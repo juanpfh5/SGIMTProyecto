@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditarPropietario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarPropietario.Designer.cs">
+      <DependentUpon>EditarPropietario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarVehiculo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditarVehiculo.Designer.cs">
+      <DependentUpon>EditarVehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LiberacionPublicoPrivado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LiberacionPublicoPrivado.Designer.cs">
+      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrdenCobro.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +108,15 @@
     <Compile Include="TarjetaCirculacion.Designer.cs">
       <DependentUpon>TarjetaCirculacion.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditarPropietario.resx">
+      <DependentUpon>EditarPropietario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarVehiculo.resx">
+      <DependentUpon>EditarVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiberacionPublicoPrivado.resx">
+      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrdenCobro.resx">
       <DependentUpon>OrdenCobro.cs</DependentUpon>
     </EmbeddedResource>

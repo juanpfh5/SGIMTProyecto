@@ -34,24 +34,24 @@
             this.JBL_Placas = new System.Windows.Forms.Label();
             this.TXT_Placas = new System.Windows.Forms.TextBox();
             this.JBL_Domicilio = new System.Windows.Forms.Label();
-            this.JBL_RFC = new System.Windows.Forms.Label();
-            this.JBL_NoExterior = new System.Windows.Forms.Label();
-            this.JBL_NoInterior = new System.Windows.Forms.Label();
-            this.JBL_CP = new System.Windows.Forms.Label();
-            this.JBL_Colonia = new System.Windows.Forms.Label();
-            this.JBL_Municipio = new System.Windows.Forms.Label();
-            this.JBL_Estado = new System.Windows.Forms.Label();
             this.TXT_Domicilio = new System.Windows.Forms.TextBox();
+            this.JBL_RFC = new System.Windows.Forms.Label();
             this.TXT_RFC = new System.Windows.Forms.TextBox();
+            this.JBL_NoExterior = new System.Windows.Forms.Label();
             this.TXT_NoExterior = new System.Windows.Forms.TextBox();
+            this.JBL_NoInterior = new System.Windows.Forms.Label();
             this.TXT_NoInterior = new System.Windows.Forms.TextBox();
+            this.JBL_CP = new System.Windows.Forms.Label();
             this.TXT_CP = new System.Windows.Forms.TextBox();
+            this.JBL_Colonia = new System.Windows.Forms.Label();
             this.TXT_Colonia = new System.Windows.Forms.TextBox();
+            this.JBL_Municipio = new System.Windows.Forms.Label();
             this.TXT_Municipio = new System.Windows.Forms.TextBox();
+            this.JBL_Estado = new System.Windows.Forms.Label();
             this.TXT_Estado = new System.Windows.Forms.TextBox();
             this.JBL_NoConcesion = new System.Windows.Forms.Label();
-            this.JBL_NoSeguro = new System.Windows.Forms.Label();
             this.TXT_NoConcesion = new System.Windows.Forms.TextBox();
+            this.JBL_NoSeguro = new System.Windows.Forms.Label();
             this.TXT_NoSeguro = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Buscar = new System.Windows.Forms.Button();
@@ -135,6 +135,13 @@
             this.JBL_Domicilio.TabIndex = 4;
             this.JBL_Domicilio.Text = "Domicilio: ";
             // 
+            // TXT_Domicilio
+            // 
+            this.TXT_Domicilio.Location = new System.Drawing.Point(82, 90);
+            this.TXT_Domicilio.Name = "TXT_Domicilio";
+            this.TXT_Domicilio.Size = new System.Drawing.Size(839, 20);
+            this.TXT_Domicilio.TabIndex = 12;
+            // 
             // JBL_RFC
             // 
             this.JBL_RFC.AutoSize = true;
@@ -143,6 +150,13 @@
             this.JBL_RFC.Size = new System.Drawing.Size(31, 13);
             this.JBL_RFC.TabIndex = 5;
             this.JBL_RFC.Text = "RFC:";
+            // 
+            // TXT_RFC
+            // 
+            this.TXT_RFC.Location = new System.Drawing.Point(82, 128);
+            this.TXT_RFC.Name = "TXT_RFC";
+            this.TXT_RFC.Size = new System.Drawing.Size(316, 20);
+            this.TXT_RFC.TabIndex = 13;
             // 
             // JBL_NoExterior
             // 
@@ -153,6 +167,13 @@
             this.JBL_NoExterior.TabIndex = 6;
             this.JBL_NoExterior.Text = "No. Ext:";
             // 
+            // TXT_NoExterior
+            // 
+            this.TXT_NoExterior.Location = new System.Drawing.Point(455, 126);
+            this.TXT_NoExterior.Name = "TXT_NoExterior";
+            this.TXT_NoExterior.Size = new System.Drawing.Size(198, 20);
+            this.TXT_NoExterior.TabIndex = 14;
+            // 
             // JBL_NoInterior
             // 
             this.JBL_NoInterior.AutoSize = true;
@@ -161,6 +182,13 @@
             this.JBL_NoInterior.Size = new System.Drawing.Size(42, 13);
             this.JBL_NoInterior.TabIndex = 7;
             this.JBL_NoInterior.Text = "No. Int:";
+            // 
+            // TXT_NoInterior
+            // 
+            this.TXT_NoInterior.Location = new System.Drawing.Point(731, 126);
+            this.TXT_NoInterior.Name = "TXT_NoInterior";
+            this.TXT_NoInterior.Size = new System.Drawing.Size(190, 20);
+            this.TXT_NoInterior.TabIndex = 15;
             // 
             // JBL_CP
             // 
@@ -171,6 +199,13 @@
             this.JBL_CP.TabIndex = 8;
             this.JBL_CP.Text = "CP: ";
             // 
+            // TXT_CP
+            // 
+            this.TXT_CP.Location = new System.Drawing.Point(82, 166);
+            this.TXT_CP.Name = "TXT_CP";
+            this.TXT_CP.Size = new System.Drawing.Size(313, 20);
+            this.TXT_CP.TabIndex = 16;
+            // 
             // JBL_Colonia
             // 
             this.JBL_Colonia.AutoSize = true;
@@ -179,6 +214,13 @@
             this.JBL_Colonia.Size = new System.Drawing.Size(48, 13);
             this.JBL_Colonia.TabIndex = 9;
             this.JBL_Colonia.Text = "Colonia: ";
+            // 
+            // TXT_Colonia
+            // 
+            this.TXT_Colonia.Location = new System.Drawing.Point(456, 165);
+            this.TXT_Colonia.Name = "TXT_Colonia";
+            this.TXT_Colonia.Size = new System.Drawing.Size(465, 20);
+            this.TXT_Colonia.TabIndex = 17;
             // 
             // JBL_Municipio
             // 
@@ -189,6 +231,13 @@
             this.JBL_Municipio.TabIndex = 10;
             this.JBL_Municipio.Text = "Municipio: ";
             // 
+            // TXT_Municipio
+            // 
+            this.TXT_Municipio.Location = new System.Drawing.Point(82, 202);
+            this.TXT_Municipio.Name = "TXT_Municipio";
+            this.TXT_Municipio.Size = new System.Drawing.Size(313, 20);
+            this.TXT_Municipio.TabIndex = 18;
+            // 
             // JBL_Estado
             // 
             this.JBL_Estado.AutoSize = true;
@@ -197,55 +246,6 @@
             this.JBL_Estado.Size = new System.Drawing.Size(46, 13);
             this.JBL_Estado.TabIndex = 11;
             this.JBL_Estado.Text = "Estado: ";
-            // 
-            // TXT_Domicilio
-            // 
-            this.TXT_Domicilio.Location = new System.Drawing.Point(82, 90);
-            this.TXT_Domicilio.Name = "TXT_Domicilio";
-            this.TXT_Domicilio.Size = new System.Drawing.Size(839, 20);
-            this.TXT_Domicilio.TabIndex = 12;
-            // 
-            // TXT_RFC
-            // 
-            this.TXT_RFC.Location = new System.Drawing.Point(82, 128);
-            this.TXT_RFC.Name = "TXT_RFC";
-            this.TXT_RFC.Size = new System.Drawing.Size(316, 20);
-            this.TXT_RFC.TabIndex = 13;
-            // 
-            // TXT_NoExterior
-            // 
-            this.TXT_NoExterior.Location = new System.Drawing.Point(455, 126);
-            this.TXT_NoExterior.Name = "TXT_NoExterior";
-            this.TXT_NoExterior.Size = new System.Drawing.Size(198, 20);
-            this.TXT_NoExterior.TabIndex = 14;
-            // 
-            // TXT_NoInterior
-            // 
-            this.TXT_NoInterior.Location = new System.Drawing.Point(731, 126);
-            this.TXT_NoInterior.Name = "TXT_NoInterior";
-            this.TXT_NoInterior.Size = new System.Drawing.Size(190, 20);
-            this.TXT_NoInterior.TabIndex = 15;
-            // 
-            // TXT_CP
-            // 
-            this.TXT_CP.Location = new System.Drawing.Point(82, 166);
-            this.TXT_CP.Name = "TXT_CP";
-            this.TXT_CP.Size = new System.Drawing.Size(313, 20);
-            this.TXT_CP.TabIndex = 16;
-            // 
-            // TXT_Colonia
-            // 
-            this.TXT_Colonia.Location = new System.Drawing.Point(456, 165);
-            this.TXT_Colonia.Name = "TXT_Colonia";
-            this.TXT_Colonia.Size = new System.Drawing.Size(465, 20);
-            this.TXT_Colonia.TabIndex = 17;
-            // 
-            // TXT_Municipio
-            // 
-            this.TXT_Municipio.Location = new System.Drawing.Point(82, 202);
-            this.TXT_Municipio.Name = "TXT_Municipio";
-            this.TXT_Municipio.Size = new System.Drawing.Size(313, 20);
-            this.TXT_Municipio.TabIndex = 18;
             // 
             // TXT_Estado
             // 
@@ -264,6 +264,13 @@
             this.JBL_NoConcesion.Text = "No. Concesion: ";
             this.JBL_NoConcesion.Click += new System.EventHandler(this.JBL_NoConcesion_Click);
             // 
+            // TXT_NoConcesion
+            // 
+            this.TXT_NoConcesion.Location = new System.Drawing.Point(116, 236);
+            this.TXT_NoConcesion.Name = "TXT_NoConcesion";
+            this.TXT_NoConcesion.Size = new System.Drawing.Size(279, 20);
+            this.TXT_NoConcesion.TabIndex = 22;
+            // 
             // JBL_NoSeguro
             // 
             this.JBL_NoSeguro.AutoSize = true;
@@ -272,13 +279,6 @@
             this.JBL_NoSeguro.Size = new System.Drawing.Size(67, 13);
             this.JBL_NoSeguro.TabIndex = 21;
             this.JBL_NoSeguro.Text = "No. Seguro: ";
-            // 
-            // TXT_NoConcesion
-            // 
-            this.TXT_NoConcesion.Location = new System.Drawing.Point(116, 236);
-            this.TXT_NoConcesion.Name = "TXT_NoConcesion";
-            this.TXT_NoConcesion.Size = new System.Drawing.Size(279, 20);
-            this.TXT_NoConcesion.TabIndex = 22;
             // 
             // TXT_NoSeguro
             // 

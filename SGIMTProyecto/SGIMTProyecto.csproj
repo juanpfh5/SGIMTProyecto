@@ -64,6 +64,36 @@
     <Compile Include="LiberacionPublicoPrivado.Designer.cs">
       <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuEditar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuEditar.Designer.cs">
+      <DependentUpon>MenuEditar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuOrdenCobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuOrdenCobro.Designer.cs">
+      <DependentUpon>MenuOrdenCobro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPermisos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPermisos.Designer.cs">
+      <DependentUpon>MenuPermisos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuPrincipalUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipalUC.Designer.cs">
+      <DependentUpon>MenuPrincipalUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrdenCobro.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +132,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Revista.Designer.cs">
+      <DependentUpon>Revista.cs</DependentUpon>
+    </Compile>
     <Compile Include="TarjetaCirculacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +152,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LiberacionPublicoPrivado.resx">
       <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipalUC.resx">
+      <DependentUpon>MenuPrincipalUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdenCobro.resx">
       <DependentUpon>OrdenCobro.cs</DependentUpon>
@@ -143,6 +185,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -156,6 +199,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\revista_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tc_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\permisos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\permiso_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ordenCobro_icon50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documento_white_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\documento_white50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar_white_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\editar_white_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\combi_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logosmyt_530.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

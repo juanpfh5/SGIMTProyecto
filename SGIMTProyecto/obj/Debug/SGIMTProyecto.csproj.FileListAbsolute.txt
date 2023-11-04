@@ -19,3 +19,8 @@ C:\RepoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SGIMTProyecto.exe
 C:\RepoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SGIMTProyecto.pdb
 C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.exe
 C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.pdb
+C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.Revista.resources
+C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.TarjetaCirculacion.resources
+C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.MenuPermisos.resources
+C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.MenuOrdenCobro.resources
+C:\RepoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.MenuEditar.resources

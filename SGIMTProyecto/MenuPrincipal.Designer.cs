@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.SDP_menuPrincipal = new System.Windows.Forms.Panel();
             this.PUC_menuPrincipal = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.BTN_editar = new System.Windows.Forms.Button();
             this.BTN_liberacion = new System.Windows.Forms.Button();
             this.BTN_ordenCobro = new System.Windows.Forms.Button();
             this.BTN_permisos = new System.Windows.Forms.Button();
             this.BTN_tarjetaCirculacion = new System.Windows.Forms.Button();
             this.BTN_revista = new System.Windows.Forms.Button();
-            this.SDP_menuPrincipal = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(20)))), ((int)(((byte)(62)))));
             this.panel1.Controls.Add(this.SDP_menuPrincipal);
-            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.BTN_editar);
             this.panel1.Controls.Add(this.BTN_liberacion);
             this.panel1.Controls.Add(this.BTN_ordenCobro);
             this.panel1.Controls.Add(this.BTN_permisos);
@@ -56,6 +56,14 @@
             this.panel1.Size = new System.Drawing.Size(307, 657);
             this.panel1.TabIndex = 0;
             // 
+            // SDP_menuPrincipal
+            // 
+            this.SDP_menuPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(126)))), ((int)(((byte)(188)))));
+            this.SDP_menuPrincipal.Location = new System.Drawing.Point(0, 47);
+            this.SDP_menuPrincipal.Name = "SDP_menuPrincipal";
+            this.SDP_menuPrincipal.Size = new System.Drawing.Size(10, 69);
+            this.SDP_menuPrincipal.TabIndex = 0;
+            // 
             // PUC_menuPrincipal
             // 
             this.PUC_menuPrincipal.Dock = System.Windows.Forms.DockStyle.Right;
@@ -64,24 +72,27 @@
             this.PUC_menuPrincipal.Size = new System.Drawing.Size(759, 657);
             this.PUC_menuPrincipal.TabIndex = 1;
             // 
-            // button6
+            // BTN_editar
             // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(24)))), ((int)(((byte)(122)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.button6.ForeColor = System.Drawing.SystemColors.Window;
-            this.button6.Image = global::SGIMTProyecto.Properties.Resources.editar_white_25px;
-            this.button6.Location = new System.Drawing.Point(55, 582);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(176, 47);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "    Editar";
-            this.button6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button6.UseVisualStyleBackColor = false;
+            this.BTN_editar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(24)))), ((int)(((byte)(122)))));
+            this.BTN_editar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_editar.FlatAppearance.BorderSize = 0;
+            this.BTN_editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_editar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_editar.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_editar.Image = global::SGIMTProyecto.Properties.Resources.editar_white_25px;
+            this.BTN_editar.Location = new System.Drawing.Point(55, 582);
+            this.BTN_editar.Name = "BTN_editar";
+            this.BTN_editar.Size = new System.Drawing.Size(176, 47);
+            this.BTN_editar.TabIndex = 6;
+            this.BTN_editar.Text = "    Editar";
+            this.BTN_editar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_editar.UseVisualStyleBackColor = false;
+            this.BTN_editar.Click += new System.EventHandler(this.button6_Click);
             // 
             // BTN_liberacion
             // 
+            this.BTN_liberacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTN_liberacion.FlatAppearance.BorderSize = 0;
             this.BTN_liberacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_liberacion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
@@ -95,9 +106,11 @@
             this.BTN_liberacion.Text = "Liberación de Servicio Publico a Privado";
             this.BTN_liberacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BTN_liberacion.UseVisualStyleBackColor = true;
+            this.BTN_liberacion.Click += new System.EventHandler(this.BTN_liberacion_Click);
             // 
             // BTN_ordenCobro
             // 
+            this.BTN_ordenCobro.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTN_ordenCobro.FlatAppearance.BorderSize = 0;
             this.BTN_ordenCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_ordenCobro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
@@ -111,9 +124,11 @@
             this.BTN_ordenCobro.Text = "    Orden de Cobro";
             this.BTN_ordenCobro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BTN_ordenCobro.UseVisualStyleBackColor = true;
+            this.BTN_ordenCobro.Click += new System.EventHandler(this.BTN_ordenCobro_Click);
             // 
             // BTN_permisos
             // 
+            this.BTN_permisos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTN_permisos.FlatAppearance.BorderSize = 0;
             this.BTN_permisos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_permisos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
@@ -127,9 +142,11 @@
             this.BTN_permisos.Text = "    Permisos";
             this.BTN_permisos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BTN_permisos.UseVisualStyleBackColor = true;
+            this.BTN_permisos.Click += new System.EventHandler(this.BTN_permisos_Click);
             // 
             // BTN_tarjetaCirculacion
             // 
+            this.BTN_tarjetaCirculacion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTN_tarjetaCirculacion.FlatAppearance.BorderSize = 0;
             this.BTN_tarjetaCirculacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_tarjetaCirculacion.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
@@ -143,9 +160,11 @@
             this.BTN_tarjetaCirculacion.Text = "Tarjeta de Circulación";
             this.BTN_tarjetaCirculacion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BTN_tarjetaCirculacion.UseVisualStyleBackColor = true;
+            this.BTN_tarjetaCirculacion.Click += new System.EventHandler(this.BTN_tarjetaCirculacion_Click);
             // 
             // BTN_revista
             // 
+            this.BTN_revista.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTN_revista.FlatAppearance.BorderSize = 0;
             this.BTN_revista.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_revista.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
@@ -160,14 +179,6 @@
             this.BTN_revista.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BTN_revista.UseVisualStyleBackColor = true;
             this.BTN_revista.Click += new System.EventHandler(this.BTN_revista_Click);
-            // 
-            // SDP_menuPrincipal
-            // 
-            this.SDP_menuPrincipal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(126)))), ((int)(((byte)(188)))));
-            this.SDP_menuPrincipal.Location = new System.Drawing.Point(0, 47);
-            this.SDP_menuPrincipal.Name = "SDP_menuPrincipal";
-            this.SDP_menuPrincipal.Size = new System.Drawing.Size(10, 69);
-            this.SDP_menuPrincipal.TabIndex = 0;
             // 
             // MenuPrincipal
             // 
@@ -192,7 +203,7 @@
         private System.Windows.Forms.Button BTN_ordenCobro;
         private System.Windows.Forms.Button BTN_permisos;
         private System.Windows.Forms.Button BTN_tarjetaCirculacion;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button BTN_editar;
         private System.Windows.Forms.Panel PUC_menuPrincipal;
         private System.Windows.Forms.Panel SDP_menuPrincipal;
     }

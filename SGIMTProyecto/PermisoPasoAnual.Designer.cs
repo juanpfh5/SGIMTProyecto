@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.JLB_FechaExpedicion = new System.Windows.Forms.Label();
-            this.DTP_FechaExpedicion = new System.Windows.Forms.DateTimePicker();
-            this.JLB_FechaVigencia = new System.Windows.Forms.Label();
-            this.DTP_FechaVigencia = new System.Windows.Forms.DateTimePicker();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
             this.JLB_Domicilio = new System.Windows.Forms.Label();
@@ -57,6 +53,10 @@
             this.TXT_TarjetaCirculacion = new System.Windows.Forms.TextBox();
             this.JLB_Recorrido = new System.Windows.Forms.Label();
             this.TXT_Recorrido = new System.Windows.Forms.TextBox();
+            this.JLB_FechaExpedicion = new System.Windows.Forms.Label();
+            this.DTP_FechaExpedicion = new System.Windows.Forms.DateTimePicker();
+            this.JLB_FechaVigencia = new System.Windows.Forms.Label();
+            this.DTP_FechaVigencia = new System.Windows.Forms.DateTimePicker();
             this.JLB_TitularSMyT = new System.Windows.Forms.Label();
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
@@ -100,50 +100,13 @@
             this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
             this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
             this.groupBox1.Location = new System.Drawing.Point(30, 21);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(736, 541);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PERMISO DE PASO ANUAL";
-            // 
-            // JLB_FechaExpedicion
-            // 
-            this.JLB_FechaExpedicion.AutoSize = true;
-            this.JLB_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_FechaExpedicion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_FechaExpedicion.Location = new System.Drawing.Point(7, 441);
-            this.JLB_FechaExpedicion.Name = "JLB_FechaExpedicion";
-            this.JLB_FechaExpedicion.Size = new System.Drawing.Size(102, 15);
-            this.JLB_FechaExpedicion.TabIndex = 32;
-            this.JLB_FechaExpedicion.Text = "Fecha Expedición:";
-            // 
-            // DTP_FechaExpedicion
-            // 
-            this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 431);
-            this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";
-            this.DTP_FechaExpedicion.Size = new System.Drawing.Size(200, 23);
-            this.DTP_FechaExpedicion.TabIndex = 34;
-            // 
-            // JLB_FechaVigencia
-            // 
-            this.JLB_FechaVigencia.AutoSize = true;
-            this.JLB_FechaVigencia.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_FechaVigencia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_FechaVigencia.Location = new System.Drawing.Point(377, 439);
-            this.JLB_FechaVigencia.Name = "JLB_FechaVigencia";
-            this.JLB_FechaVigencia.Size = new System.Drawing.Size(90, 15);
-            this.JLB_FechaVigencia.TabIndex = 33;
-            this.JLB_FechaVigencia.Text = "Fecha Vigencia:";
-            // 
-            // DTP_FechaVigencia
-            // 
-            this.DTP_FechaVigencia.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTP_FechaVigencia.Location = new System.Drawing.Point(491, 433);
-            this.DTP_FechaVigencia.Name = "DTP_FechaVigencia";
-            this.DTP_FechaVigencia.Size = new System.Drawing.Size(200, 23);
-            this.DTP_FechaVigencia.TabIndex = 35;
             // 
             // JLB_Nombre
             // 
@@ -373,6 +336,44 @@
             this.TXT_Recorrido.Size = new System.Drawing.Size(625, 23);
             this.TXT_Recorrido.TabIndex = 31;
             // 
+            // JLB_FechaExpedicion
+            // 
+            this.JLB_FechaExpedicion.AutoSize = true;
+            this.JLB_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_FechaExpedicion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_FechaExpedicion.Location = new System.Drawing.Point(7, 441);
+            this.JLB_FechaExpedicion.Name = "JLB_FechaExpedicion";
+            this.JLB_FechaExpedicion.Size = new System.Drawing.Size(102, 15);
+            this.JLB_FechaExpedicion.TabIndex = 32;
+            this.JLB_FechaExpedicion.Text = "Fecha Expedición:";
+            // 
+            // DTP_FechaExpedicion
+            // 
+            this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 431);
+            this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";
+            this.DTP_FechaExpedicion.Size = new System.Drawing.Size(200, 23);
+            this.DTP_FechaExpedicion.TabIndex = 34;
+            // 
+            // JLB_FechaVigencia
+            // 
+            this.JLB_FechaVigencia.AutoSize = true;
+            this.JLB_FechaVigencia.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_FechaVigencia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_FechaVigencia.Location = new System.Drawing.Point(377, 439);
+            this.JLB_FechaVigencia.Name = "JLB_FechaVigencia";
+            this.JLB_FechaVigencia.Size = new System.Drawing.Size(90, 15);
+            this.JLB_FechaVigencia.TabIndex = 33;
+            this.JLB_FechaVigencia.Text = "Fecha Vigencia:";
+            // 
+            // DTP_FechaVigencia
+            // 
+            this.DTP_FechaVigencia.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.DTP_FechaVigencia.Location = new System.Drawing.Point(491, 433);
+            this.DTP_FechaVigencia.Name = "DTP_FechaVigencia";
+            this.DTP_FechaVigencia.Size = new System.Drawing.Size(200, 23);
+            this.DTP_FechaVigencia.TabIndex = 35;
+            // 
             // JLB_TitularSMyT
             // 
             this.JLB_TitularSMyT.AutoSize = true;
@@ -413,20 +414,24 @@
             // 
             // BTN_Imprimir
             // 
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
             this.BTN_Imprimir.Location = new System.Drawing.Point(361, 568);
             this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 27);
-            this.BTN_Imprimir.TabIndex = 2;
+            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
+            this.BTN_Imprimir.TabIndex = 40;
             this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = true;
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
             // 
             // PermisoPasoAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BTN_Imprimir);
+            this.Controls.Add(this.groupBox1);
             this.Name = "PermisoPasoAnual";
             this.Size = new System.Drawing.Size(797, 607);
             this.groupBox1.ResumeLayout(false);

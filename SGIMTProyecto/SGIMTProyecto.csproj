@@ -153,6 +153,15 @@
     <EmbeddedResource Include="LiberacionPublicoPrivado.resx">
       <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuEditar.resx">
+      <DependentUpon>MenuEditar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuOrdenCobro.resx">
+      <DependentUpon>MenuOrdenCobro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPermisos.resx">
+      <DependentUpon>MenuPermisos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +196,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Revista.resx">
+      <DependentUpon>Revista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TarjetaCirculacion.resx">
+      <DependentUpon>TarjetaCirculacion.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -232,6 +247,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logosmyt_530.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logosmyt_blanco_530.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\autobus-escolar_white_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendario-anual_white_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\personal_white_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rutas_white_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salarioCobro_white_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salarioCobroDiversos_white_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coche_white_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\perfil_white_50px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,6 +15,12 @@ namespace SGIMTProyecto
         public TarjetaCirculacion()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void BTN_inicio_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

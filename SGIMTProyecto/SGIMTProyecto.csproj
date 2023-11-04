@@ -46,67 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrdenCobro.cs">
+    <Compile Include="EditarPropietario.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OrdenCobro.Designer.cs">
-      <DependentUpon>OrdenCobro.cs</DependentUpon>
+    <Compile Include="EditarPropietario.Designer.cs">
+      <DependentUpon>EditarPropietario.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdenCobroDiversos.cs">
+    <Compile Include="EditarVehiculo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OrdenCobroDiversos.Designer.cs">
-      <DependentUpon>OrdenCobroDiversos.cs</DependentUpon>
+    <Compile Include="EditarVehiculo.Designer.cs">
+      <DependentUpon>EditarVehiculo.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermisoCircularFueraRuta.cs">
+    <Compile Include="LiberacionPublicoPrivado.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PermisoCircularFueraRuta.Designer.cs">
-      <DependentUpon>PermisoCircularFueraRuta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PermisoPasoAnual.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PermisoPasoAnual.Designer.cs">
-      <DependentUpon>PermisoPasoAnual.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PermisoPersonalEmpresas.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PermisoPersonalEmpresas.Designer.cs">
-      <DependentUpon>PermisoPersonalEmpresas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PermisoTransporteE.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PermisoTransporteE.Designer.cs">
-      <DependentUpon>PermisoTransporteE.cs</DependentUpon>
+    <Compile Include="LiberacionPublicoPrivado.Designer.cs">
+      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TarjetaCirculacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TarjetaCirculacion.Designer.cs">
-      <DependentUpon>TarjetaCirculacion.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="OrdenCobro.resx">
-      <DependentUpon>OrdenCobro.cs</DependentUpon>
+    <EmbeddedResource Include="EditarPropietario.resx">
+      <DependentUpon>EditarPropietario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdenCobroDiversos.resx">
-      <DependentUpon>OrdenCobroDiversos.cs</DependentUpon>
+    <EmbeddedResource Include="EditarVehiculo.resx">
+      <DependentUpon>EditarVehiculo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PermisoCircularFueraRuta.resx">
-      <DependentUpon>PermisoCircularFueraRuta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PermisoPasoAnual.resx">
-      <DependentUpon>PermisoPasoAnual.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PermisoPersonalEmpresas.resx">
-      <DependentUpon>PermisoPersonalEmpresas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PermisoTransporteE.resx">
-      <DependentUpon>PermisoTransporteE.cs</DependentUpon>
+    <EmbeddedResource Include="LiberacionPublicoPrivado.resx">
+      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

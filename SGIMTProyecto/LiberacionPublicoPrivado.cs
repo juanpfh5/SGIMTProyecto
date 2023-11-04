@@ -16,5 +16,20 @@ namespace SGIMTProyecto
         {
             InitializeComponent();
         }
+
+        private void GRB_Liberacion_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

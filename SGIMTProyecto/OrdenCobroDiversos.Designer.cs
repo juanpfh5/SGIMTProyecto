@@ -31,10 +31,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
-            this.JLB_Domicilio = new System.Windows.Forms.Label();
-            this.TXT_Domicilio = new System.Windows.Forms.TextBox();
             this.JLB_NoExterior = new System.Windows.Forms.Label();
             this.TXT_NoExterior = new System.Windows.Forms.TextBox();
+            this.JLB_Domicilio = new System.Windows.Forms.Label();
+            this.TXT_Domicilio = new System.Windows.Forms.TextBox();
             this.JLB_NoInterior = new System.Windows.Forms.Label();
             this.TXT_NoInterior = new System.Windows.Forms.TextBox();
             this.JLB_RFC = new System.Windows.Forms.Label();
@@ -51,12 +51,12 @@
             this.TXT_Clave = new System.Windows.Forms.TextBox();
             this.BTN_Agregar = new System.Windows.Forms.Button();
             this.DGV_Datos = new System.Windows.Forms.DataGridView();
-            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
-            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.JBL_ClaveData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.JBL_DescripcionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.JBL_ImporteData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
+            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
+            this.BTN_imprimir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,7 @@
             this.groupBox1.Controls.Add(this.JLB_NoMovimiento);
             this.groupBox1.Controls.Add(this.TXT_NoMovimiento);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.DarkViolet;
             this.groupBox1.Location = new System.Drawing.Point(21, 29);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1023, 532);
@@ -114,25 +115,6 @@
             this.TXT_Nombre.Size = new System.Drawing.Size(416, 23);
             this.TXT_Nombre.TabIndex = 13;
             // 
-            // JLB_Domicilio
-            // 
-            this.JLB_Domicilio.AutoSize = true;
-            this.JLB_Domicilio.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Domicilio.Location = new System.Drawing.Point(16, 89);
-            this.JLB_Domicilio.Name = "JLB_Domicilio";
-            this.JLB_Domicilio.Size = new System.Drawing.Size(62, 15);
-            this.JLB_Domicilio.TabIndex = 14;
-            this.JLB_Domicilio.Text = "Domicilio:";
-            // 
-            // TXT_Domicilio
-            // 
-            this.TXT_Domicilio.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Domicilio.Location = new System.Drawing.Point(104, 81);
-            this.TXT_Domicilio.Name = "TXT_Domicilio";
-            this.TXT_Domicilio.Size = new System.Drawing.Size(416, 23);
-            this.TXT_Domicilio.TabIndex = 15;
-            // 
             // JLB_NoExterior
             // 
             this.JLB_NoExterior.AutoSize = true;
@@ -151,6 +133,25 @@
             this.TXT_NoExterior.Name = "TXT_NoExterior";
             this.TXT_NoExterior.Size = new System.Drawing.Size(289, 23);
             this.TXT_NoExterior.TabIndex = 17;
+            // 
+            // JLB_Domicilio
+            // 
+            this.JLB_Domicilio.AutoSize = true;
+            this.JLB_Domicilio.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Domicilio.Location = new System.Drawing.Point(16, 89);
+            this.JLB_Domicilio.Name = "JLB_Domicilio";
+            this.JLB_Domicilio.Size = new System.Drawing.Size(62, 15);
+            this.JLB_Domicilio.TabIndex = 14;
+            this.JLB_Domicilio.Text = "Domicilio:";
+            // 
+            // TXT_Domicilio
+            // 
+            this.TXT_Domicilio.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Domicilio.Location = new System.Drawing.Point(104, 81);
+            this.TXT_Domicilio.Name = "TXT_Domicilio";
+            this.TXT_Domicilio.Size = new System.Drawing.Size(416, 23);
+            this.TXT_Domicilio.TabIndex = 15;
             // 
             // JLB_NoInterior
             // 
@@ -288,6 +289,7 @@
             // BTN_Agregar
             // 
             this.BTN_Agregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_Agregar.ForeColor = System.Drawing.Color.DarkRed;
             this.BTN_Agregar.Location = new System.Drawing.Point(250, 278);
             this.BTN_Agregar.Name = "BTN_Agregar";
             this.BTN_Agregar.Size = new System.Drawing.Size(73, 26);
@@ -306,6 +308,21 @@
             this.DGV_Datos.Name = "DGV_Datos";
             this.DGV_Datos.Size = new System.Drawing.Size(955, 123);
             this.DGV_Datos.TabIndex = 33;
+            // 
+            // JBL_ClaveData
+            // 
+            this.JBL_ClaveData.HeaderText = "Clave";
+            this.JBL_ClaveData.Name = "JBL_ClaveData";
+            // 
+            // JBL_DescripcionData
+            // 
+            this.JBL_DescripcionData.HeaderText = "Descripcion";
+            this.JBL_DescripcionData.Name = "JBL_DescripcionData";
+            // 
+            // JBL_ImporteData
+            // 
+            this.JBL_ImporteData.HeaderText = "Importe";
+            this.JBL_ImporteData.Name = "JBL_ImporteData";
             // 
             // JLB_NoMovimiento
             // 
@@ -326,37 +343,24 @@
             this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
             this.TXT_NoMovimiento.TabIndex = 41;
             // 
-            // BTN_Imprimir
+            // BTN_imprimir
             // 
-            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_Imprimir.Location = new System.Drawing.Point(497, 567);
-            this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 27);
-            this.BTN_Imprimir.TabIndex = 3;
-            this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = true;
-            // 
-            // JBL_ClaveData
-            // 
-            this.JBL_ClaveData.HeaderText = "Clave";
-            this.JBL_ClaveData.Name = "JBL_ClaveData";
-            // 
-            // JBL_DescripcionData
-            // 
-            this.JBL_DescripcionData.HeaderText = "Descripcion";
-            this.JBL_DescripcionData.Name = "JBL_DescripcionData";
-            // 
-            // JBL_ImporteData
-            // 
-            this.JBL_ImporteData.HeaderText = "Importe";
-            this.JBL_ImporteData.Name = "JBL_ImporteData";
+            this.BTN_imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_imprimir.Location = new System.Drawing.Point(502, 567);
+            this.BTN_imprimir.Name = "BTN_imprimir";
+            this.BTN_imprimir.Size = new System.Drawing.Size(80, 30);
+            this.BTN_imprimir.TabIndex = 65;
+            this.BTN_imprimir.Text = "Imprimir";
+            this.BTN_imprimir.UseVisualStyleBackColor = false;
             // 
             // OrdenCobroDiversos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BTN_imprimir);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "OrdenCobroDiversos";
             this.Size = new System.Drawing.Size(1064, 618);
             this.groupBox1.ResumeLayout(false);
@@ -393,9 +397,9 @@
         private System.Windows.Forms.DataGridView DGV_Datos;
         private System.Windows.Forms.Label JLB_NoMovimiento;
         private System.Windows.Forms.TextBox TXT_NoMovimiento;
-        private System.Windows.Forms.Button BTN_Imprimir;
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ClaveData;
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_DescripcionData;
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ImporteData;
+        private System.Windows.Forms.Button BTN_imprimir;
     }
 }

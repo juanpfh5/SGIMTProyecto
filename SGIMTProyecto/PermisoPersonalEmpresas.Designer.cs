@@ -33,10 +33,10 @@
             this.TXT_Permisionario = new System.Windows.Forms.TextBox();
             this.JLB_Domicilio = new System.Windows.Forms.Label();
             this.TXT_Domicilio = new System.Windows.Forms.TextBox();
-            this.JLB_Poblacion = new System.Windows.Forms.Label();
-            this.TXT_Poblacion = new System.Windows.Forms.TextBox();
             this.JLB_CP = new System.Windows.Forms.Label();
             this.TXT_CP = new System.Windows.Forms.TextBox();
+            this.JLB_Poblacion = new System.Windows.Forms.Label();
+            this.TXT_Poblacion = new System.Windows.Forms.TextBox();
             this.JLB_Placas = new System.Windows.Forms.Label();
             this.TXT_Placas = new System.Windows.Forms.TextBox();
             this.JLB_TarjetaCirculacion = new System.Windows.Forms.Label();
@@ -80,6 +80,7 @@
             this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
             this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
             this.groupBox1.Location = new System.Drawing.Point(17, 16);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(756, 546);
@@ -125,25 +126,6 @@
             this.TXT_Domicilio.Size = new System.Drawing.Size(616, 23);
             this.TXT_Domicilio.TabIndex = 11;
             // 
-            // JLB_Poblacion
-            // 
-            this.JLB_Poblacion.AutoSize = true;
-            this.JLB_Poblacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Poblacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Poblacion.Location = new System.Drawing.Point(333, 117);
-            this.JLB_Poblacion.Name = "JLB_Poblacion";
-            this.JLB_Poblacion.Size = new System.Drawing.Size(63, 15);
-            this.JLB_Poblacion.TabIndex = 12;
-            this.JLB_Poblacion.Text = "Población:";
-            // 
-            // TXT_Poblacion
-            // 
-            this.TXT_Poblacion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Poblacion.Location = new System.Drawing.Point(415, 109);
-            this.TXT_Poblacion.Name = "TXT_Poblacion";
-            this.TXT_Poblacion.Size = new System.Drawing.Size(296, 23);
-            this.TXT_Poblacion.TabIndex = 13;
-            // 
             // JLB_CP
             // 
             this.JLB_CP.AutoSize = true;
@@ -162,6 +144,25 @@
             this.TXT_CP.Name = "TXT_CP";
             this.TXT_CP.Size = new System.Drawing.Size(227, 23);
             this.TXT_CP.TabIndex = 15;
+            // 
+            // JLB_Poblacion
+            // 
+            this.JLB_Poblacion.AutoSize = true;
+            this.JLB_Poblacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Poblacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Poblacion.Location = new System.Drawing.Point(333, 117);
+            this.JLB_Poblacion.Name = "JLB_Poblacion";
+            this.JLB_Poblacion.Size = new System.Drawing.Size(63, 15);
+            this.JLB_Poblacion.TabIndex = 12;
+            this.JLB_Poblacion.Text = "Población:";
+            // 
+            // TXT_Poblacion
+            // 
+            this.TXT_Poblacion.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Poblacion.Location = new System.Drawing.Point(415, 109);
+            this.TXT_Poblacion.Name = "TXT_Poblacion";
+            this.TXT_Poblacion.Size = new System.Drawing.Size(296, 23);
+            this.TXT_Poblacion.TabIndex = 13;
             // 
             // JLB_Placas
             // 
@@ -298,13 +299,17 @@
             // 
             // BTN_Imprimir
             // 
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
             this.BTN_Imprimir.Location = new System.Drawing.Point(362, 568);
             this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 27);
+            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
             this.BTN_Imprimir.TabIndex = 1;
             this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = true;
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
             // 
             // PermisoPersonalEmpresas
             // 

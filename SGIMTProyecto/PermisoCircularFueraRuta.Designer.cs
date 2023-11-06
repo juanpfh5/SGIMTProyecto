@@ -57,15 +57,15 @@
             this.DTP_FechaExpedicion = new System.Windows.Forms.DateTimePicker();
             this.JLB_FechaVigencia = new System.Windows.Forms.Label();
             this.DTP_FechaVigencia = new System.Windows.Forms.DateTimePicker();
+            this.JLB_Motivo = new System.Windows.Forms.Label();
+            this.TXT_Motivo = new System.Windows.Forms.TextBox();
             this.JLB_TitularSMyT = new System.Windows.Forms.Label();
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
-            this.JLB_Motivo = new System.Windows.Forms.Label();
-            this.TXT_Motivo = new System.Windows.Forms.TextBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
+            this.BTN_buscar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +106,7 @@
             this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
             this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
             this.groupBox1.Location = new System.Drawing.Point(30, 47);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(736, 512);
@@ -379,6 +380,25 @@
             this.DTP_FechaVigencia.Size = new System.Drawing.Size(200, 23);
             this.DTP_FechaVigencia.TabIndex = 67;
             // 
+            // JLB_Motivo
+            // 
+            this.JLB_Motivo.AutoSize = true;
+            this.JLB_Motivo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Motivo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Motivo.Location = new System.Drawing.Point(29, 405);
+            this.JLB_Motivo.Name = "JLB_Motivo";
+            this.JLB_Motivo.Size = new System.Drawing.Size(48, 15);
+            this.JLB_Motivo.TabIndex = 72;
+            this.JLB_Motivo.Text = "Motivo:";
+            // 
+            // TXT_Motivo
+            // 
+            this.TXT_Motivo.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Motivo.Location = new System.Drawing.Point(95, 396);
+            this.TXT_Motivo.Name = "TXT_Motivo";
+            this.TXT_Motivo.Size = new System.Drawing.Size(625, 23);
+            this.TXT_Motivo.TabIndex = 73;
+            // 
             // JLB_TitularSMyT
             // 
             this.JLB_TitularSMyT.AutoSize = true;
@@ -417,59 +437,48 @@
             this.TXT_FolioPermiso.Size = new System.Drawing.Size(200, 23);
             this.TXT_FolioPermiso.TabIndex = 71;
             // 
-            // JLB_Motivo
+            // TXT_Placa
             // 
-            this.JLB_Motivo.AutoSize = true;
-            this.JLB_Motivo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Motivo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Motivo.Location = new System.Drawing.Point(29, 405);
-            this.JLB_Motivo.Name = "JLB_Motivo";
-            this.JLB_Motivo.Size = new System.Drawing.Size(48, 15);
-            this.JLB_Motivo.TabIndex = 72;
-            this.JLB_Motivo.Text = "Motivo:";
-            // 
-            // TXT_Motivo
-            // 
-            this.TXT_Motivo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Motivo.Location = new System.Drawing.Point(95, 396);
-            this.TXT_Motivo.Name = "TXT_Motivo";
-            this.TXT_Motivo.Size = new System.Drawing.Size(625, 23);
-            this.TXT_Motivo.TabIndex = 73;
+            this.TXT_Placa.Location = new System.Drawing.Point(558, 20);
+            this.TXT_Placa.Name = "TXT_Placa";
+            this.TXT_Placa.Size = new System.Drawing.Size(128, 20);
+            this.TXT_Placa.TabIndex = 3;
             // 
             // BTN_Imprimir
             // 
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_Imprimir.Location = new System.Drawing.Point(370, 565);
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(346, 565);
             this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 27);
-            this.BTN_Imprimir.TabIndex = 2;
+            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
+            this.BTN_Imprimir.TabIndex = 5;
             this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = true;
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
             // 
-            // TXT_Placa
+            // BTN_buscar
             // 
-            this.TXT_Placa.Location = new System.Drawing.Point(566, 20);
-            this.TXT_Placa.Name = "TXT_Placa";
-            this.TXT_Placa.Size = new System.Drawing.Size(100, 20);
-            this.TXT_Placa.TabIndex = 3;
-            // 
-            // BTN_BuscarPlaca
-            // 
-            this.BTN_BuscarPlaca.Location = new System.Drawing.Point(685, 18);
-            this.BTN_BuscarPlaca.Name = "BTN_BuscarPlaca";
-            this.BTN_BuscarPlaca.Size = new System.Drawing.Size(75, 23);
-            this.BTN_BuscarPlaca.TabIndex = 4;
-            this.BTN_BuscarPlaca.Text = "Lupa";
-            this.BTN_BuscarPlaca.UseVisualStyleBackColor = true;
+            this.BTN_buscar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_buscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_buscar.FlatAppearance.BorderSize = 0;
+            this.BTN_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_buscar.Location = new System.Drawing.Point(707, 14);
+            this.BTN_buscar.Name = "BTN_buscar";
+            this.BTN_buscar.Size = new System.Drawing.Size(59, 30);
+            this.BTN_buscar.TabIndex = 26;
+            this.BTN_buscar.UseVisualStyleBackColor = false;
             // 
             // PermisoCircularFueraRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.TXT_Placa);
-            this.Controls.Add(this.BTN_BuscarPlaca);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.BTN_buscar);
             this.Controls.Add(this.BTN_Imprimir);
+            this.Controls.Add(this.TXT_Placa);
+            this.Controls.Add(this.groupBox1);
             this.Name = "PermisoCircularFueraRuta";
             this.Size = new System.Drawing.Size(797, 607);
             this.groupBox1.ResumeLayout(false);
@@ -516,8 +525,8 @@
         private System.Windows.Forms.TextBox TXT_FolioPermiso;
         private System.Windows.Forms.Label JLB_Motivo;
         private System.Windows.Forms.TextBox TXT_Motivo;
-        private System.Windows.Forms.Button BTN_Imprimir;
         private System.Windows.Forms.TextBox TXT_Placa;
-        private System.Windows.Forms.Button BTN_BuscarPlaca;
+        private System.Windows.Forms.Button BTN_Imprimir;
+        private System.Windows.Forms.Button BTN_buscar;
     }
 }

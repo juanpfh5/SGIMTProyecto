@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -37,10 +40,10 @@
             this.TXT_Domicilio = new System.Windows.Forms.TextBox();
             this.JLB_NuevaPlaca = new System.Windows.Forms.Label();
             this.TXT_NuevaPlaca = new System.Windows.Forms.TextBox();
-            this.JLB_FolioRevista = new System.Windows.Forms.Label();
-            this.TXT_FolioRevista = new System.Windows.Forms.TextBox();
             this.JLB_CP = new System.Windows.Forms.Label();
             this.TXT_CP = new System.Windows.Forms.TextBox();
+            this.JLB_FolioRevista = new System.Windows.Forms.Label();
+            this.TXT_FolioRevista = new System.Windows.Forms.TextBox();
             this.JLB_NoSerie = new System.Windows.Forms.Label();
             this.TXT_NoSerie = new System.Windows.Forms.TextBox();
             this.JLB_NoMotor = new System.Windows.Forms.Label();
@@ -53,10 +56,10 @@
             this.TXT_ClaveVehicular = new System.Windows.Forms.TextBox();
             this.JLB_Tipo = new System.Windows.Forms.Label();
             this.TXT_Tipo = new System.Windows.Forms.TextBox();
-            this.JLB_NoPasajeros = new System.Windows.Forms.Label();
-            this.TXT_NoPasajeros = new System.Windows.Forms.TextBox();
             this.JLB_Combustible = new System.Windows.Forms.Label();
             this.TXT_Combustible = new System.Windows.Forms.TextBox();
+            this.JLB_NoPasajeros = new System.Windows.Forms.Label();
+            this.TXT_NoPasajeros = new System.Windows.Forms.TextBox();
             this.JLB_Clave = new System.Windows.Forms.Label();
             this.TXT_Clave = new System.Windows.Forms.TextBox();
             this.BTN_Agregar = new System.Windows.Forms.Button();
@@ -72,7 +75,7 @@
             this.TXT_Total = new System.Windows.Forms.TextBox();
             this.JLB_Elaboro = new System.Windows.Forms.Label();
             this.CMB_Elaboro = new System.Windows.Forms.ComboBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
+            this.BTN_imprimir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).BeginInit();
             this.SuspendLayout();
@@ -120,6 +123,7 @@
             this.groupBox1.Controls.Add(this.JLB_Elaboro);
             this.groupBox1.Controls.Add(this.CMB_Elaboro);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox1.ForeColor = System.Drawing.Color.DarkViolet;
             this.groupBox1.Location = new System.Drawing.Point(15, 35);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1023, 533);
@@ -203,25 +207,6 @@
             this.TXT_NuevaPlaca.Size = new System.Drawing.Size(289, 23);
             this.TXT_NuevaPlaca.TabIndex = 31;
             // 
-            // JLB_FolioRevista
-            // 
-            this.JLB_FolioRevista.AutoSize = true;
-            this.JLB_FolioRevista.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_FolioRevista.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_FolioRevista.Location = new System.Drawing.Point(277, 133);
-            this.JLB_FolioRevista.Name = "JLB_FolioRevista";
-            this.JLB_FolioRevista.Size = new System.Drawing.Size(76, 15);
-            this.JLB_FolioRevista.TabIndex = 32;
-            this.JLB_FolioRevista.Text = "Folio Revista:";
-            // 
-            // TXT_FolioRevista
-            // 
-            this.TXT_FolioRevista.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_FolioRevista.Location = new System.Drawing.Point(359, 130);
-            this.TXT_FolioRevista.Name = "TXT_FolioRevista";
-            this.TXT_FolioRevista.Size = new System.Drawing.Size(161, 23);
-            this.TXT_FolioRevista.TabIndex = 33;
-            // 
             // JLB_CP
             // 
             this.JLB_CP.AutoSize = true;
@@ -240,6 +225,25 @@
             this.TXT_CP.Name = "TXT_CP";
             this.TXT_CP.Size = new System.Drawing.Size(161, 23);
             this.TXT_CP.TabIndex = 35;
+            // 
+            // JLB_FolioRevista
+            // 
+            this.JLB_FolioRevista.AutoSize = true;
+            this.JLB_FolioRevista.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_FolioRevista.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_FolioRevista.Location = new System.Drawing.Point(277, 133);
+            this.JLB_FolioRevista.Name = "JLB_FolioRevista";
+            this.JLB_FolioRevista.Size = new System.Drawing.Size(76, 15);
+            this.JLB_FolioRevista.TabIndex = 32;
+            this.JLB_FolioRevista.Text = "Folio Revista:";
+            // 
+            // TXT_FolioRevista
+            // 
+            this.TXT_FolioRevista.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_FolioRevista.Location = new System.Drawing.Point(359, 130);
+            this.TXT_FolioRevista.Name = "TXT_FolioRevista";
+            this.TXT_FolioRevista.Size = new System.Drawing.Size(161, 23);
+            this.TXT_FolioRevista.TabIndex = 33;
             // 
             // JLB_NoSerie
             // 
@@ -355,25 +359,6 @@
             this.TXT_Tipo.Size = new System.Drawing.Size(161, 23);
             this.TXT_Tipo.TabIndex = 47;
             // 
-            // JLB_NoPasajeros
-            // 
-            this.JLB_NoPasajeros.AutoSize = true;
-            this.JLB_NoPasajeros.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_NoPasajeros.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_NoPasajeros.Location = new System.Drawing.Point(296, 271);
-            this.JLB_NoPasajeros.Name = "JLB_NoPasajeros";
-            this.JLB_NoPasajeros.Size = new System.Drawing.Size(81, 15);
-            this.JLB_NoPasajeros.TabIndex = 48;
-            this.JLB_NoPasajeros.Text = "No. Pasajeros:";
-            // 
-            // TXT_NoPasajeros
-            // 
-            this.TXT_NoPasajeros.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_NoPasajeros.Location = new System.Drawing.Point(378, 268);
-            this.TXT_NoPasajeros.Name = "TXT_NoPasajeros";
-            this.TXT_NoPasajeros.Size = new System.Drawing.Size(161, 23);
-            this.TXT_NoPasajeros.TabIndex = 49;
-            // 
             // JLB_Combustible
             // 
             this.JLB_Combustible.AutoSize = true;
@@ -392,6 +377,25 @@
             this.TXT_Combustible.Name = "TXT_Combustible";
             this.TXT_Combustible.Size = new System.Drawing.Size(194, 23);
             this.TXT_Combustible.TabIndex = 51;
+            // 
+            // JLB_NoPasajeros
+            // 
+            this.JLB_NoPasajeros.AutoSize = true;
+            this.JLB_NoPasajeros.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_NoPasajeros.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoPasajeros.Location = new System.Drawing.Point(296, 271);
+            this.JLB_NoPasajeros.Name = "JLB_NoPasajeros";
+            this.JLB_NoPasajeros.Size = new System.Drawing.Size(81, 15);
+            this.JLB_NoPasajeros.TabIndex = 48;
+            this.JLB_NoPasajeros.Text = "No. Pasajeros:";
+            // 
+            // TXT_NoPasajeros
+            // 
+            this.TXT_NoPasajeros.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_NoPasajeros.Location = new System.Drawing.Point(378, 268);
+            this.TXT_NoPasajeros.Name = "TXT_NoPasajeros";
+            this.TXT_NoPasajeros.Size = new System.Drawing.Size(161, 23);
+            this.TXT_NoPasajeros.TabIndex = 49;
             // 
             // JLB_Clave
             // 
@@ -415,6 +419,7 @@
             // BTN_Agregar
             // 
             this.BTN_Agregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_Agregar.ForeColor = System.Drawing.Color.DarkRed;
             this.BTN_Agregar.Location = new System.Drawing.Point(247, 300);
             this.BTN_Agregar.Name = "BTN_Agregar";
             this.BTN_Agregar.Size = new System.Drawing.Size(73, 26);
@@ -429,8 +434,26 @@
             this.JBL_ClaveData,
             this.JBL_DescripcionData,
             this.JBL_ImporteData});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.DarkViolet;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGV_Datos.DefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Datos.Location = new System.Drawing.Point(18, 336);
             this.DGV_Datos.Name = "DGV_Datos";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_Datos.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Datos.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.DGV_Datos.Size = new System.Drawing.Size(955, 123);
             this.DGV_Datos.TabIndex = 55;
             // 
@@ -525,22 +548,24 @@
             this.CMB_Elaboro.Size = new System.Drawing.Size(121, 33);
             this.CMB_Elaboro.TabIndex = 63;
             // 
-            // BTN_Imprimir
+            // BTN_imprimir
             // 
-            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_Imprimir.Location = new System.Drawing.Point(558, 574);
-            this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 27);
-            this.BTN_Imprimir.TabIndex = 4;
-            this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = true;
+            this.BTN_imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_imprimir.Location = new System.Drawing.Point(498, 574);
+            this.BTN_imprimir.Name = "BTN_imprimir";
+            this.BTN_imprimir.Size = new System.Drawing.Size(80, 30);
+            this.BTN_imprimir.TabIndex = 64;
+            this.BTN_imprimir.Text = "Imprimir";
+            this.BTN_imprimir.UseVisualStyleBackColor = false;
             // 
             // OrdenCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.BTN_imprimir);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "OrdenCobro";
             this.Size = new System.Drawing.Size(1064, 618);
             this.groupBox1.ResumeLayout(false);
@@ -596,6 +621,6 @@
         private System.Windows.Forms.TextBox TXT_Total;
         private System.Windows.Forms.Label JLB_Elaboro;
         private System.Windows.Forms.ComboBox CMB_Elaboro;
-        private System.Windows.Forms.Button BTN_Imprimir;
+        private System.Windows.Forms.Button BTN_imprimir;
     }
 }

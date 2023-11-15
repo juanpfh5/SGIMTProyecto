@@ -28,100 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.BTN_ordenCD = new System.Windows.Forms.Button();
-            this.SDP_menuOC = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.PUC_menuOrdenC = new System.Windows.Forms.Panel();
-            this.BTN_inicio = new System.Windows.Forms.Button();
-            this.BTN_ordenCobro = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PNL_MenuOrdenC = new System.Windows.Forms.Panel();
+            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
+            this.SDP_MenuOC = new System.Windows.Forms.Panel();
+            this.BTN_OrdenCobroDiversos = new System.Windows.Forms.Button();
+            this.BTN_OrdenCobro = new System.Windows.Forms.Button();
+            this.PNL_OrdenC = new System.Windows.Forms.Panel();
+            this.BTN_Inicio = new System.Windows.Forms.Button();
+            this.PNL_MenuOrdenC.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // PNL_MenuOrdenC
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(24)))), ((int)(((byte)(122)))));
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.SDP_menuOC);
-            this.panel1.Controls.Add(this.BTN_ordenCD);
-            this.panel1.Controls.Add(this.BTN_ordenCobro);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1064, 100);
-            this.panel1.TabIndex = 0;
+            this.PNL_MenuOrdenC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(103)))), ((int)(((byte)(24)))), ((int)(((byte)(122)))));
+            this.PNL_MenuOrdenC.Controls.Add(this.PCB_LogoSMyT);
+            this.PNL_MenuOrdenC.Controls.Add(this.SDP_MenuOC);
+            this.PNL_MenuOrdenC.Controls.Add(this.BTN_OrdenCobroDiversos);
+            this.PNL_MenuOrdenC.Controls.Add(this.BTN_OrdenCobro);
+            this.PNL_MenuOrdenC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PNL_MenuOrdenC.Location = new System.Drawing.Point(0, 0);
+            this.PNL_MenuOrdenC.Name = "PNL_MenuOrdenC";
+            this.PNL_MenuOrdenC.Size = new System.Drawing.Size(1064, 100);
+            this.PNL_MenuOrdenC.TabIndex = 0;
             // 
-            // BTN_ordenCD
+            // PCB_LogoSMyT
             // 
-            this.BTN_ordenCD.FlatAppearance.BorderSize = 0;
-            this.BTN_ordenCD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_ordenCD.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_ordenCD.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_ordenCD.Image = global::SGIMTProyecto.Properties.Resources.salarioCobroDiversos_white_50px;
-            this.BTN_ordenCD.Location = new System.Drawing.Point(723, 0);
-            this.BTN_ordenCD.Name = "BTN_ordenCD";
-            this.BTN_ordenCD.Size = new System.Drawing.Size(283, 69);
-            this.BTN_ordenCD.TabIndex = 1;
-            this.BTN_ordenCD.Text = "  Orden de Cobro de Derechos (Diversos)";
-            this.BTN_ordenCD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BTN_ordenCD.UseVisualStyleBackColor = true;
-            this.BTN_ordenCD.Click += new System.EventHandler(this.BTN_ordenCobroD_Click);
+            this.PCB_LogoSMyT.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_blanco_530;
+            this.PCB_LogoSMyT.Location = new System.Drawing.Point(3, 3);
+            this.PCB_LogoSMyT.Name = "PCB_LogoSMyT";
+            this.PCB_LogoSMyT.Size = new System.Drawing.Size(202, 97);
+            this.PCB_LogoSMyT.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PCB_LogoSMyT.TabIndex = 2;
+            this.PCB_LogoSMyT.TabStop = false;
             // 
-            // SDP_menuOC
+            // SDP_MenuOC
             // 
-            this.SDP_menuOC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(126)))), ((int)(((byte)(188)))));
-            this.SDP_menuOC.Location = new System.Drawing.Point(397, 75);
-            this.SDP_menuOC.Name = "SDP_menuOC";
-            this.SDP_menuOC.Size = new System.Drawing.Size(283, 25);
-            this.SDP_menuOC.TabIndex = 1;
+            this.SDP_MenuOC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(126)))), ((int)(((byte)(188)))));
+            this.SDP_MenuOC.Location = new System.Drawing.Point(397, 75);
+            this.SDP_MenuOC.Name = "SDP_MenuOC";
+            this.SDP_MenuOC.Size = new System.Drawing.Size(283, 25);
+            this.SDP_MenuOC.TabIndex = 1;
             // 
-            // pictureBox1
+            // BTN_OrdenCobroDiversos
             // 
-            this.pictureBox1.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_blanco_530;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(202, 97);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.BTN_OrdenCobroDiversos.FlatAppearance.BorderSize = 0;
+            this.BTN_OrdenCobroDiversos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_OrdenCobroDiversos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_OrdenCobroDiversos.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_OrdenCobroDiversos.Image = global::SGIMTProyecto.Properties.Resources.salarioCobroDiversos_white_50px;
+            this.BTN_OrdenCobroDiversos.Location = new System.Drawing.Point(723, 0);
+            this.BTN_OrdenCobroDiversos.Name = "BTN_OrdenCobroDiversos";
+            this.BTN_OrdenCobroDiversos.Size = new System.Drawing.Size(283, 69);
+            this.BTN_OrdenCobroDiversos.TabIndex = 1;
+            this.BTN_OrdenCobroDiversos.Text = "  Orden de Cobro de Derechos (Diversos)";
+            this.BTN_OrdenCobroDiversos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_OrdenCobroDiversos.UseVisualStyleBackColor = true;
+            this.BTN_OrdenCobroDiversos.Click += new System.EventHandler(this.BTN_OrdenCobroDiversos_Click);
             // 
-            // PUC_menuOrdenC
+            // BTN_OrdenCobro
             // 
-            this.PUC_menuOrdenC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PUC_menuOrdenC.Location = new System.Drawing.Point(0, 100);
-            this.PUC_menuOrdenC.Name = "PUC_menuOrdenC";
-            this.PUC_menuOrdenC.Size = new System.Drawing.Size(1064, 638);
-            this.PUC_menuOrdenC.TabIndex = 1;
+            this.BTN_OrdenCobro.FlatAppearance.BorderSize = 0;
+            this.BTN_OrdenCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_OrdenCobro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_OrdenCobro.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_OrdenCobro.Image = global::SGIMTProyecto.Properties.Resources.salarioCobro_white_50px;
+            this.BTN_OrdenCobro.Location = new System.Drawing.Point(397, 0);
+            this.BTN_OrdenCobro.Name = "BTN_OrdenCobro";
+            this.BTN_OrdenCobro.Size = new System.Drawing.Size(283, 69);
+            this.BTN_OrdenCobro.TabIndex = 0;
+            this.BTN_OrdenCobro.Text = "  Orden de Cobro de Derechos";
+            this.BTN_OrdenCobro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_OrdenCobro.UseVisualStyleBackColor = true;
+            this.BTN_OrdenCobro.Click += new System.EventHandler(this.BTN_OrdenCobro_Click);
             // 
-            // BTN_inicio
+            // PNL_OrdenC
             // 
-            this.BTN_inicio.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_inicio.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_inicio.Location = new System.Drawing.Point(972, 744);
-            this.BTN_inicio.Name = "BTN_inicio";
-            this.BTN_inicio.Size = new System.Drawing.Size(80, 30);
-            this.BTN_inicio.TabIndex = 24;
-            this.BTN_inicio.Text = "Inicio";
-            this.BTN_inicio.UseVisualStyleBackColor = false;
-            this.BTN_inicio.Click += new System.EventHandler(this.BTN_inicio_Click);
+            this.PNL_OrdenC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PNL_OrdenC.Location = new System.Drawing.Point(0, 100);
+            this.PNL_OrdenC.Name = "PNL_OrdenC";
+            this.PNL_OrdenC.Size = new System.Drawing.Size(1064, 638);
+            this.PNL_OrdenC.TabIndex = 1;
             // 
-            // BTN_ordenCobro
+            // BTN_Inicio
             // 
-            this.BTN_ordenCobro.FlatAppearance.BorderSize = 0;
-            this.BTN_ordenCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_ordenCobro.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_ordenCobro.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_ordenCobro.Image = global::SGIMTProyecto.Properties.Resources.salarioCobro_white_50px;
-            this.BTN_ordenCobro.Location = new System.Drawing.Point(397, 0);
-            this.BTN_ordenCobro.Name = "BTN_ordenCobro";
-            this.BTN_ordenCobro.Size = new System.Drawing.Size(283, 69);
-            this.BTN_ordenCobro.TabIndex = 0;
-            this.BTN_ordenCobro.Text = "  Orden de Cobro de Derechos";
-            this.BTN_ordenCobro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BTN_ordenCobro.UseVisualStyleBackColor = true;
-            this.BTN_ordenCobro.Click += new System.EventHandler(this.BTN_ordenCobro_Click);
+            this.BTN_Inicio.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Inicio.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Inicio.Location = new System.Drawing.Point(972, 744);
+            this.BTN_Inicio.Name = "BTN_Inicio";
+            this.BTN_Inicio.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Inicio.TabIndex = 24;
+            this.BTN_Inicio.Text = "Inicio";
+            this.BTN_Inicio.UseVisualStyleBackColor = false;
+            this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
             // 
             // MenuOrdenCobro
             // 
@@ -129,25 +129,25 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(1064, 781);
-            this.Controls.Add(this.BTN_inicio);
-            this.Controls.Add(this.PUC_menuOrdenC);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PNL_OrdenC);
+            this.Controls.Add(this.PNL_MenuOrdenC);
+            this.Controls.Add(this.BTN_Inicio);
             this.Name = "MenuOrdenCobro";
             this.Text = "MenuOrdenCobro";
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PNL_MenuOrdenC.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button BTN_ordenCD;
-        private System.Windows.Forms.Panel SDP_menuOC;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel PUC_menuOrdenC;
-        private System.Windows.Forms.Button BTN_inicio;
-        private System.Windows.Forms.Button BTN_ordenCobro;
+        private System.Windows.Forms.Panel PNL_MenuOrdenC;
+        private System.Windows.Forms.Button BTN_OrdenCobroDiversos;
+        private System.Windows.Forms.Panel SDP_MenuOC;
+        private System.Windows.Forms.PictureBox PCB_LogoSMyT;
+        private System.Windows.Forms.Panel PNL_OrdenC;
+        private System.Windows.Forms.Button BTN_Inicio;
+        private System.Windows.Forms.Button BTN_OrdenCobro;
     }
 }

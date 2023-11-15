@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GRB_OrdenCobroDiversos = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
             this.JLB_NoExterior = new System.Windows.Forms.Label();
@@ -56,45 +56,47 @@
             this.JBL_ImporteData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
             this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
-            this.BTN_imprimir = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
+            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            this.TXT_Placa = new System.Windows.Forms.TextBox();
+            this.GRB_OrdenCobroDiversos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // GRB_OrdenCobroDiversos
             // 
-            this.groupBox1.Controls.Add(this.JLB_Nombre);
-            this.groupBox1.Controls.Add(this.TXT_Nombre);
-            this.groupBox1.Controls.Add(this.JLB_NoExterior);
-            this.groupBox1.Controls.Add(this.TXT_NoExterior);
-            this.groupBox1.Controls.Add(this.JLB_Domicilio);
-            this.groupBox1.Controls.Add(this.TXT_Domicilio);
-            this.groupBox1.Controls.Add(this.JLB_NoInterior);
-            this.groupBox1.Controls.Add(this.TXT_NoInterior);
-            this.groupBox1.Controls.Add(this.JLB_RFC);
-            this.groupBox1.Controls.Add(this.TXT_RFC);
-            this.groupBox1.Controls.Add(this.JLB_CP);
-            this.groupBox1.Controls.Add(this.TXT_CP);
-            this.groupBox1.Controls.Add(this.JLB_Colonia);
-            this.groupBox1.Controls.Add(this.TXT_Colonia);
-            this.groupBox1.Controls.Add(this.JLB_Estado);
-            this.groupBox1.Controls.Add(this.TXT_Estado);
-            this.groupBox1.Controls.Add(this.JLB_Municipio);
-            this.groupBox1.Controls.Add(this.TXT_Municipio);
-            this.groupBox1.Controls.Add(this.JLB_Clave);
-            this.groupBox1.Controls.Add(this.TXT_Clave);
-            this.groupBox1.Controls.Add(this.BTN_Agregar);
-            this.groupBox1.Controls.Add(this.DGV_Datos);
-            this.groupBox1.Controls.Add(this.JLB_NoMovimiento);
-            this.groupBox1.Controls.Add(this.TXT_NoMovimiento);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.DarkViolet;
-            this.groupBox1.Location = new System.Drawing.Point(21, 29);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1023, 532);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ORDEN DE COBRO DE DERECHOS DIVERSOS";
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Nombre);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Nombre);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_NoExterior);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_NoExterior);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Domicilio);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Domicilio);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_NoInterior);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_NoInterior);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_RFC);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_RFC);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_CP);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_CP);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Colonia);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Colonia);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Estado);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Estado);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Municipio);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Municipio);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Clave);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Clave);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.BTN_Agregar);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.DGV_Datos);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_NoMovimiento);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_NoMovimiento);
+            this.GRB_OrdenCobroDiversos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.GRB_OrdenCobroDiversos.ForeColor = System.Drawing.Color.DarkViolet;
+            this.GRB_OrdenCobroDiversos.Location = new System.Drawing.Point(21, 29);
+            this.GRB_OrdenCobroDiversos.Name = "GRB_OrdenCobroDiversos";
+            this.GRB_OrdenCobroDiversos.Size = new System.Drawing.Size(1023, 532);
+            this.GRB_OrdenCobroDiversos.TabIndex = 0;
+            this.GRB_OrdenCobroDiversos.TabStop = false;
+            this.GRB_OrdenCobroDiversos.Text = "ORDEN DE COBRO DE DERECHOS DIVERSOS";
             // 
             // JLB_Nombre
             // 
@@ -343,36 +345,60 @@
             this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
             this.TXT_NoMovimiento.TabIndex = 41;
             // 
-            // BTN_imprimir
+            // BTN_Imprimir
             // 
-            this.BTN_imprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_imprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_imprimir.Location = new System.Drawing.Point(502, 567);
-            this.BTN_imprimir.Name = "BTN_imprimir";
-            this.BTN_imprimir.Size = new System.Drawing.Size(80, 30);
-            this.BTN_imprimir.TabIndex = 65;
-            this.BTN_imprimir.Text = "Imprimir";
-            this.BTN_imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(502, 567);
+            this.BTN_Imprimir.Name = "BTN_Imprimir";
+            this.BTN_Imprimir.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Imprimir.TabIndex = 65;
+            this.BTN_Imprimir.Text = "Imprimir";
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            // 
+            // BTN_BuscarPlaca
+            // 
+            this.BTN_BuscarPlaca.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_BuscarPlaca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_BuscarPlaca.FlatAppearance.BorderSize = 0;
+            this.BTN_BuscarPlaca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_BuscarPlaca.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_BuscarPlaca.Location = new System.Drawing.Point(964, 7);
+            this.BTN_BuscarPlaca.Name = "BTN_BuscarPlaca";
+            this.BTN_BuscarPlaca.Size = new System.Drawing.Size(59, 30);
+            this.BTN_BuscarPlaca.TabIndex = 67;
+            this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
+            this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
+            // 
+            // TXT_Placa
+            // 
+            this.TXT_Placa.Location = new System.Drawing.Point(790, 13);
+            this.TXT_Placa.Name = "TXT_Placa";
+            this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
+            this.TXT_Placa.TabIndex = 66;
             // 
             // OrdenCobroDiversos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BTN_imprimir);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.TXT_Placa);
+            this.Controls.Add(this.BTN_BuscarPlaca);
+            this.Controls.Add(this.GRB_OrdenCobroDiversos);
+            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "OrdenCobroDiversos";
             this.Size = new System.Drawing.Size(1064, 618);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GRB_OrdenCobroDiversos.ResumeLayout(false);
+            this.GRB_OrdenCobroDiversos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GRB_OrdenCobroDiversos;
         private System.Windows.Forms.Label JLB_Nombre;
         private System.Windows.Forms.TextBox TXT_Nombre;
         private System.Windows.Forms.Label JLB_Domicilio;
@@ -400,6 +426,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ClaveData;
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_DescripcionData;
         private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ImporteData;
-        private System.Windows.Forms.Button BTN_imprimir;
+        private System.Windows.Forms.Button BTN_Imprimir;
+        private System.Windows.Forms.Button BTN_BuscarPlaca;
+        private System.Windows.Forms.TextBox TXT_Placa;
     }
 }

@@ -21,7 +21,7 @@ namespace SGIMTProyecto
         public string tipo_un { get; set; }
         public string combustible_un { get; set; }
         public int pasajeros_un { get; set; }
-        public float clave_cl { get; set; }
+        public int clave_cl { get; set; }
         public string observaciones_un { get; set; }
         public int id_mo { get; set; }
         public float total_mo { get; set; }

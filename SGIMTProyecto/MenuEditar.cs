@@ -21,22 +21,22 @@ namespace SGIMTProyecto
         private void AddUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
-            PUC_menuEditar.Controls.Clear();
-            PUC_menuEditar.Controls.Add(userControl);
+            PNL_Editar.Controls.Clear();
+            PNL_Editar.Controls.Add(userControl);
             userControl.BringToFront();
         }
 
-        private void BTN_datosV_Click(object sender, EventArgs e)
+        private void BTN_DatosVehiculo_Click(object sender, EventArgs e)
         {
             AddUserControl(new EditarVehiculo());
         }
 
-        private void BTN_inicio_Click(object sender, EventArgs e)
+        private void BTN_Inicio_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void BTN_datosP_Click(object sender, EventArgs e)
+        private void BTN_DatosPropietario_Click(object sender, EventArgs e)
         {
             AddUserControl(new EditarPropietario());
         }

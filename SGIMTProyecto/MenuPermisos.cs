@@ -16,47 +16,47 @@ namespace SGIMTProyecto
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            SDP_menuEditar.Height = BTN_transporteE.Height;
-            SDP_menuEditar.Top = BTN_transporteE.Top;
+            SDP_MenuEditar.Height = BTN_TransporteEscolar.Height;
+            SDP_MenuEditar.Top = BTN_TransporteEscolar.Top;
             AddUserControl(new PermisoTransporteE());
         }
         private void AddUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
-            PUC_menuEditar.Controls.Clear();
-            PUC_menuEditar.Controls.Add(userControl);
+            PNL_Editar.Controls.Clear();
+            PNL_Editar.Controls.Add(userControl);
             userControl.BringToFront();
         }
 
-        private void BTN_transporteE_Click(object sender, EventArgs e)
+        private void BTN_TransporteEscolar_Click(object sender, EventArgs e)
         {
-            SDP_menuEditar.Height = BTN_transporteE.Height;
-            SDP_menuEditar.Top = BTN_transporteE.Top;
+            SDP_MenuEditar.Height = BTN_TransporteEscolar.Height;
+            SDP_MenuEditar.Top = BTN_TransporteEscolar.Top;
             AddUserControl(new PermisoTransporteE());
         }
 
-        private void BTN_pasoAnual_Click(object sender, EventArgs e)
+        private void BTN_PasoAnual_Click(object sender, EventArgs e)
         {
-            SDP_menuEditar.Height = BTN_pasoAnual.Height;
-            SDP_menuEditar.Top = BTN_pasoAnual.Top;
+            SDP_MenuEditar.Height = BTN_PasoAnual.Height;
+            SDP_MenuEditar.Top = BTN_PasoAnual.Top;
             AddUserControl(new PermisoPasoAnual());
         }
 
-        private void BTN_transportePE_Click(object sender, EventArgs e)
+        private void BTN_TransportePersonalEmpresas_Click(object sender, EventArgs e)
         {
-            SDP_menuEditar.Height = BTN_transportePE.Height;
-            SDP_menuEditar.Top = BTN_transportePE.Top;
+            SDP_MenuEditar.Height = BTN_TransportePersonalEmpresas.Height;
+            SDP_MenuEditar.Top = BTN_TransportePersonalEmpresas.Top;
             AddUserControl(new PermisoPersonalEmpresas());
         }
 
-        private void BTN_eventualFR_Click(object sender, EventArgs e)
+        private void BTN_EventualFueraRuta_Click(object sender, EventArgs e)
         {
-            SDP_menuEditar.Height = BTN_eventualFR.Height;
-            SDP_menuEditar.Top = BTN_eventualFR.Top;
+            SDP_MenuEditar.Height = BTN_EventualFueraRuta.Height;
+            SDP_MenuEditar.Top = BTN_EventualFueraRuta.Top;
             AddUserControl(new PermisoCircularFueraRuta());
         }
 
-        private void BTN_inicio_Click(object sender, EventArgs e)
+        private void BTN_Inicio_Click(object sender, EventArgs e)
         {
             this.Close();
         }

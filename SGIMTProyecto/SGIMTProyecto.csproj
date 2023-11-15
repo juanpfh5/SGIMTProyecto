@@ -48,6 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="D_EditarPropietario.cs" />
+    <Compile Include="D_EditarVehiculo.cs" />
+    <Compile Include="D_LiberacionPublicoPrivado.cs" />
+    <Compile Include="D_OrdenCobro.cs" />
+    <Compile Include="D_OrdenCobroDiversos.cs" />
+    <Compile Include="D_PermisoCircularFueraRuta.cs" />
+    <Compile Include="D_Revista.cs" />
+    <Compile Include="D_TarjetaCirculacion.cs" />
     <Compile Include="EditarPropietario.cs">
       <SubType>UserControl</SubType>
     </Compile>

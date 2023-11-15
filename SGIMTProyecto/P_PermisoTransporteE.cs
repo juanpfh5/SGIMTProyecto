@@ -10,7 +10,7 @@ namespace SGIMTProyecto
     {
         public string permisionario_te { get; set; }
         public string domicilio_te { get; set; }
-        public int poblacion_te { get; set; }
+        public string poblacion_te { get; set; }
         public int cp_te { get; set; }
         public string placa_te { get; set; }
         public int folioTC_te { get; set; }

@@ -21,24 +21,24 @@ namespace SGIMTProyecto
         private void AddUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
-            PUC_menuOrdenC.Controls.Clear();
-            PUC_menuOrdenC.Controls.Add(userControl);
+            PNL_OrdenC.Controls.Clear();
+            PNL_OrdenC.Controls.Add(userControl);
             userControl.BringToFront();
         }
 
-        private void BTN_ordenCobro_Click(object sender, EventArgs e)
+        private void BTN_OrdenCobro_Click(object sender, EventArgs e)
         {
             
             AddUserControl(new OrdenCobro());
         }
 
-        private void BTN_ordenCobroD_Click(object sender, EventArgs e)
+        private void BTN_OrdenCobroDiversos_Click(object sender, EventArgs e)
         {
             
             AddUserControl(new OrdenCobroDiversos());
         }
 
-        private void BTN_inicio_Click(object sender, EventArgs e)
+        private void BTN_Inicio_Click(object sender, EventArgs e)
         {
             this.Close();
         }

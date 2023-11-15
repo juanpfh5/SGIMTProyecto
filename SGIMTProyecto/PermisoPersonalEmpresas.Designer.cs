@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GRB_TransportePersonalEmpresas = new System.Windows.Forms.GroupBox();
             this.JLB_Permisionario = new System.Windows.Forms.Label();
             this.TXT_Permisionario = new System.Windows.Forms.TextBox();
             this.JLB_Domicilio = new System.Windows.Forms.Label();
@@ -52,41 +52,41 @@
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.GRB_TransportePersonalEmpresas.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // GRB_TransportePersonalEmpresas
             // 
-            this.groupBox1.Controls.Add(this.JLB_Permisionario);
-            this.groupBox1.Controls.Add(this.TXT_Permisionario);
-            this.groupBox1.Controls.Add(this.JLB_Domicilio);
-            this.groupBox1.Controls.Add(this.TXT_Domicilio);
-            this.groupBox1.Controls.Add(this.JLB_CP);
-            this.groupBox1.Controls.Add(this.TXT_CP);
-            this.groupBox1.Controls.Add(this.JLB_Poblacion);
-            this.groupBox1.Controls.Add(this.TXT_Poblacion);
-            this.groupBox1.Controls.Add(this.JLB_Placas);
-            this.groupBox1.Controls.Add(this.TXT_Placas);
-            this.groupBox1.Controls.Add(this.JLB_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.TXT_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.JLB_Recorrido);
-            this.groupBox1.Controls.Add(this.TXT_Recorrido);
-            this.groupBox1.Controls.Add(this.JLB_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.DTP_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.JLB_FechaVigencia);
-            this.groupBox1.Controls.Add(this.DTP_FechaVigencia);
-            this.groupBox1.Controls.Add(this.JLB_TitularSMyT);
-            this.groupBox1.Controls.Add(this.TXT_TitularSMyT);
-            this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
-            this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
-            this.groupBox1.Location = new System.Drawing.Point(17, 16);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(756, 546);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "PERMISO PARA TRANSPORTE DE PERSONAL DE EMPRESAS";
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_Permisionario);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_Permisionario);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_Domicilio);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_Domicilio);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_CP);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_CP);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_Poblacion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_Poblacion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_Placas);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_Placas);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_TarjetaCirculacion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_TarjetaCirculacion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_Recorrido);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_Recorrido);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_FechaExpedicion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.DTP_FechaExpedicion);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_FechaVigencia);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.DTP_FechaVigencia);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_TitularSMyT);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_TitularSMyT);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_FolioPermiso);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_TransportePersonalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.GRB_TransportePersonalEmpresas.ForeColor = System.Drawing.Color.DarkOrchid;
+            this.GRB_TransportePersonalEmpresas.Location = new System.Drawing.Point(17, 16);
+            this.GRB_TransportePersonalEmpresas.Name = "GRB_TransportePersonalEmpresas";
+            this.GRB_TransportePersonalEmpresas.Size = new System.Drawing.Size(756, 546);
+            this.GRB_TransportePersonalEmpresas.TabIndex = 0;
+            this.GRB_TransportePersonalEmpresas.TabStop = false;
+            this.GRB_TransportePersonalEmpresas.Text = "PERMISO PARA TRANSPORTE DE PERSONAL DE EMPRESAS";
             // 
             // JLB_Permisionario
             // 
@@ -315,19 +315,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.GRB_TransportePersonalEmpresas);
             this.Controls.Add(this.BTN_Imprimir);
             this.Name = "PermisoPersonalEmpresas";
             this.Size = new System.Drawing.Size(797, 607);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GRB_TransportePersonalEmpresas.ResumeLayout(false);
+            this.GRB_TransportePersonalEmpresas.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GRB_TransportePersonalEmpresas;
         private System.Windows.Forms.Label JLB_Recorrido;
         private System.Windows.Forms.TextBox TXT_Recorrido;
         private System.Windows.Forms.Label JLB_TarjetaCirculacion;

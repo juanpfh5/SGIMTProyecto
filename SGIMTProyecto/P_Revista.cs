@@ -21,7 +21,7 @@ namespace SGIMTProyecto
         public string marca_un { get; set; }
         public int pasajeros_un { get; set; }
         public int folioRevista_un { get; set; }
-        public int tipo_co { get; set; }
+        public string tipo_co { get; set; }
         public string otros_un { get; set; }
         public string resolucion_co { get; set; }
         public string tipo_un { get; set; }

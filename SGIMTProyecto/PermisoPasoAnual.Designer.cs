@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GRB_PasoAnual = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
             this.JLB_Domicilio = new System.Windows.Forms.Label();
@@ -62,51 +62,51 @@
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.GRB_PasoAnual.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // GRB_PasoAnual
             // 
-            this.groupBox1.Controls.Add(this.JLB_Nombre);
-            this.groupBox1.Controls.Add(this.TXT_Nombre);
-            this.groupBox1.Controls.Add(this.JLB_Domicilio);
-            this.groupBox1.Controls.Add(this.TXT_Domicilio);
-            this.groupBox1.Controls.Add(this.JLB_Poblacion);
-            this.groupBox1.Controls.Add(this.TXT_Poblacion);
-            this.groupBox1.Controls.Add(this.JLB_CP);
-            this.groupBox1.Controls.Add(this.TXT_CP);
-            this.groupBox1.Controls.Add(this.JLB_NoSerie);
-            this.groupBox1.Controls.Add(this.TXT_NoSerie);
-            this.groupBox1.Controls.Add(this.JLB_NoMotor);
-            this.groupBox1.Controls.Add(this.TXT_NoMotor);
-            this.groupBox1.Controls.Add(this.JLB_RFV);
-            this.groupBox1.Controls.Add(this.TXT_RFV);
-            this.groupBox1.Controls.Add(this.JLB_Marca);
-            this.groupBox1.Controls.Add(this.TXT_Marca);
-            this.groupBox1.Controls.Add(this.JLB_Modelo);
-            this.groupBox1.Controls.Add(this.TXT_Modelo);
-            this.groupBox1.Controls.Add(this.JLB_Placas);
-            this.groupBox1.Controls.Add(this.TXT_Placas);
-            this.groupBox1.Controls.Add(this.JLB_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.TXT_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.JLB_Recorrido);
-            this.groupBox1.Controls.Add(this.TXT_Recorrido);
-            this.groupBox1.Controls.Add(this.JLB_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.DTP_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.JLB_FechaVigencia);
-            this.groupBox1.Controls.Add(this.DTP_FechaVigencia);
-            this.groupBox1.Controls.Add(this.JLB_TitularSMyT);
-            this.groupBox1.Controls.Add(this.TXT_TitularSMyT);
-            this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
-            this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
-            this.groupBox1.Location = new System.Drawing.Point(30, 21);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(736, 541);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "PERMISO DE PASO ANUAL";
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Nombre);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Nombre);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Domicilio);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Domicilio);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Poblacion);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Poblacion);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_CP);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_CP);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_NoSerie);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_NoSerie);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_NoMotor);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_NoMotor);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_RFV);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_RFV);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Marca);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Marca);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Modelo);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Modelo);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Placas);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Placas);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_TarjetaCirculacion);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_TarjetaCirculacion);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_Recorrido);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_Recorrido);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_FechaExpedicion);
+            this.GRB_PasoAnual.Controls.Add(this.DTP_FechaExpedicion);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_FechaVigencia);
+            this.GRB_PasoAnual.Controls.Add(this.DTP_FechaVigencia);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_TitularSMyT);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_TitularSMyT);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_FolioPermiso);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_PasoAnual.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.GRB_PasoAnual.ForeColor = System.Drawing.Color.DarkOrchid;
+            this.GRB_PasoAnual.Location = new System.Drawing.Point(30, 21);
+            this.GRB_PasoAnual.Name = "GRB_PasoAnual";
+            this.GRB_PasoAnual.Size = new System.Drawing.Size(736, 541);
+            this.GRB_PasoAnual.TabIndex = 0;
+            this.GRB_PasoAnual.TabStop = false;
+            this.GRB_PasoAnual.Text = "PERMISO DE PASO ANUAL";
             // 
             // JLB_Nombre
             // 
@@ -430,19 +430,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.GRB_PasoAnual);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Controls.Add(this.groupBox1);
             this.Name = "PermisoPasoAnual";
             this.Size = new System.Drawing.Size(797, 607);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GRB_PasoAnual.ResumeLayout(false);
+            this.GRB_PasoAnual.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GRB_PasoAnual;
         private System.Windows.Forms.Label JLB_Nombre;
         private System.Windows.Forms.TextBox TXT_Nombre;
         private System.Windows.Forms.Label JLB_Domicilio;

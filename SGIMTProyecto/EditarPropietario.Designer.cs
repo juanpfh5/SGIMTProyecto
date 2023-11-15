@@ -54,8 +54,8 @@
             this.JBL_NoSeguro = new System.Windows.Forms.Label();
             this.TXT_NoSeguro = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.BTN_guardar = new System.Windows.Forms.Button();
-            this.BTN_buscar = new System.Windows.Forms.Button();
+            this.BTN_Guardar = new System.Windows.Forms.Button();
+            this.BTN_Buscar = new System.Windows.Forms.Button();
             this.GRB_Propietario.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,7 +93,6 @@
             this.GRB_Propietario.TabIndex = 0;
             this.GRB_Propietario.TabStop = false;
             this.GRB_Propietario.Text = "DATOS DEL PROPIETARIO";
-            this.GRB_Propietario.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // JBL_Nombre
             // 
@@ -105,7 +104,6 @@
             this.JBL_Nombre.Size = new System.Drawing.Size(58, 15);
             this.JBL_Nombre.TabIndex = 0;
             this.JBL_Nombre.Text = "Nombre: ";
-            this.JBL_Nombre.Click += new System.EventHandler(this.label1_Click);
             // 
             // TXT_Nombre
             // 
@@ -306,7 +304,6 @@
             this.JBL_NoConcesion.Size = new System.Drawing.Size(93, 15);
             this.JBL_NoConcesion.TabIndex = 20;
             this.JBL_NoConcesion.Text = "No. Concesion: ";
-            this.JBL_NoConcesion.Click += new System.EventHandler(this.JBL_NoConcesion_Click);
             // 
             // TXT_NoConcesion
             // 
@@ -345,39 +342,40 @@
             this.TXT_Placa.TabIndex = 1;
             this.TXT_Placa.Tag = "";
             // 
-            // BTN_guardar
+            // BTN_Guardar
             // 
-            this.BTN_guardar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_guardar.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_guardar.Location = new System.Drawing.Point(494, 450);
-            this.BTN_guardar.Name = "BTN_guardar";
-            this.BTN_guardar.Size = new System.Drawing.Size(80, 30);
-            this.BTN_guardar.TabIndex = 26;
-            this.BTN_guardar.Text = "Guardar";
-            this.BTN_guardar.UseVisualStyleBackColor = false;
+            this.BTN_Guardar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Guardar.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Guardar.Location = new System.Drawing.Point(494, 450);
+            this.BTN_Guardar.Name = "BTN_Guardar";
+            this.BTN_Guardar.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Guardar.TabIndex = 26;
+            this.BTN_Guardar.Text = "Guardar";
+            this.BTN_Guardar.UseVisualStyleBackColor = false;
             // 
-            // BTN_buscar
+            // BTN_Buscar
             // 
-            this.BTN_buscar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_buscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_buscar.FlatAppearance.BorderSize = 0;
-            this.BTN_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
-            this.BTN_buscar.Location = new System.Drawing.Point(930, 17);
-            this.BTN_buscar.Name = "BTN_buscar";
-            this.BTN_buscar.Size = new System.Drawing.Size(59, 30);
-            this.BTN_buscar.TabIndex = 27;
-            this.BTN_buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Buscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Buscar.FlatAppearance.BorderSize = 0;
+            this.BTN_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_Buscar.Location = new System.Drawing.Point(930, 17);
+            this.BTN_Buscar.Name = "BTN_Buscar";
+            this.BTN_Buscar.Size = new System.Drawing.Size(59, 30);
+            this.BTN_Buscar.TabIndex = 27;
+            this.BTN_Buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.Click += new System.EventHandler(this.BTN_Buscar_Click);
             // 
             // EditarPropietario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BTN_buscar);
-            this.Controls.Add(this.BTN_guardar);
             this.Controls.Add(this.TXT_Placa);
+            this.Controls.Add(this.BTN_Guardar);
             this.Controls.Add(this.GRB_Propietario);
+            this.Controls.Add(this.BTN_Buscar);
             this.Name = "EditarPropietario";
             this.Size = new System.Drawing.Size(1064, 500);
             this.GRB_Propietario.ResumeLayout(false);
@@ -415,7 +413,7 @@
         private System.Windows.Forms.TextBox TXT_NoSeguro;
         private System.Windows.Forms.TextBox TXT_NoConcesion;
         private System.Windows.Forms.TextBox TXT_Placa;
-        private System.Windows.Forms.Button BTN_guardar;
-        private System.Windows.Forms.Button BTN_buscar;
+        private System.Windows.Forms.Button BTN_Guardar;
+        private System.Windows.Forms.Button BTN_Buscar;
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GRB_EventualFueraRuta = new System.Windows.Forms.GroupBox();
             this.JLB_Permisionario = new System.Windows.Forms.Label();
             this.TXT_Permisionario = new System.Windows.Forms.TextBox();
             this.JLB_Domicilio = new System.Windows.Forms.Label();
@@ -65,54 +65,54 @@
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
-            this.BTN_buscar = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            this.GRB_EventualFueraRuta.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // GRB_EventualFueraRuta
             // 
-            this.groupBox1.Controls.Add(this.JLB_Permisionario);
-            this.groupBox1.Controls.Add(this.TXT_Permisionario);
-            this.groupBox1.Controls.Add(this.JLB_Domicilio);
-            this.groupBox1.Controls.Add(this.TXT_Domicilio);
-            this.groupBox1.Controls.Add(this.JLB_Poblacion);
-            this.groupBox1.Controls.Add(this.TXT_Poblacion);
-            this.groupBox1.Controls.Add(this.JLB_CP);
-            this.groupBox1.Controls.Add(this.TXT_CP);
-            this.groupBox1.Controls.Add(this.JLB_NoSerie);
-            this.groupBox1.Controls.Add(this.TXT_NoSerie);
-            this.groupBox1.Controls.Add(this.JLB_NoMotor);
-            this.groupBox1.Controls.Add(this.TXT_NoMotor);
-            this.groupBox1.Controls.Add(this.JLB_Repuve);
-            this.groupBox1.Controls.Add(this.TXT_Repuve);
-            this.groupBox1.Controls.Add(this.JLB_Marca);
-            this.groupBox1.Controls.Add(this.TXT_Marca);
-            this.groupBox1.Controls.Add(this.JLB_Modelo);
-            this.groupBox1.Controls.Add(this.TXT_Modelo);
-            this.groupBox1.Controls.Add(this.JLB_Placas);
-            this.groupBox1.Controls.Add(this.TXT_Placas);
-            this.groupBox1.Controls.Add(this.JLB_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.TXT_TarjetaCirculacion);
-            this.groupBox1.Controls.Add(this.JLB_Recorrido);
-            this.groupBox1.Controls.Add(this.TXT_Recorrido);
-            this.groupBox1.Controls.Add(this.JLB_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.DTP_FechaExpedicion);
-            this.groupBox1.Controls.Add(this.JLB_FechaVigencia);
-            this.groupBox1.Controls.Add(this.DTP_FechaVigencia);
-            this.groupBox1.Controls.Add(this.JLB_Motivo);
-            this.groupBox1.Controls.Add(this.TXT_Motivo);
-            this.groupBox1.Controls.Add(this.JLB_TitularSMyT);
-            this.groupBox1.Controls.Add(this.TXT_TitularSMyT);
-            this.groupBox1.Controls.Add(this.JLB_FolioPermiso);
-            this.groupBox1.Controls.Add(this.TXT_FolioPermiso);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.DarkOrchid;
-            this.groupBox1.Location = new System.Drawing.Point(30, 47);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(736, 512);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "PERMISO EVENTUAL PARA CIRCULAR FUERA DE RUTA";
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Permisionario);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Permisionario);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Domicilio);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Domicilio);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Poblacion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Poblacion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_CP);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_CP);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_NoSerie);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_NoSerie);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_NoMotor);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_NoMotor);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Repuve);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Repuve);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Marca);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Marca);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Modelo);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Modelo);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Placas);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Placas);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_TarjetaCirculacion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_TarjetaCirculacion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Recorrido);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Recorrido);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_FechaExpedicion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.DTP_FechaExpedicion);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_FechaVigencia);
+            this.GRB_EventualFueraRuta.Controls.Add(this.DTP_FechaVigencia);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_Motivo);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_Motivo);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_TitularSMyT);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_TitularSMyT);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_FolioPermiso);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_EventualFueraRuta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.GRB_EventualFueraRuta.ForeColor = System.Drawing.Color.DarkOrchid;
+            this.GRB_EventualFueraRuta.Location = new System.Drawing.Point(30, 47);
+            this.GRB_EventualFueraRuta.Name = "GRB_EventualFueraRuta";
+            this.GRB_EventualFueraRuta.Size = new System.Drawing.Size(736, 512);
+            this.GRB_EventualFueraRuta.TabIndex = 0;
+            this.GRB_EventualFueraRuta.TabStop = false;
+            this.GRB_EventualFueraRuta.Text = "PERMISO EVENTUAL PARA CIRCULAR FUERA DE RUTA";
             // 
             // JLB_Permisionario
             // 
@@ -458,31 +458,32 @@
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
             // 
-            // BTN_buscar
+            // BTN_BuscarPlaca
             // 
-            this.BTN_buscar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_buscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_buscar.FlatAppearance.BorderSize = 0;
-            this.BTN_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
-            this.BTN_buscar.Location = new System.Drawing.Point(707, 14);
-            this.BTN_buscar.Name = "BTN_buscar";
-            this.BTN_buscar.Size = new System.Drawing.Size(59, 30);
-            this.BTN_buscar.TabIndex = 26;
-            this.BTN_buscar.UseVisualStyleBackColor = false;
+            this.BTN_BuscarPlaca.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_BuscarPlaca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_BuscarPlaca.FlatAppearance.BorderSize = 0;
+            this.BTN_BuscarPlaca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_BuscarPlaca.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_BuscarPlaca.Location = new System.Drawing.Point(707, 14);
+            this.BTN_BuscarPlaca.Name = "BTN_BuscarPlaca";
+            this.BTN_BuscarPlaca.Size = new System.Drawing.Size(59, 30);
+            this.BTN_BuscarPlaca.TabIndex = 26;
+            this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
+            this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
             // 
             // PermisoCircularFueraRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BTN_buscar);
-            this.Controls.Add(this.BTN_Imprimir);
             this.Controls.Add(this.TXT_Placa);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.BTN_BuscarPlaca);
+            this.Controls.Add(this.GRB_EventualFueraRuta);
+            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "PermisoCircularFueraRuta";
             this.Size = new System.Drawing.Size(797, 607);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GRB_EventualFueraRuta.ResumeLayout(false);
+            this.GRB_EventualFueraRuta.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,7 +491,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox GRB_EventualFueraRuta;
         private System.Windows.Forms.Label JLB_Permisionario;
         private System.Windows.Forms.TextBox TXT_Permisionario;
         private System.Windows.Forms.Label JLB_Domicilio;
@@ -527,6 +528,6 @@
         private System.Windows.Forms.TextBox TXT_Motivo;
         private System.Windows.Forms.TextBox TXT_Placa;
         private System.Windows.Forms.Button BTN_Imprimir;
-        private System.Windows.Forms.Button BTN_buscar;
+        private System.Windows.Forms.Button BTN_BuscarPlaca;
     }
 }

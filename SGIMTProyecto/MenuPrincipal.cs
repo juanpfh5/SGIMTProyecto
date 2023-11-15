@@ -20,21 +20,21 @@ namespace SGIMTProyecto
         private void AddUserControl(UserControl userControl)
         {
             userControl.Dock = DockStyle.Fill;
-            PUC_menuPrincipal.Controls.Clear();
-            PUC_menuPrincipal.Controls.Add(userControl);
+            PNL_MenuPrincipal.Controls.Clear();
+            PNL_MenuPrincipal.Controls.Add(userControl);
             userControl.BringToFront();
         }
         public MenuPrincipal()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;//centrar el formulario al crearse
-            SDP_menuPrincipal.Height = BTN_revista.Height;//alinear el side panel con el boton
-            SDP_menuPrincipal.Top = BTN_revista.Top;
+            SDP_MenuPrincipal.Height = BTN_Revista.Height;//alinear el side panel con el boton
+            SDP_MenuPrincipal.Top = BTN_Revista.Top;
             MenuPrincipalUC menuPrincipalUC = new MenuPrincipalUC();
             AddUserControl(menuPrincipalUC);
         }
 
-        private void BTN_revista_Click(object sender, EventArgs e)
+        private void BTN_Revista_Click(object sender, EventArgs e)
         {
             /*
              *  BOTON REVISTA
@@ -49,7 +49,7 @@ namespace SGIMTProyecto
             this.Show();
         }
 
-        private void BTN_tarjetaCirculacion_Click(object sender, EventArgs e)
+        private void BTN_TarjetaCirculacion_Click(object sender, EventArgs e)
         {
             if (formTC == null || formTC.IsDisposed)
             {
@@ -58,11 +58,11 @@ namespace SGIMTProyecto
             this.Hide();
             formTC.ShowDialog();
             this.Show();
-            SDP_menuPrincipal.Height = BTN_tarjetaCirculacion.Height;
-            SDP_menuPrincipal.Top = BTN_tarjetaCirculacion.Top;
+            SDP_MenuPrincipal.Height = BTN_TarjetaCirculacion.Height;
+            SDP_MenuPrincipal.Top = BTN_TarjetaCirculacion.Top;
         }
 
-        private void BTN_permisos_Click(object sender, EventArgs e)
+        private void BTN_Permisos_Click(object sender, EventArgs e)
         {
             if (formMpermisos == null || formMpermisos.IsDisposed)
             {
@@ -71,11 +71,11 @@ namespace SGIMTProyecto
             this.Hide();
             formMpermisos.ShowDialog();
             this.Show();
-            SDP_menuPrincipal.Height = BTN_permisos.Height;
-            SDP_menuPrincipal.Top = BTN_permisos.Top;
+            SDP_MenuPrincipal.Height = BTN_Permisos.Height;
+            SDP_MenuPrincipal.Top = BTN_Permisos.Top;
         }
 
-        private void BTN_ordenCobro_Click(object sender, EventArgs e)
+        private void BTN_OrdenCobro_Click(object sender, EventArgs e)
         {
             if (formOrdenCobro == null || formOrdenCobro.IsDisposed)
             {
@@ -84,18 +84,18 @@ namespace SGIMTProyecto
             this.Hide();
             formOrdenCobro.ShowDialog();
             this.Show();
-            SDP_menuPrincipal.Height = BTN_ordenCobro.Height;
-            SDP_menuPrincipal.Top = BTN_ordenCobro.Top;
+            SDP_MenuPrincipal.Height = BTN_OrdenCobro.Height;
+            SDP_MenuPrincipal.Top = BTN_OrdenCobro.Top;
         }
 
-        private void BTN_liberacion_Click(object sender, EventArgs e)
+        private void BTN_LiberacionPublicoPrivado_Click(object sender, EventArgs e)
         {
-            SDP_menuPrincipal.Height = BTN_liberacion.Height;
-            SDP_menuPrincipal.Top = BTN_liberacion.Top;
+            SDP_MenuPrincipal.Height = BTN_LiberacionPublicoPrivado.Height;
+            SDP_MenuPrincipal.Top = BTN_LiberacionPublicoPrivado.Top;
             AddUserControl(new LiberacionPublicoPrivado());
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void BTN_Editar_Click(object sender, EventArgs e)
         {
             if (formMenuEditar == null  || formMenuEditar.IsDisposed)
             {
@@ -104,8 +104,8 @@ namespace SGIMTProyecto
             this.Hide();
             formMenuEditar.ShowDialog();
             this.Show();
-            SDP_menuPrincipal.Height = BTN_editar.Height;
-            SDP_menuPrincipal.Top = BTN_editar.Top;
+            SDP_MenuPrincipal.Height = BTN_Editar.Height;
+            SDP_MenuPrincipal.Top = BTN_Editar.Top;
         }
     }
 }

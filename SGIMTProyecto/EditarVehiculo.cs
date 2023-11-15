@@ -17,19 +17,78 @@ namespace SGIMTProyecto
             InitializeComponent();
         }
 
-        private void GRB_Vehiculo_Enter(object sender, EventArgs e)
+        #region Métodos
+        private void DatosVehiculo (string cTexto)
         {
-
+            D_EditarVehiculo Datos = new D_EditarVehiculo();
+            MostrarDatos(Datos.DatosVehiculo(cTexto));
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
+        private void MostrarDatos(List<string[]> datos)
         {
+            // Verificar que haya al menos una fila de datos
+            if (datos.Count > 0)
+            {
+                // Acceder a los valores de la primera fila
+                string[] primeraFila = datos[0];
 
+                // Mostrar los valores en TextBox correspondientes
+                if (primeraFila.Length > 0) TXT_Nombre.Text = primeraFila[0];
+                if (primeraFila.Length > 1) TXT_Vehiculo.Text = primeraFila[1];
+                if (primeraFila.Length > 2) TXT_Marca.Text = primeraFila[2];
+                if (primeraFila.Length > 3) TXT_Modelo.Text = primeraFila[3];
+                if (primeraFila.Length > 4) TXT_Tipo.Text = primeraFila[4];
+                if (primeraFila.Length > 5) TXT_TipoServicio.Text = primeraFila[5];
+                if (primeraFila.Length > 6) TXT_VehiculoOrigen.Text = primeraFila[6];
+                if (primeraFila.Length > 7) TXT_ClaveVehicular.Text = primeraFila[7];
+                if (primeraFila.Length > 8) TXT_NoSeguro.Text = primeraFila[8];
+                if (primeraFila.Length > 9) TXT_Repuve.Text = primeraFila[9];
+                if (primeraFila.Length > 10) TXT_NoSerie.Text = primeraFila[10];
+                if (primeraFila.Length > 11) TXT_NoMotor.Text = primeraFila[11];
+                if (primeraFila.Length > 12) TXT_Cilindros.Text = primeraFila[12];
+                if (primeraFila.Length > 13) TXT_Combustible.Text = primeraFila[13];
+                if (primeraFila.Length > 14) TXT_Toneladas.Text = primeraFila[14];
+                if (primeraFila.Length > 15) TXT_Pasajeros.Text = primeraFila[15];
+                if (primeraFila.Length > 16) TXT_Uso.Text = primeraFila[16];
+                if (primeraFila.Length > 17) TXT_Placas.Text = primeraFila[17];
+                if (primeraFila.Length > 18) TXT_SitioRuta.Text = primeraFila[18];
+                if (primeraFila.Length > 19) TXT_FolioTC.Text = primeraFila[19];
+                if (primeraFila.Length > 20) TXT_RFV.Text = primeraFila[20];
+                if (primeraFila.Length > 21) TXT_FolioRevista.Text = primeraFila[21];
+            }
+            else
+            {
+                TXT_Nombre.Text = "";
+                TXT_Vehiculo.Text = "";
+                TXT_Marca.Text = "";
+                TXT_Modelo.Text = "";
+                TXT_Tipo.Text = "";
+                TXT_TipoServicio.Text = "";
+                TXT_VehiculoOrigen.Text = "";
+                TXT_ClaveVehicular.Text = "";
+                TXT_NoSeguro.Text = "";
+                TXT_Repuve.Text = "";
+                TXT_NoSerie.Text = "";
+                TXT_NoMotor.Text = "";
+                TXT_Cilindros.Text = "";
+                TXT_Combustible.Text = "";
+                TXT_Toneladas.Text = "";
+                TXT_Pasajeros.Text = "";
+                TXT_Uso.Text = "";
+                TXT_Placas.Text = "";
+                TXT_SitioRuta.Text = "";
+                TXT_FolioTC.Text = "";
+                TXT_RFV.Text = "";
+                TXT_FolioRevista.Text = "";
+                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
+        #endregion
 
+        private void BTN_Buscar_Click(object sender, EventArgs e)
+        {
+            this.DatosVehiculo(TXT_Placa.Text.Trim());
         }
     }
 }

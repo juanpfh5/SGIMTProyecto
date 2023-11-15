@@ -12,8 +12,8 @@ namespace SGIMTProyecto
         public string placa_un { get; set; }
         public string domicilio_co { get; set; }
         public string rfc_co { get; set; }
-        public int noExterior_co { get; set; }
-        public int noInterior_co { get; set; }
+        public string noExterior_co { get; set; }
+        public string noInterior_co { get; set; }
         public int cp_co { get; set; }
         public string colonia_co { get; set; }
         public string municipio_co { get; set; }

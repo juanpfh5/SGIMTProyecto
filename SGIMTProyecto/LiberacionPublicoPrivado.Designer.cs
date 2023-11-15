@@ -44,8 +44,8 @@
             this.JBL_Fecha = new System.Windows.Forms.Label();
             this.DTP_Fecha = new System.Windows.Forms.DateTimePicker();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.BTN_buscar = new System.Windows.Forms.Button();
-            this.BTN_imprimir = new System.Windows.Forms.Button();
+            this.BTN_Buscar = new System.Windows.Forms.Button();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.GRB_Liberacion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +73,6 @@
             this.GRB_Liberacion.TabIndex = 0;
             this.GRB_Liberacion.TabStop = false;
             this.GRB_Liberacion.Text = "LIBERACION DE SERVICIO PUBLICO A PRIVADO";
-            this.GRB_Liberacion.Enter += new System.EventHandler(this.GRB_Liberacion_Enter);
             // 
             // JBL_Marca
             // 
@@ -180,7 +179,6 @@
             this.JBL_NoBaja.Size = new System.Drawing.Size(60, 15);
             this.JBL_NoBaja.TabIndex = 3;
             this.JBL_NoBaja.Text = "No. Baja: ";
-            this.JBL_NoBaja.Click += new System.EventHandler(this.label2_Click);
             // 
             // TXT_NoBaja
             // 
@@ -189,7 +187,6 @@
             this.TXT_NoBaja.Name = "TXT_NoBaja";
             this.TXT_NoBaja.Size = new System.Drawing.Size(199, 21);
             this.TXT_NoBaja.TabIndex = 2;
-            this.TXT_NoBaja.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // JBL_Fecha
             // 
@@ -219,39 +216,40 @@
             this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
             this.TXT_Placa.TabIndex = 3;
             // 
-            // BTN_buscar
+            // BTN_Buscar
             // 
-            this.BTN_buscar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_buscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_buscar.FlatAppearance.BorderSize = 0;
-            this.BTN_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
-            this.BTN_buscar.Location = new System.Drawing.Point(660, 16);
-            this.BTN_buscar.Name = "BTN_buscar";
-            this.BTN_buscar.Size = new System.Drawing.Size(59, 30);
-            this.BTN_buscar.TabIndex = 22;
-            this.BTN_buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Buscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Buscar.FlatAppearance.BorderSize = 0;
+            this.BTN_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_Buscar.Location = new System.Drawing.Point(660, 16);
+            this.BTN_Buscar.Name = "BTN_Buscar";
+            this.BTN_Buscar.Size = new System.Drawing.Size(59, 30);
+            this.BTN_Buscar.TabIndex = 22;
+            this.BTN_Buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.Click += new System.EventHandler(this.BTN_Buscar_Click);
             // 
-            // BTN_imprimir
+            // BTN_Imprimir
             // 
-            this.BTN_imprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_imprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_imprimir.Location = new System.Drawing.Point(359, 576);
-            this.BTN_imprimir.Name = "BTN_imprimir";
-            this.BTN_imprimir.Size = new System.Drawing.Size(80, 30);
-            this.BTN_imprimir.TabIndex = 65;
-            this.BTN_imprimir.Text = "Imprimir";
-            this.BTN_imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(359, 576);
+            this.BTN_Imprimir.Name = "BTN_Imprimir";
+            this.BTN_Imprimir.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Imprimir.TabIndex = 65;
+            this.BTN_Imprimir.Text = "Imprimir";
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
             // 
             // LiberacionPublicoPrivado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BTN_imprimir);
-            this.Controls.Add(this.BTN_buscar);
             this.Controls.Add(this.TXT_Placa);
+            this.Controls.Add(this.BTN_Buscar);
             this.Controls.Add(this.GRB_Liberacion);
+            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "LiberacionPublicoPrivado";
             this.Size = new System.Drawing.Size(756, 657);
             this.GRB_Liberacion.ResumeLayout(false);
@@ -279,7 +277,7 @@
         private System.Windows.Forms.Label JBL_NoMotor;
         private System.Windows.Forms.TextBox TXT_NoMotor;
         private System.Windows.Forms.TextBox TXT_Placa;
-        private System.Windows.Forms.Button BTN_buscar;
-        private System.Windows.Forms.Button BTN_imprimir;
+        private System.Windows.Forms.Button BTN_Buscar;
+        private System.Windows.Forms.Button BTN_Imprimir;
     }
 }

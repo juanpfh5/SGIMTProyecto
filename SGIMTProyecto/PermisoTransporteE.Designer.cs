@@ -316,8 +316,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.Controls.Add(this.BTN_Imprimir);
             this.Controls.Add(this.GRB_TransporteEscolar);
+            this.Controls.Add(this.BTN_Imprimir);
             this.Name = "PermisoTransporteE";
             this.Size = new System.Drawing.Size(797, 607);
             this.GRB_TransporteEscolar.ResumeLayout(false);

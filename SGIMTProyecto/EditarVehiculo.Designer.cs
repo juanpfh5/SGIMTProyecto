@@ -74,8 +74,8 @@
             this.JBL_FolioRevista = new System.Windows.Forms.Label();
             this.TXT_FolioRevista = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.BTN_buscar = new System.Windows.Forms.Button();
-            this.BTN_guardar = new System.Windows.Forms.Button();
+            this.BTN_Buscar = new System.Windows.Forms.Button();
+            this.BTN_Guardar = new System.Windows.Forms.Button();
             this.GRB_Vehiculo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,7 +133,6 @@
             this.GRB_Vehiculo.TabIndex = 0;
             this.GRB_Vehiculo.TabStop = false;
             this.GRB_Vehiculo.Text = "DATOS DEL VEHICULO";
-            this.GRB_Vehiculo.Enter += new System.EventHandler(this.GRB_Vehiculo_Enter);
             // 
             // JBL_Nombre
             // 
@@ -325,7 +324,6 @@
             this.JBL_Repuve.Size = new System.Drawing.Size(55, 15);
             this.JBL_Repuve.TabIndex = 25;
             this.JBL_Repuve.Text = "Repuve: ";
-            this.JBL_Repuve.Click += new System.EventHandler(this.label1_Click);
             // 
             // TXT_Repuve
             // 
@@ -455,7 +453,6 @@
             this.TXT_Pasajeros.Name = "TXT_Pasajeros";
             this.TXT_Pasajeros.Size = new System.Drawing.Size(100, 21);
             this.TXT_Pasajeros.TabIndex = 12;
-            this.TXT_Pasajeros.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // JBL_Uso
             // 
@@ -583,39 +580,40 @@
             this.TXT_Placa.Size = new System.Drawing.Size(161, 20);
             this.TXT_Placa.TabIndex = 2;
             // 
-            // BTN_buscar
+            // BTN_Buscar
             // 
-            this.BTN_buscar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_buscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_buscar.FlatAppearance.BorderSize = 0;
-            this.BTN_buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
-            this.BTN_buscar.Location = new System.Drawing.Point(951, 14);
-            this.BTN_buscar.Name = "BTN_buscar";
-            this.BTN_buscar.Size = new System.Drawing.Size(59, 30);
-            this.BTN_buscar.TabIndex = 28;
-            this.BTN_buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Buscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Buscar.FlatAppearance.BorderSize = 0;
+            this.BTN_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Buscar.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_Buscar.Location = new System.Drawing.Point(951, 14);
+            this.BTN_Buscar.Name = "BTN_Buscar";
+            this.BTN_Buscar.Size = new System.Drawing.Size(59, 30);
+            this.BTN_Buscar.TabIndex = 28;
+            this.BTN_Buscar.UseVisualStyleBackColor = false;
+            this.BTN_Buscar.Click += new System.EventHandler(this.BTN_Buscar_Click);
             // 
-            // BTN_guardar
+            // BTN_Guardar
             // 
-            this.BTN_guardar.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_guardar.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_guardar.Location = new System.Drawing.Point(506, 453);
-            this.BTN_guardar.Name = "BTN_guardar";
-            this.BTN_guardar.Size = new System.Drawing.Size(80, 30);
-            this.BTN_guardar.TabIndex = 29;
-            this.BTN_guardar.Text = "Guardar";
-            this.BTN_guardar.UseVisualStyleBackColor = false;
+            this.BTN_Guardar.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Guardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Guardar.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Guardar.Location = new System.Drawing.Point(506, 453);
+            this.BTN_Guardar.Name = "BTN_Guardar";
+            this.BTN_Guardar.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Guardar.TabIndex = 29;
+            this.BTN_Guardar.Text = "Guardar";
+            this.BTN_Guardar.UseVisualStyleBackColor = false;
             // 
             // EditarVehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BTN_guardar);
-            this.Controls.Add(this.BTN_buscar);
             this.Controls.Add(this.TXT_Placa);
+            this.Controls.Add(this.BTN_Buscar);
             this.Controls.Add(this.GRB_Vehiculo);
+            this.Controls.Add(this.BTN_Guardar);
             this.Name = "EditarVehiculo";
             this.Size = new System.Drawing.Size(1064, 500);
             this.GRB_Vehiculo.ResumeLayout(false);
@@ -673,7 +671,7 @@
         private System.Windows.Forms.Label JBL_Nombre;
         private System.Windows.Forms.TextBox TXT_Nombre;
         private System.Windows.Forms.TextBox TXT_Placa;
-        private System.Windows.Forms.Button BTN_buscar;
-        private System.Windows.Forms.Button BTN_guardar;
+        private System.Windows.Forms.Button BTN_Buscar;
+        private System.Windows.Forms.Button BTN_Guardar;
     }
 }

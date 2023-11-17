@@ -56,89 +56,89 @@
     <Compile Include="D_PermisoCircularFueraRuta.cs" />
     <Compile Include="D_Revista.cs" />
     <Compile Include="D_TarjetaCirculacion.cs" />
-    <Compile Include="EditarPropietario.cs">
+    <Compile Include="F_EditarPropietario.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditarPropietario.Designer.cs">
-      <DependentUpon>EditarPropietario.cs</DependentUpon>
+    <Compile Include="F_EditarPropietario.Designer.cs">
+      <DependentUpon>F_EditarPropietario.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditarVehiculo.cs">
+    <Compile Include="F_EditarVehiculo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditarVehiculo.Designer.cs">
-      <DependentUpon>EditarVehiculo.cs</DependentUpon>
+    <Compile Include="F_EditarVehiculo.Designer.cs">
+      <DependentUpon>F_EditarVehiculo.cs</DependentUpon>
     </Compile>
-    <Compile Include="LiberacionPublicoPrivado.cs">
+    <Compile Include="F_LiberacionPublicoPrivado.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LiberacionPublicoPrivado.Designer.cs">
-      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
+    <Compile Include="F_LiberacionPublicoPrivado.Designer.cs">
+      <DependentUpon>F_LiberacionPublicoPrivado.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuEditar.cs">
+    <Compile Include="F_MenuEditar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuEditar.Designer.cs">
-      <DependentUpon>MenuEditar.cs</DependentUpon>
+    <Compile Include="F_MenuEditar.Designer.cs">
+      <DependentUpon>F_MenuEditar.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuOrdenCobro.cs">
+    <Compile Include="F_MenuOrdenCobro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuOrdenCobro.Designer.cs">
-      <DependentUpon>MenuOrdenCobro.cs</DependentUpon>
+    <Compile Include="F_MenuOrdenCobro.Designer.cs">
+      <DependentUpon>F_MenuOrdenCobro.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuPermisos.cs">
+    <Compile Include="F_MenuPermisos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuPermisos.Designer.cs">
-      <DependentUpon>MenuPermisos.cs</DependentUpon>
+    <Compile Include="F_MenuPermisos.Designer.cs">
+      <DependentUpon>F_MenuPermisos.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipal.cs">
+    <Compile Include="F_MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuPrincipal.Designer.cs">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <Compile Include="F_MenuPrincipal.Designer.cs">
+      <DependentUpon>F_MenuPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuPrincipalUC.cs">
+    <Compile Include="F_MenuPrincipalUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MenuPrincipalUC.Designer.cs">
-      <DependentUpon>MenuPrincipalUC.cs</DependentUpon>
+    <Compile Include="F_MenuPrincipalUC.Designer.cs">
+      <DependentUpon>F_MenuPrincipalUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdenCobro.cs">
+    <Compile Include="F_OrdenCobro.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OrdenCobro.Designer.cs">
-      <DependentUpon>OrdenCobro.cs</DependentUpon>
+    <Compile Include="F_OrdenCobro.Designer.cs">
+      <DependentUpon>F_OrdenCobro.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdenCobroDiversos.cs">
+    <Compile Include="F_OrdenCobroDiversos.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OrdenCobroDiversos.Designer.cs">
-      <DependentUpon>OrdenCobroDiversos.cs</DependentUpon>
+    <Compile Include="F_OrdenCobroDiversos.Designer.cs">
+      <DependentUpon>F_OrdenCobroDiversos.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermisoCircularFueraRuta.cs">
+    <Compile Include="F_PermisoCircularFueraRuta.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PermisoCircularFueraRuta.Designer.cs">
-      <DependentUpon>PermisoCircularFueraRuta.cs</DependentUpon>
+    <Compile Include="F_PermisoCircularFueraRuta.Designer.cs">
+      <DependentUpon>F_PermisoCircularFueraRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermisoPasoAnual.cs">
+    <Compile Include="F_PermisoPasoAnual.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PermisoPasoAnual.Designer.cs">
-      <DependentUpon>PermisoPasoAnual.cs</DependentUpon>
+    <Compile Include="F_PermisoPasoAnual.Designer.cs">
+      <DependentUpon>F_PermisoPasoAnual.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermisoPersonalEmpresas.cs">
+    <Compile Include="F_PermisoPersonalEmpresas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PermisoPersonalEmpresas.Designer.cs">
-      <DependentUpon>PermisoPersonalEmpresas.cs</DependentUpon>
+    <Compile Include="F_PermisoPersonalEmpresas.Designer.cs">
+      <DependentUpon>F_PermisoPersonalEmpresas.cs</DependentUpon>
     </Compile>
-    <Compile Include="PermisoTransporteE.cs">
+    <Compile Include="F_PermisoTransporteE.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PermisoTransporteE.Designer.cs">
-      <DependentUpon>PermisoTransporteE.cs</DependentUpon>
+    <Compile Include="F_PermisoTransporteE.Designer.cs">
+      <DependentUpon>F_PermisoTransporteE.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,59 +153,59 @@
     <Compile Include="P_PermisoTransporteE.cs" />
     <Compile Include="P_Revista.cs" />
     <Compile Include="P_TarjetaCirculacion.cs" />
-    <Compile Include="Revista.cs">
+    <Compile Include="F_Revista.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Revista.Designer.cs">
-      <DependentUpon>Revista.cs</DependentUpon>
+    <Compile Include="F_Revista.Designer.cs">
+      <DependentUpon>F_Revista.cs</DependentUpon>
     </Compile>
-    <Compile Include="TarjetaCirculacion.cs">
+    <Compile Include="F_TarjetaCirculacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TarjetaCirculacion.Designer.cs">
-      <DependentUpon>TarjetaCirculacion.cs</DependentUpon>
+    <Compile Include="F_TarjetaCirculacion.Designer.cs">
+      <DependentUpon>F_TarjetaCirculacion.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditarPropietario.resx">
-      <DependentUpon>EditarPropietario.cs</DependentUpon>
+    <EmbeddedResource Include="F_EditarPropietario.resx">
+      <DependentUpon>F_EditarPropietario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditarVehiculo.resx">
-      <DependentUpon>EditarVehiculo.cs</DependentUpon>
+    <EmbeddedResource Include="F_EditarVehiculo.resx">
+      <DependentUpon>F_EditarVehiculo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LiberacionPublicoPrivado.resx">
-      <DependentUpon>LiberacionPublicoPrivado.cs</DependentUpon>
+    <EmbeddedResource Include="F_LiberacionPublicoPrivado.resx">
+      <DependentUpon>F_LiberacionPublicoPrivado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuEditar.resx">
-      <DependentUpon>MenuEditar.cs</DependentUpon>
+    <EmbeddedResource Include="F_MenuEditar.resx">
+      <DependentUpon>F_MenuEditar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuOrdenCobro.resx">
-      <DependentUpon>MenuOrdenCobro.cs</DependentUpon>
+    <EmbeddedResource Include="F_MenuOrdenCobro.resx">
+      <DependentUpon>F_MenuOrdenCobro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPermisos.resx">
-      <DependentUpon>MenuPermisos.cs</DependentUpon>
+    <EmbeddedResource Include="F_MenuPermisos.resx">
+      <DependentUpon>F_MenuPermisos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPrincipal.resx">
-      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="F_MenuPrincipal.resx">
+      <DependentUpon>F_MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuPrincipalUC.resx">
-      <DependentUpon>MenuPrincipalUC.cs</DependentUpon>
+    <EmbeddedResource Include="F_MenuPrincipalUC.resx">
+      <DependentUpon>F_MenuPrincipalUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdenCobro.resx">
-      <DependentUpon>OrdenCobro.cs</DependentUpon>
+    <EmbeddedResource Include="F_OrdenCobro.resx">
+      <DependentUpon>F_OrdenCobro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdenCobroDiversos.resx">
-      <DependentUpon>OrdenCobroDiversos.cs</DependentUpon>
+    <EmbeddedResource Include="F_OrdenCobroDiversos.resx">
+      <DependentUpon>F_OrdenCobroDiversos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PermisoCircularFueraRuta.resx">
-      <DependentUpon>PermisoCircularFueraRuta.cs</DependentUpon>
+    <EmbeddedResource Include="F_PermisoCircularFueraRuta.resx">
+      <DependentUpon>F_PermisoCircularFueraRuta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PermisoPasoAnual.resx">
-      <DependentUpon>PermisoPasoAnual.cs</DependentUpon>
+    <EmbeddedResource Include="F_PermisoPasoAnual.resx">
+      <DependentUpon>F_PermisoPasoAnual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PermisoPersonalEmpresas.resx">
-      <DependentUpon>PermisoPersonalEmpresas.cs</DependentUpon>
+    <EmbeddedResource Include="F_PermisoPersonalEmpresas.resx">
+      <DependentUpon>F_PermisoPersonalEmpresas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PermisoTransporteE.resx">
-      <DependentUpon>PermisoTransporteE.cs</DependentUpon>
+    <EmbeddedResource Include="F_PermisoTransporteE.resx">
+      <DependentUpon>F_PermisoTransporteE.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -217,11 +217,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Revista.resx">
-      <DependentUpon>Revista.cs</DependentUpon>
+    <EmbeddedResource Include="F_Revista.resx">
+      <DependentUpon>F_Revista.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TarjetaCirculacion.resx">
-      <DependentUpon>TarjetaCirculacion.cs</DependentUpon>
+    <EmbeddedResource Include="F_TarjetaCirculacion.resx">
+      <DependentUpon>F_TarjetaCirculacion.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

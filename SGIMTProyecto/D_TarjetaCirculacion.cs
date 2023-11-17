@@ -11,7 +11,7 @@ namespace SGIMTProyecto
 {
     public class D_TarjetaCirculacion
     {
-        public List<string[]> TC(string cTexto)
+        public List<string[]> TC(string placa)
         {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
@@ -20,25 +20,23 @@ namespace SGIMTProyecto
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, domicilio_co, vehiculo_un, rfc_co, repuve_un, noSerie_un, placa_un, toneladas_un, noMotor_un ,cilindros_un, pasajeros_un, marca_un, combustible_un, modelo_un, claveVehicular_un, tipo_un, uso_un, tipoServicio_un, noConcesion_un, vehiculoOrigen_un, ruta_un, folioTC_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = '" + cTexto + "' ";
+                string sql_tarea = "SELECT nombre_co, domicilio_co, vehiculo_un, rfc_co, repuve_un, noSerie_un, placa_un, toneladas_un, noMotor_un ,cilindros_un, pasajeros_un, marca_un, combustible_un, modelo_un, claveVehicular_un, tipo_un, uso_un, tipoServicio_un, noConcesion_un, vehiculoOrigen_un, ruta_un, folioTC_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
                 while (Resultado.Read())
                 {
-                    // Crear un array para almacenar los datos de cada fila
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    // Copiar los datos de cada columna al array
                     for (int i = 0; i < Resultado.FieldCount; i++)
                     {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
-                    // Agregar el array a la lista
                     listaDatos.Add(datosFila);
                 }
 

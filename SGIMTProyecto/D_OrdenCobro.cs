@@ -11,7 +11,7 @@ namespace SGIMTProyecto
 {
     public class D_OrdenCobro
     {
-        public List<string[]> OrdenC(string cTexto)
+        public List<string[]> OrdenC(string placa)
         {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
@@ -20,9 +20,10 @@ namespace SGIMTProyecto
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, cp_co, noSerie_un, noMotor_un, modelo_un, marca_un, claveVehicular_un, tipo_un, combustible_un, pasajeros_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = '" + cTexto + "' ";
+                string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, cp_co, noSerie_un, noMotor_un, modelo_un, marca_un, claveVehicular_un, tipo_un, combustible_un, pasajeros_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();

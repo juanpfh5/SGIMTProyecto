@@ -10,18 +10,14 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace SGIMTProyecto
-{
-    public class D_EditarPropietario
-    {
-        public List<string[]> DatosPropietario(string placa)
-        {
+namespace SGIMTProyecto {
+    public class D_EditarPropietario {
+        public List<string[]> DatosPropietario(string placa) {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, rfc_co, noExterior_co, noInterior_co, cp_co, colonia_co, municipio_co, estado_co, noConcesion_un, noSeguro_un FROM unidad_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa";
 
@@ -31,12 +27,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
-                while (Resultado.Read())
-                {
+                while (Resultado.Read()) {
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    for (int i = 0; i < Resultado.FieldCount; i++)
-                    {
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
@@ -45,12 +39,10 @@ namespace SGIMTProyecto
 
                 return listaDatos;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
@@ -58,8 +50,7 @@ namespace SGIMTProyecto
         public bool ExistenciaVehiculo(string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
 
@@ -74,22 +65,18 @@ namespace SGIMTProyecto
                 // Devolver true si el vehículo existe, false si no existe
                 return resultado == 1;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
 
-        public void ActualizarPropietario(List<object> datosPropietario, string placa)
-        {
+        public void ActualizarPropietario(List<object> datosPropietario, string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 int count = 0;
                 string parametro;
 
@@ -128,12 +115,12 @@ namespace SGIMTProyecto
                         case 8:
                             parametro = "@Estado";
                             break;
-                        /*case 9:
-                            parametro = "@NoConcesion";
-                            break;
-                        case 10:
-                            parametro = "@NoSeguro";
-                            break;*/
+                            /*case 9:
+                                parametro = "@NoConcesion";
+                                break;
+                            case 10:
+                                parametro = "@NoSeguro";
+                                break;*/
                     }
                     Comando.Parameters.AddWithValue(parametro, elemento);
                     count++;
@@ -143,12 +130,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Comando.ExecuteReader();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }

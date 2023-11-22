@@ -51,6 +51,8 @@
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
+            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
+            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.GRB_TransportePersonalEmpresas.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,8 @@
             this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_TitularSMyT);
             this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_FolioPermiso);
             this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.JLB_NoMovimiento);
+            this.GRB_TransportePersonalEmpresas.Controls.Add(this.TXT_NoMovimiento);
             this.GRB_TransportePersonalEmpresas.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.GRB_TransportePersonalEmpresas.ForeColor = System.Drawing.Color.DarkOrchid;
             this.GRB_TransportePersonalEmpresas.Location = new System.Drawing.Point(17, 16);
@@ -297,6 +301,25 @@
             this.TXT_FolioPermiso.Size = new System.Drawing.Size(200, 23);
             this.TXT_FolioPermiso.TabIndex = 29;
             // 
+            // JLB_NoMovimiento
+            // 
+            this.JLB_NoMovimiento.AutoSize = true;
+            this.JLB_NoMovimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_NoMovimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoMovimiento.Location = new System.Drawing.Point(390, 457);
+            this.JLB_NoMovimiento.Name = "JLB_NoMovimiento";
+            this.JLB_NoMovimiento.Size = new System.Drawing.Size(97, 15);
+            this.JLB_NoMovimiento.TabIndex = 42;
+            this.JLB_NoMovimiento.Text = "No. Movimiento:";
+            // 
+            // TXT_NoMovimiento
+            // 
+            this.TXT_NoMovimiento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_NoMovimiento.Location = new System.Drawing.Point(507, 449);
+            this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
+            this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
+            this.TXT_NoMovimiento.TabIndex = 43;
+            // 
             // BTN_Imprimir
             // 
             this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
@@ -310,15 +333,17 @@
             this.BTN_Imprimir.TabIndex = 1;
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
-            // PermisoPersonalEmpresas
+            // F_PermisoPersonalEmpresas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GRB_TransportePersonalEmpresas);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Name = "PermisoPersonalEmpresas";
+            this.Name = "F_PermisoPersonalEmpresas";
             this.Size = new System.Drawing.Size(797, 607);
+            this.Load += new System.EventHandler(this.F_PermisoPersonalEmpresas_Load);
             this.GRB_TransportePersonalEmpresas.ResumeLayout(false);
             this.GRB_TransportePersonalEmpresas.PerformLayout();
             this.ResumeLayout(false);
@@ -351,5 +376,7 @@
         private System.Windows.Forms.Label JLB_FolioPermiso;
         private System.Windows.Forms.TextBox TXT_FolioPermiso;
         private System.Windows.Forms.Button BTN_Imprimir;
+        private System.Windows.Forms.Label JLB_NoMovimiento;
+        private System.Windows.Forms.TextBox TXT_NoMovimiento;
     }
 }

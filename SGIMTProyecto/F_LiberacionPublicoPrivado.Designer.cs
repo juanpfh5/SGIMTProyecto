@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.GRB_Liberacion = new System.Windows.Forms.GroupBox();
-            this.JBL_Marca = new System.Windows.Forms.Label();
+            this.JLB_Marca = new System.Windows.Forms.Label();
             this.TXT_Marca = new System.Windows.Forms.TextBox();
-            this.JBL_Modelo = new System.Windows.Forms.Label();
+            this.JLB_Modelo = new System.Windows.Forms.Label();
             this.TXT_Modelo = new System.Windows.Forms.TextBox();
-            this.JBL_Tipo = new System.Windows.Forms.Label();
+            this.JLB_Tipo = new System.Windows.Forms.Label();
             this.TXT_Tipo = new System.Windows.Forms.TextBox();
-            this.JBL_NoSerie = new System.Windows.Forms.Label();
+            this.JLB_NoSerie = new System.Windows.Forms.Label();
             this.TXT_NoSerie = new System.Windows.Forms.TextBox();
-            this.JBL_NoMotor = new System.Windows.Forms.Label();
+            this.JLB_NoMotor = new System.Windows.Forms.Label();
             this.TXT_NoMotor = new System.Windows.Forms.TextBox();
-            this.JBL_NoBaja = new System.Windows.Forms.Label();
+            this.JLB_NoBaja = new System.Windows.Forms.Label();
             this.TXT_NoBaja = new System.Windows.Forms.TextBox();
-            this.JBL_Fecha = new System.Windows.Forms.Label();
+            this.JLB_Fecha = new System.Windows.Forms.Label();
             this.DTP_Fecha = new System.Windows.Forms.DateTimePicker();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Buscar = new System.Windows.Forms.Button();
@@ -51,19 +51,19 @@
             // 
             // GRB_Liberacion
             // 
-            this.GRB_Liberacion.Controls.Add(this.JBL_Marca);
+            this.GRB_Liberacion.Controls.Add(this.JLB_Marca);
             this.GRB_Liberacion.Controls.Add(this.TXT_Marca);
-            this.GRB_Liberacion.Controls.Add(this.JBL_Modelo);
+            this.GRB_Liberacion.Controls.Add(this.JLB_Modelo);
             this.GRB_Liberacion.Controls.Add(this.TXT_Modelo);
-            this.GRB_Liberacion.Controls.Add(this.JBL_Tipo);
+            this.GRB_Liberacion.Controls.Add(this.JLB_Tipo);
             this.GRB_Liberacion.Controls.Add(this.TXT_Tipo);
-            this.GRB_Liberacion.Controls.Add(this.JBL_NoSerie);
+            this.GRB_Liberacion.Controls.Add(this.JLB_NoSerie);
             this.GRB_Liberacion.Controls.Add(this.TXT_NoSerie);
-            this.GRB_Liberacion.Controls.Add(this.JBL_NoMotor);
+            this.GRB_Liberacion.Controls.Add(this.JLB_NoMotor);
             this.GRB_Liberacion.Controls.Add(this.TXT_NoMotor);
-            this.GRB_Liberacion.Controls.Add(this.JBL_NoBaja);
+            this.GRB_Liberacion.Controls.Add(this.JLB_NoBaja);
             this.GRB_Liberacion.Controls.Add(this.TXT_NoBaja);
-            this.GRB_Liberacion.Controls.Add(this.JBL_Fecha);
+            this.GRB_Liberacion.Controls.Add(this.JLB_Fecha);
             this.GRB_Liberacion.Controls.Add(this.DTP_Fecha);
             this.GRB_Liberacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GRB_Liberacion.ForeColor = System.Drawing.Color.DarkViolet;
@@ -74,111 +74,116 @@
             this.GRB_Liberacion.TabStop = false;
             this.GRB_Liberacion.Text = "LIBERACION DE SERVICIO PUBLICO A PRIVADO";
             // 
-            // JBL_Marca
+            // JLB_Marca
             // 
-            this.JBL_Marca.AutoSize = true;
-            this.JBL_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Marca.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_Marca.Location = new System.Drawing.Point(187, 165);
-            this.JBL_Marca.Name = "JBL_Marca";
-            this.JBL_Marca.Size = new System.Drawing.Size(48, 15);
-            this.JBL_Marca.TabIndex = 13;
-            this.JBL_Marca.Text = "Marca: ";
+            this.JLB_Marca.AutoSize = true;
+            this.JLB_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Marca.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_Marca.Location = new System.Drawing.Point(187, 165);
+            this.JLB_Marca.Name = "JLB_Marca";
+            this.JLB_Marca.Size = new System.Drawing.Size(45, 15);
+            this.JLB_Marca.TabIndex = 13;
+            this.JLB_Marca.Text = "Marca:";
             // 
             // TXT_Marca
             // 
             this.TXT_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Marca.Location = new System.Drawing.Point(267, 158);
             this.TXT_Marca.Name = "TXT_Marca";
+            this.TXT_Marca.ReadOnly = true;
             this.TXT_Marca.Size = new System.Drawing.Size(199, 21);
             this.TXT_Marca.TabIndex = 12;
             // 
-            // JBL_Modelo
+            // JLB_Modelo
             // 
-            this.JBL_Modelo.AutoSize = true;
-            this.JBL_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Modelo.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_Modelo.Location = new System.Drawing.Point(187, 212);
-            this.JBL_Modelo.Name = "JBL_Modelo";
-            this.JBL_Modelo.Size = new System.Drawing.Size(55, 15);
-            this.JBL_Modelo.TabIndex = 11;
-            this.JBL_Modelo.Text = "Modelo: ";
+            this.JLB_Modelo.AutoSize = true;
+            this.JLB_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Modelo.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_Modelo.Location = new System.Drawing.Point(187, 212);
+            this.JLB_Modelo.Name = "JLB_Modelo";
+            this.JLB_Modelo.Size = new System.Drawing.Size(52, 15);
+            this.JLB_Modelo.TabIndex = 11;
+            this.JLB_Modelo.Text = "Modelo:";
             // 
             // TXT_Modelo
             // 
             this.TXT_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Modelo.Location = new System.Drawing.Point(267, 205);
             this.TXT_Modelo.Name = "TXT_Modelo";
+            this.TXT_Modelo.ReadOnly = true;
             this.TXT_Modelo.Size = new System.Drawing.Size(199, 21);
             this.TXT_Modelo.TabIndex = 10;
             // 
-            // JBL_Tipo
+            // JLB_Tipo
             // 
-            this.JBL_Tipo.AutoSize = true;
-            this.JBL_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Tipo.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_Tipo.Location = new System.Drawing.Point(187, 251);
-            this.JBL_Tipo.Name = "JBL_Tipo";
-            this.JBL_Tipo.Size = new System.Drawing.Size(37, 15);
-            this.JBL_Tipo.TabIndex = 9;
-            this.JBL_Tipo.Text = "Tipo: ";
+            this.JLB_Tipo.AutoSize = true;
+            this.JLB_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Tipo.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_Tipo.Location = new System.Drawing.Point(187, 251);
+            this.JLB_Tipo.Name = "JLB_Tipo";
+            this.JLB_Tipo.Size = new System.Drawing.Size(34, 15);
+            this.JLB_Tipo.TabIndex = 9;
+            this.JLB_Tipo.Text = "Tipo:";
             // 
             // TXT_Tipo
             // 
             this.TXT_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Tipo.Location = new System.Drawing.Point(267, 244);
             this.TXT_Tipo.Name = "TXT_Tipo";
+            this.TXT_Tipo.ReadOnly = true;
             this.TXT_Tipo.Size = new System.Drawing.Size(199, 21);
             this.TXT_Tipo.TabIndex = 8;
             // 
-            // JBL_NoSerie
+            // JLB_NoSerie
             // 
-            this.JBL_NoSerie.AutoSize = true;
-            this.JBL_NoSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoSerie.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_NoSerie.Location = new System.Drawing.Point(187, 287);
-            this.JBL_NoSerie.Name = "JBL_NoSerie";
-            this.JBL_NoSerie.Size = new System.Drawing.Size(64, 15);
-            this.JBL_NoSerie.TabIndex = 7;
-            this.JBL_NoSerie.Text = "No. Serie: ";
+            this.JLB_NoSerie.AutoSize = true;
+            this.JLB_NoSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoSerie.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_NoSerie.Location = new System.Drawing.Point(187, 287);
+            this.JLB_NoSerie.Name = "JLB_NoSerie";
+            this.JLB_NoSerie.Size = new System.Drawing.Size(61, 15);
+            this.JLB_NoSerie.TabIndex = 7;
+            this.JLB_NoSerie.Text = "No. Serie:";
             // 
             // TXT_NoSerie
             // 
             this.TXT_NoSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_NoSerie.Location = new System.Drawing.Point(267, 280);
             this.TXT_NoSerie.Name = "TXT_NoSerie";
+            this.TXT_NoSerie.ReadOnly = true;
             this.TXT_NoSerie.Size = new System.Drawing.Size(199, 21);
             this.TXT_NoSerie.TabIndex = 6;
             // 
-            // JBL_NoMotor
+            // JLB_NoMotor
             // 
-            this.JBL_NoMotor.AutoSize = true;
-            this.JBL_NoMotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoMotor.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_NoMotor.Location = new System.Drawing.Point(187, 325);
-            this.JBL_NoMotor.Name = "JBL_NoMotor";
-            this.JBL_NoMotor.Size = new System.Drawing.Size(67, 15);
-            this.JBL_NoMotor.TabIndex = 5;
-            this.JBL_NoMotor.Text = "No. Motor: ";
+            this.JLB_NoMotor.AutoSize = true;
+            this.JLB_NoMotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoMotor.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_NoMotor.Location = new System.Drawing.Point(187, 325);
+            this.JLB_NoMotor.Name = "JLB_NoMotor";
+            this.JLB_NoMotor.Size = new System.Drawing.Size(64, 15);
+            this.JLB_NoMotor.TabIndex = 5;
+            this.JLB_NoMotor.Text = "No. Motor:";
             // 
             // TXT_NoMotor
             // 
             this.TXT_NoMotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_NoMotor.Location = new System.Drawing.Point(267, 318);
             this.TXT_NoMotor.Name = "TXT_NoMotor";
+            this.TXT_NoMotor.ReadOnly = true;
             this.TXT_NoMotor.Size = new System.Drawing.Size(199, 21);
             this.TXT_NoMotor.TabIndex = 4;
             // 
-            // JBL_NoBaja
+            // JLB_NoBaja
             // 
-            this.JBL_NoBaja.AutoSize = true;
-            this.JBL_NoBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoBaja.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_NoBaja.Location = new System.Drawing.Point(187, 361);
-            this.JBL_NoBaja.Name = "JBL_NoBaja";
-            this.JBL_NoBaja.Size = new System.Drawing.Size(60, 15);
-            this.JBL_NoBaja.TabIndex = 3;
-            this.JBL_NoBaja.Text = "No. Baja: ";
+            this.JLB_NoBaja.AutoSize = true;
+            this.JLB_NoBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoBaja.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_NoBaja.Location = new System.Drawing.Point(187, 361);
+            this.JLB_NoBaja.Name = "JLB_NoBaja";
+            this.JLB_NoBaja.Size = new System.Drawing.Size(57, 15);
+            this.JLB_NoBaja.TabIndex = 3;
+            this.JLB_NoBaja.Text = "No. Baja:";
             // 
             // TXT_NoBaja
             // 
@@ -188,16 +193,16 @@
             this.TXT_NoBaja.Size = new System.Drawing.Size(199, 21);
             this.TXT_NoBaja.TabIndex = 2;
             // 
-            // JBL_Fecha
+            // JLB_Fecha
             // 
-            this.JBL_Fecha.AutoSize = true;
-            this.JBL_Fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Fecha.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JBL_Fecha.Location = new System.Drawing.Point(187, 397);
-            this.JBL_Fecha.Name = "JBL_Fecha";
-            this.JBL_Fecha.Size = new System.Drawing.Size(47, 15);
-            this.JBL_Fecha.TabIndex = 1;
-            this.JBL_Fecha.Text = "Fecha: ";
+            this.JLB_Fecha.AutoSize = true;
+            this.JLB_Fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Fecha.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.JLB_Fecha.Location = new System.Drawing.Point(187, 397);
+            this.JLB_Fecha.Name = "JLB_Fecha";
+            this.JLB_Fecha.Size = new System.Drawing.Size(44, 15);
+            this.JLB_Fecha.TabIndex = 1;
+            this.JLB_Fecha.Text = "Fecha:";
             // 
             // DTP_Fecha
             // 
@@ -211,10 +216,14 @@
             // 
             // TXT_Placa
             // 
+            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
             this.TXT_Placa.Location = new System.Drawing.Point(486, 22);
             this.TXT_Placa.Name = "TXT_Placa";
             this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
             this.TXT_Placa.TabIndex = 3;
+            this.TXT_Placa.Text = "Placa";
+            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_Buscar
             // 
@@ -243,7 +252,7 @@
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
             this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
-            // LiberacionPublicoPrivado
+            // F_LiberacionPublicoPrivado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -251,8 +260,9 @@
             this.Controls.Add(this.BTN_Buscar);
             this.Controls.Add(this.GRB_Liberacion);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Name = "LiberacionPublicoPrivado";
+            this.Name = "F_LiberacionPublicoPrivado";
             this.Size = new System.Drawing.Size(756, 657);
+            this.Click += new System.EventHandler(this.F_LiberacionPublicoPrivado_Click);
             this.GRB_Liberacion.ResumeLayout(false);
             this.GRB_Liberacion.PerformLayout();
             this.ResumeLayout(false);
@@ -263,19 +273,19 @@
         #endregion
 
         private System.Windows.Forms.GroupBox GRB_Liberacion;
-        private System.Windows.Forms.Label JBL_NoBaja;
+        private System.Windows.Forms.Label JLB_NoBaja;
         private System.Windows.Forms.TextBox TXT_NoBaja;
-        private System.Windows.Forms.Label JBL_Fecha;
+        private System.Windows.Forms.Label JLB_Fecha;
         private System.Windows.Forms.DateTimePicker DTP_Fecha;
-        private System.Windows.Forms.Label JBL_Marca;
+        private System.Windows.Forms.Label JLB_Marca;
         private System.Windows.Forms.TextBox TXT_Marca;
-        private System.Windows.Forms.Label JBL_Modelo;
+        private System.Windows.Forms.Label JLB_Modelo;
         private System.Windows.Forms.TextBox TXT_Modelo;
-        private System.Windows.Forms.Label JBL_Tipo;
+        private System.Windows.Forms.Label JLB_Tipo;
         private System.Windows.Forms.TextBox TXT_Tipo;
-        private System.Windows.Forms.Label JBL_NoSerie;
+        private System.Windows.Forms.Label JLB_NoSerie;
         private System.Windows.Forms.TextBox TXT_NoSerie;
-        private System.Windows.Forms.Label JBL_NoMotor;
+        private System.Windows.Forms.Label JLB_NoMotor;
         private System.Windows.Forms.TextBox TXT_NoMotor;
         private System.Windows.Forms.TextBox TXT_Placa;
         private System.Windows.Forms.Button BTN_Buscar;

@@ -66,6 +66,8 @@
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
+            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
             this.GRB_EventualFueraRuta.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +107,8 @@
             this.GRB_EventualFueraRuta.Controls.Add(this.TXT_TitularSMyT);
             this.GRB_EventualFueraRuta.Controls.Add(this.JLB_FolioPermiso);
             this.GRB_EventualFueraRuta.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_EventualFueraRuta.Controls.Add(this.JLB_NoMovimiento);
+            this.GRB_EventualFueraRuta.Controls.Add(this.TXT_NoMovimiento);
             this.GRB_EventualFueraRuta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.GRB_EventualFueraRuta.ForeColor = System.Drawing.Color.DarkOrchid;
             this.GRB_EventualFueraRuta.Location = new System.Drawing.Point(30, 47);
@@ -415,6 +419,7 @@
             this.TXT_TitularSMyT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_TitularSMyT.Location = new System.Drawing.Point(123, 437);
             this.TXT_TitularSMyT.Name = "TXT_TitularSMyT";
+            this.TXT_TitularSMyT.ReadOnly = true;
             this.TXT_TitularSMyT.Size = new System.Drawing.Size(200, 23);
             this.TXT_TitularSMyT.TabIndex = 69;
             // 
@@ -439,10 +444,14 @@
             // 
             // TXT_Placa
             // 
+            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
             this.TXT_Placa.Location = new System.Drawing.Point(558, 20);
             this.TXT_Placa.Name = "TXT_Placa";
             this.TXT_Placa.Size = new System.Drawing.Size(128, 20);
             this.TXT_Placa.TabIndex = 3;
+            this.TXT_Placa.Text = "Placa";
+            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_Imprimir
             // 
@@ -457,6 +466,7 @@
             this.BTN_Imprimir.TabIndex = 5;
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
             // BTN_BuscarPlaca
             // 
@@ -472,7 +482,26 @@
             this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
             this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
             // 
-            // PermisoCircularFueraRuta
+            // JLB_NoMovimiento
+            // 
+            this.JLB_NoMovimiento.AutoSize = true;
+            this.JLB_NoMovimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_NoMovimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoMovimiento.Location = new System.Drawing.Point(394, 480);
+            this.JLB_NoMovimiento.Name = "JLB_NoMovimiento";
+            this.JLB_NoMovimiento.Size = new System.Drawing.Size(97, 15);
+            this.JLB_NoMovimiento.TabIndex = 74;
+            this.JLB_NoMovimiento.Text = "No. Movimiento:";
+            // 
+            // TXT_NoMovimiento
+            // 
+            this.TXT_NoMovimiento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_NoMovimiento.Location = new System.Drawing.Point(511, 472);
+            this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
+            this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
+            this.TXT_NoMovimiento.TabIndex = 75;
+            // 
+            // F_PermisoCircularFueraRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -480,8 +509,9 @@
             this.Controls.Add(this.BTN_BuscarPlaca);
             this.Controls.Add(this.GRB_EventualFueraRuta);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Name = "PermisoCircularFueraRuta";
+            this.Name = "F_PermisoCircularFueraRuta";
             this.Size = new System.Drawing.Size(797, 607);
+            this.Load += new System.EventHandler(this.F_PermisoCircularFueraRuta_Load);
             this.GRB_EventualFueraRuta.ResumeLayout(false);
             this.GRB_EventualFueraRuta.PerformLayout();
             this.ResumeLayout(false);
@@ -529,5 +559,7 @@
         private System.Windows.Forms.TextBox TXT_Placa;
         private System.Windows.Forms.Button BTN_Imprimir;
         private System.Windows.Forms.Button BTN_BuscarPlaca;
+        private System.Windows.Forms.Label JLB_NoMovimiento;
+        private System.Windows.Forms.TextBox TXT_NoMovimiento;
     }
 }

@@ -51,5 +51,114 @@ namespace SGIMTProyecto
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public string ObtenerTitularSMyT() {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                object resultado = Comando.ExecuteScalar();
+
+                if (resultado != null) {
+                    return resultado.ToString();
+                } else {
+                    return "No se encontró un Titular.";
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+        }
+
+        public void InsertarFueraRuta(List<object> datosPasoAnual) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                int count = 0;
+                string parametro;
+
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "INSERT INTO fueraruta_fr (permisionario_fr, domicilio_fr, poblacion_fr, cp_fr, folioTC_fr, marca_fr, modelo_fr, noSerie_fr, noMotor_fr, repuve_fr, recorrido_fr, motivo_fr, fechaExpedicion_fr, fechaVigencia_fr, folioPermiso_fr, id_mo) VALUES (@Permisionario, @Domicilio, @Poblacion, @CP, @FolioTC, @Marca, @Modelo, @NoSerie, @Nomotor, @Repuve, @Recorrido, @Motivo, @FechaExpedicion,  @FechaVigencia, @FolioPermiso, @NoMovimiento);";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                foreach (var elemento in datosPasoAnual) {
+                    parametro = "";
+                    switch (count) {
+                        case 0:
+                            parametro = "@Permisionario";
+                            break;
+                        case 1:
+                            parametro = "@Domicilio";
+                            break;
+                        case 2:
+                            parametro = "@Poblacion";
+                            break;
+                        case 3:
+                            parametro = "@CP";
+                            break;
+                        case 4:
+                            parametro = "@FolioTC";
+                            break;
+                        case 5:
+                            parametro = "@Marca";
+                            break;
+                        case 6:
+                            parametro = "@Modelo";
+                            break;
+                        case 7:
+                            parametro = "@NoSerie";
+                            break;
+                        case 8:
+                            parametro = "@NoMotor";
+                            break;
+                        case 9:
+                            parametro = "@Repuve";
+                            break;
+                        case 10:
+                            parametro = "@Recorrido";
+                            break;
+                        case 11:
+                            parametro = "@Motivo";
+                            break;
+                        case 12:
+                            parametro = "@FechaExpedicion";
+                            break;
+                        case 13:
+                            parametro = "@FechaVigencia";
+                            break;
+                        case 14:
+                            parametro = "@FolioPermiso";
+                            break;
+                        case 15:
+                            parametro = "@NoMovimiento";
+                            break;
+
+                    }
+                    Comando.Parameters.AddWithValue(parametro, elemento);
+                    count++;
+                }
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                Comando.ExecuteReader();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

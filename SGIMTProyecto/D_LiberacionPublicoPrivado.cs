@@ -7,18 +7,14 @@ using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace SGIMTProyecto
-{
-    public class D_LiberacionPublicoPrivado
-    {
-        public List<string[]> LiberacionP_P(string placa)
-        {
+namespace SGIMTProyecto {
+    public class D_LiberacionPublicoPrivado {
+        public List<string[]> LiberacionP_P(string placa) {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT marca_un, modelo_un, tipo_un, noSerie_un, noMotor_un FROM unidad_un WHERE placa_un = @Placa";
 
@@ -28,12 +24,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
-                while (Resultado.Read())
-                {
+                while (Resultado.Read()) {
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    for (int i = 0; i < Resultado.FieldCount; i++)
-                    {
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
@@ -42,22 +36,18 @@ namespace SGIMTProyecto
 
                 return listaDatos;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
 
-        public bool ExistenciaVehiculo(string placa)
-        {
+        public bool ExistenciaVehiculo(string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
 
@@ -72,22 +62,18 @@ namespace SGIMTProyecto
                 // Devolver true si el vehículo existe, false si no existe
                 return resultado == 1;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
 
-        public void ActualizarLiberacion(string placa)
-        {
+        public void ActualizarLiberacion(string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 int count = 0;
                 string parametro;
 
@@ -101,12 +87,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Comando.ExecuteReader();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }

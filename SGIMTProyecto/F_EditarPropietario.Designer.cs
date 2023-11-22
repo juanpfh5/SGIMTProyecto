@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.GRB_Propietario = new System.Windows.Forms.GroupBox();
-            this.JBL_Nombre = new System.Windows.Forms.Label();
+            this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
-            this.JBL_Placas = new System.Windows.Forms.Label();
+            this.JLB_Placas = new System.Windows.Forms.Label();
             this.TXT_Placas = new System.Windows.Forms.TextBox();
-            this.JBL_Domicilio = new System.Windows.Forms.Label();
+            this.JLB_Domicilio = new System.Windows.Forms.Label();
             this.TXT_Domicilio = new System.Windows.Forms.TextBox();
-            this.JBL_RFC = new System.Windows.Forms.Label();
+            this.JLB_RFC = new System.Windows.Forms.Label();
             this.TXT_RFC = new System.Windows.Forms.TextBox();
-            this.JBL_NoExterior = new System.Windows.Forms.Label();
+            this.JLB_NoExterior = new System.Windows.Forms.Label();
             this.TXT_NoExterior = new System.Windows.Forms.TextBox();
-            this.JBL_NoInterior = new System.Windows.Forms.Label();
+            this.JLB_NoInterior = new System.Windows.Forms.Label();
             this.TXT_NoInterior = new System.Windows.Forms.TextBox();
-            this.JBL_CP = new System.Windows.Forms.Label();
+            this.JLB_CP = new System.Windows.Forms.Label();
             this.TXT_CP = new System.Windows.Forms.TextBox();
-            this.JBL_Colonia = new System.Windows.Forms.Label();
+            this.JLB_Colonia = new System.Windows.Forms.Label();
             this.TXT_Colonia = new System.Windows.Forms.TextBox();
-            this.JBL_Municipio = new System.Windows.Forms.Label();
+            this.JLB_Municipio = new System.Windows.Forms.Label();
             this.TXT_Municipio = new System.Windows.Forms.TextBox();
-            this.JBL_Estado = new System.Windows.Forms.Label();
+            this.JLB_Estado = new System.Windows.Forms.Label();
             this.TXT_Estado = new System.Windows.Forms.TextBox();
-            this.JBL_NoConcesion = new System.Windows.Forms.Label();
+            this.JLB_NoConcesion = new System.Windows.Forms.Label();
             this.TXT_NoConcesion = new System.Windows.Forms.TextBox();
-            this.JBL_NoSeguro = new System.Windows.Forms.Label();
+            this.JLB_NoSeguro = new System.Windows.Forms.Label();
             this.TXT_NoSeguro = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Guardar = new System.Windows.Forms.Button();
@@ -61,29 +61,29 @@
             // 
             // GRB_Propietario
             // 
-            this.GRB_Propietario.Controls.Add(this.JBL_Nombre);
+            this.GRB_Propietario.Controls.Add(this.JLB_Nombre);
             this.GRB_Propietario.Controls.Add(this.TXT_Nombre);
-            this.GRB_Propietario.Controls.Add(this.JBL_Placas);
+            this.GRB_Propietario.Controls.Add(this.JLB_Placas);
             this.GRB_Propietario.Controls.Add(this.TXT_Placas);
-            this.GRB_Propietario.Controls.Add(this.JBL_Domicilio);
+            this.GRB_Propietario.Controls.Add(this.JLB_Domicilio);
             this.GRB_Propietario.Controls.Add(this.TXT_Domicilio);
-            this.GRB_Propietario.Controls.Add(this.JBL_RFC);
+            this.GRB_Propietario.Controls.Add(this.JLB_RFC);
             this.GRB_Propietario.Controls.Add(this.TXT_RFC);
-            this.GRB_Propietario.Controls.Add(this.JBL_NoExterior);
+            this.GRB_Propietario.Controls.Add(this.JLB_NoExterior);
             this.GRB_Propietario.Controls.Add(this.TXT_NoExterior);
-            this.GRB_Propietario.Controls.Add(this.JBL_NoInterior);
+            this.GRB_Propietario.Controls.Add(this.JLB_NoInterior);
             this.GRB_Propietario.Controls.Add(this.TXT_NoInterior);
-            this.GRB_Propietario.Controls.Add(this.JBL_CP);
+            this.GRB_Propietario.Controls.Add(this.JLB_CP);
             this.GRB_Propietario.Controls.Add(this.TXT_CP);
-            this.GRB_Propietario.Controls.Add(this.JBL_Colonia);
+            this.GRB_Propietario.Controls.Add(this.JLB_Colonia);
             this.GRB_Propietario.Controls.Add(this.TXT_Colonia);
-            this.GRB_Propietario.Controls.Add(this.JBL_Municipio);
+            this.GRB_Propietario.Controls.Add(this.JLB_Municipio);
             this.GRB_Propietario.Controls.Add(this.TXT_Municipio);
-            this.GRB_Propietario.Controls.Add(this.JBL_Estado);
+            this.GRB_Propietario.Controls.Add(this.JLB_Estado);
             this.GRB_Propietario.Controls.Add(this.TXT_Estado);
-            this.GRB_Propietario.Controls.Add(this.JBL_NoConcesion);
+            this.GRB_Propietario.Controls.Add(this.JLB_NoConcesion);
             this.GRB_Propietario.Controls.Add(this.TXT_NoConcesion);
-            this.GRB_Propietario.Controls.Add(this.JBL_NoSeguro);
+            this.GRB_Propietario.Controls.Add(this.JLB_NoSeguro);
             this.GRB_Propietario.Controls.Add(this.TXT_NoSeguro);
             this.GRB_Propietario.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GRB_Propietario.ForeColor = System.Drawing.Color.DarkViolet;
@@ -94,16 +94,16 @@
             this.GRB_Propietario.TabStop = false;
             this.GRB_Propietario.Text = "DATOS DEL PROPIETARIO";
             // 
-            // JBL_Nombre
+            // JLB_Nombre
             // 
-            this.JBL_Nombre.AutoSize = true;
-            this.JBL_Nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Nombre.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Nombre.Location = new System.Drawing.Point(26, 42);
-            this.JBL_Nombre.Name = "JBL_Nombre";
-            this.JBL_Nombre.Size = new System.Drawing.Size(58, 15);
-            this.JBL_Nombre.TabIndex = 0;
-            this.JBL_Nombre.Text = "Nombre: ";
+            this.JLB_Nombre.AutoSize = true;
+            this.JLB_Nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Nombre.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Nombre.Location = new System.Drawing.Point(26, 42);
+            this.JLB_Nombre.Name = "JLB_Nombre";
+            this.JLB_Nombre.Size = new System.Drawing.Size(55, 15);
+            this.JLB_Nombre.TabIndex = 0;
+            this.JLB_Nombre.Text = "Nombre:";
             // 
             // TXT_Nombre
             // 
@@ -114,16 +114,16 @@
             this.TXT_Nombre.Size = new System.Drawing.Size(571, 21);
             this.TXT_Nombre.TabIndex = 1;
             // 
-            // JBL_Placas
+            // JLB_Placas
             // 
-            this.JBL_Placas.AutoSize = true;
-            this.JBL_Placas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Placas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Placas.Location = new System.Drawing.Point(679, 42);
-            this.JBL_Placas.Name = "JBL_Placas";
-            this.JBL_Placas.Size = new System.Drawing.Size(50, 15);
-            this.JBL_Placas.TabIndex = 2;
-            this.JBL_Placas.Text = "Placas: ";
+            this.JLB_Placas.AutoSize = true;
+            this.JLB_Placas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Placas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Placas.Location = new System.Drawing.Point(679, 42);
+            this.JLB_Placas.Name = "JLB_Placas";
+            this.JLB_Placas.Size = new System.Drawing.Size(47, 15);
+            this.JLB_Placas.TabIndex = 2;
+            this.JLB_Placas.Text = "Placas:";
             // 
             // TXT_Placas
             // 
@@ -131,19 +131,20 @@
             this.TXT_Placas.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_Placas.Location = new System.Drawing.Point(730, 39);
             this.TXT_Placas.Name = "TXT_Placas";
+            this.TXT_Placas.ReadOnly = true;
             this.TXT_Placas.Size = new System.Drawing.Size(191, 21);
             this.TXT_Placas.TabIndex = 3;
             // 
-            // JBL_Domicilio
+            // JLB_Domicilio
             // 
-            this.JBL_Domicilio.AutoSize = true;
-            this.JBL_Domicilio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Domicilio.Location = new System.Drawing.Point(11, 96);
-            this.JBL_Domicilio.Name = "JBL_Domicilio";
-            this.JBL_Domicilio.Size = new System.Drawing.Size(65, 15);
-            this.JBL_Domicilio.TabIndex = 4;
-            this.JBL_Domicilio.Text = "Domicilio: ";
+            this.JLB_Domicilio.AutoSize = true;
+            this.JLB_Domicilio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Domicilio.Location = new System.Drawing.Point(11, 96);
+            this.JLB_Domicilio.Name = "JLB_Domicilio";
+            this.JLB_Domicilio.Size = new System.Drawing.Size(62, 15);
+            this.JLB_Domicilio.TabIndex = 4;
+            this.JLB_Domicilio.Text = "Domicilio:";
             // 
             // TXT_Domicilio
             // 
@@ -154,16 +155,16 @@
             this.TXT_Domicilio.Size = new System.Drawing.Size(839, 21);
             this.TXT_Domicilio.TabIndex = 12;
             // 
-            // JBL_RFC
+            // JLB_RFC
             // 
-            this.JBL_RFC.AutoSize = true;
-            this.JBL_RFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_RFC.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_RFC.Location = new System.Drawing.Point(26, 128);
-            this.JBL_RFC.Name = "JBL_RFC";
-            this.JBL_RFC.Size = new System.Drawing.Size(34, 15);
-            this.JBL_RFC.TabIndex = 5;
-            this.JBL_RFC.Text = "RFC:";
+            this.JLB_RFC.AutoSize = true;
+            this.JLB_RFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_RFC.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_RFC.Location = new System.Drawing.Point(26, 128);
+            this.JLB_RFC.Name = "JLB_RFC";
+            this.JLB_RFC.Size = new System.Drawing.Size(34, 15);
+            this.JLB_RFC.TabIndex = 5;
+            this.JLB_RFC.Text = "RFC:";
             // 
             // TXT_RFC
             // 
@@ -174,16 +175,16 @@
             this.TXT_RFC.Size = new System.Drawing.Size(316, 21);
             this.TXT_RFC.TabIndex = 13;
             // 
-            // JBL_NoExterior
+            // JLB_NoExterior
             // 
-            this.JBL_NoExterior.AutoSize = true;
-            this.JBL_NoExterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoExterior.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_NoExterior.Location = new System.Drawing.Point(404, 128);
-            this.JBL_NoExterior.Name = "JBL_NoExterior";
-            this.JBL_NoExterior.Size = new System.Drawing.Size(49, 15);
-            this.JBL_NoExterior.TabIndex = 6;
-            this.JBL_NoExterior.Text = "No. Ext:";
+            this.JLB_NoExterior.AutoSize = true;
+            this.JLB_NoExterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoExterior.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoExterior.Location = new System.Drawing.Point(404, 128);
+            this.JLB_NoExterior.Name = "JLB_NoExterior";
+            this.JLB_NoExterior.Size = new System.Drawing.Size(49, 15);
+            this.JLB_NoExterior.TabIndex = 6;
+            this.JLB_NoExterior.Text = "No. Ext:";
             // 
             // TXT_NoExterior
             // 
@@ -194,16 +195,16 @@
             this.TXT_NoExterior.Size = new System.Drawing.Size(198, 21);
             this.TXT_NoExterior.TabIndex = 14;
             // 
-            // JBL_NoInterior
+            // JLB_NoInterior
             // 
-            this.JBL_NoInterior.AutoSize = true;
-            this.JBL_NoInterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoInterior.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_NoInterior.Location = new System.Drawing.Point(682, 128);
-            this.JBL_NoInterior.Name = "JBL_NoInterior";
-            this.JBL_NoInterior.Size = new System.Drawing.Size(45, 15);
-            this.JBL_NoInterior.TabIndex = 7;
-            this.JBL_NoInterior.Text = "No. Int:";
+            this.JLB_NoInterior.AutoSize = true;
+            this.JLB_NoInterior.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoInterior.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoInterior.Location = new System.Drawing.Point(682, 128);
+            this.JLB_NoInterior.Name = "JLB_NoInterior";
+            this.JLB_NoInterior.Size = new System.Drawing.Size(45, 15);
+            this.JLB_NoInterior.TabIndex = 7;
+            this.JLB_NoInterior.Text = "No. Int:";
             // 
             // TXT_NoInterior
             // 
@@ -214,16 +215,16 @@
             this.TXT_NoInterior.Size = new System.Drawing.Size(190, 21);
             this.TXT_NoInterior.TabIndex = 15;
             // 
-            // JBL_CP
+            // JLB_CP
             // 
-            this.JBL_CP.AutoSize = true;
-            this.JBL_CP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_CP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_CP.Location = new System.Drawing.Point(30, 166);
-            this.JBL_CP.Name = "JBL_CP";
-            this.JBL_CP.Size = new System.Drawing.Size(29, 15);
-            this.JBL_CP.TabIndex = 8;
-            this.JBL_CP.Text = "CP: ";
+            this.JLB_CP.AutoSize = true;
+            this.JLB_CP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_CP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_CP.Location = new System.Drawing.Point(30, 166);
+            this.JLB_CP.Name = "JLB_CP";
+            this.JLB_CP.Size = new System.Drawing.Size(26, 15);
+            this.JLB_CP.TabIndex = 8;
+            this.JLB_CP.Text = "CP:";
             // 
             // TXT_CP
             // 
@@ -234,16 +235,16 @@
             this.TXT_CP.Size = new System.Drawing.Size(313, 21);
             this.TXT_CP.TabIndex = 16;
             // 
-            // JBL_Colonia
+            // JLB_Colonia
             // 
-            this.JBL_Colonia.AutoSize = true;
-            this.JBL_Colonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Colonia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Colonia.Location = new System.Drawing.Point(401, 166);
-            this.JBL_Colonia.Name = "JBL_Colonia";
-            this.JBL_Colonia.Size = new System.Drawing.Size(55, 15);
-            this.JBL_Colonia.TabIndex = 9;
-            this.JBL_Colonia.Text = "Colonia: ";
+            this.JLB_Colonia.AutoSize = true;
+            this.JLB_Colonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Colonia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Colonia.Location = new System.Drawing.Point(401, 166);
+            this.JLB_Colonia.Name = "JLB_Colonia";
+            this.JLB_Colonia.Size = new System.Drawing.Size(52, 15);
+            this.JLB_Colonia.TabIndex = 9;
+            this.JLB_Colonia.Text = "Colonia:";
             // 
             // TXT_Colonia
             // 
@@ -254,16 +255,16 @@
             this.TXT_Colonia.Size = new System.Drawing.Size(465, 21);
             this.TXT_Colonia.TabIndex = 17;
             // 
-            // JBL_Municipio
+            // JLB_Municipio
             // 
-            this.JBL_Municipio.AutoSize = true;
-            this.JBL_Municipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Municipio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Municipio.Location = new System.Drawing.Point(11, 208);
-            this.JBL_Municipio.Name = "JBL_Municipio";
-            this.JBL_Municipio.Size = new System.Drawing.Size(67, 15);
-            this.JBL_Municipio.TabIndex = 10;
-            this.JBL_Municipio.Text = "Municipio: ";
+            this.JLB_Municipio.AutoSize = true;
+            this.JLB_Municipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Municipio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Municipio.Location = new System.Drawing.Point(11, 208);
+            this.JLB_Municipio.Name = "JLB_Municipio";
+            this.JLB_Municipio.Size = new System.Drawing.Size(64, 15);
+            this.JLB_Municipio.TabIndex = 10;
+            this.JLB_Municipio.Text = "Municipio:";
             // 
             // TXT_Municipio
             // 
@@ -274,16 +275,16 @@
             this.TXT_Municipio.Size = new System.Drawing.Size(313, 21);
             this.TXT_Municipio.TabIndex = 18;
             // 
-            // JBL_Estado
+            // JLB_Estado
             // 
-            this.JBL_Estado.AutoSize = true;
-            this.JBL_Estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_Estado.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_Estado.Location = new System.Drawing.Point(401, 202);
-            this.JBL_Estado.Name = "JBL_Estado";
-            this.JBL_Estado.Size = new System.Drawing.Size(51, 15);
-            this.JBL_Estado.TabIndex = 11;
-            this.JBL_Estado.Text = "Estado: ";
+            this.JLB_Estado.AutoSize = true;
+            this.JLB_Estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_Estado.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Estado.Location = new System.Drawing.Point(401, 202);
+            this.JLB_Estado.Name = "JLB_Estado";
+            this.JLB_Estado.Size = new System.Drawing.Size(48, 15);
+            this.JLB_Estado.TabIndex = 11;
+            this.JLB_Estado.Text = "Estado:";
             // 
             // TXT_Estado
             // 
@@ -294,16 +295,16 @@
             this.TXT_Estado.Size = new System.Drawing.Size(465, 21);
             this.TXT_Estado.TabIndex = 19;
             // 
-            // JBL_NoConcesion
+            // JLB_NoConcesion
             // 
-            this.JBL_NoConcesion.AutoSize = true;
-            this.JBL_NoConcesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoConcesion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_NoConcesion.Location = new System.Drawing.Point(18, 239);
-            this.JBL_NoConcesion.Name = "JBL_NoConcesion";
-            this.JBL_NoConcesion.Size = new System.Drawing.Size(93, 15);
-            this.JBL_NoConcesion.TabIndex = 20;
-            this.JBL_NoConcesion.Text = "No. Concesion: ";
+            this.JLB_NoConcesion.AutoSize = true;
+            this.JLB_NoConcesion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoConcesion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoConcesion.Location = new System.Drawing.Point(18, 239);
+            this.JLB_NoConcesion.Name = "JLB_NoConcesion";
+            this.JLB_NoConcesion.Size = new System.Drawing.Size(90, 15);
+            this.JLB_NoConcesion.TabIndex = 20;
+            this.JLB_NoConcesion.Text = "No. Concesion:";
             // 
             // TXT_NoConcesion
             // 
@@ -314,16 +315,16 @@
             this.TXT_NoConcesion.Size = new System.Drawing.Size(279, 21);
             this.TXT_NoConcesion.TabIndex = 22;
             // 
-            // JBL_NoSeguro
+            // JLB_NoSeguro
             // 
-            this.JBL_NoSeguro.AutoSize = true;
-            this.JBL_NoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JBL_NoSeguro.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JBL_NoSeguro.Location = new System.Drawing.Point(26, 275);
-            this.JBL_NoSeguro.Name = "JBL_NoSeguro";
-            this.JBL_NoSeguro.Size = new System.Drawing.Size(75, 15);
-            this.JBL_NoSeguro.TabIndex = 21;
-            this.JBL_NoSeguro.Text = "No. Seguro: ";
+            this.JLB_NoSeguro.AutoSize = true;
+            this.JLB_NoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.JLB_NoSeguro.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoSeguro.Location = new System.Drawing.Point(26, 275);
+            this.JLB_NoSeguro.Name = "JLB_NoSeguro";
+            this.JLB_NoSeguro.Size = new System.Drawing.Size(72, 15);
+            this.JLB_NoSeguro.TabIndex = 21;
+            this.JLB_NoSeguro.Text = "No. Seguro:";
             // 
             // TXT_NoSeguro
             // 
@@ -331,6 +332,7 @@
             this.TXT_NoSeguro.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_NoSeguro.Location = new System.Drawing.Point(116, 268);
             this.TXT_NoSeguro.Name = "TXT_NoSeguro";
+            this.TXT_NoSeguro.ReadOnly = true;
             this.TXT_NoSeguro.Size = new System.Drawing.Size(279, 21);
             this.TXT_NoSeguro.TabIndex = 23;
             // 
@@ -373,7 +375,7 @@
             this.BTN_Buscar.UseVisualStyleBackColor = false;
             this.BTN_Buscar.Click += new System.EventHandler(this.BTN_Buscar_Click);
             // 
-            // EditarPropietario
+            // F_EditarPropietario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -381,7 +383,7 @@
             this.Controls.Add(this.BTN_Guardar);
             this.Controls.Add(this.GRB_Propietario);
             this.Controls.Add(this.BTN_Buscar);
-            this.Name = "EditarPropietario";
+            this.Name = "F_EditarPropietario";
             this.Size = new System.Drawing.Size(1064, 500);
             this.GRB_Propietario.ResumeLayout(false);
             this.GRB_Propietario.PerformLayout();
@@ -393,18 +395,18 @@
         #endregion
 
         private System.Windows.Forms.GroupBox GRB_Propietario;
-        private System.Windows.Forms.Label JBL_Nombre;
+        private System.Windows.Forms.Label JLB_Nombre;
         private System.Windows.Forms.TextBox TXT_Placas;
-        private System.Windows.Forms.Label JBL_Placas;
+        private System.Windows.Forms.Label JLB_Placas;
         private System.Windows.Forms.TextBox TXT_Nombre;
-        private System.Windows.Forms.Label JBL_Estado;
-        private System.Windows.Forms.Label JBL_Municipio;
-        private System.Windows.Forms.Label JBL_Colonia;
-        private System.Windows.Forms.Label JBL_CP;
-        private System.Windows.Forms.Label JBL_NoInterior;
-        private System.Windows.Forms.Label JBL_NoExterior;
-        private System.Windows.Forms.Label JBL_Domicilio;
-        private System.Windows.Forms.Label JBL_RFC;
+        private System.Windows.Forms.Label JLB_Estado;
+        private System.Windows.Forms.Label JLB_Municipio;
+        private System.Windows.Forms.Label JLB_Colonia;
+        private System.Windows.Forms.Label JLB_CP;
+        private System.Windows.Forms.Label JLB_NoInterior;
+        private System.Windows.Forms.Label JLB_NoExterior;
+        private System.Windows.Forms.Label JLB_Domicilio;
+        private System.Windows.Forms.Label JLB_RFC;
         private System.Windows.Forms.TextBox TXT_Estado;
         private System.Windows.Forms.TextBox TXT_Municipio;
         private System.Windows.Forms.TextBox TXT_Colonia;
@@ -413,8 +415,8 @@
         private System.Windows.Forms.TextBox TXT_NoExterior;
         private System.Windows.Forms.TextBox TXT_RFC;
         private System.Windows.Forms.TextBox TXT_Domicilio;
-        private System.Windows.Forms.Label JBL_NoConcesion;
-        private System.Windows.Forms.Label JBL_NoSeguro;
+        private System.Windows.Forms.Label JLB_NoConcesion;
+        private System.Windows.Forms.Label JLB_NoSeguro;
         private System.Windows.Forms.TextBox TXT_NoSeguro;
         private System.Windows.Forms.TextBox TXT_NoConcesion;
         private System.Windows.Forms.TextBox TXT_Placa;

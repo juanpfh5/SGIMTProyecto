@@ -54,6 +54,9 @@
     <Compile Include="D_OrdenCobro.cs" />
     <Compile Include="D_OrdenCobroDiversos.cs" />
     <Compile Include="D_PermisoCircularFueraRuta.cs" />
+    <Compile Include="D_PermisoPasoAnual.cs" />
+    <Compile Include="D_PermisoPersonalEmpresas.cs" />
+    <Compile Include="D_PermisoTransporteE.cs" />
     <Compile Include="D_Revista.cs" />
     <Compile Include="D_TarjetaCirculacion.cs" />
     <Compile Include="F_EditarPropietario.cs">

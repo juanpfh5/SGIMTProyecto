@@ -54,5 +54,35 @@ namespace SGIMTProyecto
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public List<string> ListadoPersonal() {
+            List<string> listaNombres = new List<string>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_pe FROM personal_pe";
+
+                using (MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon)) {
+                    Comando.CommandTimeout = 60;
+                    SqlCon.Open();
+
+                    using (MySqlDataReader Resultado = Comando.ExecuteReader()) {
+                        while (Resultado.Read()) {
+                            string nombre = Resultado["nombre_pe"].ToString();
+                            listaNombres.Add(nombre);
+                        }
+                    }
+                }
+
+                return listaNombres;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

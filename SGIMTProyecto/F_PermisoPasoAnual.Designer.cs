@@ -62,6 +62,8 @@
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
+            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
+            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
             this.GRB_PasoAnual.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +101,8 @@
             this.GRB_PasoAnual.Controls.Add(this.TXT_TitularSMyT);
             this.GRB_PasoAnual.Controls.Add(this.JLB_FolioPermiso);
             this.GRB_PasoAnual.Controls.Add(this.TXT_FolioPermiso);
+            this.GRB_PasoAnual.Controls.Add(this.JLB_NoMovimiento);
+            this.GRB_PasoAnual.Controls.Add(this.TXT_NoMovimiento);
             this.GRB_PasoAnual.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.GRB_PasoAnual.ForeColor = System.Drawing.Color.DarkOrchid;
             this.GRB_PasoAnual.Location = new System.Drawing.Point(30, 21);
@@ -425,15 +429,36 @@
             this.BTN_Imprimir.TabIndex = 40;
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
-            // PermisoPasoAnual
+            // JLB_NoMovimiento
+            // 
+            this.JLB_NoMovimiento.AutoSize = true;
+            this.JLB_NoMovimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_NoMovimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoMovimiento.Location = new System.Drawing.Point(374, 504);
+            this.JLB_NoMovimiento.Name = "JLB_NoMovimiento";
+            this.JLB_NoMovimiento.Size = new System.Drawing.Size(97, 15);
+            this.JLB_NoMovimiento.TabIndex = 40;
+            this.JLB_NoMovimiento.Text = "No. Movimiento:";
+            // 
+            // TXT_NoMovimiento
+            // 
+            this.TXT_NoMovimiento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_NoMovimiento.Location = new System.Drawing.Point(491, 496);
+            this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
+            this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
+            this.TXT_NoMovimiento.TabIndex = 41;
+            // 
+            // F_PermisoPasoAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GRB_PasoAnual);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Name = "PermisoPasoAnual";
+            this.Name = "F_PermisoPasoAnual";
             this.Size = new System.Drawing.Size(797, 607);
+            this.Load += new System.EventHandler(this.F_PermisoPasoAnual_Load);
             this.GRB_PasoAnual.ResumeLayout(false);
             this.GRB_PasoAnual.PerformLayout();
             this.ResumeLayout(false);
@@ -476,5 +501,7 @@
         private System.Windows.Forms.Label JLB_FolioPermiso;
         private System.Windows.Forms.TextBox TXT_FolioPermiso;
         private System.Windows.Forms.Button BTN_Imprimir;
+        private System.Windows.Forms.Label JLB_NoMovimiento;
+        private System.Windows.Forms.TextBox TXT_NoMovimiento;
     }
 }

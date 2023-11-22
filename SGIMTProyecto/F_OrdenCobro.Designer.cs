@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GRB_OrdenCobro = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -61,10 +61,7 @@
             this.JLB_Clave = new System.Windows.Forms.Label();
             this.TXT_Clave = new System.Windows.Forms.TextBox();
             this.BTN_Agregar = new System.Windows.Forms.Button();
-            this.DGV_Datos = new System.Windows.Forms.DataGridView();
-            this.JBL_ClaveData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JBL_DescripcionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JBL_ImporteData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DGV_Clave = new System.Windows.Forms.DataGridView();
             this.JLB_Observaciones = new System.Windows.Forms.Label();
             this.TXT_Observaciones = new System.Windows.Forms.TextBox();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
@@ -76,8 +73,9 @@
             this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
+            this.BTN_Limpiar = new System.Windows.Forms.Button();
             this.GRB_OrdenCobro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).BeginInit();
             this.SuspendLayout();
             // 
             // GRB_OrdenCobro
@@ -113,7 +111,8 @@
             this.GRB_OrdenCobro.Controls.Add(this.JLB_Clave);
             this.GRB_OrdenCobro.Controls.Add(this.TXT_Clave);
             this.GRB_OrdenCobro.Controls.Add(this.BTN_Agregar);
-            this.GRB_OrdenCobro.Controls.Add(this.DGV_Datos);
+            this.GRB_OrdenCobro.Controls.Add(this.BTN_Limpiar);
+            this.GRB_OrdenCobro.Controls.Add(this.DGV_Clave);
             this.GRB_OrdenCobro.Controls.Add(this.JLB_Observaciones);
             this.GRB_OrdenCobro.Controls.Add(this.TXT_Observaciones);
             this.GRB_OrdenCobro.Controls.Add(this.JLB_NoMovimiento);
@@ -413,48 +412,35 @@
             this.TXT_Clave.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_Clave.Location = new System.Drawing.Point(101, 298);
             this.TXT_Clave.Name = "TXT_Clave";
-            this.TXT_Clave.Size = new System.Drawing.Size(128, 23);
+            this.TXT_Clave.Size = new System.Drawing.Size(273, 23);
             this.TXT_Clave.TabIndex = 53;
             // 
             // BTN_Agregar
             // 
             this.BTN_Agregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.BTN_Agregar.ForeColor = System.Drawing.Color.DarkRed;
-            this.BTN_Agregar.Location = new System.Drawing.Point(247, 300);
+            this.BTN_Agregar.Location = new System.Drawing.Point(380, 300);
             this.BTN_Agregar.Name = "BTN_Agregar";
             this.BTN_Agregar.Size = new System.Drawing.Size(73, 26);
             this.BTN_Agregar.TabIndex = 54;
             this.BTN_Agregar.Text = "Agregar";
             this.BTN_Agregar.UseVisualStyleBackColor = true;
+            this.BTN_Agregar.Click += new System.EventHandler(this.BTN_Agregar_Click);
             // 
-            // DGV_Datos
+            // DGV_Clave
             // 
-            this.DGV_Datos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Datos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.JBL_ClaveData,
-            this.JBL_DescripcionData,
-            this.JBL_ImporteData});
-            this.DGV_Datos.Location = new System.Drawing.Point(18, 336);
-            this.DGV_Datos.Name = "DGV_Datos";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGV_Datos.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.DGV_Datos.Size = new System.Drawing.Size(955, 123);
-            this.DGV_Datos.TabIndex = 55;
-            // 
-            // JBL_ClaveData
-            // 
-            this.JBL_ClaveData.HeaderText = "Clave";
-            this.JBL_ClaveData.Name = "JBL_ClaveData";
-            // 
-            // JBL_DescripcionData
-            // 
-            this.JBL_DescripcionData.HeaderText = "Descripcion";
-            this.JBL_DescripcionData.Name = "JBL_DescripcionData";
-            // 
-            // JBL_ImporteData
-            // 
-            this.JBL_ImporteData.HeaderText = "Importe";
-            this.JBL_ImporteData.Name = "JBL_ImporteData";
+            this.DGV_Clave.AllowUserToAddRows = false;
+            this.DGV_Clave.AllowUserToDeleteRows = false;
+            this.DGV_Clave.AllowUserToOrderColumns = true;
+            this.DGV_Clave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Clave.Location = new System.Drawing.Point(18, 336);
+            this.DGV_Clave.Name = "DGV_Clave";
+            this.DGV_Clave.ReadOnly = true;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
+            this.DGV_Clave.TabIndex = 55;
+            this.DGV_Clave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellContentClick);
             // 
             // JLB_Observaciones
             // 
@@ -510,6 +496,7 @@
             this.TXT_Total.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_Total.Location = new System.Drawing.Point(684, 465);
             this.TXT_Total.Name = "TXT_Total";
+            this.TXT_Total.ReadOnly = true;
             this.TXT_Total.Size = new System.Drawing.Size(161, 23);
             this.TXT_Total.TabIndex = 59;
             // 
@@ -543,6 +530,7 @@
             this.BTN_Imprimir.TabIndex = 64;
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
             // BTN_BuscarPlaca
             // 
@@ -560,12 +548,28 @@
             // 
             // TXT_Placa
             // 
+            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
             this.TXT_Placa.Location = new System.Drawing.Point(784, 16);
             this.TXT_Placa.Name = "TXT_Placa";
             this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
             this.TXT_Placa.TabIndex = 65;
+            this.TXT_Placa.Text = "Placa";
+            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
-            // OrdenCobro
+            // BTN_Limpiar
+            // 
+            this.BTN_Limpiar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_Limpiar.ForeColor = System.Drawing.Color.DarkRed;
+            this.BTN_Limpiar.Location = new System.Drawing.Point(466, 300);
+            this.BTN_Limpiar.Name = "BTN_Limpiar";
+            this.BTN_Limpiar.Size = new System.Drawing.Size(110, 26);
+            this.BTN_Limpiar.TabIndex = 64;
+            this.BTN_Limpiar.Text = "Limpiar Clave";
+            this.BTN_Limpiar.UseVisualStyleBackColor = true;
+            this.BTN_Limpiar.Click += new System.EventHandler(this.BTN_Limpiar_Click);
+            // 
+            // F_OrdenCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -573,11 +577,12 @@
             this.Controls.Add(this.BTN_BuscarPlaca);
             this.Controls.Add(this.GRB_OrdenCobro);
             this.Controls.Add(this.BTN_Imprimir);
-            this.Name = "OrdenCobro";
+            this.Name = "F_OrdenCobro";
             this.Size = new System.Drawing.Size(1064, 618);
+            this.Load += new System.EventHandler(this.F_OrdenCobro_Load);
             this.GRB_OrdenCobro.ResumeLayout(false);
             this.GRB_OrdenCobro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Datos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,10 +622,7 @@
         private System.Windows.Forms.Label JLB_Clave;
         private System.Windows.Forms.TextBox TXT_Clave;
         private System.Windows.Forms.Button BTN_Agregar;
-        private System.Windows.Forms.DataGridView DGV_Datos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ClaveData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_DescripcionData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ImporteData;
+        private System.Windows.Forms.DataGridView DGV_Clave;
         private System.Windows.Forms.Label JLB_Observaciones;
         private System.Windows.Forms.TextBox TXT_Observaciones;
         private System.Windows.Forms.Label JLB_NoMovimiento;
@@ -632,5 +634,6 @@
         private System.Windows.Forms.Button BTN_Imprimir;
         private System.Windows.Forms.Button BTN_BuscarPlaca;
         private System.Windows.Forms.TextBox TXT_Placa;
+        private System.Windows.Forms.Button BTN_Limpiar;
     }
 }

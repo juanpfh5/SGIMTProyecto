@@ -8,12 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SGIMTProyecto
-{
-    public partial class F_LiberacionPublicoPrivado : UserControl
-    {
-        public F_LiberacionPublicoPrivado()
-        {
+namespace SGIMTProyecto {
+    public partial class F_LiberacionPublicoPrivado : UserControl {
+        public F_LiberacionPublicoPrivado() {
             InitializeComponent();
         }
 
@@ -26,17 +23,14 @@ namespace SGIMTProyecto
             TXT_NoSerie.Text = "";
             TXT_NoMotor.Text = "";
         }
-        private void LiberacionP_P(string cTexto)
-        {
+        private void LiberacionP_P(string cTexto) {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
             MostrarDatos(Datos.LiberacionP_P(cTexto));
         }
 
-        private void MostrarDatos(List<string[]> datos)
-        {
+        private void MostrarDatos(List<string[]> datos) {
             // Verificar que haya al menos una fila de datos
-            if (datos.Count > 0)
-            {
+            if (datos.Count > 0) {
                 // Acceder a los valores de la primera fila
                 string[] primeraFila = datos[0];
 
@@ -46,45 +40,43 @@ namespace SGIMTProyecto
                 if (primeraFila.Length > 2) TXT_Tipo.Text = primeraFila[2];
                 if (primeraFila.Length > 3) TXT_NoSerie.Text = primeraFila[3];
                 if (primeraFila.Length > 4) TXT_NoMotor.Text = primeraFila[4];
-            }
-            else
-            {
+            } else {
                 LimpiarTextBox();
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private (string, bool) VerificacionParametros()
-        {
-            string error = "";
+        private (string, bool) VerificacionParametros() {
+            string error, variable;
             bool bandera = false;
 
             List<string> parametros = new List<string>();
 
             int tamanio;
 
-            if (!int.TryParse(TXT_NoBaja.Text, out int noBaja))
-            {
-                parametros.Add("No. Baja");
+            if (!int.TryParse(TXT_NoBaja.Text, out int noBaja)) {
+                variable = JLB_NoBaja.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            
+            if (DTP_Fecha.Value > DateTime.Now) {
+                variable = JLB_Fecha.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+
+
             tamanio = parametros.Count;
 
-            if (tamanio == 1)
-            {
+            if (tamanio == 1) {
                 error = "Verifica el siguiente parámetro: ";
-            }
-            else
-            {
+            } else {
                 error = "Verifica los siguientes parámetros: ";
             }
 
-            for (int i = 0; i < tamanio; i++)
-            {
+            for (int i = 0; i < tamanio; i++) {
                 error += parametros[i];
-                if (i != tamanio - 1)
-                {
+                if (i != tamanio - 1) {
                     error += ", ";
                 }
             }
@@ -92,49 +84,65 @@ namespace SGIMTProyecto
             return (error, bandera);
         }
 
-        private bool ExistenciaVehiculo(string cTexto)
-        {
+        private bool ExistenciaVehiculo(string cTexto) {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
             return Datos.ExistenciaVehiculo(cTexto);
         }
 
-        private void ActualizarLiberacion(string placa)
-        {
+        private void ActualizarLiberacion(string placa) {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
             Datos.ActualizarLiberacion(placa);
         }
 
         #endregion
 
-        private void BTN_Buscar_Click(object sender, EventArgs e)
-        {
-            this.LiberacionP_P(TXT_Placa.Text.Trim());
+        private void BTN_Buscar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                this.LiberacionP_P(TXT_Placa.Text.Trim());
+            }
         }
 
-        private void BTN_Imprimir_Click(object sender, EventArgs e)
-        {
-            (string mensajeError, bool bandera) = VerificacionParametros();
+        private void BTN_Imprimir_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
 
-            if (bandera)
-            {
-                MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim()))
-                {
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
 
-                    ActualizarLiberacion(TXT_Placa.Text.Trim());
+                        ActualizarLiberacion(TXT_Placa.Text.Trim());
 
-                    MessageBox.Show("La unidad ha sido dada de baja correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Imprimir
 
-                    LimpiarTextBox();
-                }
-                else
-                {
-                    MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("La unidad ha sido dada de baja correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarTextBox();
+                    } else {
+                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
+        }
+
+        #region PlaceHolder
+        private void TXT_Placa_Enter(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "Placa") {
+                TXT_Placa.Text = "";
+                TXT_Placa.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_Placa_Leave(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "") {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+        }
+        #endregion
+
+        private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
+
         }
     }
 }

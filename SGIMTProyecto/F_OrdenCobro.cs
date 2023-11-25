@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -228,20 +229,17 @@ namespace SGIMTProyecto
             D_OrdenCobro Datos = new D_OrdenCobro();
             return Datos.ListadoPersonal();
         }
+
         private List<string> ListadoClaveConcepto(string busqueda) {
             D_OrdenCobro Datos = new D_OrdenCobro();
             return Datos.ListadoClaveConcepto(busqueda);
         }
-        /*private void AutoCompleteClave() {
-            AutoCompleteStringCollection colClaveConcepto = new AutoCompleteStringCollection();
-            List<string> claveConcepto = ListadoClaveConcepto(TXT_Clave.Text);
-            foreach (string clc in claveConcepto) {
-                colClaveConcepto.Add(clc);
-            }
-            TXT_Clave.AutoCompleteCustomSource = colClaveConcepto;
-            TXT_Clave.AutoCompleteMode = AutoCompleteMode.Suggest;
-            TXT_Clave.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }*/
+
+        private List<string> AgregarClave(string concepto) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.AgregarClave(concepto);
+        }
+
         private void AutoCompleteClave() {
             AutoCompleteStringCollection colClaveConcepto = new AutoCompleteStringCollection();
             List<string> claveConcepto = ListadoClaveConcepto(TXT_Clave.Text);
@@ -261,7 +259,6 @@ namespace SGIMTProyecto
                 }
             };
         }
-
 
         private string TruncarTextBox(string textBox) {
             string concepto = "";
@@ -309,15 +306,16 @@ namespace SGIMTProyecto
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
             AutoCompleteClave();
-            DGV_Clave.ColumnCount = 4;
+            DGV_Clave.ColumnCount = 5;
             DGV_Clave.Columns[0].Name = "Clave";
             DGV_Clave.Columns[1].Name = "Concepto";
-            DGV_Clave.Columns[2].Name = "Costo";
+            DGV_Clave.Columns[2].Name = "Costo Unitario";
             DGV_Clave.Columns[3].Name = "Cantidad";
+            DGV_Clave.Columns[4].Name = "Costo";
 
-            DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
-            DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2);
-            DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 3);
+            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
+            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2);
+            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 3);
 
             DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
             btnEliminar.HeaderText = "Eliminar Registro";
@@ -325,8 +323,6 @@ namespace SGIMTProyecto
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseColumnTextForButtonValue = true;
             DGV_Clave.Columns.Add(btnEliminar);
-
-
         }
 
         #region PlaceHolder
@@ -345,20 +341,108 @@ namespace SGIMTProyecto
         }
         #endregion
 
+
         private void BTN_Agregar_Click(object sender, EventArgs e) {
-            String concepto = TruncarTextBox(TXT_Clave.Text);
-            MessageBox.Show(concepto, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            List<string> concepto = AgregarClave(TruncarTextBox(TXT_Clave.Text));
+
+            // Suponiendo que concepto tiene la estructura Clave, Concepto, Valor repetida
+            for (int i = 0; i < concepto.Count; i += 3) {
+                int index = DGV_Clave.Rows.Add(concepto[i], concepto[i + 1], concepto[i + 2]);
+                ActualizarCosto(index);
+            }
+
+            BTN_LimpiarClave_Click(sender, e);
         }
 
-        private void BTN_Limpiar_Click(object sender, EventArgs e) {
+
+
+
+        private void BTN_LimpiarClave_Click(object sender, EventArgs e) {
             TXT_Clave.Enabled = true;    
             TXT_Clave.Text = "";
         }
 
         private void DGV_Clave_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if(e.ColumnIndex == 4) {
+            if(e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
                 DGV_Clave.Rows.RemoveAt(e.RowIndex);
             }
         }
+
+        private Dictionary<int, int> valores = new Dictionary<int, int>(); // Almacena los valores para cada fila
+
+        private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) { // Ajusta el índice de la columna según sea necesario
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentForeground);
+
+                // Obtener el valor actual para la fila
+                int valorActual = valores.ContainsKey(e.RowIndex) ? valores[e.RowIndex] : 1;
+
+                // Dibujar el primer botón
+                var buttonRect1 = new Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
+
+                // Dibujar el número en medio de los dos botones
+                var textRect = new Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
+                TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+
+                // Dibujar el segundo botón
+                var buttonRect2 = new Rectangle(e.CellBounds.X + e.CellBounds.Width * 3 / 4, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect2, ButtonState.Normal);
+
+                e.Handled = true;
+            }
+        }
+
+        private void DGV_Clave_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) {
+                // Determinar si se hizo clic en el primer o segundo botón
+                var clickPosition = DGV_Clave.PointToClient(Cursor.Position);
+                var buttonRect1 = new Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+                var buttonRect2 = new Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width * 3 / 4, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+
+                if (buttonRect1.Contains(clickPosition)) {
+                    // Clic en el primer botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] < 5) {
+                            valores[e.RowIndex]++;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, 1);
+                    }
+                } else if (buttonRect2.Contains(clickPosition)) {
+                    // Clic en el segundo botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] > 1) {
+                            valores[e.RowIndex]--;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, -1);
+                    }
+                }
+
+                // Actualizar la visualización después de hacer clic
+                DGV_Clave.InvalidateCell(e.ColumnIndex, e.RowIndex);
+
+                // Actualizar el valor en la columna "Costo"
+                ActualizarCosto(e.RowIndex);
+            }
+        }
+
+        private void ActualizarCosto(int rowIndex) {
+        // Obtener la cantidad y el costo unitario de la fila
+            int cantidad = valores.ContainsKey(rowIndex) ? valores[rowIndex] : 1;
+
+            // Asegurarse de que las celdas tengan valores numéricos
+            if (decimal.TryParse(DGV_Clave.Rows[rowIndex].Cells[2].Value?.ToString(), out decimal costoUnitario)) {
+                // Calcular el costo multiplicando cantidad por costo unitario
+                decimal costo = cantidad * costoUnitario;
+
+                // Actualizar el valor en la columna "Costo"
+                DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
+            }
+        }
+
+
+
     }
 }

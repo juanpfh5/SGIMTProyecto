@@ -112,5 +112,82 @@ namespace SGIMTProyecto {
             // Mostrar el MessageBox
             MessageBox.Show(mensaje, "Elementos de la Lista", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        /*public List<string> AgregarClave(string concepto) {
+            MySqlDataReader Resultado;
+            List<string> listaDatos = new List<string>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT clave_cl, concepto_cl, COALESCE(dias_cl * (SELECT valor_um FROM uma_um ORDER BY id_um DESC LIMIT 1), costo_cl) AS valor FROM claves_cl WHERE id_cl = (SELECT id_cl FROM claves_cl WHERE concepto_cl = @Concepto);a";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Concepto", concepto);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+
+                while (Resultado.Read()) {
+                    string[] datosFila = new string[Resultado.FieldCount];
+
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
+                        datosFila[i] = Resultado[i].ToString();
+                    }
+
+                    listaDatos.Add(datosFila);
+                }
+
+                return listaDatos;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }*/
+        public List<string> AgregarClave(string concepto) {
+            List<string> listaBusqueda = new List<string>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+
+                string sql_valor_um = "SELECT valor_um FROM uma_um ORDER BY id_um DESC LIMIT 1";
+                using (MySqlCommand comandoValorUm = new MySqlCommand(sql_valor_um, SqlCon)) {
+                    SqlCon.Open();
+                    object valorUm = comandoValorUm.ExecuteScalar();
+                    SqlCon.Close();
+
+                    string sql_tarea = "SELECT clave_cl, concepto_cl, COALESCE(dias_cl * @ValorUm, costo_cl) AS valor_cl FROM claves_cl WHERE id_cl = (SELECT id_cl FROM claves_cl WHERE concepto_cl = @Concepto);";
+
+                    using (MySqlCommand comandoPrincipal = new MySqlCommand(sql_tarea, SqlCon)) {
+                        comandoPrincipal.Parameters.AddWithValue("@Concepto", concepto);
+                        comandoPrincipal.Parameters.AddWithValue("@ValorUm", valorUm ?? DBNull.Value);
+
+                        SqlCon.Open();
+                        using (MySqlDataReader listaClaveConcepto = comandoPrincipal.ExecuteReader()) {
+                            while (listaClaveConcepto.Read()) {
+                                listaBusqueda.Add(listaClaveConcepto["clave_cl"].ToString());
+                                listaBusqueda.Add(listaClaveConcepto["concepto_cl"].ToString());
+                                listaBusqueda.Add(listaClaveConcepto["valor_cl"].ToString());
+                            }
+                        }
+                    }
+                }
+
+                return listaBusqueda;
+            }
+            catch (Exception ex) {
+                // Aquí puedes considerar lograr la excepción o manejarla de otra manera
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+
     }
 }

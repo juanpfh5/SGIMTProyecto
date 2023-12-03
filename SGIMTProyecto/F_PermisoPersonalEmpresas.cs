@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Globalization;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Previewer;
+
 namespace SGIMTProyecto
 {
     public partial class F_PermisoPersonalEmpresas : UserControl
@@ -167,7 +172,74 @@ namespace SGIMTProyecto
                 MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarTextBox();
+
+                //imprimir 
+                /*REQUISITOS PARA IMPRIMIR
+                 * 
+                 * string placa = "AXXXXX";
+                    string nombre = "MANUEL ALEJANDRO MORA MENESES";
+                    string direccion = "Enrique segoviano";
+                    string poblacion = "AMAXAC DE GUERRERO";
+                    int CP = 90600;
+                    int TC = 4812;
+
+                    string recorrido = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
+                    string fechaVig = "31/12/2023";
+                    string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+                 * 
+                 */
             }
+        }
+        private static object GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string recorrido, string fechaVig, string director)
+        {
+            CultureInfo culturaEspañol = new CultureInfo("es-ES");
+            DateTime today = DateTime.Today;
+            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+
+            var documentopdf =
+            Document.Create(documento =>
+            {
+                documento.Page(pagina =>
+                {
+                    pagina.Margin(30);
+                    pagina.Header().Text("");
+                    pagina.Content().Column(col =>
+                    {
+                        col.Item().PaddingTop(50);
+                        col.Item().Text($"{nombre}").FontSize(10);
+                        col.Item().Padding(10);
+                        col.Item().Text($"{direccion}").FontSize(10);
+                        col.Item().Padding(10);
+                        col.Item().Row(row =>
+                        {
+                            row.RelativeItem(3).Text($"{poblacion}").FontSize(10);
+                            row.RelativeItem().Text($"{CP}").FontSize(10);
+                        });
+                        col.Item().Padding(10);
+                        col.Item().Row(row =>
+                        {
+                            row.RelativeItem().Text($"{placa}").FontSize(10);
+                            row.RelativeItem().Text($"{TC}").FontSize(10);
+                        });
+                        col.Item().Padding(10);
+                        col.Item().Row(row =>
+                        {
+                            row.RelativeItem().Text($"").FontSize(9);
+                            row.RelativeItem(6).Text($"{recorrido}").FontSize(9);
+                        });
+                        col.Item().Padding(20);
+                        col.Item().Row(row =>
+                        {
+                            row.RelativeItem().Text($"{fechaHoy}").FontSize(10);
+                            row.RelativeItem().Text($"{fechaVig}").FontSize(9);
+                            row.RelativeItem().Text($"{director}").FontSize(9);
+                        });
+
+                    });
+                });
+            }).GeneratePdf();
+
+            return documentopdf;
         }
     }
 }

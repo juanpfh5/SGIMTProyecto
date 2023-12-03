@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuestPDF.Fluent;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//librerias para la creacion de pdf
+using QuestPDF.Fluent;
+using System.Globalization;
+using QuestPDF.Helpers;
+using QuestPDF.Previewer;
+using System.Security.Cryptography;
+using HarfBuzzSharp;
+using static QuestPDF.Helpers.Colors;
+using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace SGIMTProyecto
 {
@@ -294,14 +306,74 @@ namespace SGIMTProyecto
             if (!TXT_Placa.Text.Trim().Equals("Placa")){
                 (string mensajeError, bool bandera) = VerificacionParametros();
 
-                if (bandera) {
+                if (bandera)
+                {
                     MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    /*if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) { 
-
-                    }*/
                 }
+                else
+                {
+                    #region Generar pdf
+                    /* PARAMETROS A PASAR:
+                     * var documentoPDF = GenerarPdf();# aqui se le pasa los parametros que son:
+                     * 
+                     * string placa, 
+                     * string nombre, 
+                     * string direccion, 
+                     * int CP, 
+                     * int folioR, 
+                     * string serie, 
+                     * string motor, 
+                     * int modelo, 
+                     * string marca, 
+                     * string clvVehicular, 
+                     * string tipo, 
+                     * decimal total, 
+                     * string elaboro, 
+                     * List<int> claves, 
+                     * List<String>descripcion, 
+                     * List<decimal>importe, 
+                     * string mesVigencia, 
+                     * int diaVigencia, 
+                     * int yearVigencia
+                     * int nMovimiento
+                     * 
+                     * string combustible
+                     * string capacidad
+                     * 
+                     */
+                    #endregion
+
+                    #region Generar Resumen
+                    /*
+                     * //datos diferentes para el RESUMEN
+                     * 
+                        funcion:
+                        GenerarpdfResumen()
+
+                        string rfc = "TUX920811PQ7";
+                        string ruta = "INTERNA DE LA CIUDAD DE TLAXCALA AUTORIZADA POR LA SECRETARIA DE COMUNICACIONES CONFORME A PLANO SUJETO A ROL POR LA EMPRESA";
+                        string observaciones = "CANJE DE PLACAS 2023";
+                        string fecha = "15/AGOSTO/2023";
+                        string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
+                        string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
+                        string combustible = "GASOLINA";
+                        string capacidad = "20 PASAEROS";
+                     * 
+                     * 
+                     */
+                    #endregion
+                }
+
             }
+            /*POSIBLE FORMA DE VISUALIZAR EL PDF
+             * 
+             * 
+             * var docPDFgenerado = GenerarPdf(placa, nombre, direccion, CP, folioR, serie, motor, modelo, marca, clvVehicular, tipo, total, elaboro, claves, descripcion, importe, mesVigencia, diaVigencia, yearVigencia);
+            PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
+
+            printPreviewDialog1.Document = docPDFgenerado as PrintDocument;
+            printPreviewDialog1.ShowDialog();*/
+
         }
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
@@ -341,7 +413,6 @@ namespace SGIMTProyecto
         }
         #endregion
 
-
         private void BTN_Agregar_Click(object sender, EventArgs e) {
             List<string> concepto = AgregarClave(TruncarTextBox(TXT_Clave.Text));
 
@@ -353,9 +424,6 @@ namespace SGIMTProyecto
 
             BTN_LimpiarClave_Click(sender, e);
         }
-
-
-
 
         private void BTN_LimpiarClave_Click(object sender, EventArgs e) {
             TXT_Clave.Enabled = true;    
@@ -442,7 +510,372 @@ namespace SGIMTProyecto
             }
         }
 
+        #region funciones de PDF
+        private static object GenerarPdf(string placa, string nombre, string direccion, int CP, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, List<int> claves, List<String> descripcion, List<decimal> importe, string mesVigencia, int diaVigencia, int yearVigencia, int nMovimiento, string combustible, string capacidad)
+        {
+            //obtenemos los valores del dia de hoy
+            DateTime today = DateTime.Today;
+            //variables dentro de la funcion:
+            CultureInfo culturaEspañol = new CultureInfo("es-ES");
+            int dia = today.Day;
+            string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
+            //creamos nuestro pdf
+            var documentoPDF =
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(10);
+                    page.Header().Row(fila =>
+                    {
+                        fila.ConstantItem(160).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
+                        fila.RelativeItem().Column(col =>
+                        {
+                            col.Item()
+                            .Height(20);
+                            col.Item()
+                            .AlignCenter()
+                            .Text("ORDEN DE COBRO DERECHOS")
+                            .Bold()
+                            .FontSize(10);
+                            col.Item()
+                            .AlignCenter()
+                            .Text("VEHICULARES TRANSPORTE PUBLICO 2023")
+                            .Bold()
+                            .FontSize(10);
+                        });
+                        fila.ConstantItem(100).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
+                    });
+                    page.Content().Column(col1 =>
+                    {
+                        col1.Item().Text($"Apetatitlán, Tlax a {dia} de {mes} 2023").Bold();
+                        col1.Item().Text($"PLACA: {placa}");
+                        col1.Item().AlignCenter().Text("DATOS DE CONCECIONARIO").Bold().FontSize(12);
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Text(txt =>
+                        {
+                            txt.Span("NOMBRE: ").Bold().FontSize(10);
+                            txt.Span($"{nombre}");
+                            txt.Span("       CP: ").Bold().FontSize(10);
+                            txt.Span($"{CP}");
+                            txt.Span("       FOLIO DE REVISTA: ").Bold().FontSize(10);
+                            txt.Span($"{folioR}");
+                        });
+                        col1.Item().Text(txt2 =>
+                        {
+                            txt2.Span("DIRECCION: ").Bold().FontSize(10);
+                            txt2.Span($"{direccion}");
 
 
+                        });
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().AlignCenter().Text("DATOS  VEHÍCULO").Bold().FontSize(12);
+                        // creacion de tabla
+
+                        col1.Item().Table(tabla =>
+                        {
+                            tabla.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(65);
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+                            tabla.Cell().Text(" SERIE:").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{serie}").FontSize(9);
+                            tabla.Cell().Text(" MOTOR: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{motor}").FontSize(9);
+                            tabla.Cell().Text(" MODELO").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{modelo}").FontSize(9);
+                            tabla.Cell().Text(" MARCA: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{marca}").FontSize(9);
+                            tabla.Cell().Text(" CVE_VEHICULAR:").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{clvVehicular}").FontSize(9);
+                            tabla.Cell().Text(" TIPO: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{tipo}").FontSize(9);
+                            tabla.Cell().Text("COMBUSTIBLE: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{combustible}").FontSize(9);
+                            tabla.Cell().Text("CAPACIDAD: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{capacidad}").FontSize(9);
+                        });
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Table(tabla2 =>
+                        {
+                            tabla2.ColumnsDefinition(columnas =>
+                            {
+                                columnas.ConstantColumn(60);
+                                columnas.RelativeColumn();
+                                columnas.ConstantColumn(100);
+                            });
+
+                            tabla2.Header(cabezera =>
+                            {
+                                cabezera.Cell().Text("CLAVE").Bold();
+                                cabezera.Cell().AlignCenter().Text("DESCRIPCIÓN").Bold();
+                                cabezera.Cell().Text("IMPORTE").Bold();
+                            });
+                            //aqui comenzamos la tabla dinamica
+                            for (int i = 0; i < claves.Count; i++)
+                            {
+                                tabla2.Cell().Text($"{claves[i]}");
+                                tabla2.Cell().AlignCenter().Text($"{descripcion[i]}");
+                                tabla2.Cell().Text($"{importe[i]}");
+                            }
+                            tabla2.Cell().Text("");
+                            tabla2.Cell().Text("");
+                            tabla2.Cell().Text(txt =>
+                            {
+                                txt.Span("Total: ").Bold().FontSize(13);
+                                txt.Span($"${total}");
+                            });
+
+                        });
+                        col1.Item().AlignCenter().Text("");
+                        col1.Item().AlignCenter().Text("AUTORIZÓ").Bold();
+                        col1.Item().AlignCenter().Width(250).LineHorizontal(1f);
+                        col1.Item().AlignCenter().Text($"{nombre}");
+                        col1.Item().Table(tabla =>
+                        {
+                            tabla.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(160);
+                                columns.RelativeColumn();
+                                columns.ConstantColumn(200);
+                            });
+                            tabla.Cell().Text("");
+                            tabla.Cell().Text("");
+                            tabla.Cell().Text("");
+
+                            tabla.Cell().Text(texto =>
+                            {
+                                texto.Span($"NUMERO DE MOVIMIENTO:{nMovimiento}").Bold().FontSize(9);
+                            });
+                            tabla.Cell().Text("");
+                            tabla.Cell().Row(row =>
+                            {
+                                row.RelativeItem().Column(colum =>
+                                {
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("VIGENCIA HASTA:").FontSize(9).Bold();
+                                        texto.Span($"{diaVigencia} DE {mesVigencia.ToUpper()} {yearVigencia}").FontSize(9);
+                                    });
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("ELABORÓ:").FontSize(9).Bold();
+                                        texto.Span($"{elaboro}").FontSize(9);
+                                    });
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("SAN PABLO APETATITLÁN").FontSize(9).Bold();
+
+                                    });
+
+                                });
+
+                            });
+
+                        });
+                    });
+                });
+            }).GeneratePdf();
+
+            return documentoPDF;
+        }
+
+        private static object GenerarpdfResumen(string placa, string nombre, string direccion, int CP, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, List<int> claves, List<String> descripcion, List<decimal> importe, string mesVigencia, int diaVigencia, int yearVigencia, int nMovimiento, string rfc, string ruta, string observaciones, string fecha, string elaboroC, string autorizoC, string combustible, string capacidad)
+        {
+            var resumenPDF =
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(10);
+                    page.Header().Row(fila =>
+                    {
+                        fila.ConstantItem(160).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
+                        fila.RelativeItem().Column(col =>
+                        {
+                            col.Item()
+                            .Height(20);
+                            col.Item()
+                            .AlignCenter()
+                            .Text("GOBIERNO DEL ESTADO DE TLAXCALA")
+                            .Bold()
+                            .FontSize(9);
+                            col.Item()
+                            .AlignCenter()
+                            .Text("SECRETARIA DE MOVILIDAD Y TRANSPORTE")
+                            .Bold()
+                            .FontSize(9);
+                            col.Item().AlignCenter().Text("SOLICITUD DE SERVICIO PUBLICO DE PASAJEROS").FontSize(9);
+                        });
+                        fila.ConstantItem(100).AlignLeft().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
+                    });
+                    page.Content().Column(col1 =>
+                    {
+
+                        col1.Item().Text($"PLACA: {placa}");
+                        col1.Item().AlignCenter().Text("DATOS DE CONCECIONARIO").Bold().FontSize(12);
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Text("NOMBRE DEL CONCECIONARIO: ").FontSize(10).Bold();
+                        col1.Item().Text($"{nombre}").FontSize(10);
+                        col1.Item().Text("DOMICILIO:").Bold().FontSize(10);
+                        col1.Item().Text($"{direccion}").FontSize(10);
+
+                        col1.Item().Text(texto =>
+                        {
+                            texto.Span("RFC: ").Bold().FontSize(10);
+                            texto.Span($"{rfc}").FontSize(10);
+                        });
+
+                        col1.Item().Text("");
+                        col1.Item().LineHorizontal(0.5f);
+                        // creacion de tabla
+                        col1.Item().Text("");
+
+                        col1.Item().Table(tabla =>
+                        {
+                            tabla.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(65);
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                                columns.RelativeColumn();
+                            });
+                            tabla.Cell().Text(" SERIE:").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{serie}").FontSize(9);
+                            tabla.Cell().Text(" MOTOR: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{motor}").FontSize(9);
+                            tabla.Cell().Text(" MODELO").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{modelo}").FontSize(9);
+                            tabla.Cell().Text(" MARCA: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{marca}").FontSize(9);
+                            tabla.Cell().Text(" CVE_VEHICULAR:").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{clvVehicular}").FontSize(9);
+                            tabla.Cell().Text(" TIPO: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{tipo}").FontSize(9);
+                            tabla.Cell().Text("COMBUSTIBLE: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{combustible}").FontSize(9);
+                            tabla.Cell().Text("CAPACIDAD: ").Bold().FontSize(9);
+                            tabla.Cell().AlignCenter().Text($"{capacidad}").FontSize(9);
+                        });
+
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Text(texto =>
+                        {
+                            texto.Span("RUTA AUTORIZADA: ").FontSize(10).Bold();
+                            texto.Span($"{ruta}").FontSize(10);
+                        });
+                        col1.Item().LineHorizontal(0.5f);
+                        col1.Item().Table(tabla2 =>
+                        {
+                            tabla2.ColumnsDefinition(columnas =>
+                            {
+                                columnas.ConstantColumn(60);
+                                columnas.RelativeColumn();
+                                columnas.ConstantColumn(100);
+                            });
+
+                            tabla2.Header(cabezera =>
+                            {
+                                cabezera.Cell().Text("CLAVE").Bold();
+                                cabezera.Cell().AlignCenter().Text("DESCRIPCIÓN").Bold();
+                                cabezera.Cell().Text("IMPORTE").Bold();
+                            });
+                            //aqui comenzamos la tabla dinamica
+                            for (int i = 0; i < claves.Count; i++)
+                            {
+                                tabla2.Cell().Text($"{claves[i]}");
+                                tabla2.Cell().AlignCenter().Text($"{descripcion[i]}");
+                                tabla2.Cell().Text($"{importe[i]}");
+                            }
+                            tabla2.Cell().Text("");
+                            tabla2.Cell().Text("");
+                            tabla2.Cell().Text(txt =>
+                            {
+                                txt.Span("Total: ").Bold().FontSize(13);
+                                txt.Span($"${total}");
+                            });
+
+                        });
+                        col1.Item().AlignCenter().Text("");
+                        col1.Item().AlignCenter().Text("AUTORIZÓ").Bold();
+                        col1.Item().AlignCenter().Width(250).LineHorizontal(1f);
+                        col1.Item().AlignCenter().Text($"{nombre}");
+                        col1.Item().Table(tabla =>
+                        {
+                            tabla.ColumnsDefinition(columns =>
+                            {
+                                columns.ConstantColumn(160);
+                                columns.RelativeColumn();
+                                columns.ConstantColumn(200);
+                            });
+                            tabla.Cell().Text("");
+                            tabla.Cell().Text("");
+                            tabla.Cell().Text("");
+
+                            tabla.Cell().Text(texto =>
+                            {
+                                texto.Span($"OBSERVACIONES:{observaciones}").Bold().FontSize(9);
+                            });
+                            tabla.Cell().Text("");
+                            tabla.Cell().Row(row =>
+                            {
+                                row.RelativeItem().Column(colum =>
+                                {
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("VIGENCIA HASTA:").FontSize(9).Bold();
+                                        texto.Span($"{diaVigencia} DE {mesVigencia.ToUpper()} {yearVigencia}").FontSize(9);
+                                    });
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("ELABORÓ:").FontSize(9).Bold();
+                                        texto.Span($"{elaboro}").FontSize(9);
+                                    });
+                                    colum.Item().Text(texto =>
+                                    {
+                                        texto.Span("SAN PABLO APETATITLÁN").FontSize(9).Bold();
+
+                                    });
+
+                                });
+
+                            });
+
+                        });
+                    });
+                    page.Footer().Row(row =>
+                    {
+
+                        row.RelativeItem().AlignCenter().Column(texto =>
+                        {
+                            texto.Item().Text($"{fecha}").FontSize(9);
+                            texto.Item().AlignCenter().Text("FECHA").Bold();
+                        });
+                        row.RelativeItem().AlignCenter().Column(texto =>
+                        {
+                            texto.Item().Text($"{elaboroC}").FontSize(9);
+                            texto.Item().AlignCenter().Text("ELABORÓ").Bold();
+                        });
+                        row.RelativeItem().AlignCenter().Column(texto =>
+                        {
+                            texto.Item().Text($"{autorizoC}").FontSize(9);
+                            texto.Item().AlignCenter().Text("AUTORIZÓ").Bold();
+                        });
+
+                    });
+                });
+            }).GeneratePdf();
+
+            return resumenPDF;
+        }
+        
+        #endregion
     }
 }

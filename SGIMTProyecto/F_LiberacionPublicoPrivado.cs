@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuestPDF.Fluent;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuestPDF.Helpers;
+using QuestPDF.Previewer;
+using System.Globalization;
+
 
 namespace SGIMTProyecto {
     public partial class F_LiberacionPublicoPrivado : UserControl {
@@ -114,6 +119,29 @@ namespace SGIMTProyecto {
                         ActualizarLiberacion(TXT_Placa.Text.Trim());
 
                         // Imprimir
+                        /*DATOS NECESARIOS PARA IMPRIMIR
+                         * 
+                         * CultureInfo culturaEspañol = new CultureInfo("es-ES");
+                            DateTime today = DateTime.Today;
+
+                            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+
+                            int year = today.Year;
+                            int dia = today.Day;
+                            string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
+
+                            int nOficio = 1570;
+                            string marca = "TOYOTA";
+                            int modelo = 2009;
+                            string tipo = "HIACE GV S";
+                            string serie = "JTFPX22P890015513";
+                            string motor = "2TR8162498";
+
+                            int nBaja = 45971683;
+                            string fechaRecibo = "2/22/2022";
+                            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+                         * 
+                         */
 
                         MessageBox.Show("La unidad ha sido dada de baja correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -142,6 +170,109 @@ namespace SGIMTProyecto {
         #endregion
 
         private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
+
+        }
+
+        private static object GenerarLiberacion(int nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
+        {
+            CultureInfo culturaEspañol = new CultureInfo("es-ES");
+            DateTime today = DateTime.Today;
+            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+            int year = today.Year;
+            int dia = today.Day;
+            string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
+
+            var documentopdf =
+            Document.Create(documento =>
+            {
+                documento.Page(pagina =>
+                {
+                    pagina.Margin(80);
+                    pagina.Header().Column(colh =>
+                    {
+                        colh.Item().Table(row =>
+                        {
+                            row.ColumnsDefinition(deff =>
+                            {
+                                deff.RelativeColumn(3);
+                                deff.RelativeColumn(2);
+                            });
+                            row.Cell().Width(180).AlignRight().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
+                            row.Cell().Width(120).AlignLeft().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
+
+                        });
+
+                    });
+                    pagina.Content().Column(columna =>
+                    {
+                        columna.Item().PaddingTop(3);
+                        columna.Item().AlignRight().Text($"FORMATO DST/{nOficio}/{year}").FontSize(10);
+                        columna.Item().Padding(15);
+                        columna.Item().AlignCenter().Text("SECRETARÍA DE MOVILIDAD Y TRANSPORTES.").FontSize(9).Bold();
+                        columna.Item().AlignCenter().Text("TRAMITE DE ALTA VEHICULAR.").FontSize(9).Bold();
+                        columna.Item().AlignCenter().Text("SERVICIO PARTICULAR.").FontSize(9).Bold();
+                        columna.Item().AlignRight().Text($"FECHA:{fechaHoy}").FontSize(9);
+                        columna.Item().Padding(25);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("MARCA:  ").FontSize(9).Bold();
+                            texto.Span($"{marca}").FontSize(9);
+                        });
+                        columna.Item().Padding(10);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("MODELO:  ").FontSize(9).Bold();
+                            texto.Span($"{modelo}").FontSize(9);
+                        });
+                        columna.Item().Padding(10);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("TIPO:  ").FontSize(9).Bold();
+                            texto.Span($"{tipo}").FontSize(9);
+                        });
+                        columna.Item().Padding(25);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("SERIE:  ").FontSize(9).Bold();
+                            texto.Span($"{serie}").FontSize(9);
+                        });
+                        columna.Item().Padding(10);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("MOTOR:  ").FontSize(9).Bold();
+                            texto.Span($"{motor}").FontSize(9);
+                        });
+                        columna.Item().Padding(25);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("NÚMERO DE BAJA:  ").FontSize(9).Bold();
+                            texto.Span($"{nBaja}").FontSize(9);
+                        });
+                        columna.Item().Padding(10);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("FECHA:  ").FontSize(9).Bold();
+                            texto.Span($"{fechaRecibo}").FontSize(9);
+                        });
+
+                        columna.Item().Padding(35);
+                        columna.Item().AlignCenter().Text("PREVIO ANALISIS DE DOCUMENTACION CORRESPONDIENTE").FontSize(9);
+                        columna.Item().AlignCenter().Text(texto =>
+                        {
+                            texto.Span("NOTA: ").FontSize(9);
+                            texto.Span("ENPLACAMIENTO A PLACAS PARTICULARES, NO AUTORIZA ").FontSize(9).Bold();
+                            texto.Span("TRANSPORTE DE PERSONAL.").FontSize(9);
+                        });
+                        columna.Item().Padding(15);
+                        columna.Item().AlignCenter().Text($"DIRECTOR DE TRANSPORTES DE LA SMYT").Bold().FontSize(9);
+                        columna.Item().AlignCenter().Text($"{director}").Bold().FontSize(9);
+
+
+                    });
+                });
+            }).GeneratePdf();
+
+            return documentopdf;
 
         }
     }

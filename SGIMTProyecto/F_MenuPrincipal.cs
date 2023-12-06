@@ -47,6 +47,7 @@ namespace SGIMTProyecto
             formRevista.ShowDialog();
 
             this.Show();
+            AddUserControl(new F_MenuPrincipalUC());
         }
 
         private void BTN_TarjetaCirculacion_Click(object sender, EventArgs e)
@@ -60,6 +61,7 @@ namespace SGIMTProyecto
             this.Show();
             SDP_MenuPrincipal.Height = BTN_TarjetaCirculacion.Height;
             SDP_MenuPrincipal.Top = BTN_TarjetaCirculacion.Top;
+            AddUserControl(new F_MenuPrincipalUC());
         }
 
         private void BTN_Permisos_Click(object sender, EventArgs e)
@@ -73,6 +75,7 @@ namespace SGIMTProyecto
             this.Show();
             SDP_MenuPrincipal.Height = BTN_Permisos.Height;
             SDP_MenuPrincipal.Top = BTN_Permisos.Top;
+            AddUserControl(new F_MenuPrincipalUC());
         }
 
         private void BTN_OrdenCobro_Click(object sender, EventArgs e)
@@ -86,6 +89,7 @@ namespace SGIMTProyecto
             this.Show();
             SDP_MenuPrincipal.Height = BTN_OrdenCobro.Height;
             SDP_MenuPrincipal.Top = BTN_OrdenCobro.Top;
+            AddUserControl(new F_MenuPrincipalUC());
         }
 
         private void BTN_LiberacionPublicoPrivado_Click(object sender, EventArgs e)

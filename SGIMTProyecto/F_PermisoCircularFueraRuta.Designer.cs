@@ -63,11 +63,11 @@
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
+            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
+            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
-            this.JLB_NoMovimiento = new System.Windows.Forms.Label();
-            this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
             this.GRB_EventualFueraRuta.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +142,7 @@
             this.JLB_Domicilio.AutoSize = true;
             this.JLB_Domicilio.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Domicilio.Location = new System.Drawing.Point(7, 67);
+            this.JLB_Domicilio.Location = new System.Drawing.Point(25, 67);
             this.JLB_Domicilio.Name = "JLB_Domicilio";
             this.JLB_Domicilio.Size = new System.Drawing.Size(62, 15);
             this.JLB_Domicilio.TabIndex = 42;
@@ -161,7 +161,7 @@
             this.JLB_Poblacion.AutoSize = true;
             this.JLB_Poblacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Poblacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Poblacion.Location = new System.Drawing.Point(6, 122);
+            this.JLB_Poblacion.Location = new System.Drawing.Point(24, 122);
             this.JLB_Poblacion.Name = "JLB_Poblacion";
             this.JLB_Poblacion.Size = new System.Drawing.Size(63, 15);
             this.JLB_Poblacion.TabIndex = 44;
@@ -180,7 +180,7 @@
             this.JLB_CP.AutoSize = true;
             this.JLB_CP.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_CP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_CP.Location = new System.Drawing.Point(44, 182);
+            this.JLB_CP.Location = new System.Drawing.Point(63, 182);
             this.JLB_CP.Name = "JLB_CP";
             this.JLB_CP.Size = new System.Drawing.Size(24, 15);
             this.JLB_CP.TabIndex = 46;
@@ -218,7 +218,7 @@
             this.JLB_NoMotor.AutoSize = true;
             this.JLB_NoMotor.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_NoMotor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_NoMotor.Location = new System.Drawing.Point(533, 182);
+            this.JLB_NoMotor.Location = new System.Drawing.Point(511, 182);
             this.JLB_NoMotor.Name = "JLB_NoMotor";
             this.JLB_NoMotor.Size = new System.Drawing.Size(65, 15);
             this.JLB_NoMotor.TabIndex = 50;
@@ -227,9 +227,9 @@
             // TXT_NoMotor
             // 
             this.TXT_NoMotor.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_NoMotor.Location = new System.Drawing.Point(604, 179);
+            this.TXT_NoMotor.Location = new System.Drawing.Point(582, 179);
             this.TXT_NoMotor.Name = "TXT_NoMotor";
-            this.TXT_NoMotor.Size = new System.Drawing.Size(107, 23);
+            this.TXT_NoMotor.Size = new System.Drawing.Size(129, 23);
             this.TXT_NoMotor.TabIndex = 51;
             // 
             // JLB_Repuve
@@ -237,7 +237,7 @@
             this.JLB_Repuve.AutoSize = true;
             this.JLB_Repuve.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Repuve.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Repuve.Location = new System.Drawing.Point(44, 226);
+            this.JLB_Repuve.Location = new System.Drawing.Point(38, 226);
             this.JLB_Repuve.Name = "JLB_Repuve";
             this.JLB_Repuve.Size = new System.Drawing.Size(49, 15);
             this.JLB_Repuve.TabIndex = 52;
@@ -256,7 +256,7 @@
             this.JLB_Marca.AutoSize = true;
             this.JLB_Marca.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Marca.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Marca.Location = new System.Drawing.Point(292, 226);
+            this.JLB_Marca.Location = new System.Drawing.Point(280, 231);
             this.JLB_Marca.Name = "JLB_Marca";
             this.JLB_Marca.Size = new System.Drawing.Size(43, 15);
             this.JLB_Marca.TabIndex = 54;
@@ -286,7 +286,7 @@
             this.TXT_Modelo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_Modelo.Location = new System.Drawing.Point(582, 223);
             this.TXT_Modelo.Name = "TXT_Modelo";
-            this.TXT_Modelo.Size = new System.Drawing.Size(148, 23);
+            this.TXT_Modelo.Size = new System.Drawing.Size(129, 23);
             this.TXT_Modelo.TabIndex = 57;
             // 
             // JLB_Placas
@@ -313,7 +313,7 @@
             this.JLB_TarjetaCirculacion.AutoSize = true;
             this.JLB_TarjetaCirculacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_TarjetaCirculacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_TarjetaCirculacion.Location = new System.Drawing.Point(265, 274);
+            this.JLB_TarjetaCirculacion.Location = new System.Drawing.Point(280, 274);
             this.JLB_TarjetaCirculacion.Name = "JLB_TarjetaCirculacion";
             this.JLB_TarjetaCirculacion.Size = new System.Drawing.Size(123, 15);
             this.JLB_TarjetaCirculacion.TabIndex = 60;
@@ -332,7 +332,7 @@
             this.JLB_Recorrido.AutoSize = true;
             this.JLB_Recorrido.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Recorrido.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Recorrido.Location = new System.Drawing.Point(16, 317);
+            this.JLB_Recorrido.Location = new System.Drawing.Point(26, 317);
             this.JLB_Recorrido.Name = "JLB_Recorrido";
             this.JLB_Recorrido.Size = new System.Drawing.Size(61, 15);
             this.JLB_Recorrido.TabIndex = 62;
@@ -408,7 +408,7 @@
             this.JLB_TitularSMyT.AutoSize = true;
             this.JLB_TitularSMyT.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_TitularSMyT.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_TitularSMyT.Location = new System.Drawing.Point(9, 440);
+            this.JLB_TitularSMyT.Location = new System.Drawing.Point(24, 440);
             this.JLB_TitularSMyT.Name = "JLB_TitularSMyT";
             this.JLB_TitularSMyT.Size = new System.Drawing.Size(78, 15);
             this.JLB_TitularSMyT.TabIndex = 68;
@@ -441,6 +441,25 @@
             this.TXT_FolioPermiso.Name = "TXT_FolioPermiso";
             this.TXT_FolioPermiso.Size = new System.Drawing.Size(200, 23);
             this.TXT_FolioPermiso.TabIndex = 71;
+            // 
+            // JLB_NoMovimiento
+            // 
+            this.JLB_NoMovimiento.AutoSize = true;
+            this.JLB_NoMovimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_NoMovimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_NoMovimiento.Location = new System.Drawing.Point(394, 480);
+            this.JLB_NoMovimiento.Name = "JLB_NoMovimiento";
+            this.JLB_NoMovimiento.Size = new System.Drawing.Size(97, 15);
+            this.JLB_NoMovimiento.TabIndex = 74;
+            this.JLB_NoMovimiento.Text = "No. Movimiento:";
+            // 
+            // TXT_NoMovimiento
+            // 
+            this.TXT_NoMovimiento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_NoMovimiento.Location = new System.Drawing.Point(511, 472);
+            this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
+            this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
+            this.TXT_NoMovimiento.TabIndex = 75;
             // 
             // TXT_Placa
             // 
@@ -481,25 +500,6 @@
             this.BTN_BuscarPlaca.TabIndex = 26;
             this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
             this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
-            // 
-            // JLB_NoMovimiento
-            // 
-            this.JLB_NoMovimiento.AutoSize = true;
-            this.JLB_NoMovimiento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_NoMovimiento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_NoMovimiento.Location = new System.Drawing.Point(394, 480);
-            this.JLB_NoMovimiento.Name = "JLB_NoMovimiento";
-            this.JLB_NoMovimiento.Size = new System.Drawing.Size(97, 15);
-            this.JLB_NoMovimiento.TabIndex = 74;
-            this.JLB_NoMovimiento.Text = "No. Movimiento:";
-            // 
-            // TXT_NoMovimiento
-            // 
-            this.TXT_NoMovimiento.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_NoMovimiento.Location = new System.Drawing.Point(511, 472);
-            this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
-            this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
-            this.TXT_NoMovimiento.TabIndex = 75;
             // 
             // F_PermisoCircularFueraRuta
             // 

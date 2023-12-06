@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="signomenos10px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\signomenos10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="documento_white_25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\documento_white_25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -127,11 +130,17 @@
   <data name="salarioCobro_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\salarioCobro_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="permiso_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\permiso_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="perfil_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\perfil_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="editar_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editar_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="salarioCobroDiversos_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\salarioCobroDiversos_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="signomas10px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\signomas10px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tc_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tc_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,11 +160,14 @@
   <data name="combi_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\combi_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="eliminar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eliminar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="permisos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\permisos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="documento_white50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\documento_white50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="salarioCobroDiversos_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\salarioCobroDiversos_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logosmyt_530" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logosmyt_530.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,16 +181,19 @@
   <data name="rutas_white_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rutas_white_25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="documento_white50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\documento_white50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="personal_white_25" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\personal_white_25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="permiso_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\permiso_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="signomas20px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\signomas20px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="revista_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\revista_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="perfil_white_50px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\perfil_white_50px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="tlax_nh_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tlax_nh_horizontal.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

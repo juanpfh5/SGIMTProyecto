@@ -1,4 +1,4 @@
-﻿using QuestPDF.Fluent;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuestPDF.Helpers;
-using QuestPDF.Previewer;
 using System.Globalization;
+
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 
 namespace SGIMTProyecto {
@@ -173,107 +175,174 @@ namespace SGIMTProyecto {
 
         }
 
-        private static object GenerarLiberacion(int nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
+        private static void GenerarLiberacion()
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
+
             string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+
             int year = today.Year;
             int dia = today.Day;
+            int mesn = today.Month;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
 
-            var documentopdf =
-            Document.Create(documento =>
+            int nOficio = 1570;
+            int modelo = 2009;
+            string tipo = "HIACE GV S";
+            string serie = "JTFPX22P890015513";
+            string motor = "2TR8162498";
+
+            int nBaja = 45971683;
+            string fechaRecibo = "2/22/2022";
+            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+
+            /*
+             * FUENTES
+             * 
+             */
+            BaseFont basefuente = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, true);
+            iTextSharp.text.Font fnormal = new iTextSharp.text.Font(basefuente, 10f);
+            iTextSharp.text.Font fnormal_mini = new iTextSharp.text.Font(basefuente, 8f);
+            iTextSharp.text.Font fnegrita = new iTextSharp.text.Font(basefuente, 10f, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font fnegrita_mini = new iTextSharp.text.Font(basefuente, 8f, iTextSharp.text.Font.BOLD);
+
+            /**
+             * 
+             * IMAGENES
+             * 
+             */
+            System.Drawing.Bitmap bitmap = Properties.Resources.logosmyt_530;
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_logosmyt = stream.ToArray();//imagen 1 Bytes
+            System.Drawing.Bitmap bitm2 = Properties.Resources.tlax_nh_horizontal;
+            System.IO.MemoryStream stream2 = new System.IO.MemoryStream();
+            bitm2.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_gobT = stream2.ToArray();//imagen 2 Bytes
+
+            iTextSharp.text.Image logo1 = iTextSharp.text.Image.GetInstance(imageB_logosmyt);
+            iTextSharp.text.Image logo2 = iTextSharp.text.Image.GetInstance(imageB_gobT);
+
+            /*
+             * 
+             * DOCUMENTO 
+             * 
+             */
+            var doc = new Document();
+
+            PdfWriter.GetInstance(doc, new FileStream("Liberacion.pdf", FileMode.Create));
+            doc.AddAuthor("SecretariaMovilidadyTransporte");
+            doc.AddTitle("Documento de Liberacion");
+            doc.SetMargins(100f, 100f, 50f, 50f);
+
+            doc.Open();
+
+            logo1.ScalePercent(30f);
+            logo2.ScalePercent(30f);
+            var header = new PdfPTable(new float[] { 50f, 50f }) { WidthPercentage = 100 };
+            var cell1 = new PdfPCell(logo1) { Border = 0, HorizontalAlignment = Element.ALIGN_RIGHT };
+            var cell2 = new PdfPCell(logo2) { Border = 0, HorizontalAlignment = Element.ALIGN_LEFT, VerticalAlignment = Element.ALIGN_MIDDLE };
+
+            header.AddCell(cell1);
+            header.AddCell(cell2);
+            doc.Add(header);
+            doc.Add(Chunk.NEWLINE);
+
+            doc.Add(new Paragraph($"FORMATO: DST/{nOficio}/{year}", fnormal) { Alignment = Element.ALIGN_RIGHT });
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph($"SECRETARÍA DE MOVILIDAD Y TRANSPORTES.", fnegrita) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(new Paragraph($"TRAMITE DE ALTA VEHICULAR.", fnegrita) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(new Paragraph($"SERVICIO PARTICULAR.", fnegrita) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(new Paragraph($"FECHA: {dia}/{mesn}/{year}", fnormal) { Alignment = Element.ALIGN_RIGHT });
+            doc.Add(Chunk.NEWLINE);
+            var contenido = new PdfPTable(new float[] { 100f }) { WidthPercentage = 100 };
+            var txtmarca = new Paragraph
             {
-                documento.Page(pagina =>
-                {
-                    pagina.Margin(80);
-                    pagina.Header().Column(colh =>
-                    {
-                        colh.Item().Table(row =>
-                        {
-                            row.ColumnsDefinition(deff =>
-                            {
-                                deff.RelativeColumn(3);
-                                deff.RelativeColumn(2);
-                            });
-                            row.Cell().Width(180).AlignRight().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
-                            row.Cell().Width(120).AlignLeft().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
+                new Chunk("MARCA: ", fnegrita),
+                new Chunk($"{modelo}", fnormal)
+            };
+            var Ccell1 = new PdfPCell(new Paragraph(txtmarca) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
+            contenido.AddCell(Ccell1);
 
-                        });
+            var txtmodelo = new Paragraph
+            {
+                new Chunk("MODELO: ", fnegrita),
+                new Chunk($"{modelo}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txtmodelo) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
+            contenido.AddCell(Ccell1);
 
-                    });
-                    pagina.Content().Column(columna =>
-                    {
-                        columna.Item().PaddingTop(3);
-                        columna.Item().AlignRight().Text($"FORMATO DST/{nOficio}/{year}").FontSize(10);
-                        columna.Item().Padding(15);
-                        columna.Item().AlignCenter().Text("SECRETARÍA DE MOVILIDAD Y TRANSPORTES.").FontSize(9).Bold();
-                        columna.Item().AlignCenter().Text("TRAMITE DE ALTA VEHICULAR.").FontSize(9).Bold();
-                        columna.Item().AlignCenter().Text("SERVICIO PARTICULAR.").FontSize(9).Bold();
-                        columna.Item().AlignRight().Text($"FECHA:{fechaHoy}").FontSize(9);
-                        columna.Item().Padding(25);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("MARCA:  ").FontSize(9).Bold();
-                            texto.Span($"{marca}").FontSize(9);
-                        });
-                        columna.Item().Padding(10);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("MODELO:  ").FontSize(9).Bold();
-                            texto.Span($"{modelo}").FontSize(9);
-                        });
-                        columna.Item().Padding(10);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("TIPO:  ").FontSize(9).Bold();
-                            texto.Span($"{tipo}").FontSize(9);
-                        });
-                        columna.Item().Padding(25);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("SERIE:  ").FontSize(9).Bold();
-                            texto.Span($"{serie}").FontSize(9);
-                        });
-                        columna.Item().Padding(10);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("MOTOR:  ").FontSize(9).Bold();
-                            texto.Span($"{motor}").FontSize(9);
-                        });
-                        columna.Item().Padding(25);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("NÚMERO DE BAJA:  ").FontSize(9).Bold();
-                            texto.Span($"{nBaja}").FontSize(9);
-                        });
-                        columna.Item().Padding(10);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("FECHA:  ").FontSize(9).Bold();
-                            texto.Span($"{fechaRecibo}").FontSize(9);
-                        });
+            var txttipo = new Paragraph
+            {
+                new Chunk("TIPO: ", fnegrita),
+                new Chunk($"{tipo}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txttipo) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 50f };
+            contenido.AddCell(Ccell1);
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
+            var txtserie = new Phrase
+            {
+                new Chunk("SERIE: ", fnegrita),
+                new Chunk($"{serie}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txtserie) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
+            contenido.AddCell(Ccell1);
+            var txtmotor = new Paragraph
+            {
+                new Chunk("MOTOR: ", fnegrita),
+                new Chunk($"{motor}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txtmotor) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 50f };
+            contenido.AddCell(Ccell1);
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
+            var txtnbaja = new Paragraph
+            {
+                new Chunk("NÚMERO DE BAJA: ", fnegrita),
+                new Chunk($"{nBaja}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txtnbaja) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
+            contenido.AddCell(Ccell1);
+            var txtfecha = new Paragraph
+            {
+                new Chunk("FEHCA: ", fnegrita),
+                new Chunk($"{fechaRecibo}", fnormal)
+            };
+            Ccell1 = new PdfPCell(new Paragraph(txtfecha) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 60f };
+            contenido.AddCell(Ccell1);
 
-                        columna.Item().Padding(35);
-                        columna.Item().AlignCenter().Text("PREVIO ANALISIS DE DOCUMENTACION CORRESPONDIENTE").FontSize(9);
-                        columna.Item().AlignCenter().Text(texto =>
-                        {
-                            texto.Span("NOTA: ").FontSize(9);
-                            texto.Span("ENPLACAMIENTO A PLACAS PARTICULARES, NO AUTORIZA ").FontSize(9).Bold();
-                            texto.Span("TRANSPORTE DE PERSONAL.").FontSize(9);
-                        });
-                        columna.Item().Padding(15);
-                        columna.Item().AlignCenter().Text($"DIRECTOR DE TRANSPORTES DE LA SMYT").Bold().FontSize(9);
-                        columna.Item().AlignCenter().Text($"{director}").Bold().FontSize(9);
+            doc.Add(contenido);
+
+            var pr1 = new Paragraph("PREVIO ANALISIS DE DOCUMENTACIÓN CORRESPONDIENTE.", fnormal);
+            pr1.Alignment = Element.ALIGN_CENTER;
+            var pr2 = new Paragraph
+            {
+                new Chunk("NOTA: ", fnormal),
+                new Chunk("EMPLACAMIENTO A PLACAS PARTICULARES, NO AUTORIZA ", fnegrita),
+                new Chunk(" TRANSPORTE DE PERSONAL.", fnormal)
+            };
+            pr2.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(pr1);
+            doc.Add(pr2);
 
 
-                    });
-                });
-            }).GeneratePdf();
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
 
-            return documentopdf;
+            var ultimo = new Paragraph("DIRECTOR DE TRANSPORTE DE LA SMYT.", fnegrita);
+            ultimo.Alignment = Element.ALIGN_CENTER;
+            doc.Add(ultimo);
+            var direc = new Paragraph($"{director}", fnegrita);
+            direc.Alignment = Element.ALIGN_CENTER;
+            doc.Add(direc);
 
+            doc.Close();
         }
     }
 }

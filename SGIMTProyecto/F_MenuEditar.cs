@@ -29,6 +29,8 @@ namespace SGIMTProyecto
         private void BTN_DatosVehiculo_Click(object sender, EventArgs e)
         {
             AddUserControl(new F_EditarVehiculo());
+            Button btnVehiculo = BTN_DatosVehiculo;
+            btnVehiculo.BackColor = Color.FromArgb(80, 14, 95);
         }
 
         private void BTN_Inicio_Click(object sender, EventArgs e)

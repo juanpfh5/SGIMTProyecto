@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 
 using System.Globalization;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Previewer;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 namespace SGIMTProyecto
 {
@@ -300,7 +300,7 @@ namespace SGIMTProyecto
         }
         #endregion
 
-        private static object GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve)
+        private static void GenerarPDF()
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -308,58 +308,115 @@ namespace SGIMTProyecto
             string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
 
 
-            var documentopdf =
-            Document.Create(documento =>
-            {
-                documento.Page(pagina =>
-                {
-                    pagina.Margin(30);
-                    pagina.Header().Text("");
-                    pagina.Content().Column(col =>
-                    {
-                        col.Item().PaddingTop(50);
-                        col.Item().Text($"{nombre}").FontSize(10);
-                        col.Item().Padding(10);
-                        col.Item().Text($"{direccion}").FontSize(10);
-                        col.Item().Padding(10);
-                        col.Item().Row(row =>
-                        {
-                            row.RelativeItem(3).Text($"{poblacion}").FontSize(10);
-                            row.RelativeItem().Text($"{CP}").FontSize(10);
-                        });
-                        col.Item().Padding(10);
-                        col.Item().Row(row =>
-                        {
-                            row.RelativeItem().Text($"{placa}").FontSize(10);
-                            row.RelativeItem().Text($"{TC}").FontSize(10);
-                            row.RelativeItem().Text($"{marca}").FontSize(10);
-                            row.RelativeItem().Text($"{modelo}").FontSize(10);
-                        });
-                        col.Item().Padding(10);
-                        col.Item().Row(row =>
-                        {
-                            row.RelativeItem().Text($"{motor}").FontSize(9);
-                            row.RelativeItem().Text($"{serie}").FontSize(9);
-                            row.RelativeItem().Text($"{repuve}").FontSize(9);
-                        });
-                        col.Item().Padding(10);
-                        col.Item().Row(row =>
-                        {
-                            row.RelativeItem().Text($"{motivo}").FontSize(8);
-                        });
-                        col.Item().Padding(20);
-                        col.Item().Row(row =>
-                        {
-                            row.RelativeItem().Text($"{fechaHoy}").FontSize(10);
-                            row.RelativeItem().Text($"{fechaVig}").FontSize(9);
-                            row.RelativeItem().Text($"{director}").FontSize(9);
-                        });
+            string placa = "AXXXXX";
+            string nombre = "MANUEL ALEJANDRO MORA MENESES";
+            string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
+            string poblacion = "AMAXAC DE GUERRERO";
+            int CP = 90600;
+            int TC = 4812;
+            int modelo = 2023;
+            string serie = "VF1FLADRACY419294";
+            string motor = "C683198";
+            string marca = "RENAULT TRAFIC";
+            string motivo = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
+            string fechaVig = "31/12/2023";
+            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+            string repuve = "322PIE61";
+            /*
+             * FUENTES
+             * 
+             */
+            BaseFont basefuente = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, true);
+            iTextSharp.text.Font fnormal = new iTextSharp.text.Font(basefuente, 9f);
+            iTextSharp.text.Font fnormal_mini = new iTextSharp.text.Font(basefuente, 6f);
+            iTextSharp.text.Font fnormal_supermini = new iTextSharp.text.Font(basefuente, 5f);
+            iTextSharp.text.Font fnegrita = new iTextSharp.text.Font(basefuente, 10f, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font fnegrita_mini = new iTextSharp.text.Font(basefuente, 8f, iTextSharp.text.Font.BOLD);
 
-                    });
-                });
-            }).GeneratePdf();
+            /**
+             * 
+             * IMAGENES
+             * 
+             */
+            System.Drawing.Bitmap bitmap = Properties.Resources.logosmyt_530;
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_logosmyt = stream.ToArray();//imagen 1 Bytes
+            System.Drawing.Bitmap bitm2 = Properties.Resources.tlax_nh_horizontal;
+            System.IO.MemoryStream stream2 = new System.IO.MemoryStream();
+            bitm2.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_gobT = stream2.ToArray();//imagen 2 Bytes
 
-            return documentopdf;
+            iTextSharp.text.Image logo1 = iTextSharp.text.Image.GetInstance(imageB_logosmyt);
+            iTextSharp.text.Image logo2 = iTextSharp.text.Image.GetInstance(imageB_gobT);
+
+            /*
+             * 
+             * DOCUMENTO 
+             * 
+             */
+            var doc = new Document();
+
+            PdfWriter.GetInstance(doc, new FileStream("PermisoFueraRuta.pdf", FileMode.Create));
+            doc.AddAuthor("SecretariaMovilidadyTransporte");
+            doc.AddTitle("Documento de Permiso Fuera de Ruta");
+
+            doc.SetMargins(30f, 30f, 0f, 30f);
+
+            doc.Open();
+            var tabla1 = new PdfPTable(new float[] { 100f }) { WidthPercentage = 100 };
+            var t1cel1 = new PdfPCell(new Paragraph($"{nombre}", fnormal)) { MinimumHeight = 90f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var t1cel2 = new PdfPCell(new Paragraph($"{direccion}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+
+            tabla1.AddCell(t1cel1);
+            tabla1.AddCell(t1cel2);
+
+            doc.Add(tabla1);
+
+            var tabla2 = new PdfPTable(new float[] { 80f, 20f }) { WidthPercentage = 100 };
+            var t2cel1 = new PdfPCell(new Paragraph($"{poblacion}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t2cel2 = new PdfPCell(new Paragraph($"{CP}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            tabla2.AddCell(t2cel1);
+            tabla2.AddCell(t2cel2);
+            doc.Add(tabla2);
+
+            var tabla3 = new PdfPTable(new float[] { 34f, 33f, 33f, 33f }) { WidthPercentage = 100 };
+            var t3cel1 = new PdfPCell(new Paragraph($"{placa}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t3cel2 = new PdfPCell(new Paragraph($"{TC}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t3cel3 = new PdfPCell(new Paragraph($"{marca}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t3cel4 = new PdfPCell(new Paragraph($"{modelo}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+
+            tabla3.AddCell(t3cel1);
+            tabla3.AddCell(t3cel2);
+            tabla3.AddCell(t3cel3);
+            tabla3.AddCell(t3cel4);
+
+            doc.Add(tabla3);
+
+            var tabla4 = new PdfPTable(new float[] { 30f, 50f, 20f }) { WidthPercentage = 100 };
+            var t4cel1 = new PdfPCell(new Paragraph($"{motor}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t4cel2 = new PdfPCell(new Paragraph($"{serie}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t4cel3 = new PdfPCell(new Paragraph($"{repuve}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            tabla4.AddCell(t4cel1);
+            tabla4.AddCell(t4cel2);
+            tabla4.AddCell(t4cel3);
+            doc.Add(tabla4);
+
+            var tabla5 = new PdfPTable(new float[] { 100f }) { WidthPercentage = 100 };
+            var t5cel1 = new PdfPCell(new Paragraph($"{motivo}", fnormal_mini)) { MinimumHeight = 25f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            tabla5.AddCell(t5cel1);
+            doc.Add(tabla5);
+
+            var tabla6 = new PdfPTable(new float[] { 33f, 33f, 34f }) { WidthPercentage = 100 };
+            var t6cel1 = new PdfPCell(new Paragraph($"{fechaHoy}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t6cel2 = new PdfPCell(new Paragraph($"{fechaVig}", fnormal)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            var t6cel3 = new PdfPCell(new Paragraph($"{director}", fnormal_mini)) { MinimumHeight = 20f, Border = 0, VerticalAlignment = Element.ALIGN_MIDDLE };
+            tabla6.AddCell(t6cel1);
+            tabla6.AddCell(t6cel2);
+            tabla6.AddCell(t6cel3);
+            doc.Add(tabla6);
+
+            doc.Close();
         }
     }
 }

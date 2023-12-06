@@ -77,7 +77,6 @@ C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SGIMTProyecto.exe
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SGIMTProyecto.pdb
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\HarfBuzzSharp.dll
-C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\QuestPDF.dll
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SkiaSharp.dll
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SkiaSharp.HarfBuzz.dll
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\Syncfusion.Compression.Base.dll
@@ -99,7 +98,6 @@ C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\HarfBuzzSharp.pdb
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\HarfBuzzSharp.xml
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\MySql.Data.xml
-C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\QuestPDF.xml
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SkiaSharp.pdb
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SkiaSharp.xml
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\SkiaSharp.HarfBuzz.pdb
@@ -114,7 +112,6 @@ C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.csproj.AssemblyReference.cache
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.csproj.SuggestedBindingRedirects.cache
-C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.exe.config
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.F_EditarPropietario.resources
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.F_EditarVehiculo.resources
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.F_LiberacionPublicoPrivado.resources
@@ -137,3 +134,5 @@ C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.csproj.CopyComplete
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.exe
 C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.pdb
+C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\itextsharp.dll
+C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\bin\Debug\itextsharp.xml

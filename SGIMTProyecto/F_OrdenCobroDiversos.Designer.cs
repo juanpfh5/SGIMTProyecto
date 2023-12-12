@@ -50,19 +50,17 @@
             this.JLB_Clave = new System.Windows.Forms.Label();
             this.TXT_Clave = new System.Windows.Forms.TextBox();
             this.BTN_Agregar = new System.Windows.Forms.Button();
+            this.BTN_LimpiarClave = new System.Windows.Forms.Button();
             this.DGV_Clave = new System.Windows.Forms.DataGridView();
-            this.JBL_ClaveData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JBL_DescripcionData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.JBL_ImporteData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
             this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
+            this.JLB_Elaboro = new System.Windows.Forms.Label();
+            this.CMB_Elaboro = new System.Windows.Forms.ComboBox();
+            this.JLB_Total = new System.Windows.Forms.Label();
+            this.TXT_Total = new System.Windows.Forms.TextBox();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.JLB_Total = new System.Windows.Forms.Label();
-            this.TXT_Total = new System.Windows.Forms.TextBox();
-            this.JLB_Elaboro = new System.Windows.Forms.Label();
-            this.CMB_Elaboro = new System.Windows.Forms.ComboBox();
             this.GRB_OrdenCobroDiversos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +88,7 @@
             this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Clave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Clave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.BTN_Agregar);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.BTN_LimpiarClave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.DGV_Clave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_NoMovimiento);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_NoMovimiento);
@@ -293,46 +292,48 @@
             this.TXT_Clave.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_Clave.Location = new System.Drawing.Point(104, 281);
             this.TXT_Clave.Name = "TXT_Clave";
-            this.TXT_Clave.Size = new System.Drawing.Size(128, 23);
+            this.TXT_Clave.Size = new System.Drawing.Size(228, 23);
             this.TXT_Clave.TabIndex = 31;
             // 
             // BTN_Agregar
             // 
             this.BTN_Agregar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.BTN_Agregar.ForeColor = System.Drawing.Color.DarkRed;
-            this.BTN_Agregar.Location = new System.Drawing.Point(250, 278);
+            this.BTN_Agregar.Location = new System.Drawing.Point(339, 278);
             this.BTN_Agregar.Name = "BTN_Agregar";
             this.BTN_Agregar.Size = new System.Drawing.Size(73, 26);
             this.BTN_Agregar.TabIndex = 32;
             this.BTN_Agregar.Text = "Agregar";
             this.BTN_Agregar.UseVisualStyleBackColor = true;
+            this.BTN_Agregar.Click += new System.EventHandler(this.BTN_Agregar_Click);
+            // 
+            // BTN_LimpiarClave
+            // 
+            this.BTN_LimpiarClave.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.BTN_LimpiarClave.ForeColor = System.Drawing.Color.DarkRed;
+            this.BTN_LimpiarClave.Location = new System.Drawing.Point(430, 278);
+            this.BTN_LimpiarClave.Name = "BTN_LimpiarClave";
+            this.BTN_LimpiarClave.Size = new System.Drawing.Size(97, 26);
+            this.BTN_LimpiarClave.TabIndex = 66;
+            this.BTN_LimpiarClave.Text = "Limpiar Clave";
+            this.BTN_LimpiarClave.UseVisualStyleBackColor = true;
+            this.BTN_LimpiarClave.Click += new System.EventHandler(this.BTN_LimpiarClave_Click);
             // 
             // DGV_Clave
             // 
+            this.DGV_Clave.AllowUserToAddRows = false;
+            this.DGV_Clave.AllowUserToDeleteRows = false;
+            this.DGV_Clave.AllowUserToOrderColumns = true;
             this.DGV_Clave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Clave.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.JBL_ClaveData,
-            this.JBL_DescripcionData,
-            this.JBL_ImporteData});
             this.DGV_Clave.Location = new System.Drawing.Point(19, 336);
             this.DGV_Clave.Name = "DGV_Clave";
+            this.DGV_Clave.ReadOnly = true;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 33;
-            // 
-            // JBL_ClaveData
-            // 
-            this.JBL_ClaveData.HeaderText = "Clave";
-            this.JBL_ClaveData.Name = "JBL_ClaveData";
-            // 
-            // JBL_DescripcionData
-            // 
-            this.JBL_DescripcionData.HeaderText = "Descripcion";
-            this.JBL_DescripcionData.Name = "JBL_DescripcionData";
-            // 
-            // JBL_ImporteData
-            // 
-            this.JBL_ImporteData.HeaderText = "Importe";
-            this.JBL_ImporteData.Name = "JBL_ImporteData";
+            this.DGV_Clave.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellClick);
+            this.DGV_Clave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellContentClick);
+            this.DGV_Clave.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DGV_Clave_CellPainting);
+            this.DGV_Clave.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellValueChanged);
             // 
             // JLB_NoMovimiento
             // 
@@ -352,6 +353,45 @@
             this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
             this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
             this.TXT_NoMovimiento.TabIndex = 41;
+            // 
+            // JLB_Elaboro
+            // 
+            this.JLB_Elaboro.AutoSize = true;
+            this.JLB_Elaboro.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Elaboro.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Elaboro.Location = new System.Drawing.Point(477, 482);
+            this.JLB_Elaboro.Name = "JLB_Elaboro";
+            this.JLB_Elaboro.Size = new System.Drawing.Size(50, 15);
+            this.JLB_Elaboro.TabIndex = 64;
+            this.JLB_Elaboro.Text = "Elaboró:";
+            // 
+            // CMB_Elaboro
+            // 
+            this.CMB_Elaboro.FormattingEnabled = true;
+            this.CMB_Elaboro.Location = new System.Drawing.Point(529, 473);
+            this.CMB_Elaboro.Name = "CMB_Elaboro";
+            this.CMB_Elaboro.Size = new System.Drawing.Size(121, 33);
+            this.CMB_Elaboro.TabIndex = 65;
+            // 
+            // JLB_Total
+            // 
+            this.JLB_Total.AutoSize = true;
+            this.JLB_Total.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Total.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Total.Location = new System.Drawing.Point(735, 486);
+            this.JLB_Total.Name = "JLB_Total";
+            this.JLB_Total.Size = new System.Drawing.Size(36, 15);
+            this.JLB_Total.TabIndex = 60;
+            this.JLB_Total.Text = "Total:";
+            // 
+            // TXT_Total
+            // 
+            this.TXT_Total.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Total.Location = new System.Drawing.Point(792, 483);
+            this.TXT_Total.Name = "TXT_Total";
+            this.TXT_Total.ReadOnly = true;
+            this.TXT_Total.Size = new System.Drawing.Size(161, 23);
+            this.TXT_Total.TabIndex = 61;
             // 
             // BTN_Imprimir
             // 
@@ -390,45 +430,6 @@
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
-            // 
-            // JLB_Total
-            // 
-            this.JLB_Total.AutoSize = true;
-            this.JLB_Total.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Total.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Total.Location = new System.Drawing.Point(735, 486);
-            this.JLB_Total.Name = "JLB_Total";
-            this.JLB_Total.Size = new System.Drawing.Size(36, 15);
-            this.JLB_Total.TabIndex = 60;
-            this.JLB_Total.Text = "Total:";
-            // 
-            // TXT_Total
-            // 
-            this.TXT_Total.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Total.Location = new System.Drawing.Point(792, 483);
-            this.TXT_Total.Name = "TXT_Total";
-            this.TXT_Total.ReadOnly = true;
-            this.TXT_Total.Size = new System.Drawing.Size(161, 23);
-            this.TXT_Total.TabIndex = 61;
-            // 
-            // JLB_Elaboro
-            // 
-            this.JLB_Elaboro.AutoSize = true;
-            this.JLB_Elaboro.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Elaboro.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Elaboro.Location = new System.Drawing.Point(477, 482);
-            this.JLB_Elaboro.Name = "JLB_Elaboro";
-            this.JLB_Elaboro.Size = new System.Drawing.Size(50, 15);
-            this.JLB_Elaboro.TabIndex = 64;
-            this.JLB_Elaboro.Text = "Elaboró:";
-            // 
-            // CMB_Elaboro
-            // 
-            this.CMB_Elaboro.FormattingEnabled = true;
-            this.CMB_Elaboro.Location = new System.Drawing.Point(529, 473);
-            this.CMB_Elaboro.Name = "CMB_Elaboro";
-            this.CMB_Elaboro.Size = new System.Drawing.Size(121, 33);
-            this.CMB_Elaboro.TabIndex = 65;
             // 
             // F_OrdenCobroDiversos
             // 
@@ -476,9 +477,6 @@
         private System.Windows.Forms.DataGridView DGV_Clave;
         private System.Windows.Forms.Label JLB_NoMovimiento;
         private System.Windows.Forms.TextBox TXT_NoMovimiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ClaveData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_DescripcionData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn JBL_ImporteData;
         private System.Windows.Forms.Button BTN_Imprimir;
         private System.Windows.Forms.Button BTN_BuscarPlaca;
         private System.Windows.Forms.TextBox TXT_Placa;
@@ -486,5 +484,6 @@
         private System.Windows.Forms.TextBox TXT_Total;
         private System.Windows.Forms.Label JLB_Elaboro;
         private System.Windows.Forms.ComboBox CMB_Elaboro;
+        private System.Windows.Forms.Button BTN_LimpiarClave;
     }
 }

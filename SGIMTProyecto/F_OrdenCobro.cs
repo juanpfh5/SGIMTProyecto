@@ -80,6 +80,18 @@ namespace SGIMTProyecto
             else
             {
                 LimpiarTextBox();
+                TXT_Nombre.Enabled = true;
+                TXT_PlacaActual.Enabled = true;
+                TXT_Domicilio.Enabled = true;
+                TXT_CP.Enabled = true;
+                TXT_NoSerie.Enabled = true;
+                TXT_NoMotor.Enabled = true;
+                TXT_Modelo.Enabled = true;
+                TXT_Marca.Enabled = true;
+                TXT_ClaveVehicular.Enabled = true;
+                TXT_Tipo.Enabled = true;
+                TXT_Combustible.Enabled = true;
+                TXT_NoPasajeros.Enabled = true;
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -289,7 +301,6 @@ namespace SGIMTProyecto
         private void BTN_BuscarPlaca_Click(object sender, EventArgs e)
         {
             if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.OrdenC(TXT_Placa.Text.Trim());
                 TXT_Nombre.Enabled = false;
                 TXT_PlacaActual.Enabled = false;
                 TXT_Domicilio.Enabled = false;
@@ -302,6 +313,7 @@ namespace SGIMTProyecto
                 TXT_Tipo.Enabled = false;
                 TXT_Combustible.Enabled = false;
                 TXT_NoPasajeros.Enabled = false;
+                this.OrdenC(TXT_Placa.Text.Trim());
             }
         }
 
@@ -379,8 +391,8 @@ namespace SGIMTProyecto
 
         }
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
-            //CMB_Elaboro.DataSource = ListadoPersonal();
-            //AutoCompleteClave();
+            CMB_Elaboro.DataSource = ListadoPersonal();
+            AutoCompleteClave();
             DGV_Clave.ColumnCount = 5;
             DGV_Clave.Columns[0].Name = "Clave";
             DGV_Clave.Columns[1].Name = "Concepto";
@@ -388,7 +400,7 @@ namespace SGIMTProyecto
             DGV_Clave.Columns[3].Name = "Cantidad";
             DGV_Clave.Columns[4].Name = "Costo";
 
-             DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
+             //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
              //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2, 1);
              //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 3, 1);
 
@@ -440,6 +452,7 @@ namespace SGIMTProyecto
         private void DGV_Clave_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
                 DGV_Clave.Rows.RemoveAt(e.RowIndex);
+                SumarCostos();
             }
         }
 
@@ -532,6 +545,15 @@ namespace SGIMTProyecto
                 // Actualizar el valor en la columna "Costo"
                 DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
             }
+        }
+
+        private void SumarCostos(){
+            decimal Total = 0;
+            foreach (DataGridViewRow row in DGV_Clave.Rows){
+                Total += Convert.ToDecimal(row.Cells["Costo"].Value);
+            }
+
+            TXT_Total.Text = Total.ToString();
         }
 
         #region funciones de PDF
@@ -1015,5 +1037,9 @@ namespace SGIMTProyecto
         }
 
         #endregion
+
+        private void DGV_Clave_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+            SumarCostos();
+        }
     }
 }

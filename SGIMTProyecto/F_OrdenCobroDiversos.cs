@@ -74,6 +74,15 @@ namespace SGIMTProyecto
             else
             {
                 LimpiarTextBox();
+                TXT_Nombre.Enabled = true;
+                TXT_NoExterior.Enabled = true;
+                TXT_Domicilio.Enabled = true;
+                TXT_NoInterior.Enabled = true;
+                TXT_RFC.Enabled = true;
+                TXT_CP.Enabled = true;
+                TXT_Colonia.Enabled = true;
+                TXT_Estado.Enabled = true;
+                TXT_Municipio.Enabled = true;
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -159,13 +168,75 @@ namespace SGIMTProyecto
 
             return (error, bandera);
         }
+        private DataTable ExtraerDatosDataGridView(DataGridView dataGridView) {
+            DataTable dataTable = new DataTable();
+
+            // Agrega columnas al DataTable
+            foreach (DataGridViewColumn column in dataGridView.Columns) {
+                dataTable.Columns.Add(column.Name);
+            }
+
+            // Agrega filas al DataTable
+            foreach (DataGridViewRow row in dataGridView.Rows) {
+                if (!row.IsNewRow) {
+                    DataRow dataRow = dataTable.NewRow();
+
+                    foreach (DataGridViewCell cell in row.Cells) {
+                        dataRow[cell.ColumnIndex] = cell.Value;
+                    }
+
+                    dataTable.Rows.Add(dataRow);
+                }
+            }
+
+            return dataTable;
+        }
+
+        private List<string> AgregarClave(string concepto) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.AgregarClave(concepto);
+        }
+
+        private List<string> ListadoClaveConcepto(string busqueda) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ListadoClaveConcepto(busqueda);
+        }
+
+        private void AutoCompleteClave() {
+            AutoCompleteStringCollection colClaveConcepto = new AutoCompleteStringCollection();
+            List<string> claveConcepto = ListadoClaveConcepto(TXT_Clave.Text);
+            foreach (string clc in claveConcepto) {
+                colClaveConcepto.Add(clc);
+            }
+            TXT_Clave.AutoCompleteCustomSource = colClaveConcepto;
+            TXT_Clave.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TXT_Clave.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // Manejar el evento TextChanged para deshabilitar el TextBox al seleccionar una opción
+            TXT_Clave.TextChanged += (sender, e) => {
+                string textoIngresado = TXT_Clave.Text;
+                if (colClaveConcepto.Contains(textoIngresado)) {
+                    // La opción seleccionada está en la colección de autocompletado, deshabilitar el TextBox
+                    TXT_Clave.Enabled = false;
+                }
+            };
+        }
+
+        private string TruncarTextBox(string textBox) {
+            string concepto = "";
+            if (textBox.Length > 7) {
+                concepto = textBox.Substring(7);
+            } else {
+                concepto = string.Empty;
+            }
+            return concepto;
+        }
 
         #endregion
 
         private void BTN_BuscarPlaca_Click(object sender, EventArgs e)
         {
             if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.OrdenCD(TXT_Placa.Text.Trim());
                 TXT_Nombre.Enabled = false;
                 TXT_NoExterior.Enabled = false;
                 TXT_Domicilio.Enabled = false;
@@ -175,6 +246,7 @@ namespace SGIMTProyecto
                 TXT_Colonia.Enabled = false;
                 TXT_Estado.Enabled = false;
                 TXT_Municipio.Enabled = false;
+                this.OrdenCD(TXT_Placa.Text.Trim());
             }
         }
         private void BTN_Imprimir_Click(object sender, EventArgs e) {
@@ -244,7 +316,25 @@ namespace SGIMTProyecto
         }
         private void F_OrdenCobroDiversos_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
+            AutoCompleteClave();
             DGV_Clave.Rows.Clear();
+
+            DGV_Clave.ColumnCount = 5;
+            DGV_Clave.Columns[0].Name = "Clave";
+            DGV_Clave.Columns[1].Name = "Concepto";
+            DGV_Clave.Columns[2].Name = "Costo Unitario";
+            DGV_Clave.Columns[3].Name = "Cantidad";
+            DGV_Clave.Columns[4].Name = "Costo";
+
+            DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
+
+            btnEliminar.HeaderText = "Eliminar Registro";
+            btnEliminar.Name = "EliminarRegistro";
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseColumnTextForButtonValue = true;
+
+
+            DGV_Clave.Columns.Add(btnEliminar);
         }
 
         #region PlaceHolder
@@ -745,5 +835,130 @@ namespace SGIMTProyecto
 
         #endregion
 
+        private void DGV_Clave_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
+                DGV_Clave.Rows.RemoveAt(e.RowIndex);
+                SumarCostos();
+            }
+        }
+
+        private Dictionary<int, int> valores = new Dictionary<int, int>();
+
+        private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) { // Ajusta el índice de la columna según sea necesario
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentForeground);
+
+                // Obtener el valor actual para la fila
+                int valorActual = valores.ContainsKey(e.RowIndex) ? valores[e.RowIndex] : 1;
+
+                // Dibujar el primer botón
+                var buttonRect1 = new System.Drawing.Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
+                /*
+                 * IMAGEN DEL BOTON MAS
+                 */
+                // Dibujar el icono en el primer botón
+                System.Drawing.Image iconomas = Properties.Resources.signomas10px;
+                //Image icono1 = Image.FromFile("Resources/signomas.png"); // Ajusta la ruta según tu proyecto
+                int x1 = buttonRect1.X + (buttonRect1.Width - iconomas.Width) / 2;
+                int y1 = buttonRect1.Y + (buttonRect1.Height - iconomas.Height) / 2;
+                e.Graphics.DrawImage(iconomas, x1, y1);
+
+                // Dibujar el número en medio de los dos botones
+                var textRect = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
+                TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+
+                /*
+                 * Imagen DEL BOTON MENOS
+                 */
+                System.Drawing.Image iconomenos = Properties.Resources.signomenos10px;
+
+                // Dibujar el segundo botón
+                var buttonRect2 = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width * 3 / 4, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect2, ButtonState.Normal);
+                int x2 = buttonRect2.X + (buttonRect2.Width - iconomenos.Width) / 2;
+                int y2 = buttonRect2.Y + (buttonRect2.Height - iconomenos.Height) / 2;
+                e.Graphics.DrawImage(iconomenos, x2, y2);
+
+                e.Handled = true;
+            }
+        }
+
+        private void DGV_Clave_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) {
+                // Determinar si se hizo clic en el primer o segundo botón
+                var clickPosition = DGV_Clave.PointToClient(Cursor.Position);
+                var buttonRect1 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+                var buttonRect2 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width * 3 / 4, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+
+                if (buttonRect1.Contains(clickPosition)) {
+                    // Clic en el primer botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] < 5) {
+                            valores[e.RowIndex]++;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, 1);
+                    }
+                } else if (buttonRect2.Contains(clickPosition)) {
+                    // Clic en el segundo botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] > 1) {
+                            valores[e.RowIndex]--;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, -1);
+                    }
+                }
+
+                // Actualizar la visualización después de hacer clic
+                DGV_Clave.InvalidateCell(e.ColumnIndex, e.RowIndex);
+
+                // Actualizar el valor en la columna "Costo"
+                ActualizarCosto(e.RowIndex);
+            }
+        }
+        private void ActualizarCosto(int rowIndex) {
+            // Obtener la cantidad y el costo unitario de la fila
+            int cantidad = valores.ContainsKey(rowIndex) ? valores[rowIndex] : 1;
+
+            // Asegurarse de que las celdas tengan valores numéricos
+            if (decimal.TryParse(DGV_Clave.Rows[rowIndex].Cells[2].Value?.ToString(), out decimal costoUnitario)) {
+                // Calcular el costo multiplicando cantidad por costo unitario
+                decimal costo = cantidad * costoUnitario;
+
+                // Actualizar el valor en la columna "Costo"
+                DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
+            }
+        }
+
+        private void BTN_LimpiarClave_Click(object sender, EventArgs e) {
+            TXT_Clave.Enabled = true;
+            TXT_Clave.Text = "";
+        }
+
+        private void BTN_Agregar_Click(object sender, EventArgs e) {
+            List<string> concepto = AgregarClave(TruncarTextBox(TXT_Clave.Text));
+
+            // Suponiendo que concepto tiene la estructura Clave, Concepto, Valor repetida
+            for (int i = 0; i < concepto.Count; i += 3) {
+                int index = DGV_Clave.Rows.Add(concepto[i], concepto[i + 1], concepto[i + 2]);
+                ActualizarCosto(index);
+            }
+
+            BTN_LimpiarClave_Click(sender, e);
+        }
+        private void SumarCostos() {
+            decimal Total = 0;
+            foreach (DataGridViewRow row in DGV_Clave.Rows) {
+                Total += Convert.ToDecimal(row.Cells["Costo"].Value);
+            }
+
+            TXT_Total.Text = Total.ToString();
+        }
+
+        private void DGV_Clave_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+            SumarCostos();
+        }
     }
 }

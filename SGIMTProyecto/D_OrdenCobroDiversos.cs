@@ -84,5 +84,33 @@ namespace SGIMTProyecto
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public List<string> ListadoClaveConcepto(string busqueda) {
+            MySqlDataReader listaClaveConcepto;
+            List<string> listaBusqueda = new List<string>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = $"SELECT CONCAT(clave_cl, ' | ', concepto_cl) AS clave_concepto_cl FROM claves_cl WHERE clave_cl LIKE '%{busqueda}%' OR concepto_cl LIKE '%{busqueda}%'";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                listaClaveConcepto = Comando.ExecuteReader();
+
+                while (listaClaveConcepto.Read()) {
+                    listaBusqueda.Add(listaClaveConcepto["clave_concepto_cl"].ToString());
+                }
+
+                return listaBusqueda;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GRB_OrdenCobro = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -71,9 +71,9 @@
             this.TXT_Total = new System.Windows.Forms.TextBox();
             this.JLB_Elaboro = new System.Windows.Forms.Label();
             this.CMB_Elaboro = new System.Windows.Forms.ComboBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
-            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
+            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.GRB_OrdenCobro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).BeginInit();
             this.SuspendLayout();
@@ -448,8 +448,8 @@
             this.DGV_Clave.Location = new System.Drawing.Point(18, 336);
             this.DGV_Clave.Name = "DGV_Clave";
             this.DGV_Clave.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 55;
             this.DGV_Clave.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellClick);
@@ -533,18 +533,16 @@
             this.CMB_Elaboro.Size = new System.Drawing.Size(121, 33);
             this.CMB_Elaboro.TabIndex = 63;
             // 
-            // BTN_Imprimir
+            // TXT_Placa
             // 
-            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_Imprimir.Location = new System.Drawing.Point(498, 574);
-            this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(80, 30);
-            this.BTN_Imprimir.TabIndex = 64;
-            this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = false;
-            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
+            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
+            this.TXT_Placa.Location = new System.Drawing.Point(784, 16);
+            this.TXT_Placa.Name = "TXT_Placa";
+            this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
+            this.TXT_Placa.TabIndex = 65;
+            this.TXT_Placa.Text = "Placa";
+            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_BuscarPlaca
             // 
@@ -560,16 +558,18 @@
             this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
             this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
             // 
-            // TXT_Placa
+            // BTN_Imprimir
             // 
-            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
-            this.TXT_Placa.Location = new System.Drawing.Point(784, 16);
-            this.TXT_Placa.Name = "TXT_Placa";
-            this.TXT_Placa.Size = new System.Drawing.Size(143, 20);
-            this.TXT_Placa.TabIndex = 65;
-            this.TXT_Placa.Text = "Placa";
-            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
-            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(498, 574);
+            this.BTN_Imprimir.Name = "BTN_Imprimir";
+            this.BTN_Imprimir.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Imprimir.TabIndex = 64;
+            this.BTN_Imprimir.Text = "Imprimir";
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
             // F_OrdenCobro
             // 

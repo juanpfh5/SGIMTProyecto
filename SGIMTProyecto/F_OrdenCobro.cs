@@ -1,4 +1,4 @@
-﻿using QuestPDF.Fluent;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,16 +10,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 //librerias para la creacion de pdf
-using QuestPDF.Fluent;
-using System.Globalization;
-using QuestPDF.Helpers;
-using QuestPDF.Previewer;
+
 using System.Security.Cryptography;
 using HarfBuzzSharp;
-using static QuestPDF.Helpers.Colors;
 using System.Numerics;
 using System.Text.RegularExpressions;
 using System.Threading;
+using SGIMTProyecto.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using Syncfusion.XPS;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Globalization;
 
 namespace SGIMTProyecto
 {
@@ -376,8 +379,8 @@ namespace SGIMTProyecto
 
         }
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
-            CMB_Elaboro.DataSource = ListadoPersonal();
-            AutoCompleteClave();
+            //CMB_Elaboro.DataSource = ListadoPersonal();
+            //AutoCompleteClave();
             DGV_Clave.ColumnCount = 5;
             DGV_Clave.Columns[0].Name = "Clave";
             DGV_Clave.Columns[1].Name = "Concepto";
@@ -385,15 +388,19 @@ namespace SGIMTProyecto
             DGV_Clave.Columns[3].Name = "Cantidad";
             DGV_Clave.Columns[4].Name = "Costo";
 
-            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
-            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2);
-            // DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 3);
+             DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
+             //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2, 1);
+             //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 3, 1);
 
             DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
+            
+            
             btnEliminar.HeaderText = "Eliminar Registro";
             btnEliminar.Name = "EliminarRegistro";
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseColumnTextForButtonValue = true;
+
+
             DGV_Clave.Columns.Add(btnEliminar);
         }
 
@@ -446,16 +453,33 @@ namespace SGIMTProyecto
                 int valorActual = valores.ContainsKey(e.RowIndex) ? valores[e.RowIndex] : 1;
 
                 // Dibujar el primer botón
-                var buttonRect1 = new Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                var buttonRect1 = new System.Drawing.Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
                 ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
+                /*
+                 * IMAGEN DEL BOTON MAS
+                 */
+                // Dibujar el icono en el primer botón
+                System.Drawing.Image iconomas = Properties.Resources.signomas10px;
+                //Image icono1 = Image.FromFile("Resources/signomas.png"); // Ajusta la ruta según tu proyecto
+                int x1 = buttonRect1.X + (buttonRect1.Width - iconomas.Width) / 2;
+                int y1 = buttonRect1.Y + (buttonRect1.Height - iconomas.Height) / 2;
+                e.Graphics.DrawImage(iconomas, x1, y1);
 
                 // Dibujar el número en medio de los dos botones
-                var textRect = new Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
+                var textRect = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
                 TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
+                /*
+                 * Imagen DEL BOTON MENOS
+                 */
+                System.Drawing.Image iconomenos = Properties.Resources.signomenos10px;
+                
                 // Dibujar el segundo botón
-                var buttonRect2 = new Rectangle(e.CellBounds.X + e.CellBounds.Width * 3 / 4, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                var buttonRect2 = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width * 3 / 4, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
                 ControlPaint.DrawButton(e.Graphics, buttonRect2, ButtonState.Normal);
+                int x2 = buttonRect2.X + (buttonRect2.Width - iconomenos.Width) / 2;
+                int y2 = buttonRect2.Y + (buttonRect2.Height - iconomenos.Height) / 2;
+                e.Graphics.DrawImage(iconomenos, x2, y2);
 
                 e.Handled = true;
             }
@@ -465,8 +489,8 @@ namespace SGIMTProyecto
             if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) {
                 // Determinar si se hizo clic en el primer o segundo botón
                 var clickPosition = DGV_Clave.PointToClient(Cursor.Position);
-                var buttonRect1 = new Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
-                var buttonRect2 = new Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width * 3 / 4, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+                var buttonRect1 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+                var buttonRect2 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width * 3 / 4, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
 
                 if (buttonRect1.Contains(clickPosition)) {
                     // Clic en el primer botón
@@ -511,371 +535,485 @@ namespace SGIMTProyecto
         }
 
         #region funciones de PDF
-        private static object GenerarPdf(string placa, string nombre, string direccion, int CP, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, List<int> claves, List<String> descripcion, List<decimal> importe, string mesVigencia, int diaVigencia, int yearVigencia, int nMovimiento, string combustible, string capacidad)
+        private static void GenerarPdf()
         {
-            //obtenemos los valores del dia de hoy
+            #region DATOS
             DateTime today = DateTime.Today;
             //variables dentro de la funcion:
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
-            //creamos nuestro pdf
-            var documentoPDF =
-            Document.Create(container =>
+            int year = today.Year;
+            //variables para la vigencia
+
+            string placa = "AXXXXX";
+            string nombre = "MANUEL ALEJANDRO MORA MENESES";
+            string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
+            int folioR = 185;
+
+            string serie = "VF1FLADRACY419294";
+            string motor = "C683198";
+            int modelo = 2023;
+            string marca = "RENAULT TRAFIC";
+            string clvVehicular = "1982432";
+            string tipo = "PANEL";
+            decimal total = 1535;
+            string elaboro = "J.A.C.M.";
+            int nMovimiento = 234;
+            string combustible = "GASOLINA";
+            string capacidad = "20 PASAJEROS";
+            //creacion de las listas para las claves, descripcion e importe
+            List<int> claves = new List<int> { 512, 511, 315 };
+            List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
+            List<decimal> importe = new List<decimal> { 720, 711, 104 };
+            #endregion
+
+            var doc = new Document();
+            PdfWriter.GetInstance(doc, new FileStream("OrdenCobro.pdf", FileMode.Create));
+            doc.AddAuthor("SecretariaMovilidadyTransporte");
+            doc.AddTitle("Documento de Orden de Cobro");
+
+            //creamos nuestras fuentes del texto
+            BaseFont basefuente = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, true);
+            iTextSharp.text.Font fnormal = new iTextSharp.text.Font(basefuente, 10f);
+            iTextSharp.text.Font fnormal_mini = new iTextSharp.text.Font(basefuente, 8f);
+            iTextSharp.text.Font fnegrita = new iTextSharp.text.Font(basefuente, 10f, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font fnegrita_mini = new iTextSharp.text.Font(basefuente, 8f, iTextSharp.text.Font.BOLD);
+            //creamos la instancia para usar nuestras imagenes
+            System.Drawing.Bitmap bitmap = Properties.Resources.logosmyt_530;
+
+            // Convierte el Bitmap a un arreglo de bytes
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_logosmyt = stream.ToArray();//imagen 1 Bytes
+            System.Drawing.Bitmap bitm2 = Properties.Resources.tlax_nh_horizontal;
+            System.IO.MemoryStream stream2 = new System.IO.MemoryStream();
+            bitm2.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_gobT = stream2.ToArray();//imagen 2 Bytes
+            iTextSharp.text.Image logo1 = iTextSharp.text.Image.GetInstance(imageB_logosmyt);
+            iTextSharp.text.Image logo2 = iTextSharp.text.Image.GetInstance(imageB_gobT);
+
+            doc.Open();
+            var tabla = new PdfPTable(new float[] { 20f, 50f, 25f }) { WidthPercentage = 100f };
+            logo1.ScalePercent(20f);
+            logo2.ScalePercent(20f);
+
+            var cell1 = new PdfPCell(logo1) { Rowspan = 2, Border = 0 };
+            var cell2 = new PdfPCell(new Phrase($"ORDEN DE COBRO DE DERECHOS", fnegrita)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER };
+            var cell3 = new PdfPCell(logo2) { Rowspan = 2, Border = 0 };
+
+            tabla.AddCell(cell1);
+            tabla.AddCell(cell2);
+            tabla.AddCell(cell3);
+
+            cell2.Phrase = new Phrase($"VEHICULARES TRANSPORTE PUBLICO {year}", fnegrita);
+            //cell3.Phrase = new Phrase("");
+            tabla.AddCell(cell2);
+            doc.Add(tabla);
+
+            doc.Add(new iTextSharp.text.Paragraph($"Apetatitlán Tlax, a {dia} de {mes} {year}", fnegrita));
+            doc.Add(new Phrase($"PLACA: ", fnegrita));
+            doc.Add(new Phrase($"{placa}", fnormal));
+            doc.Add(new iTextSharp.text.Paragraph($"DATOS DE CONCECIONARIO", fnegrita) { Alignment = Element.ALIGN_CENTER });
+
+            iTextSharp.text.Chunk linea = new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f));
+            doc.Add(linea);
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new Phrase($"NOMBRE: ", fnegrita));
+            doc.Add(new Phrase($"{nombre}", fnormal));
+            doc.Add(new Phrase("    FOLIO REVISTA: ", fnegrita));
+            doc.Add(new Phrase($"{folioR}", fnormal));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new Phrase($"DIRECCIÓN: ", fnegrita));
+            doc.Add(new Phrase($"{direccion}", fnormal));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Paragraph($"DATOS DEL VEHICULO ", fnegrita) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            var tabla2 = new PdfPTable(new float[] { 50f, 50f, 50f }) { WidthPercentage = 100 };
+            var parrafoSerie = new iTextSharp.text.Paragraph
             {
-                container.Page(page =>
-                {
-                    page.Margin(10);
-                    page.Header().Row(fila =>
-                    {
-                        fila.ConstantItem(160).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
-                        fila.RelativeItem().Column(col =>
-                        {
-                            col.Item()
-                            .Height(20);
-                            col.Item()
-                            .AlignCenter()
-                            .Text("ORDEN DE COBRO DERECHOS")
-                            .Bold()
-                            .FontSize(10);
-                            col.Item()
-                            .AlignCenter()
-                            .Text("VEHICULARES TRANSPORTE PUBLICO 2023")
-                            .Bold()
-                            .FontSize(10);
-                        });
-                        fila.ConstantItem(100).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
-                    });
-                    page.Content().Column(col1 =>
-                    {
-                        col1.Item().Text($"Apetatitlán, Tlax a {dia} de {mes} 2023").Bold();
-                        col1.Item().Text($"PLACA: {placa}");
-                        col1.Item().AlignCenter().Text("DATOS DE CONCECIONARIO").Bold().FontSize(12);
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().Text(txt =>
-                        {
-                            txt.Span("NOMBRE: ").Bold().FontSize(10);
-                            txt.Span($"{nombre}");
-                            txt.Span("       CP: ").Bold().FontSize(10);
-                            txt.Span($"{CP}");
-                            txt.Span("       FOLIO DE REVISTA: ").Bold().FontSize(10);
-                            txt.Span($"{folioR}");
-                        });
-                        col1.Item().Text(txt2 =>
-                        {
-                            txt2.Span("DIRECCION: ").Bold().FontSize(10);
-                            txt2.Span($"{direccion}");
+                new iTextSharp.text.Chunk("SERIE: ", fnegrita),
+                new iTextSharp.text.Chunk($"{serie}", fnormal)
+            };
+            var cel1 = new PdfPCell(parrafoSerie) { Border = 0 };
+            var prrfmotor = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MOTOR: ", fnegrita),
+                new iTextSharp.text.Chunk($"{motor}", fnormal)
+            };
+            var cel2 = new PdfPCell(prrfmotor) { Border = 0 };
+            var prrfmodelo = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MODELO: ", fnegrita),
+                new iTextSharp.text.Chunk($"{modelo}", fnormal)
+            };
+            var cel3 = new PdfPCell(prrfmodelo) { Border = 0 };
+
+            tabla2.AddCell(cel1);
+            tabla2.AddCell(cel2);
+            tabla2.AddCell(cel3);
+
+            var prrfmarca = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MARCA: ", fnegrita),
+                new iTextSharp.text.Chunk($"{marca}", fnormal)
+            };
+
+            cel1.Phrase = new Phrase(prrfmarca);
+            var prrfclv = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CLV_VEHICULAR: ", fnegrita),
+                new iTextSharp.text.Chunk($"{clvVehicular}", fnormal)
+            };
+            cel2.Phrase = new Phrase(prrfclv);
+            var prftipo = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("TIPO: ", fnegrita),
+                new iTextSharp.text.Chunk($"{tipo}", fnormal)
+            };
+            cel3.Phrase = new Phrase(prftipo);
+
+            tabla2.AddCell(cel1);
+            tabla2.AddCell(cel2);
+            tabla2.AddCell(cel3);
+
+            var prfcomb = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("COMBUSTIBLE: ", fnegrita),
+                new iTextSharp.text.Chunk($"{combustible}", fnormal)
+            };
+            cel1.Phrase = new Phrase(prfcomb);
+            var prfcapacidad = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CAPACIDAD: ", fnegrita),
+                new iTextSharp.text.Chunk($"{capacidad}", fnormal)
+            };
+            cel2.Phrase = new Phrase(prfcapacidad);
+            cel3.Phrase = new Phrase("");
+
+            tabla2.AddCell(cel1);
+            tabla2.AddCell(cel2);
+            tabla2.AddCell(cel3);
+
+            doc.Add(tabla2);
+
+            //tlaba de descripciones
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            var tabla3 = new PdfPTable(new float[] { 20f, 60f, 20f }) { WidthPercentage = 100 };
+            var t3cell1 = new PdfPCell(new Phrase("CLAVE", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
+            var t3cell2 = new PdfPCell(new Phrase("DESCRIPCION", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
+            var t3cell3 = new PdfPCell(new Phrase("IMPORTE", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
+
+            tabla3.AddCell(t3cell1);
+            tabla3.AddCell(t3cell2);
+            tabla3.AddCell(t3cell3);
+
+            for (int i = 0; i < claves.Count; i++)
+            {
+                t3cell1.Phrase = new Phrase($"{claves[i]}");
+                t3cell2.Phrase = new Phrase($"{descripcion[i]}");
+                t3cell3.Phrase = new Phrase($"${importe[i]}");
+
+                tabla3.AddCell(t3cell1);
+                tabla3.AddCell(t3cell2);
+                tabla3.AddCell(t3cell3);
+            }
+            var prftotal = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("TOTAL: ", fnegrita),
+                new iTextSharp.text.Chunk($"${total}", fnormal)
+            };
+
+            doc.Add(tabla3);
+            doc.Add(new iTextSharp.text.Paragraph(prftotal) { Alignment = Element.ALIGN_RIGHT });
+
+            doc.Add(new iTextSharp.text.Paragraph("AUTORIZÓ", fnegrita) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 60f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
+            doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal) { Alignment = Element.ALIGN_CENTER });
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            var tabla4 = new PdfPTable(new float[] { 30f, 10f, 30f }) { WidthPercentage = 100 };
+            var prfmovimiento = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("NÚMERO DE MOVIMIENTO: ",fnormal),
+                new iTextSharp.text.Chunk($"{nMovimiento}")
+            };
+            var t4cell1 = new PdfPCell(prfmovimiento) { Rowspan = 3, Border = 0 };
+            var t4cell2 = new PdfPCell(new Phrase("")) { Rowspan = 3, Border = 0 };
+
+            var t4cell3 = new PdfPCell(new Phrase($"VIGENCIA HASTA EL 31 DE DICIEMBRE DE {year}", fnegrita_mini)) { Border = 0 };
 
 
-                        });
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().AlignCenter().Text("DATOS  VEHÍCULO").Bold().FontSize(12);
-                        // creacion de tabla
+            tabla4.AddCell(t4cell1);
+            tabla4.AddCell(t4cell2);
+            tabla4.AddCell(t4cell3);
 
-                        col1.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(columns =>
-                            {
-                                columns.ConstantColumn(65);
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                            });
-                            tabla.Cell().Text(" SERIE:").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{serie}").FontSize(9);
-                            tabla.Cell().Text(" MOTOR: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{motor}").FontSize(9);
-                            tabla.Cell().Text(" MODELO").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{modelo}").FontSize(9);
-                            tabla.Cell().Text(" MARCA: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{marca}").FontSize(9);
-                            tabla.Cell().Text(" CVE_VEHICULAR:").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{clvVehicular}").FontSize(9);
-                            tabla.Cell().Text(" TIPO: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{tipo}").FontSize(9);
-                            tabla.Cell().Text("COMBUSTIBLE: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{combustible}").FontSize(9);
-                            tabla.Cell().Text("CAPACIDAD: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{capacidad}").FontSize(9);
-                        });
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().Table(tabla2 =>
-                        {
-                            tabla2.ColumnsDefinition(columnas =>
-                            {
-                                columnas.ConstantColumn(60);
-                                columnas.RelativeColumn();
-                                columnas.ConstantColumn(100);
-                            });
+            t4cell3.Phrase = new Phrase($"ELABORO: {elaboro}", fnegrita_mini);
 
-                            tabla2.Header(cabezera =>
-                            {
-                                cabezera.Cell().Text("CLAVE").Bold();
-                                cabezera.Cell().AlignCenter().Text("DESCRIPCIÓN").Bold();
-                                cabezera.Cell().Text("IMPORTE").Bold();
-                            });
-                            //aqui comenzamos la tabla dinamica
-                            for (int i = 0; i < claves.Count; i++)
-                            {
-                                tabla2.Cell().Text($"{claves[i]}");
-                                tabla2.Cell().AlignCenter().Text($"{descripcion[i]}");
-                                tabla2.Cell().Text($"{importe[i]}");
-                            }
-                            tabla2.Cell().Text("");
-                            tabla2.Cell().Text("");
-                            tabla2.Cell().Text(txt =>
-                            {
-                                txt.Span("Total: ").Bold().FontSize(13);
-                                txt.Span($"${total}");
-                            });
+            tabla4.AddCell(t4cell3);
 
-                        });
-                        col1.Item().AlignCenter().Text("");
-                        col1.Item().AlignCenter().Text("AUTORIZÓ").Bold();
-                        col1.Item().AlignCenter().Width(250).LineHorizontal(1f);
-                        col1.Item().AlignCenter().Text($"{nombre}");
-                        col1.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(columns =>
-                            {
-                                columns.ConstantColumn(160);
-                                columns.RelativeColumn();
-                                columns.ConstantColumn(200);
-                            });
-                            tabla.Cell().Text("");
-                            tabla.Cell().Text("");
-                            tabla.Cell().Text("");
+            t4cell3.Phrase = new Phrase($"SAN PABLO APETATITLÁN.", fnegrita_mini);
 
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span($"NUMERO DE MOVIMIENTO:{nMovimiento}").Bold().FontSize(9);
-                            });
-                            tabla.Cell().Text("");
-                            tabla.Cell().Row(row =>
-                            {
-                                row.RelativeItem().Column(colum =>
-                                {
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("VIGENCIA HASTA:").FontSize(9).Bold();
-                                        texto.Span($"{diaVigencia} DE {mesVigencia.ToUpper()} {yearVigencia}").FontSize(9);
-                                    });
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("ELABORÓ:").FontSize(9).Bold();
-                                        texto.Span($"{elaboro}").FontSize(9);
-                                    });
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("SAN PABLO APETATITLÁN").FontSize(9).Bold();
+            tabla4.AddCell(t4cell3);
 
-                                    });
+            doc.Add(tabla4);
 
-                                });
 
-                            });
-
-                        });
-                    });
-                });
-            }).GeneratePdf();
-
-            return documentoPDF;
+            doc.Close();
         }
 
-        private static object GenerarpdfResumen(string placa, string nombre, string direccion, int CP, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, List<int> claves, List<String> descripcion, List<decimal> importe, string mesVigencia, int diaVigencia, int yearVigencia, int nMovimiento, string rfc, string ruta, string observaciones, string fecha, string elaboroC, string autorizoC, string combustible, string capacidad)
+        private static void GenerarpdfResumen()
         {
-            var resumenPDF =
-            Document.Create(container =>
+            #region DATOS 
+            DateTime today = DateTime.Today;
+            CultureInfo culturaEspañol = new CultureInfo("es-ES");
+            int dia = today.Day;
+            string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
+            int year = today.Year;
+            string servicio = "COLECTIVO";
+            string placa = "AXXXXX";
+            string nombre = "MANUEL ALEJANDRO MORA MENESES";
+            string rfc = "TUX920811PQ7";
+            string serie = "VF1FLADRACY419294";
+            string motor = "C683198";
+            int modelo = 2023;
+            string marca = "RENAULT TRAFIC";
+            string clvVehicular = "1982432";
+            string tipo = "PANEL";
+            string cilindros = "4 CIL";
+            decimal total = 1535;
+            string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
+            string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
+            string observaciones = "CANJE DE PLACAS 2023";
+            string combustible = "GASOLINA";
+            string capacidad = "20 PASAJEROS";
+            string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
+            //creacion de las listas para las claves, descripcion e importe
+            List<int> claves = new List<int> { 512, 511, 315 };
+            List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
+            List<decimal> importe = new List<decimal> { 720, 711, 104 };
+
+            #endregion
+
+            #region DOCUMENTO PDF
+            var doc = new Document();
+            PdfWriter.GetInstance(doc, new FileStream("ResumenCobro.pdf", FileMode.Create));
+            doc.AddAuthor("SecretariaMovilidadyTransporte");
+            doc.AddTitle("Documento de Resumen de Orden de cobro");
+            /*
+             * FUENTES
+             */
+            BaseFont basefuente = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, true);
+            iTextSharp.text.Font fnormal = new iTextSharp.text.Font(basefuente, 10f);
+            iTextSharp.text.Font fnormal_mini = new iTextSharp.text.Font(basefuente, 9f);
+            iTextSharp.text.Font fnegrita = new iTextSharp.text.Font(basefuente, 10f, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font fnegrita_mini = new iTextSharp.text.Font(basefuente, 8f, iTextSharp.text.Font.BOLD);
+            //inicia documento
+
+            //creamos la instancia para usar nuestras imagenes
+            System.Drawing.Bitmap bitmap = Properties.Resources.logosmyt_530;
+            // Convierte el Bitmap a un arreglo de bytes
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_logosmyt = stream.ToArray();//imagen 1 Bytes
+            System.Drawing.Bitmap bitm2 = Properties.Resources.tlax_nh_horizontal;
+            System.IO.MemoryStream stream2 = new System.IO.MemoryStream();
+            bitm2.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_gobT = stream2.ToArray();//imagen 2 Bytes
+            iTextSharp.text.Image logo1 = iTextSharp.text.Image.GetInstance(imageB_logosmyt);
+            iTextSharp.text.Image logo2 = iTextSharp.text.Image.GetInstance(imageB_gobT);
+            logo1.ScalePercent(20f);
+            logo2.ScalePercent(20f);
+            doc.Open();
+            var tabla = new PdfPTable(new float[] { 20f, 50f, 25f }) { WidthPercentage = 100f };
+            var cell1 = new PdfPCell(logo1) { Rowspan = 3, Border = 0 };
+            var cell2 = new PdfPCell(new Phrase($"GOBIERNO DEL ESTADO DE TLAXCALA", fnegrita)) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER };
+            var cell3 = new PdfPCell(logo2) { Rowspan = 3, Border = 0 };
+
+            tabla.AddCell(cell1);
+            tabla.AddCell(cell2);
+            tabla.AddCell(cell3);
+
+            cell2.Phrase = new Phrase("SECETARIA DE MOVILIDAD Y TRANSPORTE", fnegrita);
+            tabla.AddCell(cell2);
+
+            cell2.Phrase = new Phrase("SOLICITUD DE SERVICIO PÚBLICO DE PASAJEROS", fnormal);
+            tabla.AddCell(cell2);
+
+
+            doc.Add(tabla);
+            doc.Add(new Phrase($"PLACA: {placa}\n", fnormal));
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Paragraph("NOMBRE DEL CONCECIONARIO: ", fnegrita));
+            doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
+            doc.Add(new iTextSharp.text.Paragraph("DOMICILIO: ", fnegrita));
+            doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
+            var prfrfc = new iTextSharp.text.Paragraph
             {
-                container.Page(page =>
-                {
-                    page.Margin(10);
-                    page.Header().Row(fila =>
-                    {
-                        fila.ConstantItem(160).Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\logosmyt_1920_black.png");
-                        fila.RelativeItem().Column(col =>
-                        {
-                            col.Item()
-                            .Height(20);
-                            col.Item()
-                            .AlignCenter()
-                            .Text("GOBIERNO DEL ESTADO DE TLAXCALA")
-                            .Bold()
-                            .FontSize(9);
-                            col.Item()
-                            .AlignCenter()
-                            .Text("SECRETARIA DE MOVILIDAD Y TRANSPORTE")
-                            .Bold()
-                            .FontSize(9);
-                            col.Item().AlignCenter().Text("SOLICITUD DE SERVICIO PUBLICO DE PASAJEROS").FontSize(9);
-                        });
-                        fila.ConstantItem(100).AlignLeft().Image("C:\\Users\\aleja\\OneDrive\\Documentos\\UATx\\PorgEvolutiva\\ConsolaOrdenCobroPDF\\Resources\\tlaxcala_nuevahistoria_black.png");
-                    });
-                    page.Content().Column(col1 =>
-                    {
+                new iTextSharp.text.Chunk("RFC: ", fnegrita),
+                new iTextSharp.text.Chunk($"{rfc}\n", fnormal)
+            };
+            doc.Add(new iTextSharp.text.Paragraph(prfrfc));
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
 
-                        col1.Item().Text($"PLACA: {placa}");
-                        col1.Item().AlignCenter().Text("DATOS DE CONCECIONARIO").Bold().FontSize(12);
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().Text("NOMBRE DEL CONCECIONARIO: ").FontSize(10).Bold();
-                        col1.Item().Text($"{nombre}").FontSize(10);
-                        col1.Item().Text("DOMICILIO:").Bold().FontSize(10);
-                        col1.Item().Text($"{direccion}").FontSize(10);
+            var tabla2 = new PdfPTable(new float[] { 25f, 25f, 25f, 25f }) { WidthPercentage = 100f };
+            var prfserie = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("SERIE: ",fnegrita_mini),
+                new iTextSharp.text.Chunk($"{serie}",fnormal_mini)
+            };
+            var t2cel1 = new PdfPCell(prfserie) { Padding = 4, Border = 0 };
+            var prfmotor = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MOTOR: ",fnegrita_mini),
+                new iTextSharp.text.Chunk($"{motor}",fnormal_mini)
+            };
+            var t2cel2 = new PdfPCell(prfmotor) { Padding = 4, Border = 0 };
+            var prfmodelo = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MODELO:", fnegrita_mini),
+                new iTextSharp.text.Chunk($"{modelo}",fnormal_mini)
+            };
+            var t2cel3 = new PdfPCell(prfmodelo) { Padding = 4, Border = 0 };
+            var prfcapacidad = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CAPACIDAD: ", fnegrita_mini),
+                new iTextSharp.text.Chunk($"{capacidad}",fnormal_mini)
+            };
+            var t2cel4 = new PdfPCell(prfcapacidad) { Padding = 4, Border = 0 };
 
-                        col1.Item().Text(texto =>
-                        {
-                            texto.Span("RFC: ").Bold().FontSize(10);
-                            texto.Span($"{rfc}").FontSize(10);
-                        });
+            tabla2.AddCell(t2cel1);
+            tabla2.AddCell(t2cel2);
+            tabla2.AddCell(t2cel3);
+            tabla2.AddCell(t2cel4);
 
-                        col1.Item().Text("");
-                        col1.Item().LineHorizontal(0.5f);
-                        // creacion de tabla
-                        col1.Item().Text("");
 
-                        col1.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(columns =>
-                            {
-                                columns.ConstantColumn(65);
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                            });
-                            tabla.Cell().Text(" SERIE:").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{serie}").FontSize(9);
-                            tabla.Cell().Text(" MOTOR: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{motor}").FontSize(9);
-                            tabla.Cell().Text(" MODELO").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{modelo}").FontSize(9);
-                            tabla.Cell().Text(" MARCA: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{marca}").FontSize(9);
-                            tabla.Cell().Text(" CVE_VEHICULAR:").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{clvVehicular}").FontSize(9);
-                            tabla.Cell().Text(" TIPO: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{tipo}").FontSize(9);
-                            tabla.Cell().Text("COMBUSTIBLE: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{combustible}").FontSize(9);
-                            tabla.Cell().Text("CAPACIDAD: ").Bold().FontSize(9);
-                            tabla.Cell().AlignCenter().Text($"{capacidad}").FontSize(9);
-                        });
 
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().Text(texto =>
-                        {
-                            texto.Span("RUTA AUTORIZADA: ").FontSize(10).Bold();
-                            texto.Span($"{ruta}").FontSize(10);
-                        });
-                        col1.Item().LineHorizontal(0.5f);
-                        col1.Item().Table(tabla2 =>
-                        {
-                            tabla2.ColumnsDefinition(columnas =>
-                            {
-                                columnas.ConstantColumn(60);
-                                columnas.RelativeColumn();
-                                columnas.ConstantColumn(100);
-                            });
+            var prfmarca = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("MARCA: ", fnegrita_mini),
+                new iTextSharp.text.Chunk($"{marca}", fnormal_mini)
+            };
+            t2cel1.Phrase = new Phrase(prfmarca);
+            var prfclv = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CVE_VEHICULAR: ", fnegrita_mini),
+                new iTextSharp.text.Chunk($"{clvVehicular}", fnormal_mini)
+            };
+            t2cel2.Phrase = new Phrase(prfclv);
+            t2cel3.Phrase = new Phrase
+            {
+                new iTextSharp.text.Chunk("CLASE: ",fnegrita_mini),
+                new iTextSharp.text.Chunk($"{tipo}", fnormal_mini)
+            };
+            t2cel4.Phrase = new Phrase
+            {
+                new iTextSharp.text.Chunk("SERVICIO: ", fnegrita_mini),
+                new iTextSharp.text.Chunk($"{servicio}", fnormal_mini)
+            };
 
-                            tabla2.Header(cabezera =>
-                            {
-                                cabezera.Cell().Text("CLAVE").Bold();
-                                cabezera.Cell().AlignCenter().Text("DESCRIPCIÓN").Bold();
-                                cabezera.Cell().Text("IMPORTE").Bold();
-                            });
-                            //aqui comenzamos la tabla dinamica
-                            for (int i = 0; i < claves.Count; i++)
-                            {
-                                tabla2.Cell().Text($"{claves[i]}");
-                                tabla2.Cell().AlignCenter().Text($"{descripcion[i]}");
-                                tabla2.Cell().Text($"{importe[i]}");
-                            }
-                            tabla2.Cell().Text("");
-                            tabla2.Cell().Text("");
-                            tabla2.Cell().Text(txt =>
-                            {
-                                txt.Span("Total: ").Bold().FontSize(13);
-                                txt.Span($"${total}");
-                            });
+            tabla2.AddCell(t2cel1);
+            tabla2.AddCell(t2cel2);
+            tabla2.AddCell(t2cel3);
+            tabla2.AddCell(t2cel4);
+            doc.Add(tabla2);
 
-                        });
-                        col1.Item().AlignCenter().Text("");
-                        col1.Item().AlignCenter().Text("AUTORIZÓ").Bold();
-                        col1.Item().AlignCenter().Width(250).LineHorizontal(1f);
-                        col1.Item().AlignCenter().Text($"{nombre}");
-                        col1.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(columns =>
-                            {
-                                columns.ConstantColumn(160);
-                                columns.RelativeColumn();
-                                columns.ConstantColumn(200);
-                            });
-                            tabla.Cell().Text("");
-                            tabla.Cell().Text("");
-                            tabla.Cell().Text("");
+            var tabla3 = new PdfPTable(new float[] { 25f, 25f, 25f, 25f }) { WidthPercentage = 100f, PaddingTop = 4 };
+            var prfcombustible = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("COMBUSTIBLE: ",fnegrita_mini),
+                new iTextSharp.text.Chunk($"{combustible}",fnormal_mini)
+            };
+            var t3cel1 = new PdfPCell(prfcombustible) { Padding = 4, Border = 0 };
+            var prfcilindros = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CILINDROS: ",fnegrita_mini),
+                new iTextSharp.text.Chunk($"{cilindros}",fnormal_mini)
+            };
+            var t3cel2 = new PdfPCell(prfcombustible) { Padding = 4, Border = 0 };
+            var t3cel3 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
+            var t3cel4 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
 
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span($"OBSERVACIONES:{observaciones}").Bold().FontSize(9);
-                            });
-                            tabla.Cell().Text("");
-                            tabla.Cell().Row(row =>
-                            {
-                                row.RelativeItem().Column(colum =>
-                                {
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("VIGENCIA HASTA:").FontSize(9).Bold();
-                                        texto.Span($"{diaVigencia} DE {mesVigencia.ToUpper()} {yearVigencia}").FontSize(9);
-                                    });
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("ELABORÓ:").FontSize(9).Bold();
-                                        texto.Span($"{elaboro}").FontSize(9);
-                                    });
-                                    colum.Item().Text(texto =>
-                                    {
-                                        texto.Span("SAN PABLO APETATITLÁN").FontSize(9).Bold();
+            tabla3.AddCell(t3cel1);
+            tabla3.AddCell(t3cel2);
+            tabla3.AddCell(t3cel3);
+            tabla3.AddCell(t3cel4);
+            doc.Add(tabla3);
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            var rutaAutorizada = new Phrase
+            {
+                new iTextSharp.text.Chunk("RUTA AUROTIZADA: ",fnegrita),
+                new iTextSharp.text.Chunk($"{ruta}",fnormal)
+            };
+            doc.Add(new iTextSharp.text.Paragraph(rutaAutorizada));
+            doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
 
-                                    });
+            var tabla4 = new PdfPTable(new float[] { 20f, 60f, 20f }) { WidthPercentage = 100 };
+            var t4cell1 = new PdfPCell(new Phrase("CLAVE", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
+            var t4cell2 = new PdfPCell(new Phrase("DESCRIPCION", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
+            var t4cell3 = new PdfPCell(new Phrase("IMPORTE", fnegrita)) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0 };
 
-                                });
+            tabla4.AddCell(t4cell1);
+            tabla4.AddCell(t4cell2);
+            tabla4.AddCell(t4cell3);
 
-                            });
+            for (int i = 0; i < claves.Count; i++)
+            {
+                t4cell1.Phrase = new Phrase($"{claves[i]}", fnormal);
+                t4cell2.Phrase = new Phrase($"{descripcion[i]}", fnormal);
+                t4cell3.Phrase = new Phrase($"${importe[i]}", fnormal);
 
-                        });
-                    });
-                    page.Footer().Row(row =>
-                    {
+                tabla4.AddCell(t4cell1);
+                tabla4.AddCell(t4cell2);
+                tabla4.AddCell(t4cell3);
+            }
+            var prftotal = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("TOTAL: ", fnegrita),
+                new iTextSharp.text.Chunk($"${total}", fnormal)
+            };
 
-                        row.RelativeItem().AlignCenter().Column(texto =>
-                        {
-                            texto.Item().Text($"{fecha}").FontSize(9);
-                            texto.Item().AlignCenter().Text("FECHA").Bold();
-                        });
-                        row.RelativeItem().AlignCenter().Column(texto =>
-                        {
-                            texto.Item().Text($"{elaboroC}").FontSize(9);
-                            texto.Item().AlignCenter().Text("ELABORÓ").Bold();
-                        });
-                        row.RelativeItem().AlignCenter().Column(texto =>
-                        {
-                            texto.Item().Text($"{autorizoC}").FontSize(9);
-                            texto.Item().AlignCenter().Text("AUTORIZÓ").Bold();
-                        });
+            doc.Add(tabla4);
+            doc.Add(new iTextSharp.text.Paragraph(prftotal) { Alignment = Element.ALIGN_RIGHT });
+            doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Paragraph($"OBSERVACIONES: {observaciones}", fnormal));
+            doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE); doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            doc.Add(new iTextSharp.text.Paragraph(" "));
+            doc.Add(new iTextSharp.text.Paragraph(" "));
+            doc.Add(new iTextSharp.text.Paragraph(" "));
+            doc.Add(new iTextSharp.text.Paragraph(" "));
+            var tablafooter = new PdfPTable(new float[] { 33f, 33f, 33f }) { WidthPercentage = 100 };
 
-                    });
-                });
-            }).GeneratePdf();
+            var tfcel1 = new PdfPCell(new iTextSharp.text.Paragraph($"{dia}/{mes.ToUpper()}/{year}", fnormal)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
+            var tfcel2 = new PdfPCell(new iTextSharp.text.Paragraph($"{elaboroC}", fnormal)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
+            var tfcel3 = new PdfPCell(new iTextSharp.text.Paragraph($"{autorizoC}", fnormal)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
 
-            return resumenPDF;
+            tablafooter.AddCell(tfcel1);
+            tablafooter.AddCell(tfcel2);
+            tablafooter.AddCell(tfcel3);
+
+            tfcel1 = new PdfPCell(new iTextSharp.text.Paragraph($"FECHA", fnegrita)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
+            tfcel2 = new PdfPCell(new iTextSharp.text.Paragraph($"ELABORÓ", fnegrita)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
+            tfcel3 = new PdfPCell(new iTextSharp.text.Paragraph($"AUTORIZÓ", fnegrita)) { Border = 0, VerticalAlignment = Element.ALIGN_CENTER, HorizontalAlignment = Element.ALIGN_CENTER };
+
+
+            tablafooter.AddCell(tfcel1);
+            tablafooter.AddCell(tfcel2);
+            tablafooter.AddCell(tfcel3);
+
+            doc.Add(tablafooter);
+
+            doc.Close();
+
+            #endregion
         }
-        
+
         #endregion
     }
 }

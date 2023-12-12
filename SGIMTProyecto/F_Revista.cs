@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Previewer;
 using System.Globalization;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
 
 namespace SGIMTProyecto
 {
@@ -123,172 +123,269 @@ namespace SGIMTProyecto
 
         }
 
-        private static object generarPDF (string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string pasajeros, string concecion, string resolucion, string docUnidad, string ruta, string condicionesR, string espejos, string llantas, string limpiadores, string llantaAux, string vestiduras, string luces, string defensas, string direccionales, string pinturaG, string cristales, string rotulacion, string observaciones)
+        private static void generarPDF ()
         {
+
+            #region datos
             DateTime today = DateTime.Today;
             //variables dentro de la funcion:
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
             int year = DateTime.Today.Year;
-            var documento =
-            Document.Create(container =>
-            {
-                container.Page(page =>
-                {
-                    page.Margin(20);
-                    page.Header().Row(fila =>
-                    {
-                        fila.RelativeItem().Height(150);
-                    });
-                    page.Content().Column(col =>
-                    {
-                        col.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(table =>
-                            {
-                                table.ConstantColumn(70);
-                                table.RelativeColumn();
-                            });
-                            tabla.Cell().Text("NOMBRE:");
-                            tabla.Cell().Text($"{nombre}");
-                            tabla.Cell().Text("DOMICILIO:");
-                            tabla.Cell().Text($"{direccion}");
-                        });
-                        col.Item().Text("");
-                        col.Item().Text("");
-                        col.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(table =>
-                            {
-                                table.ConstantColumn(70);
-                                table.RelativeColumn();
-                                table.ConstantColumn(70);
-                                table.RelativeColumn();
-                                table.ConstantColumn(70);
-                                table.RelativeColumn();
-                            });
-                            tabla.Cell().Text("PLACAS:");
-                            tabla.Cell().Text($"{placa}");
-                            tabla.Cell().Text("No.SERIE:");
-                            tabla.Cell().Text($"{serie}").FontSize(9);
-                            tabla.Cell().Text("TIPO:");
-                            tabla.Cell().Text($"{tipo}");
-                            tabla.Cell().Text("No.Motor:");
-                            tabla.Cell().AlignBottom().Text($"  {motor}").FontSize(9);
-                            tabla.Cell().Text("   ");
-                            tabla.Cell().AlignBottom().Text($"    {modelo}").FontSize(9);
-                            tabla.Cell().Text("   ");
-                            tabla.Cell().Text("   ");
-                            tabla.Cell().Text("MARCA");
-                            tabla.Cell().Text($"{marca}").FontSize(9);
-                            tabla.Cell().Text("PASAJEROS");
-                            tabla.Cell().AlignBottom().Text($"                  {pasajeros}").FontSize(9);
-                        });
-                        col.Item().Text("");
-                        col.Item().Text("");
-                        col.Item().Table(tabla =>
-                        {
-                            tabla.ColumnsDefinition(colm =>
-                            {
-                                colm.RelativeColumn();
-                            });
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span("                                  ");
-                                texto.Span($"{concecion}");
-                            });
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span("                             ");
-                                texto.Span($"{resolucion}");
-                            });
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span("                             ");
-                                texto.Span($"");
-                            });
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span("                                                                    ");
-                                texto.Span($"{docUnidad}");
-                            });
-                            tabla.Cell().Text(texto =>
-                            {
-                                texto.Span("                             ");
-                                texto.Span($"{ruta}");
-                            });
 
-                        });
-                        col.Item().PaddingVertical(30);
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{condicionesR}");
+            string placa = "AXXXXX";
+            string nombre = "MANUEL ALEJANDRO MORA MENESES";
+            string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
+            string serie = "VF1FLADRACY419294";
+            string motor = "C683198";
+            int modelo = 2023;
+            string marca = "RENAULT TRAFIC";
+            string tipo = "PANEL";
+            string pasajeros = "20 PASAJEROS";
+            string concecion = "COLECTIVO";
+            string resolucion = "RESOLUCION";
+            string docUnidad = "FACTURA, REPUVE , SEGURO, INE, CONTRATO DE COMPRA VENTA";
+            string ruta = "PAPALOTLA - PANZACOLA - P.I.(BUENAVENTURA)";
+            string condicionesR = "Check";
+            string espejos = "Check";
+            string llantas = "Check";
+            string limpiadores = "Check";
+            string llantaAux = "Check";
+            string vestiduras = "Check";
+            string luces = "Check";
+            string defensas = "Check";
+            string direccionales = "Check";
+            string pinturaG = "Check";
+            string cristales = "Check";
+            string rotulacion = "Check";
+            string observaciones = "CAMBIO DE UNIDAD SALE TOYOTA 2016, ENTRA TOYOTA 2010";
+            #endregion
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{espejos}");
-                        });
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{llantas}");
+            #region generar pdf
+            var doc = new Document();
+            PdfWriter.GetInstance(doc, new FileStream("Revista.pdf", FileMode.Create));
+            doc.AddAuthor("SecretariaMovilidadyTransporte");
+            doc.AddTitle("Documento de Revista");
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{limpiadores}");
-                        });
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{llantaAux}");
+            /*
+             * FUENTES
+             * 
+             */
+            BaseFont basefuente = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1250, true);
+            iTextSharp.text.Font fnormal = new iTextSharp.text.Font(basefuente, 10f);
+            iTextSharp.text.Font fnormal_mini = new iTextSharp.text.Font(basefuente, 8f);
+            iTextSharp.text.Font fnegrita = new iTextSharp.text.Font(basefuente, 10f, iTextSharp.text.Font.BOLD);
+            iTextSharp.text.Font fnegrita_mini = new iTextSharp.text.Font(basefuente, 8f, iTextSharp.text.Font.BOLD);
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{vestiduras}");
-                        });
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{luces}");
+            /**
+             * 
+             * IMAGENES
+             * 
+             */
+            System.Drawing.Bitmap bitmap = Properties.Resources.logosmyt_530;
+            System.IO.MemoryStream stream = new System.IO.MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_logosmyt = stream.ToArray();//imagen 1 Bytes
+            System.Drawing.Bitmap bitm2 = Properties.Resources.tlax_nh_horizontal;
+            System.IO.MemoryStream stream2 = new System.IO.MemoryStream();
+            bitm2.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] imageB_gobT = stream2.ToArray();//imagen 2 Bytes
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{defensas}");
-                        });
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{direccionales}");
+            iTextSharp.text.Image logo1 = iTextSharp.text.Image.GetInstance(imageB_logosmyt);
+            iTextSharp.text.Image logo2 = iTextSharp.text.Image.GetInstance(imageB_gobT);
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{pinturaG}");
-                        });
-                        col.Item().Row(row =>
-                        {
-                            row.Spacing(20);
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{cristales}");
+            /*
+             * 
+             * DOCUMENTO 
+             * 
+             */
 
-                            row.RelativeItem(5).Text("");
-                            row.RelativeItem(5).Text($"{rotulacion}");
-                        });
-                        col.Item().PaddingTop(30);
-                        col.Item().Text($"                                  {observaciones}");
-                        col.Item().PaddingTop(60);
-                        //col.Item().AlignCenter().Text("NOTA:EN CASO DE INCUMPLIMIENTO DE LAS OBSERVACIONES HECHAS, EL PROPIETARIO SE HARÁ ACREEDOR A LAS\nSANCIONES CORRESPONDIENTES, DE ACUERDO A LA LEY DE LA SMyT Y SU REGLAMENTO").FontSize(9);
-                        col.Item().PaddingTop(25);
-                        col.Item().AlignCenter().Text($"                   {dia}                              {mes.ToUpper()}                                 {year}").FontSize(9);
-                    });
+            doc.Open();
+            var Header = new PdfPTable(new float[] { 5f, 95f }) { WidthPercentage = 100 };
 
-                });
-            }).GeneratePdf();
+            var Hcell1 = new PdfPCell(new Paragraph($"", fnormal_mini)) { MinimumHeight = 150f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var Hcell2 = new PdfPCell(new Paragraph($"{nombre}", fnormal)) { MinimumHeight = 90f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
 
+            Header.AddCell(Hcell1);
+            Header.AddCell(Hcell2);
 
-            return documento;
+            doc.Add(Header);
 
+            var tabla2 = new PdfPTable(new float[] { 7f, 93f }) { WidthPercentage = 100 };
+            var t2cel1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 55f, Border = 0 };
+            var t2cel2 = new PdfPCell(new Paragraph($"\n{direccion}", fnormal)) { MinimumHeight = 55f, Border = 0 };
+
+            tabla2.AddCell(t2cel1);
+            tabla2.AddCell(t2cel2);
+
+            doc.Add(tabla2);
+
+            var tabla3 = new PdfPTable(new float[] { 8f, 35f, 10f, 33f, 10f, 33f }) { WidthPercentage = 100 };
+            var t3cel1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 20f, Border = 0 };
+            var t3cel2 = new PdfPCell(new Paragraph($"{placa}", fnormal)) { Border = 0 };
+            var t3cel3 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var t3cel4 = new PdfPCell(new Paragraph($"{serie}", fnormal)) { Border = 0 };
+            var t3cel5 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var t3cel6 = new PdfPCell(new Paragraph($"{tipo}", fnormal)) { Border = 0 };
+
+            tabla3.AddCell(t3cel1);
+            tabla3.AddCell(t3cel2);
+            tabla3.AddCell(t3cel3);
+            tabla3.AddCell(t3cel4);
+            tabla3.AddCell(t3cel5);
+
+            tabla3.AddCell(t3cel6);
+            doc.Add(tabla3);
+
+            var tabla4 = new PdfPTable(new float[] { 14f, 35f, 12f, 33f, 10f, 33f }) { WidthPercentage = 100 };
+
+            var t4cel1 = new PdfPCell(new Paragraph(" ")) { Border = 0, MinimumHeight = 20f };
+            var t4cel2 = new PdfPCell(new Paragraph($"{motor}", fnormal)) { Border = 0 };
+            var t4cel3 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var t4cel4 = new PdfPCell(new Paragraph($"{modelo}", fnormal)) { Border = 0 };
+            var t4cel5 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var t4cel6 = new PdfPCell(new Paragraph("")) { Border = 0 };
+
+            tabla4.AddCell(t4cel1);
+            tabla4.AddCell(t4cel2);
+            tabla4.AddCell(t4cel3);
+            tabla4.AddCell(t4cel4);
+            tabla4.AddCell(t4cel5);
+            tabla4.AddCell(t4cel6);
+
+            doc.Add(tabla4);
+
+            var tabla5 = new PdfPTable(new float[] { 8f, 40, 10f, 42f }) { WidthPercentage = 100 };
+            var t5cel1 = new PdfPCell(new Paragraph(" ")) { Border = 0 };
+            var t5cel2 = new PdfPCell(new Paragraph($"{marca}", fnormal)) { Border = 0 };
+            var t5cel3 = new PdfPCell(new Paragraph(" ")) { Border = 0 };
+            var t5cel4 = new PdfPCell(new Paragraph($"{pasajeros}", fnormal)) { Border = 0 };
+
+            tabla5.AddCell(t5cel1);
+            tabla5.AddCell(t5cel2);
+            tabla5.AddCell(t5cel3);
+            tabla5.AddCell(t5cel4);
+
+            doc.Add(tabla5);
+
+            var tablac1 = new PdfPTable(new float[] { 16f, 86f }) { WidthPercentage = 100 };
+            var tc1cell1 = new PdfPCell(new Paragraph(" ")) { MinimumHeight = 20f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var tc1cell2 = new PdfPCell(new Paragraph($"{concecion}", fnormal)) { MinimumHeight = 25f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+
+            tablac1.AddCell(tc1cell1);
+            tablac1.AddCell(tc1cell2);
+
+            doc.Add(tablac1);
+
+            var tablac2 = new PdfPTable(new float[] { 14f, 86f }) { WidthPercentage = 100 };
+            var tc2cel1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 20f, Border = 0 };
+            var tc2cel2 = new PdfPCell(new Paragraph($"{resolucion}", fnormal)) { MinimumHeight = 15f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+
+            tablac2.AddCell(tc2cel1);
+            tablac2.AddCell(tc2cel2);
+
+            doc.Add(tablac2);
+
+            var tablac3 = new PdfPTable(new float[] { 100f }) { WidthPercentage = 100 };
+            var tc3cel1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 20f, Border = 0 };
+            tablac3.AddCell(tc3cel1);
+            doc.Add(tablac3);
+
+            var tablac4 = new PdfPTable(new float[] { 20f, 80f }) { WidthPercentage = 100f };
+            var tc4cel1 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var tc4cel2 = new PdfPCell(new Paragraph($"{docUnidad}", fnormal)) { Border = 0 };
+            tablac4.AddCell(tc4cel1);
+            tablac4.AddCell(tc4cel2);
+            doc.Add(tablac4);
+
+            var tablac5 = new PdfPTable(new float[] { 10f, 80f }) { WidthPercentage = 100f };
+            var tc5cel1 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var tc5cel2 = new PdfPCell(new Paragraph($"{ruta}", fnormal)) { Border = 0 };
+            tablac5.AddCell(tc5cel1);
+            tablac5.AddCell(tc5cel2);
+            doc.Add(tablac5);
+
+            var tablac6 = new PdfPTable(new float[] { 100f }) { WidthPercentage = 100 };
+            var tc6cel1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 45f, Border = 0 };
+            tablac6.AddCell(tc6cel1);
+            doc.Add(tablac6);
+
+            var tabc = new PdfPTable(new float[] { 17f, 40, 15, 28f }) { WidthPercentage = 100 };
+            var tbc1cel1 = new PdfPCell(new Paragraph("")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel2 = new PdfPCell(new Paragraph($"{condicionesR}", fnormal)) { Border = 0 };
+            var tbc1cel3 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel4 = new PdfPCell(new Paragraph($"{espejos}", fnormal)) { Border = 0 };
+            var tbc1cel5 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel6 = new PdfPCell(new Paragraph($"{llantas}", fnormal)) { Border = 0 };
+            var tbc1cel7 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel8 = new PdfPCell(new Paragraph($"{limpiadores}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel9 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel10 = new PdfPCell(new Paragraph($"{llantaAux}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel11 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel12 = new PdfPCell(new Paragraph($"{vestiduras}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel13 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel14 = new PdfPCell(new Paragraph($"{luces}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel15 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel16 = new PdfPCell(new Paragraph($"{defensas}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel17 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel18 = new PdfPCell(new Paragraph($"{direccionales}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel19 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel20 = new PdfPCell(new Paragraph($"{pinturaG}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel21 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel22 = new PdfPCell(new Paragraph($"{cristales}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel23 = new PdfPCell(new Paragraph($"")) { Border = 0, MinimumHeight = 20 };
+            var tbc1cel24 = new PdfPCell(new Paragraph($"{rotulacion}", fnormal)) { Border = 0, MinimumHeight = 20 };
+            tabc.AddCell(tbc1cel1);
+            tabc.AddCell(tbc1cel2);
+            tabc.AddCell(tbc1cel3);
+            tabc.AddCell(tbc1cel4);
+            tabc.AddCell(tbc1cel5);
+            tabc.AddCell(tbc1cel6);
+            tabc.AddCell(tbc1cel7);
+            tabc.AddCell(tbc1cel8);
+            tabc.AddCell(tbc1cel9);
+            tabc.AddCell(tbc1cel10);
+            tabc.AddCell(tbc1cel11);
+            tabc.AddCell(tbc1cel12);
+            tabc.AddCell(tbc1cel13);
+            tabc.AddCell(tbc1cel14);
+            tabc.AddCell(tbc1cel15);
+            tabc.AddCell(tbc1cel16);
+            tabc.AddCell(tbc1cel17);
+            tabc.AddCell(tbc1cel18);
+            tabc.AddCell(tbc1cel19);
+            tabc.AddCell(tbc1cel20);
+            tabc.AddCell(tbc1cel21);
+            tabc.AddCell(tbc1cel22);
+            tabc.AddCell(tbc1cel23);
+            tabc.AddCell(tbc1cel24);
+
+            doc.Add(tabc);
+
+            var tblanco = new PdfPTable(new float[] { 100f });
+            var celblanco = new PdfPCell(new Paragraph(" ")) { Border = 0 };
+            tblanco.AddCell(celblanco);
+            doc.Add(tblanco);
+
+            var tablaobservaciones = new PdfPTable(new float[] { 12f, 93f }) { WidthPercentage = 100 };
+            var c1 = new PdfPCell(new Paragraph("")) { MinimumHeight = 65f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var c2 = new PdfPCell(new Paragraph($"{observaciones}", fnormal)) { MinimumHeight = 50f, Border = 0 };
+            tablaobservaciones.AddCell(c1);
+            tablaobservaciones.AddCell(c2);
+            doc.Add(tablaobservaciones);
+
+            var tablafondo = new PdfPTable(new float[] { 30f, 35f, 25f }) { WidthPercentage = 100 };
+            var cl1 = new PdfPCell(new Paragraph("")) { Border = 0 };
+            var cl2 = new PdfPCell(new Paragraph($"{dia}            {mes.ToUpper()}", fnormal_mini)) { MinimumHeight = 60f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var cl3 = new PdfPCell(new Paragraph($"{year}", fnormal_mini)) { MinimumHeight = 40f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            tablafondo.AddCell(cl1);
+            tablafondo.AddCell(cl2);
+            tablafondo.AddCell(cl3);
+            doc.Add(tablafondo);
+            doc.Close();
+
+            #endregion
         }
     }
 }

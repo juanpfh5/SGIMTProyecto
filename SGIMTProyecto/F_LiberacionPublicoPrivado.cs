@@ -131,6 +131,7 @@ namespace SGIMTProyecto {
                         ActualizarLiberacion(TXT_Placa.Text.Trim());
 
                         int nOficio = 1234;
+                        string marca = TXT_Marca.Text;
                         int modelo = Convert.ToInt32(TXT_Modelo.Text);
                         string tipo = TXT_Tipo.Text;
                         string serie = TXT_NoSerie.Text;
@@ -138,7 +139,7 @@ namespace SGIMTProyecto {
                         int nBaja = Convert.ToInt32(TXT_NoBaja.Text);
                         string fechaRecibo = DTP_Fecha.Value.ToString("dd/MM/yyyy");
                         string director = ObtenerDirector();
-                        GenerarLiberacion(nOficio, modelo, tipo, serie, motor, nBaja, fechaRecibo, director);
+                        GenerarLiberacion(nOficio, marca, modelo, tipo, serie, motor, nBaja, fechaRecibo, director);
 
 
                         if (formVisualizador == null || formVisualizador.IsDisposed) {
@@ -201,7 +202,7 @@ namespace SGIMTProyecto {
         private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
         }
 
-        private static void GenerarLiberacion(int nOficio, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
+        private static void GenerarLiberacion(int nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -287,7 +288,7 @@ namespace SGIMTProyecto {
             var txtmarca = new Paragraph
             {
                 new Chunk("MARCA: ", fnegrita),
-                new Chunk($"{modelo}", fnormal)
+                new Chunk($"{marca}", fnormal)
             };
             var Ccell1 = new PdfPCell(new Paragraph(txtmarca) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
             contenido.AddCell(Ccell1);

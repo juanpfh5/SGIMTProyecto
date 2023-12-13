@@ -23,11 +23,13 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using System.Globalization;
+using iTextSharp.text.pdf.qrcode;
 
 namespace SGIMTProyecto
 {
     public partial class F_OrdenCobro : UserControl
     {
+        private F_VisualizacionPDF formVisualizador;
         public F_OrdenCobro()
         {
             InitializeComponent();
@@ -267,6 +269,20 @@ namespace SGIMTProyecto
             return Datos.AgregarClave(concepto);
         }
 
+        private string ObtenerDirector() {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ObtenerDirector();
+        }
+        private string ObtenerRFC(string placa) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ObtenerRFC(placa);
+        }
+
+        private Tuple<string, string> ObtenerCilindrosYRuta(string placa) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ObtenerCilindrosYRuta(placa);
+        }
+
         private void AutoCompleteClave() {
             AutoCompleteStringCollection colClaveConcepto = new AutoCompleteStringCollection();
             List<string> claveConcepto = ListadoClaveConcepto(TXT_Clave.Text);
@@ -327,56 +343,71 @@ namespace SGIMTProyecto
                 }
                 else
                 {
-                    #region Generar pdf
-                    /* PARAMETROS A PASAR:
-                     * var documentoPDF = GenerarPdf();# aqui se le pasa los parametros que son:
-                     * 
-                     * string placa, 
-                     * string nombre, 
-                     * string direccion, 
-                     * int CP, 
-                     * int folioR, 
-                     * string serie, 
-                     * string motor, 
-                     * int modelo, 
-                     * string marca, 
-                     * string clvVehicular, 
-                     * string tipo, 
-                     * decimal total, 
-                     * string elaboro, 
-                     * List<int> claves, 
-                     * List<String>descripcion, 
-                     * List<decimal>importe, 
-                     * string mesVigencia, 
-                     * int diaVigencia, 
-                     * int yearVigencia
-                     * int nMovimiento
-                     * 
-                     * string combustible
-                     * string capacidad
-                     * 
-                     */
-                    #endregion
+                    // GENERAR PDF ORDEN COBRO
+                    
+                    string placa = TXT_PlacaActual.Text.Trim();
+                    string nombre = TXT_Nombre.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    int folioR = Convert.ToInt32(TXT_FolioRevista.Text.Trim());
+                    string serie = TXT_NoSerie.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string marca = TXT_Marca.Text.Trim();
+                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
+                    string tipo = TXT_Tipo.Text.Trim();
+                    decimal total = Convert.ToDecimal(TXT_Total.Text.Trim());
+                    string elaboro = CMB_Elaboro.Text.Trim();
+                    int nMovimiento = Convert.ToInt32(TXT_NoMovimiento.Text.Trim());
+                    string combustible = TXT_Combustible.Text.Trim();
+                    string capacidad = TXT_NoPasajeros.Text.Trim();
+                    List<int> claves = new List<int>();
+                    List<string> descripcion = new List<string>();
+                    List<decimal> importe = new List<decimal>();
 
-                    #region Generar Resumen
-                    /*
-                     * //datos diferentes para el RESUMEN
-                     * 
-                        funcion:
-                        GenerarpdfResumen()
+                    string servicio = "Colectivo";
+                    string rfc = ObtenerRFC(placa);
+                    Tuple<string, string> CilYRuta = ObtenerCilindrosYRuta(placa);
+                    string cilindros = CilYRuta.Item1;
+                    string ruta = CilYRuta.Item2;
+                    string observaciones = TXT_Observaciones.Text.Trim();
+                    string autorizoC = ObtenerDirector();
 
-                        string rfc = "TUX920811PQ7";
-                        string ruta = "INTERNA DE LA CIUDAD DE TLAXCALA AUTORIZADA POR LA SECRETARIA DE COMUNICACIONES CONFORME A PLANO SUJETO A ROL POR LA EMPRESA";
-                        string observaciones = "CANJE DE PLACAS 2023";
-                        string fecha = "15/AGOSTO/2023";
-                        string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
-                        string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
-                        string combustible = "GASOLINA";
-                        string capacidad = "20 PASAEROS";
-                     * 
-                     * 
-                     */
-                    #endregion
+                    foreach (DataGridViewRow fila in DGV_Clave.Rows) {
+                        if (fila.Cells[0].Value != null) {
+                            if (int.TryParse(fila.Cells[0].Value.ToString(), out int clave)) {
+                                claves.Add(clave);
+                            }
+                        }
+
+                        // Lista de descripciones (índice 1)
+                        if (fila.Cells[1].Value != null) {
+                            descripcion.Add(fila.Cells[1].Value.ToString());
+                        }
+
+                        // Lista de importes (índice 4)
+                        if (fila.Cells[4].Value != null) {
+                            if (decimal.TryParse(fila.Cells[4].Value.ToString(), out decimal valorImporte)) {
+                                importe.Add(valorImporte);
+                            }
+                        }
+                    }
+
+
+                    GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("ResumenCobro.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    GenerarPdf(placa, nombre, direccion, folioR, serie, motor, modelo, marca, clvVehicular, tipo, total, elaboro, nMovimiento, combustible, capacidad, claves, descripcion, importe);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("OrdenCobro.pdf");
+                        formVisualizador.ShowDialog();
+                    }
                 }
 
             }
@@ -557,7 +588,7 @@ namespace SGIMTProyecto
         }
 
         #region funciones de PDF
-        private static void GenerarPdf()
+        private static void GenerarPdf(string placa, string nombre, string direccion, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, int nMovimiento, string combustible, string capacidad, List<int> claves, List<string> descripcion, List<decimal> importe)
         {
             #region DATOS
             DateTime today = DateTime.Today;
@@ -568,7 +599,7 @@ namespace SGIMTProyecto
             int year = today.Year;
             //variables para la vigencia
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
             int folioR = 185;
@@ -587,7 +618,7 @@ namespace SGIMTProyecto
             //creacion de las listas para las claves, descripcion e importe
             List<int> claves = new List<int> { 512, 511, 315 };
             List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
-            List<decimal> importe = new List<decimal> { 720, 711, 104 };
+            List<decimal> importe = new List<decimal> { 720, 711, 104 };*/
             #endregion
 
             var doc = new Document();
@@ -786,38 +817,38 @@ namespace SGIMTProyecto
             doc.Close();
         }
 
-        private static void GenerarpdfResumen()
+        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string rfc, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe)
         {
-            #region DATOS 
             DateTime today = DateTime.Today;
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
             int year = today.Year;
-            string servicio = "COLECTIVO";
-            string placa = "AXXXXX";
-            string nombre = "MANUEL ALEJANDRO MORA MENESES";
-            string rfc = "TUX920811PQ7";
-            string serie = "VF1FLADRACY419294";
-            string motor = "C683198";
-            int modelo = 2023;
-            string marca = "RENAULT TRAFIC";
-            string clvVehicular = "1982432";
-            string tipo = "PANEL";
-            string cilindros = "4 CIL";
-            decimal total = 1535;
-            string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
-            string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-            string observaciones = "CANJE DE PLACAS 2023";
-            string combustible = "GASOLINA";
-            string capacidad = "20 PASAJEROS";
-            string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
-            //creacion de las listas para las claves, descripcion e importe
-            List<int> claves = new List<int> { 512, 511, 315 };
-            List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
-            List<decimal> importe = new List<decimal> { 720, 711, 104 };
 
-            #endregion
+
+            //string servicio = "COLECTIVO";
+            //string placa = "AXXXXX";
+            //string nombre = "MANUEL ALEJANDRO MORA MENESES";
+            //string rfc = "TUX920811PQ7";
+            //string serie = "VF1FLADRACY419294";
+            //string motor = "C683198";
+            //int modelo = 2023;
+            //string marca = "RENAULT TRAFIC";
+            //string clvVehicular = "1982432";
+            //string tipo = "PANEL";
+            //string cilindros = "4 CIL";
+            //decimal total = 1535;
+            //string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
+            //string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
+            //string observaciones = "CANJE DE PLACAS 2023";
+            //string combustible = "GASOLINA";
+            //string capacidad = "20 PASAJEROS";
+            //string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
+            ////creacion de las listas para las claves, descripcion e importe
+            //List<int> claves = new List<int> { 512, 511, 315 };
+            //List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
+            //List<decimal> importe = new List<decimal> { 720, 711, 104 };
+
 
             #region DOCUMENTO PDF
             var doc = new Document();
@@ -872,7 +903,7 @@ namespace SGIMTProyecto
             doc.Add(new iTextSharp.text.Paragraph("NOMBRE DEL CONCECIONARIO: ", fnegrita));
             doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
             doc.Add(new iTextSharp.text.Paragraph("DOMICILIO: ", fnegrita));
-            doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
+            doc.Add(new iTextSharp.text.Paragraph($"{domicilio}", fnormal));
             var prfrfc = new iTextSharp.text.Paragraph
             {
                 new iTextSharp.text.Chunk("RFC: ", fnegrita),
@@ -955,7 +986,7 @@ namespace SGIMTProyecto
                 new iTextSharp.text.Chunk("CILINDROS: ",fnegrita_mini),
                 new iTextSharp.text.Chunk($"{cilindros}",fnormal_mini)
             };
-            var t3cel2 = new PdfPCell(prfcombustible) { Padding = 4, Border = 0 };
+            var t3cel2 = new PdfPCell(prfcilindros) { Padding = 4, Border = 0 };
             var t3cel3 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
             var t3cel4 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
 

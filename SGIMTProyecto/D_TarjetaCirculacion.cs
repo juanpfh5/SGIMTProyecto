@@ -51,5 +51,34 @@ namespace SGIMTProyecto
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public string ObtenerTitularSMyT() {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                object resultado = Comando.ExecuteScalar();
+
+                if (resultado != null) {
+                    return resultado.ToString();
+                } else {
+                    return "No se encontró un Titular.";
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+        }
     }
 }

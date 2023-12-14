@@ -16,13 +16,14 @@ using System.IO;
 
 namespace SGIMTProyecto {
     public partial class F_PermisoPasoAnual : UserControl {
+        private F_VisualizacionPDF formVisualizador;
         public F_PermisoPasoAnual() {
             InitializeComponent();
         }
 
-        #region
+        #region Métodos
         private (string, bool) VerificacionParametros() {
-            string error, variable;
+            string error, variable, mensajeExtra = "";
             bool bandera = false;
 
             List<string> parametros = new List<string>();
@@ -104,10 +105,13 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
+            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento) || !ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
                 variable = JLB_NoMovimiento.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
+                if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                    mensajeExtra = "No. Movimiento no existente.";
+                }
             }
 
             tamanio = parametros.Count;
@@ -125,20 +129,26 @@ namespace SGIMTProyecto {
                 }
             }
 
+            error += "\n" + mensajeExtra;
+
             return (error, bandera);
         }
 
 
         private string ObtenerTitularSMyT() {
-            D_PasoAnual Datos = new D_PasoAnual();
+            D_PermisoPasoAnual Datos = new D_PermisoPasoAnual();
             return Datos.ObtenerTitularSMyT();
         }
 
         private void InsertarPasoAnual(List<object> datosPasoAnual) {
-            D_PasoAnual Datos = new D_PasoAnual();
+            D_PermisoPasoAnual Datos = new D_PermisoPasoAnual();
             Datos.InsertarPasoAnual(datosPasoAnual);
         }
 
+        private bool ExistenciaMovimiento(int movimiento) {
+            D_PermisoPasoAnual Datos = new D_PermisoPasoAnual();
+            return Datos.ExistenciaMovimiento(movimiento);
+        }
         private void LimpiarTextBox() {
             TXT_Nombre.Text = "";
             TXT_Domicilio.Text = "";
@@ -202,6 +212,31 @@ namespace SGIMTProyecto {
 
                 InsertarPasoAnual(datosPasoAnual);
 
+                string placa = TXT_Placas.Text.Trim();
+                string nombre = TXT_Nombre.Text.Trim();
+                string direccion = TXT_Domicilio.Text.Trim();
+                string poblacion = TXT_Poblacion.Text.Trim();
+                int CP = Convert.ToInt32(TXT_CP.Text.Trim());
+                int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
+                string serie = TXT_NoSerie.Text.Trim();
+                string motor = TXT_NoMotor.Text.Trim();
+                int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                int folio = Convert.ToInt32(TXT_FolioPermiso.Text.Trim());
+                string marca = TXT_Marca.Text.Trim();
+                string rfv = TXT_RFV.Text.Trim();
+
+                string recorrido = TXT_Recorrido.Text.Trim();
+                string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
+                string director = ObtenerTitularSMyT();
+
+                GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, serie, motor, modelo, folio, marca, rfv, recorrido, fechaVig, director);
+
+                if (formVisualizador == null || formVisualizador.IsDisposed) {
+                    F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                    formVisualizador.RecibirNombre("PermisoPasoAnual.pdf");
+                    formVisualizador.ShowDialog();
+                }
+
                 MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarTextBox();
@@ -229,7 +264,7 @@ namespace SGIMTProyecto {
             }
         }
 
-        private static void GenerarPDF()
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string serie, string motor, int modelo, int folio, string marca, string rfv, string recorrido, string fechaVig, string director)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -237,7 +272,7 @@ namespace SGIMTProyecto {
             string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
 
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
             string poblacion = "AMAXAC DE GUERRERO";
@@ -252,7 +287,7 @@ namespace SGIMTProyecto {
 
             string recorrido = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
             string fechaVig = "31/12/2023";
-            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";*/
 
             /*
              * FUENTES
@@ -356,5 +391,11 @@ namespace SGIMTProyecto {
             doc.Close();
         }
 
+        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                // Si es una letra minúscula, conviértela a mayúscula
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
     }
 }

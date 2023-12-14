@@ -61,9 +61,9 @@
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
             this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.GRB_PasoAnual.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -301,6 +301,7 @@
             this.TXT_Placas.Name = "TXT_Placas";
             this.TXT_Placas.Size = new System.Drawing.Size(148, 23);
             this.TXT_Placas.TabIndex = 27;
+            this.TXT_Placas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placas_KeyPress);
             // 
             // JLB_TarjetaCirculacion
             // 
@@ -353,6 +354,7 @@
             // 
             // DTP_FechaExpedicion
             // 
+            this.DTP_FechaExpedicion.Enabled = false;
             this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 431);
             this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";
@@ -416,21 +418,6 @@
             this.TXT_FolioPermiso.Size = new System.Drawing.Size(200, 23);
             this.TXT_FolioPermiso.TabIndex = 39;
             // 
-            // BTN_Imprimir
-            // 
-            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_Imprimir.Location = new System.Drawing.Point(361, 568);
-            this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
-            this.BTN_Imprimir.TabIndex = 40;
-            this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = false;
-            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
-            // 
             // JLB_NoMovimiento
             // 
             this.JLB_NoMovimiento.AutoSize = true;
@@ -449,6 +436,21 @@
             this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
             this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
             this.TXT_NoMovimiento.TabIndex = 41;
+            // 
+            // BTN_Imprimir
+            // 
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(361, 568);
+            this.BTN_Imprimir.Name = "BTN_Imprimir";
+            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
+            this.BTN_Imprimir.TabIndex = 40;
+            this.BTN_Imprimir.Text = "Imprimir";
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
             // F_PermisoPasoAnual
             // 

@@ -114,12 +114,15 @@
             // 
             // TXT_Placa
             // 
+            this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
             this.TXT_Placa.Location = new System.Drawing.Point(584, 50);
             this.TXT_Placa.Name = "TXT_Placa";
             this.TXT_Placa.Size = new System.Drawing.Size(155, 20);
             this.TXT_Placa.TabIndex = 24;
             this.TXT_Placa.Tag = "";
             this.TXT_Placa.Text = "Placa";
+            this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // GRB_TarjetaCirculacion
             // 
@@ -548,7 +551,7 @@
             this.JLB_Tramite.Name = "JLB_Tramite";
             this.JLB_Tramite.Size = new System.Drawing.Size(49, 15);
             this.JLB_Tramite.TabIndex = 40;
-            this.JLB_Tramite.Text = "Tramtie:";
+            this.JLB_Tramite.Text = "Tramite:";
             // 
             // TXT_Tramite
             // 

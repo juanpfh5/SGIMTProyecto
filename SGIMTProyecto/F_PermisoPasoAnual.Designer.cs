@@ -61,9 +61,9 @@
             this.TXT_TitularSMyT = new System.Windows.Forms.TextBox();
             this.JLB_FolioPermiso = new System.Windows.Forms.Label();
             this.TXT_FolioPermiso = new System.Windows.Forms.TextBox();
-            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
             this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
+            this.BTN_Imprimir = new System.Windows.Forms.Button();
             this.GRB_PasoAnual.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,7 +117,7 @@
             this.JLB_Nombre.AutoSize = true;
             this.JLB_Nombre.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Nombre.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Nombre.Location = new System.Drawing.Point(6, 50);
+            this.JLB_Nombre.Location = new System.Drawing.Point(26, 50);
             this.JLB_Nombre.Name = "JLB_Nombre";
             this.JLB_Nombre.Size = new System.Drawing.Size(54, 15);
             this.JLB_Nombre.TabIndex = 8;
@@ -136,7 +136,7 @@
             this.JLB_Domicilio.AutoSize = true;
             this.JLB_Domicilio.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Domicilio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Domicilio.Location = new System.Drawing.Point(7, 88);
+            this.JLB_Domicilio.Location = new System.Drawing.Point(18, 88);
             this.JLB_Domicilio.Name = "JLB_Domicilio";
             this.JLB_Domicilio.Size = new System.Drawing.Size(62, 15);
             this.JLB_Domicilio.TabIndex = 10;
@@ -155,7 +155,7 @@
             this.JLB_Poblacion.AutoSize = true;
             this.JLB_Poblacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Poblacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Poblacion.Location = new System.Drawing.Point(6, 143);
+            this.JLB_Poblacion.Location = new System.Drawing.Point(17, 140);
             this.JLB_Poblacion.Name = "JLB_Poblacion";
             this.JLB_Poblacion.Size = new System.Drawing.Size(63, 15);
             this.JLB_Poblacion.TabIndex = 12;
@@ -174,7 +174,7 @@
             this.JLB_CP.AutoSize = true;
             this.JLB_CP.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_CP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_CP.Location = new System.Drawing.Point(44, 203);
+            this.JLB_CP.Location = new System.Drawing.Point(56, 203);
             this.JLB_CP.Name = "JLB_CP";
             this.JLB_CP.Size = new System.Drawing.Size(24, 15);
             this.JLB_CP.TabIndex = 14;
@@ -202,9 +202,9 @@
             // TXT_NoSerie
             // 
             this.TXT_NoSerie.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_NoSerie.Location = new System.Drawing.Point(340, 200);
+            this.TXT_NoSerie.Location = new System.Drawing.Point(329, 200);
             this.TXT_NoSerie.Name = "TXT_NoSerie";
-            this.TXT_NoSerie.Size = new System.Drawing.Size(143, 23);
+            this.TXT_NoSerie.Size = new System.Drawing.Size(176, 23);
             this.TXT_NoSerie.TabIndex = 17;
             // 
             // JLB_NoMotor
@@ -212,7 +212,7 @@
             this.JLB_NoMotor.AutoSize = true;
             this.JLB_NoMotor.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_NoMotor.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_NoMotor.Location = new System.Drawing.Point(533, 203);
+            this.JLB_NoMotor.Location = new System.Drawing.Point(511, 203);
             this.JLB_NoMotor.Name = "JLB_NoMotor";
             this.JLB_NoMotor.Size = new System.Drawing.Size(65, 15);
             this.JLB_NoMotor.TabIndex = 18;
@@ -221,9 +221,9 @@
             // TXT_NoMotor
             // 
             this.TXT_NoMotor.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_NoMotor.Location = new System.Drawing.Point(604, 200);
+            this.TXT_NoMotor.Location = new System.Drawing.Point(582, 200);
             this.TXT_NoMotor.Name = "TXT_NoMotor";
-            this.TXT_NoMotor.Size = new System.Drawing.Size(107, 23);
+            this.TXT_NoMotor.Size = new System.Drawing.Size(129, 23);
             this.TXT_NoMotor.TabIndex = 19;
             // 
             // JLB_RFV
@@ -231,7 +231,7 @@
             this.JLB_RFV.AutoSize = true;
             this.JLB_RFV.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_RFV.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_RFV.Location = new System.Drawing.Point(44, 247);
+            this.JLB_RFV.Location = new System.Drawing.Point(49, 247);
             this.JLB_RFV.Name = "JLB_RFV";
             this.JLB_RFV.Size = new System.Drawing.Size(31, 15);
             this.JLB_RFV.TabIndex = 20;
@@ -250,7 +250,7 @@
             this.JLB_Marca.AutoSize = true;
             this.JLB_Marca.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Marca.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Marca.Location = new System.Drawing.Point(292, 247);
+            this.JLB_Marca.Location = new System.Drawing.Point(280, 247);
             this.JLB_Marca.Name = "JLB_Marca";
             this.JLB_Marca.Size = new System.Drawing.Size(43, 15);
             this.JLB_Marca.TabIndex = 22;
@@ -259,9 +259,9 @@
             // TXT_Marca
             // 
             this.TXT_Marca.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Marca.Location = new System.Drawing.Point(343, 244);
+            this.TXT_Marca.Location = new System.Drawing.Point(329, 244);
             this.TXT_Marca.Name = "TXT_Marca";
-            this.TXT_Marca.Size = new System.Drawing.Size(148, 23);
+            this.TXT_Marca.Size = new System.Drawing.Size(176, 23);
             this.TXT_Marca.TabIndex = 23;
             // 
             // JLB_Modelo
@@ -280,7 +280,7 @@
             this.TXT_Modelo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TXT_Modelo.Location = new System.Drawing.Point(582, 244);
             this.TXT_Modelo.Name = "TXT_Modelo";
-            this.TXT_Modelo.Size = new System.Drawing.Size(148, 23);
+            this.TXT_Modelo.Size = new System.Drawing.Size(129, 23);
             this.TXT_Modelo.TabIndex = 25;
             // 
             // JLB_Placas
@@ -288,7 +288,7 @@
             this.JLB_Placas.AutoSize = true;
             this.JLB_Placas.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Placas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Placas.Location = new System.Drawing.Point(44, 290);
+            this.JLB_Placas.Location = new System.Drawing.Point(37, 290);
             this.JLB_Placas.Name = "JLB_Placas";
             this.JLB_Placas.Size = new System.Drawing.Size(43, 15);
             this.JLB_Placas.TabIndex = 26;
@@ -307,7 +307,7 @@
             this.JLB_TarjetaCirculacion.AutoSize = true;
             this.JLB_TarjetaCirculacion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_TarjetaCirculacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_TarjetaCirculacion.Location = new System.Drawing.Point(7, 343);
+            this.JLB_TarjetaCirculacion.Location = new System.Drawing.Point(265, 295);
             this.JLB_TarjetaCirculacion.Name = "JLB_TarjetaCirculacion";
             this.JLB_TarjetaCirculacion.Size = new System.Drawing.Size(123, 15);
             this.JLB_TarjetaCirculacion.TabIndex = 28;
@@ -316,9 +316,9 @@
             // TXT_TarjetaCirculacion
             // 
             this.TXT_TarjetaCirculacion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_TarjetaCirculacion.Location = new System.Drawing.Point(145, 335);
+            this.TXT_TarjetaCirculacion.Location = new System.Drawing.Point(406, 287);
             this.TXT_TarjetaCirculacion.Name = "TXT_TarjetaCirculacion";
-            this.TXT_TarjetaCirculacion.Size = new System.Drawing.Size(566, 23);
+            this.TXT_TarjetaCirculacion.Size = new System.Drawing.Size(305, 23);
             this.TXT_TarjetaCirculacion.TabIndex = 29;
             // 
             // JLB_Recorrido
@@ -326,7 +326,7 @@
             this.JLB_Recorrido.AutoSize = true;
             this.JLB_Recorrido.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_Recorrido.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Recorrido.Location = new System.Drawing.Point(26, 395);
+            this.JLB_Recorrido.Location = new System.Drawing.Point(19, 340);
             this.JLB_Recorrido.Name = "JLB_Recorrido";
             this.JLB_Recorrido.Size = new System.Drawing.Size(61, 15);
             this.JLB_Recorrido.TabIndex = 30;
@@ -335,9 +335,10 @@
             // TXT_Recorrido
             // 
             this.TXT_Recorrido.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.TXT_Recorrido.Location = new System.Drawing.Point(105, 387);
+            this.TXT_Recorrido.Location = new System.Drawing.Point(95, 337);
+            this.TXT_Recorrido.Multiline = true;
             this.TXT_Recorrido.Name = "TXT_Recorrido";
-            this.TXT_Recorrido.Size = new System.Drawing.Size(625, 23);
+            this.TXT_Recorrido.Size = new System.Drawing.Size(616, 60);
             this.TXT_Recorrido.TabIndex = 31;
             // 
             // JLB_FechaExpedicion
@@ -345,7 +346,7 @@
             this.JLB_FechaExpedicion.AutoSize = true;
             this.JLB_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_FechaExpedicion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_FechaExpedicion.Location = new System.Drawing.Point(7, 441);
+            this.JLB_FechaExpedicion.Location = new System.Drawing.Point(7, 423);
             this.JLB_FechaExpedicion.Name = "JLB_FechaExpedicion";
             this.JLB_FechaExpedicion.Size = new System.Drawing.Size(102, 15);
             this.JLB_FechaExpedicion.TabIndex = 32;
@@ -354,7 +355,7 @@
             // DTP_FechaExpedicion
             // 
             this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 431);
+            this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 413);
             this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";
             this.DTP_FechaExpedicion.Size = new System.Drawing.Size(200, 23);
             this.DTP_FechaExpedicion.TabIndex = 34;
@@ -364,7 +365,7 @@
             this.JLB_FechaVigencia.AutoSize = true;
             this.JLB_FechaVigencia.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.JLB_FechaVigencia.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_FechaVigencia.Location = new System.Drawing.Point(377, 439);
+            this.JLB_FechaVigencia.Location = new System.Drawing.Point(377, 421);
             this.JLB_FechaVigencia.Name = "JLB_FechaVigencia";
             this.JLB_FechaVigencia.Size = new System.Drawing.Size(90, 15);
             this.JLB_FechaVigencia.TabIndex = 33;
@@ -373,7 +374,7 @@
             // DTP_FechaVigencia
             // 
             this.DTP_FechaVigencia.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.DTP_FechaVigencia.Location = new System.Drawing.Point(491, 433);
+            this.DTP_FechaVigencia.Location = new System.Drawing.Point(491, 415);
             this.DTP_FechaVigencia.Name = "DTP_FechaVigencia";
             this.DTP_FechaVigencia.Size = new System.Drawing.Size(200, 23);
             this.DTP_FechaVigencia.TabIndex = 35;
@@ -416,21 +417,6 @@
             this.TXT_FolioPermiso.Size = new System.Drawing.Size(200, 23);
             this.TXT_FolioPermiso.TabIndex = 39;
             // 
-            // BTN_Imprimir
-            // 
-            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_Imprimir.Location = new System.Drawing.Point(361, 568);
-            this.BTN_Imprimir.Name = "BTN_Imprimir";
-            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
-            this.BTN_Imprimir.TabIndex = 40;
-            this.BTN_Imprimir.Text = "Imprimir";
-            this.BTN_Imprimir.UseVisualStyleBackColor = false;
-            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
-            // 
             // JLB_NoMovimiento
             // 
             this.JLB_NoMovimiento.AutoSize = true;
@@ -449,6 +435,21 @@
             this.TXT_NoMovimiento.Name = "TXT_NoMovimiento";
             this.TXT_NoMovimiento.Size = new System.Drawing.Size(200, 23);
             this.TXT_NoMovimiento.TabIndex = 41;
+            // 
+            // BTN_Imprimir
+            // 
+            this.BTN_Imprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Imprimir.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Imprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Imprimir.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_Imprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Imprimir.Location = new System.Drawing.Point(361, 568);
+            this.BTN_Imprimir.Name = "BTN_Imprimir";
+            this.BTN_Imprimir.Size = new System.Drawing.Size(93, 29);
+            this.BTN_Imprimir.TabIndex = 40;
+            this.BTN_Imprimir.Text = "Imprimir";
+            this.BTN_Imprimir.UseVisualStyleBackColor = false;
+            this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
             // F_PermisoPasoAnual
             // 

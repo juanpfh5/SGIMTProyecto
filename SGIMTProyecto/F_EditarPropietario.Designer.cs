@@ -99,7 +99,7 @@
             this.JLB_Nombre.AutoSize = true;
             this.JLB_Nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Nombre.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Nombre.Location = new System.Drawing.Point(26, 42);
+            this.JLB_Nombre.Location = new System.Drawing.Point(18, 42);
             this.JLB_Nombre.Name = "JLB_Nombre";
             this.JLB_Nombre.Size = new System.Drawing.Size(55, 15);
             this.JLB_Nombre.TabIndex = 0;
@@ -132,7 +132,7 @@
             this.TXT_Placas.Location = new System.Drawing.Point(730, 39);
             this.TXT_Placas.Name = "TXT_Placas";
             this.TXT_Placas.ReadOnly = true;
-            this.TXT_Placas.Size = new System.Drawing.Size(191, 21);
+            this.TXT_Placas.Size = new System.Drawing.Size(249, 21);
             this.TXT_Placas.TabIndex = 3;
             // 
             // JLB_Domicilio
@@ -152,7 +152,7 @@
             this.TXT_Domicilio.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_Domicilio.Location = new System.Drawing.Point(82, 90);
             this.TXT_Domicilio.Name = "TXT_Domicilio";
-            this.TXT_Domicilio.Size = new System.Drawing.Size(839, 21);
+            this.TXT_Domicilio.Size = new System.Drawing.Size(897, 21);
             this.TXT_Domicilio.TabIndex = 12;
             // 
             // JLB_RFC
@@ -160,7 +160,7 @@
             this.JLB_RFC.AutoSize = true;
             this.JLB_RFC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_RFC.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_RFC.Location = new System.Drawing.Point(26, 128);
+            this.JLB_RFC.Location = new System.Drawing.Point(39, 128);
             this.JLB_RFC.Name = "JLB_RFC";
             this.JLB_RFC.Size = new System.Drawing.Size(34, 15);
             this.JLB_RFC.TabIndex = 5;
@@ -212,7 +212,7 @@
             this.TXT_NoInterior.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_NoInterior.Location = new System.Drawing.Point(731, 126);
             this.TXT_NoInterior.Name = "TXT_NoInterior";
-            this.TXT_NoInterior.Size = new System.Drawing.Size(190, 21);
+            this.TXT_NoInterior.Size = new System.Drawing.Size(248, 21);
             this.TXT_NoInterior.TabIndex = 15;
             // 
             // JLB_CP
@@ -220,7 +220,7 @@
             this.JLB_CP.AutoSize = true;
             this.JLB_CP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_CP.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_CP.Location = new System.Drawing.Point(30, 166);
+            this.JLB_CP.Location = new System.Drawing.Point(47, 165);
             this.JLB_CP.Name = "JLB_CP";
             this.JLB_CP.Size = new System.Drawing.Size(26, 15);
             this.JLB_CP.TabIndex = 8;
@@ -252,7 +252,7 @@
             this.TXT_Colonia.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_Colonia.Location = new System.Drawing.Point(456, 165);
             this.TXT_Colonia.Name = "TXT_Colonia";
-            this.TXT_Colonia.Size = new System.Drawing.Size(465, 21);
+            this.TXT_Colonia.Size = new System.Drawing.Size(523, 21);
             this.TXT_Colonia.TabIndex = 17;
             // 
             // JLB_Municipio
@@ -292,7 +292,7 @@
             this.TXT_Estado.ForeColor = System.Drawing.SystemColors.InfoText;
             this.TXT_Estado.Location = new System.Drawing.Point(456, 202);
             this.TXT_Estado.Name = "TXT_Estado";
-            this.TXT_Estado.Size = new System.Drawing.Size(465, 21);
+            this.TXT_Estado.Size = new System.Drawing.Size(523, 21);
             this.TXT_Estado.TabIndex = 19;
             // 
             // JLB_NoConcesion

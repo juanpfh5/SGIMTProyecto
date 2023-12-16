@@ -17,6 +17,8 @@ namespace SGIMTProyecto
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             AddUserControl(new F_EditarVehiculo());
+            BTN_DatosVehiculo.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_DatosPropietario.BackColor = Color.FromArgb(103, 24, 122);
         }
         private void AddUserControl(UserControl userControl)
         {
@@ -29,8 +31,8 @@ namespace SGIMTProyecto
         private void BTN_DatosVehiculo_Click(object sender, EventArgs e)
         {
             AddUserControl(new F_EditarVehiculo());
-            Button btnVehiculo = BTN_DatosVehiculo;
-            btnVehiculo.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_DatosVehiculo.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_DatosPropietario.BackColor = Color.FromArgb(103, 24, 122);
         }
 
         private void BTN_Inicio_Click(object sender, EventArgs e)
@@ -41,6 +43,8 @@ namespace SGIMTProyecto
         private void BTN_DatosPropietario_Click(object sender, EventArgs e)
         {
             AddUserControl(new F_EditarPropietario());
+            BTN_DatosVehiculo.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_DatosPropietario.BackColor = Color.FromArgb(80, 14, 95);
         }
     }
 }

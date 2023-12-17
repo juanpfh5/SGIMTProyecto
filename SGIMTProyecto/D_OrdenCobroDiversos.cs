@@ -84,5 +84,97 @@ namespace SGIMTProyecto
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public List<string> ListadoClaveConcepto(string busqueda) {
+            MySqlDataReader listaClaveConcepto;
+            List<string> listaBusqueda = new List<string>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = $"SELECT CONCAT(clave_cl, ' | ', concepto_cl) AS clave_concepto_cl FROM claves_cl WHERE clave_cl LIKE '%{busqueda}%' OR concepto_cl LIKE '%{busqueda}%'";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                listaClaveConcepto = Comando.ExecuteReader();
+
+                while (listaClaveConcepto.Read()) {
+                    listaBusqueda.Add(listaClaveConcepto["clave_concepto_cl"].ToString());
+                }
+
+                return listaBusqueda;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+        public List<string[]> DatosRestantes(string placa) {
+            MySqlDataReader Resultado;
+            List<string[]> listaDatos = new List<string[]>();
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT folioRevista_un, noSerie_un, noMotor_un, modelo_un, marca_un, claveVehicular_un, tipo_un, combustible_un, pasajeros_un, rfc_co, cilindros_un, ruta_un, observaciones_un FROM unidad_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+
+                while (Resultado.Read()) {
+                    // Crear un array para almacenar los datos de cada fila
+                    string[] datosFila = new string[Resultado.FieldCount];
+
+                    // Copiar los datos de cada columna al array
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
+                        datosFila[i] = Resultado[i].ToString();
+                    }
+
+                    // Agregar el array a la lista
+                    listaDatos.Add(datosFila);
+                }
+
+                return listaDatos;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+        public bool ExistenciaVehiculo(string placa) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);  // Utiliza parámetros para evitar la inyección de SQL
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                // Ejecutar la consulta y obtener el resultado
+                int resultado = Convert.ToInt32(Comando.ExecuteScalar());
+
+                // Devolver true si el vehículo existe, false si no existe
+                return resultado == 1;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

@@ -15,11 +15,17 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using HarfBuzzSharp;
+using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SGIMTProyecto
 {
     public partial class F_TarjetaCirculacion : Form
     {
+        private F_VisualizacionPDF formVisualizador;
         public F_TarjetaCirculacion()
         {
             InitializeComponent();
@@ -56,6 +62,178 @@ namespace SGIMTProyecto
             MostrarDatos(Datos.TC(cTexto));
         }
 
+        private string ObtenerTitularSMyT() {
+            D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
+            return Datos.ObtenerTitularSMyT();
+        }
+
+        private (string, bool) VerificacionParametros() {
+            string error, variable;
+            bool bandera = false;
+
+            List<string> parametros = new List<string>();
+
+            int tamanio;
+
+            if (TXT_Propietario.Text.Trim().Length > 60 || TXT_Propietario.Text.Trim().Length < 1) {
+                variable = JLB_Propietario.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Domicilio.Text.Trim().Length > 150 || TXT_Domicilio.Text.Trim().Length < 1) {
+                variable = JLB_Domicilio.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Vehiculo.Text.Trim().Length > 15 || TXT_Vehiculo.Text.Trim().Length < 1) {
+                variable = JLB_Vehiculo.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_RFC.Text.Trim().Length != 13) {
+                variable = JLB_RFC.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Repuve.Text.Trim().Length > 15 || TXT_Vehiculo.Text.Trim().Length < 1) {
+                variable = JLB_Repuve.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_NIV.Text.Trim().Length > 17 || TXT_NIV.Text.Trim().Length < 1) { // No. Serie
+                variable = JLB_NIV.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Placas.Text.Length != 9) {
+                variable = JLB_Placas.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Toneladas.Text.Trim().Length > 10 || TXT_Toneladas.Text.Trim().Length < 1) {
+                variable = JLB_Toneladas.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_NoMotor.Text.Trim(), out int noMotor)) {
+                variable = JLB_NoMotor.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Cilindros.Text.Trim().Length > 10 || TXT_Cilindros.Text.Trim().Length < 1) {
+                variable = JLB_Cilindros.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_Personas.Text.Trim(), out int personas)) {
+                variable = JLB_Personas.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Marca.Text.Trim().Length > 15 || TXT_Marca.Text.Trim().Length < 1) {
+                variable = JLB_Marca.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Combustible.Text.Trim().Length > 15 || TXT_Combustible.Text.Trim().Length < 1) {
+                variable = JLB_Combustible.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Modelo.Text.Trim().Length != 4 || !int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
+                variable = JLB_Modelo.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_ClaveVehicular.Text.Trim().Length > 7 || TXT_ClaveVehicular.Text.Trim().Length < 1) {
+                variable = JLB_ClaveVehicular.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_ClaseTipo.Text.Trim().Length > 15 || TXT_ClaseTipo.Text.Trim().Length < 1) {
+                variable = JLB_ClaseTipo.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Uso.Text.Trim().Length > 25 || TXT_Uso.Text.Trim().Length < 1) {
+                variable = JLB_Uso.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_TipoServicio.Text.Trim().Length > 50 || TXT_TipoServicio.Text.Trim().Length < 1) {
+                variable = JLB_TipoServicio.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_NoConcesion.Text.Trim().Length > 50 || TXT_NoConcesion.Text.Trim().Length < 1) {
+                variable = JLB_NoConcesion.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_VehiculoOrigen.Text.Trim().Length > 20 || TXT_VehiculoOrigen.Text.Trim().Length < 1) {
+                variable = JLB_VehiculoOrigen.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Tramite.Text.Trim().Length > 30 || TXT_Tramite.Text.Trim().Length < 1) {
+                variable = JLB_Tramite.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_SitioRuta.Text.Trim().Length > 500 || TXT_SitioRuta.Text.Trim().Length < 1) {
+                variable = JLB_SitioRuta.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_Folio.Text.Trim(), out int folio)) {
+                variable = JLB_Folio.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+
+            tamanio = parametros.Count;
+
+            if (tamanio == 1) {
+                error = "Verifica el siguiente parámetro: ";
+            } else {
+                error = "Verifica los siguientes parámetros: ";
+            }
+
+            for (int i = 0; i < tamanio; i++) {
+                error += parametros[i];
+                if (i != tamanio - 1) {
+                    error += ", ";
+                }
+            }
+
+            return (error, bandera);
+        }
+
+        private void LimpiarTextBox() {
+            TXT_Propietario.Text = "";
+            TXT_Domicilio.Text = "";
+            TXT_Vehiculo.Text = "";
+            TXT_RFC.Text = "";
+            TXT_Repuve.Text = "";
+            TXT_NIV.Text = "";
+            TXT_Placas.Text = "";
+            TXT_Toneladas.Text = "";
+            TXT_NoMotor.Text = "";
+            TXT_Cilindros.Text = "";
+            TXT_Personas.Text = "";
+            TXT_Marca.Text = "";
+            TXT_Combustible.Text = "";
+            TXT_Modelo.Text = "";
+            TXT_ClaveVehicular.Text = "";
+            TXT_ClaseTipo.Text = "";
+            TXT_Uso.Text = "";
+            TXT_TipoServicio.Text = "";
+            TXT_NoConcesion.Text = "";
+            TXT_VehiculoOrigen.Text = "";
+            TXT_SitioRuta.Text = "";
+            TXT_Folio.Text = "";
+        }
+
         private void MostrarDatos(List<string[]> datos)
         {
             // Verificar que haya al menos una fila de datos
@@ -90,28 +268,7 @@ namespace SGIMTProyecto
             }
             else
             {
-                TXT_Propietario.Text = "";
-                TXT_Domicilio.Text = "";
-                TXT_Vehiculo.Text = "";
-                TXT_RFC.Text = "";
-                TXT_Repuve.Text = "";
-                TXT_NIV.Text = "";
-                TXT_Placas.Text = "";
-                TXT_Toneladas.Text = "";
-                TXT_NoMotor.Text = "";
-                TXT_Cilindros.Text = "";
-                TXT_Personas.Text = "";
-                TXT_Marca.Text = "";
-                TXT_Combustible.Text = "";
-                TXT_Modelo.Text = "";
-                TXT_ClaveVehicular.Text = "";
-                TXT_ClaseTipo.Text = "";
-                TXT_Uso.Text = "";
-                TXT_TipoServicio.Text = "";
-                TXT_NoConcesion.Text = "";
-                TXT_VehiculoOrigen.Text = "";
-                TXT_SitioRuta.Text = "";
-                TXT_Folio.Text = "";
+                LimpiarTextBox();
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -130,44 +287,75 @@ namespace SGIMTProyecto
 
         private void BTN_TarjetaCirculacion_Click(object sender, EventArgs e)
         {
-            /*REQUISITOS PARA ENVIAR EN LA ELABORACION DEL PDF
-             * 
-             * 
-             * string placa = "AXXXXX";
-                string nombre = "MANUEL ALEJANDRO MORA MENESES";
-                string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
-                string serie = "VF1FLADRACY419294";
-                string motor = "C683198";
-                int modelo = 2023;
-                string marca = "RENAULT TRAFIC";
-                string tipo = "PANEL";
-                string pasajeros = "20 PASAJEROS";
-                string concecion = "COLECTIVO";
-                string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-                string rfc = "TUX920811PQ7";
-                string vehiculo = "NISSAN";
-                string clvVehicular = "1982432";
-                string ofcExp = "SAN PABLO APETATITLAN";
-                string tipoServ = "SERV.PUB.LOCAL CON ITINERARIO FIJO";
-                string vehOrig = "NACIONAL";
-                string tramite = "";
-                string fechaExp = "17-JULIO-23";
-                string vigencia = "31-DIC-2023";
-                string noConcecion = "P/213/23";
-                string cilindros = "4 CIL";
-                string combustible = "GASOLINA";
-                string repuve = "322PIE61";
-                string capacidad = "";
-                string toneladas = "";
-                int personas = 17;
-                string uso = "COLECTIVO";
-                string secretario = "LIC. JUAN TAPIA PELCASTRE";
-             * 
-             */
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Propietario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string serie = TXT_NIV.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string marca = TXT_Marca.Text.Trim();
+                    string tipo = TXT_ClaseTipo.Text.Trim();
+
+                    string pasajeros = "Prueba";
+
+                    string concecion = "COLECTIVO";
+                    string ruta = TXT_SitioRuta.Text.Trim();
+                    string rfc = TXT_RFC.Text.Trim();
+
+                    string vehiculo = "Prueba";
+
+                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
+                    string ofcExp = "SAN PABLO APETATITLAN";
+                    string tipoServ = TXT_TipoServicio.Text.Trim();
+                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
+                    string tramite = TXT_Tramite.Text.Trim();
+
+                    string fechaExp = DateTime.Now.ToString("dd/MM/yyyy");
+                    int diasPermiso;
+                    string selectedItem = CMB_VigenciaPermiso.SelectedItem.ToString();
+                    if (int.TryParse(selectedItem.Split(' ')[0], out int numero)) {
+                        diasPermiso = numero;
+                    } else {
+                        diasPermiso = 0;
+                    }
+                    DateTime nuevaFecha = DateTime.Now.AddDays(diasPermiso);
+                    string vigencia = nuevaFecha.ToString("dd/MM/yyyy");
+
+                    string noConcecion = TXT_NoConcesion.Text.Trim();
+                    string cilindros = TXT_Cilindros.Text.Trim();
+                    string combustible = TXT_Combustible.Text.Trim();
+                    string repuve = TXT_Repuve.Text.Trim();
+
+                    string capacidad = "Prueba";
+
+                    string toneladas = TXT_Toneladas.Text.Trim();
+                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
+                    string uso = TXT_Uso.Text.Trim();
+
+                    string secretario = "Prueba";
+
+                    GenerarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, ruta, rfc, vehiculo, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, fechaExp, vigencia, noConcecion, cilindros, combustible, repuve, capacidad, toneladas, personas, uso, secretario);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("TarjetaCirculacion.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("Tarjeta de Circulación generada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarTextBox();
+                }
+            }
         }
-        private static void GenerarPDF()
+        private static void GenerarPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string pasajeros, string concecion, string ruta, string rfc, string vehiculo, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string fechaExp, string vigencia, string noConcecion, string cilindros, string combustible, string repuve, string capacidad, string toneladas, int personas, string uso, string secretario)
         {
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
             string serie = "VF1FLADRACY419294";
@@ -195,7 +383,7 @@ namespace SGIMTProyecto
             string toneladas = "";
             int personas = 17;
             string uso = "COLECTIVO";
-            string secretario = "LIC. JUAN TAPIA PELCASTRE";
+            string secretario = "LIC. JUAN TAPIA PELCASTRE";*/
 
             /*
              * FUENTES
@@ -470,47 +658,59 @@ namespace SGIMTProyecto
 
         private void BTN_PermisoProvisional_Click(object sender, EventArgs e)
         {
-            //en caso de ser permiso provisional
-            /*REQUISITOS PARA IMPRESION:
-             * 
-             * #region DATOS - PERMISO SIN TC
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
 
-                CultureInfo culturaEspañol = new CultureInfo("es-ES");
-                DateTime today = DateTime.Today;
-                int nOficio = 1570;
-                int year = today.Year;
-                int dia = today.Day;
-                string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Propietario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string serie = TXT_NIV.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string marca = TXT_Marca.Text.Trim();
+                    string tipo = TXT_ClaseTipo.Text.Trim();
+                    string ruta = TXT_SitioRuta.Text.Trim();
+                    string rfc = TXT_RFC.Text.Trim();
+                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
+                    string ofcExp = "SAN PABLO APETATITLAN";
+                    string tipoServ = TXT_TipoServicio.Text.Trim();
+                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
+                    string tramite = TXT_Tramite.Text.Trim();
+                    string noConcecion = TXT_NoConcesion.Text.Trim();
+                    string cilindros = TXT_Cilindros.Text.Trim();
+                    string combustible = TXT_Combustible.Text.Trim();
+                    string toneladas = TXT_Toneladas.Text.Trim();
+                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
+                    string uso = TXT_Uso.Text.Trim();
 
-                string placa = "AXXXXX";
-                string nombre = "MANUEL ALEJANDRO MORA MENESES";
-                string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
-                string serie = "VF1FLADRACY419294";
-                string motor = "C683198";
-                int modelo = 2023;
-                string marca = "RENAULT TRAFIC";
-                string tipo = "PANEL";
-                string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-                string rfc = "TUX920811PQ7";
-                string clvVehicular = "1982432";
-                string ofcExp = "SAN PABLO APETATITLAN";
-                string tipoServ = "SERV.PUB.LOCAL CON ITINERARIO FIJO";
-                string vehOrig = "NACIONAL";
-                string tramite = "";
-                string noConcecion = "P/213/23";
-                string cilindros = "4 CIL";
-                string combustible = "GASOLINA";
-                string toneladas = "";
-                int personas = 17;
-                string uso = "COLECTIVO";
-                int diasPermiso = 90;
-                string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-                int nOficio = 1570;
-                #endregion
-             */
+                    int diasPermiso;
+                    string selectedItem = CMB_VigenciaPermiso.SelectedItem.ToString();
+                    if (int.TryParse(selectedItem.Split(' ')[0], out int numero)) {
+                        diasPermiso = numero;
+                    } else {
+                        diasPermiso = 0;
+                    }
+                    string director = ObtenerTitularSMyT();
+                    int nOficio = Convert.ToInt32(TXT_Folio.Text.Trim());
+
+                    GenerarProvisionalPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, ruta, rfc, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, noConcecion, cilindros, combustible, toneladas, personas, uso, diasPermiso, director, nOficio);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("PermisoSinTC.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("Permiso provisional generado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarTextBox();
+                }
+            }
 
         }
-        private static void GenerarProvisionalPDF()
+        private static void GenerarProvisionalPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string ruta, string rfc, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string noConcecion, string cilindros, string combustible, string toneladas, int personas, string uso, int diasPermiso, string director, int nOficio)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -519,7 +719,7 @@ namespace SGIMTProyecto
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
             string serie = "VF1FLADRACY419294";
@@ -542,7 +742,7 @@ namespace SGIMTProyecto
             string uso = "COLECTIVO";
             int diasPermiso = 90;
             string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-            int nOficio = 1570;
+            int nOficio = 1570;*/
             /*
              * FUENTES
              * 
@@ -799,5 +999,21 @@ namespace SGIMTProyecto
 
             doc.Close();
         }
+
+        #region PlaceHolder
+        private void TXT_Placa_Enter(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "Placa") {
+                TXT_Placa.Text = "";
+                TXT_Placa.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_Placa_Leave(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "") {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+        }
+        #endregion
     }
 }

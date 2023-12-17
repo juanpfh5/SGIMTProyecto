@@ -301,6 +301,7 @@
             this.TXT_Placas.Name = "TXT_Placas";
             this.TXT_Placas.Size = new System.Drawing.Size(148, 23);
             this.TXT_Placas.TabIndex = 27;
+            this.TXT_Placas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placas_KeyPress);
             // 
             // JLB_TarjetaCirculacion
             // 
@@ -354,6 +355,7 @@
             // 
             // DTP_FechaExpedicion
             // 
+            this.DTP_FechaExpedicion.Enabled = false;
             this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 413);
             this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";

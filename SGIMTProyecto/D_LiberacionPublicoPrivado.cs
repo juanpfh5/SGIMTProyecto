@@ -94,5 +94,36 @@ namespace SGIMTProyecto {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public string ObtenerDirector() {
+            MySqlConnection SqlCon = new MySqlConnection();
+            string nombreDirector = "";
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        nombreDirector = reader["nombre_di"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+            return nombreDirector;
+        }
+
     }
 }

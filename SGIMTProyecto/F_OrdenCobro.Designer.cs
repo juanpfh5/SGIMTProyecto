@@ -455,6 +455,7 @@
             this.DGV_Clave.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellClick);
             this.DGV_Clave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellContentClick);
             this.DGV_Clave.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DGV_Clave_CellPainting);
+            this.DGV_Clave.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellValueChanged);
             // 
             // JLB_Observaciones
             // 

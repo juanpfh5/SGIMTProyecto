@@ -13,11 +13,15 @@ using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using HarfBuzzSharp;
+using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace SGIMTProyecto
 {
     public partial class F_PermisoCircularFueraRuta : UserControl
     {
+        private F_VisualizacionPDF formVisualizador;
         public F_PermisoCircularFueraRuta()
         {
             InitializeComponent();
@@ -81,7 +85,7 @@ namespace SGIMTProyecto
         }
 
         private (string, bool) VerificacionParametros() {
-            string error, variable;
+            string error, variable, mensajeExtra = "";
             bool bandera = false;
 
             List<string> parametros = new List<string>();
@@ -168,6 +172,14 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
+            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento) || !ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                variable = JLB_NoMovimiento.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+                if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                    mensajeExtra = "No. Movimiento no existente.";
+                }
+            }
 
             tamanio = parametros.Count;
 
@@ -184,6 +196,8 @@ namespace SGIMTProyecto
                 }
             }
 
+            error += "\n" + mensajeExtra;
+
             return (error, bandera);
         }
 
@@ -195,6 +209,11 @@ namespace SGIMTProyecto
         private void InsertarFueraRuta(List<object> datosFueraRuta) {
             D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
             Datos.InsertarFueraRuta(datosFueraRuta);
+        }
+
+        private bool ExistenciaMovimiento(int movimiento) {
+            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
+            return Datos.ExistenciaMovimiento(movimiento);
         }
         #endregion
 
@@ -247,8 +266,30 @@ namespace SGIMTProyecto
 
                     InsertarFueraRuta(datosFueraRuta);
 
-                    MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Permisionario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string poblacion = TXT_Poblacion.Text.Trim();
+                    int CP = Convert.ToInt32(TXT_CP.Text.Trim());
+                    int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string serie = TXT_NoSerie.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    string marca = TXT_Marca.Text.Trim();
+                    string motivo = TXT_Motivo.Text.Trim();
+                    string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
+                    string director = ObtenerTitularSMyT();
+                    string repuve = TXT_Repuve.Text.Trim();
 
+                    GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, modelo, serie, motor, marca, motivo, fechaVig, director, repuve);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("PermisoFueraRuta.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarTextBox();
 
                     //imprimir
@@ -300,7 +341,7 @@ namespace SGIMTProyecto
         }
         #endregion
 
-        private static void GenerarPDF()
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -308,7 +349,7 @@ namespace SGIMTProyecto
             string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
 
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
             string poblacion = "AMAXAC DE GUERRERO";
@@ -321,7 +362,7 @@ namespace SGIMTProyecto
             string motivo = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
             string fechaVig = "31/12/2023";
             string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-            string repuve = "322PIE61";
+            string repuve = "322PIE61";*/
             /*
              * FUENTES
              * 
@@ -417,6 +458,13 @@ namespace SGIMTProyecto
             doc.Add(tabla6);
 
             doc.Close();
+        }
+
+        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                // Si es una letra minúscula, conviértela a mayúscula
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 using System.Collections;
+using System.Numerics;
 
 namespace SGIMTProyecto {
     public class D_OrdenCobro {
@@ -188,6 +189,105 @@ namespace SGIMTProyecto {
             }
         }
 
+        public string ObtenerDirector() {
+            MySqlConnection SqlCon = new MySqlConnection();
+            string nombreDirector = "";
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        nombreDirector = reader["nombre_di"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+            return nombreDirector;
+        }
+
+        public string ObtenerRFC(string placa) {
+            MySqlConnection SqlCon = new MySqlConnection();
+            string rfc = ""; // Cambiado el nombre de la variable a rfc
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT rfc_co FROM concesionario_co WHERE id_co = (SELECT id_co FROM unidad_un WHERE placa_un = @Placa);";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        // Asigna el valor de la columna "rfc_co" a la variable rfc
+                        rfc = reader["rfc_co"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+
+            // Retorna el RFC
+            return rfc;
+        }
+
+        public Tuple<string, string> ObtenerCilindrosYRuta(string placa) {
+            MySqlConnection SqlCon = new MySqlConnection();
+            string cilindros = "";
+            string ruta = "";
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT cilindros_un, ruta_un FROM unidad_un WHERE placa_un = @Placa;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        // Asigna los valores de las columnas a las variables correspondientes
+                        cilindros = reader["cilindros_un"].ToString();
+                        ruta = reader["ruta_un"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+
+            // Retorna una tupla con los valores obtenidos
+            return new Tuple<string, string>(cilindros, ruta);
+        }
 
     }
 }

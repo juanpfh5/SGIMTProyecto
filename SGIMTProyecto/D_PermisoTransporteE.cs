@@ -71,5 +71,60 @@ namespace SGIMTProyecto {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
+
+        public string ObtenerTitularSMyT() {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                object resultado = Comando.ExecuteScalar();
+
+                if (resultado != null) {
+                    return resultado.ToString();
+                } else {
+                    return "No se encontró un Titular.";
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+        }
+
+        public bool ExistenciaMovimiento(int movimiento) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT EXISTS(SELECT 1 FROM movimiento_mo WHERE id_mo = @Movimiento) as existeMovimiento;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Movimiento", movimiento);  // Utiliza parámetros para evitar la inyección de SQL
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                // Ejecutar la consulta y obtener el resultado
+                int resultado = Convert.ToInt32(Comando.ExecuteScalar());
+
+                // Devolver true si el vehículo existe, false si no existe
+                return resultado == 1;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

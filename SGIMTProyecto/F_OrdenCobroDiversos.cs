@@ -16,19 +16,21 @@ using System.Drawing.Printing;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using HarfBuzzSharp;
+using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace SGIMTProyecto
 {
-    public partial class F_OrdenCobroDiversos : UserControl
-    {
-        public F_OrdenCobroDiversos()
-        {
+    public partial class F_OrdenCobroDiversos : UserControl {
+        private F_VisualizacionPDF formVisualizador;
+        public F_OrdenCobroDiversos() {
             InitializeComponent();
         }
 
         #region Métodos
-        private void OrdenCD(string cTexto)
-        {
+        private void OrdenCD(string cTexto) {
             D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             MostrarDatos(Datos.OrdenCD(cTexto));
         }
@@ -52,11 +54,9 @@ namespace SGIMTProyecto
             TXT_Total.Text = "";
         }
 
-        private void MostrarDatos(List<string[]> datos)
-        {
+        private void MostrarDatos(List<string[]> datos) {
             // Verificar que haya al menos una fila de datos
-            if (datos.Count > 0)
-            {
+            if (datos.Count > 0) {
                 // Acceder a los valores de la primera fila
                 string[] primeraFila = datos[0];
 
@@ -70,10 +70,17 @@ namespace SGIMTProyecto
                 if (primeraFila.Length > 6) TXT_Colonia.Text = primeraFila[6];
                 if (primeraFila.Length > 7) TXT_Estado.Text = primeraFila[7];
                 if (primeraFila.Length > 8) TXT_Municipio.Text = primeraFila[8];
-            }
-            else
-            {
+            } else {
                 LimpiarTextBox();
+                TXT_Nombre.Enabled = true;
+                TXT_NoExterior.Enabled = true;
+                TXT_Domicilio.Enabled = true;
+                TXT_NoInterior.Enabled = true;
+                TXT_RFC.Enabled = true;
+                TXT_CP.Enabled = true;
+                TXT_Colonia.Enabled = true;
+                TXT_Estado.Enabled = true;
+                TXT_Municipio.Enabled = true;
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -159,13 +166,90 @@ namespace SGIMTProyecto
 
             return (error, bandera);
         }
+        private DataTable ExtraerDatosDataGridView(DataGridView dataGridView) {
+            DataTable dataTable = new DataTable();
+
+            // Agrega columnas al DataTable
+            foreach (DataGridViewColumn column in dataGridView.Columns) {
+                dataTable.Columns.Add(column.Name);
+            }
+
+            // Agrega filas al DataTable
+            foreach (DataGridViewRow row in dataGridView.Rows) {
+                if (!row.IsNewRow) {
+                    DataRow dataRow = dataTable.NewRow();
+
+                    foreach (DataGridViewCell cell in row.Cells) {
+                        dataRow[cell.ColumnIndex] = cell.Value;
+                    }
+
+                    dataTable.Rows.Add(dataRow);
+                }
+            }
+
+            return dataTable;
+        }
+
+        private List<string> AgregarClave(string concepto) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.AgregarClave(concepto);
+        }
+
+        private List<string[]> DatosRestantes(string placa) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.DatosRestantes(placa);
+        }
+
+        private List<string> ListadoClaveConcepto(string busqueda) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ListadoClaveConcepto(busqueda);
+        }
+
+        private string ObtenerDirector() {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ObtenerDirector();
+        }
+
+        private bool ExistenciaVehiculo(string placa) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ExistenciaVehiculo(placa);
+        }
+
+        private void AutoCompleteClave() {
+            AutoCompleteStringCollection colClaveConcepto = new AutoCompleteStringCollection();
+            List<string> claveConcepto = ListadoClaveConcepto(TXT_Clave.Text);
+            foreach (string clc in claveConcepto) {
+                colClaveConcepto.Add(clc);
+            }
+            TXT_Clave.AutoCompleteCustomSource = colClaveConcepto;
+            TXT_Clave.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TXT_Clave.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // Manejar el evento TextChanged para deshabilitar el TextBox al seleccionar una opción
+            TXT_Clave.TextChanged += (sender, e) => {
+                string textoIngresado = TXT_Clave.Text;
+                if (colClaveConcepto.Contains(textoIngresado)) {
+                    // La opción seleccionada está en la colección de autocompletado, deshabilitar el TextBox
+                    TXT_Clave.Enabled = false;
+                }
+            };
+        }
+
+        private string TruncarTextBox(string textBox) {
+            string concepto = "";
+            if (textBox.Length > 7) {
+                concepto = textBox.Substring(7);
+            } else {
+                concepto = string.Empty;
+            }
+            return concepto;
+        }
 
         #endregion
 
         private void BTN_BuscarPlaca_Click(object sender, EventArgs e)
         {
             if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.OrdenCD(TXT_Placa.Text.Trim());
                 TXT_Nombre.Enabled = false;
                 TXT_NoExterior.Enabled = false;
                 TXT_Domicilio.Enabled = false;
@@ -175,63 +259,102 @@ namespace SGIMTProyecto
                 TXT_Colonia.Enabled = false;
                 TXT_Estado.Enabled = false;
                 TXT_Municipio.Enabled = false;
+                this.OrdenCD(TXT_Placa.Text.Trim());
             }
         }
         private void BTN_Imprimir_Click(object sender, EventArgs e) {
             if (!TXT_Placa.Text.Trim().Equals("Placa")){
+               
                 (string mensajeError, bool bandera) = VerificacionParametros();
 
                 if (bandera) {
                     MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 } else {
+                    string placa = TXT_Placa.Text.Trim();
+                    string nombre = TXT_Nombre.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    decimal total = Convert.ToDecimal(TXT_Total.Text.Trim());
+                    int nMovimiento = Convert.ToInt32(TXT_NoMovimiento.Text.Trim());
 
-                    /* PARAMETROS A PASAR:
-                     * var documentoPDF = GenerarPdf();# aqui se le pasa los parametros que son:
-                     * 
-                     * string placa, 
-                     * string nombre, 
-                     * string direccion, 
-                     * int CP, 
-                     * int folioR, 
-                     * string serie, 
-                     * string motor, 
-                     * int modelo, 
-                     * string marca, 
-                     * string clvVehicular, 
-                     * string tipo, 
-                     * decimal total, 
-                     * string elaboro, 
-                     * List<int> claves, 
-                     * List<String>descripcion, 
-                     * List<decimal>importe, 
-                     * string mesVigencia, 
-                     * int diaVigencia, 
-                     * int yearVigencia
-                     * int nMovimiento
-                     */
+                    List<int> claves = new List<int>();
+                    List<string> descripcion = new List<string>();
+                    List<decimal> importe = new List<decimal>();
+                    foreach (DataGridViewRow fila in DGV_Clave.Rows) {
+                        if (fila.Cells[0].Value != null) {
+                            if (int.TryParse(fila.Cells[0].Value.ToString(), out int clave)) {
+                                claves.Add(clave);
+                            }
+                        }
 
-                    #region Generar Resumen
-                    /*
-                     * //datos diferentes para el RESUMEN
-                     * 
-                        funcion:
-                        GenerarpdfResumen()
+                        // Lista de descripciones (índice 1)
+                        if (fila.Cells[1].Value != null) {
+                            descripcion.Add(fila.Cells[1].Value.ToString());
+                        }
 
-                        string rfc = "TUX920811PQ7";
-                        string ruta = "INTERNA DE LA CIUDAD DE TLAXCALA AUTORIZADA POR LA SECRETARIA DE COMUNICACIONES CONFORME A PLANO SUJETO A ROL POR LA EMPRESA";
-                        string observaciones = "CANJE DE PLACAS 2023";
-                        string fecha = "15/AGOSTO/2023";
-                        string elaboroC = "JOSE ALFREDO CRUZ MARTINEZ";
-                        string autorizoC = "ING. FELIPE HERNANDEZ JUAREZ";
-                        string combustible = "GASOLINA";
-                        string capacidad = "20 PASAEROS";
-                     * 
-                     * 
-                     */
-                    #endregion
+                        // Lista de importes (índice 4)
+                        if (fila.Cells[4].Value != null) {
+                            if (decimal.TryParse(fila.Cells[4].Value.ToString(), out decimal valorImporte)) {
+                                importe.Add(valorImporte);
+                            }
+                        }
+                    }
+
+                    string elaboro = CMB_Elaboro.Text.Trim();
+                    string servicio = "Colectivo";
+                    string autorizoC = ObtenerDirector();
+
+
+                    string folioR = "";
+                    string serie = "";
+                    string motor = "";
+                    string modelo = "";
+                    string marca = "";
+                    string clvVehicular = "";
+                    string tipo = "";
+                    string combustible = "";
+                    string capacidad = "";
+
+                    string rfc = "";
+                    string cilindros = "";
+                    string ruta = "";
+                    string observaciones = "";
+
+                    if (ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
+                        List<string[]> datosRestantes = DatosRestantes(placa);
+                        folioR =datosRestantes[0][0];
+                        serie = datosRestantes[0][1].ToString();
+                        motor = datosRestantes[0][2].ToString();
+                        modelo = datosRestantes[0][3];
+                        marca = datosRestantes[0][4].ToString();
+                        clvVehicular = datosRestantes[0][5].ToString();
+                        tipo = datosRestantes[0][6].ToString();
+                        combustible = datosRestantes[0][7].ToString();
+                        capacidad = datosRestantes[0][8].ToString();
+
+                        rfc = datosRestantes[0][9].ToString();
+                        cilindros = datosRestantes[0][10].ToString();
+                        ruta = datosRestantes[0][11].ToString();
+                        observaciones = datosRestantes[0][12].ToString();
+                    }
+
+                    GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("ResumenCobro.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    GenerarPdf(placa, nombre, direccion, folioR, serie, motor, modelo, marca, clvVehicular, tipo, total, elaboro, nMovimiento, claves, descripcion, importe);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("OrdenCobroDiversos.pdf");
+                        formVisualizador.ShowDialog();
+                    }
                 }
             }
-            
+
 
             /*POSIBLE FORMA DE VISUALIZAR EL PDF
              * 
@@ -244,7 +367,25 @@ namespace SGIMTProyecto
         }
         private void F_OrdenCobroDiversos_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
+            AutoCompleteClave();
             DGV_Clave.Rows.Clear();
+
+            DGV_Clave.ColumnCount = 5;
+            DGV_Clave.Columns[0].Name = "Clave";
+            DGV_Clave.Columns[1].Name = "Concepto";
+            DGV_Clave.Columns[2].Name = "Costo Unitario";
+            DGV_Clave.Columns[3].Name = "Cantidad";
+            DGV_Clave.Columns[4].Name = "Costo";
+
+            DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
+
+            btnEliminar.HeaderText = "Eliminar Registro";
+            btnEliminar.Name = "EliminarRegistro";
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseColumnTextForButtonValue = true;
+
+
+            DGV_Clave.Columns.Add(btnEliminar);
         }
 
         #region PlaceHolder
@@ -264,7 +405,7 @@ namespace SGIMTProyecto
         #endregion
 
         #region Generacion de PDF
-        private static void GenerarPdf()
+        private static void GenerarPdf(string placa, string nombre, string direccion, string folioR, string serie, string motor, string modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, int nMovimiento, List<int> claves, List<String> descripcion, List<decimal> importe)
         {
             #region DATOS
             DateTime today = DateTime.Today;
@@ -279,7 +420,7 @@ namespace SGIMTProyecto
             int diaVigencia = today.Day;
             int yearVigencia = today.Year;
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
             int folioR = 185;
@@ -296,7 +437,7 @@ namespace SGIMTProyecto
             //creacion de las listas para las claves, descripcion e importe
             List<int> claves = new List<int> { 512, 511, 315 };
             List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
-            List<decimal> importe = new List<decimal> { 720, 711, 104 };
+            List<decimal> importe = new List<decimal> { 720, 711, 104 };*/
             #endregion
 
             var doc = new Document();
@@ -493,7 +634,7 @@ namespace SGIMTProyecto
 
         }
 
-        private static void GenerarpdfResumen()
+        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string rfc, string serie, string motor, string modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe)
         {
             #region DATOS 
             DateTime today = DateTime.Today;
@@ -501,7 +642,7 @@ namespace SGIMTProyecto
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
             int year = today.Year;
-            string servicio = "COLECTIVO";
+            /*string servicio = "COLECTIVO";
             string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string rfc = "TUX920811PQ7";
@@ -522,7 +663,7 @@ namespace SGIMTProyecto
             //creacion de las listas para las claves, descripcion e importe
             List<int> claves = new List<int> { 512, 511, 315 };
             List<String> descripcion = new List<String> { "RREFRENDO 2023 PARA VEHICULOS DE 15 A 20 PSJ.", "Refrendo 2023 para vehiculos 5-14 pasajeros", "BAJA DE UNIDAD" };
-            List<decimal> importe = new List<decimal> { 720, 711, 104 };
+            List<decimal> importe = new List<decimal> { 720, 711, 104 };*/
 
             #endregion
 
@@ -579,7 +720,7 @@ namespace SGIMTProyecto
             doc.Add(new iTextSharp.text.Paragraph("NOMBRE DEL CONCECIONARIO: ", fnegrita));
             doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
             doc.Add(new iTextSharp.text.Paragraph("DOMICILIO: ", fnegrita));
-            doc.Add(new iTextSharp.text.Paragraph($"{nombre}", fnormal));
+            doc.Add(new iTextSharp.text.Paragraph($"{domicilio}", fnormal));
             var prfrfc = new iTextSharp.text.Paragraph
             {
                 new iTextSharp.text.Chunk("RFC: ", fnegrita),
@@ -662,7 +803,7 @@ namespace SGIMTProyecto
                 new iTextSharp.text.Chunk("CILINDROS: ",fnegrita_mini),
                 new iTextSharp.text.Chunk($"{cilindros}",fnormal_mini)
             };
-            var t3cel2 = new PdfPCell(prfcombustible) { Padding = 4, Border = 0 };
+            var t3cel2 = new PdfPCell(prfcilindros) { Padding = 4, Border = 0 };
             var t3cel3 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
             var t3cel4 = new PdfPCell(new Phrase("")) { Padding = 4, Border = 0 };
 
@@ -745,5 +886,130 @@ namespace SGIMTProyecto
 
         #endregion
 
+        private void DGV_Clave_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
+                DGV_Clave.Rows.RemoveAt(e.RowIndex);
+                SumarCostos();
+            }
+        }
+
+        private Dictionary<int, int> valores = new Dictionary<int, int>();
+
+        private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) { // Ajusta el índice de la columna según sea necesario
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentForeground);
+
+                // Obtener el valor actual para la fila
+                int valorActual = valores.ContainsKey(e.RowIndex) ? valores[e.RowIndex] : 1;
+
+                // Dibujar el primer botón
+                var buttonRect1 = new System.Drawing.Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
+                /*
+                 * IMAGEN DEL BOTON MAS
+                 */
+                // Dibujar el icono en el primer botón
+                System.Drawing.Image iconomas = Properties.Resources.signomas10px;
+                //Image icono1 = Image.FromFile("Resources/signomas.png"); // Ajusta la ruta según tu proyecto
+                int x1 = buttonRect1.X + (buttonRect1.Width - iconomas.Width) / 2;
+                int y1 = buttonRect1.Y + (buttonRect1.Height - iconomas.Height) / 2;
+                e.Graphics.DrawImage(iconomas, x1, y1);
+
+                // Dibujar el número en medio de los dos botones
+                var textRect = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
+                TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+
+                /*
+                 * Imagen DEL BOTON MENOS
+                 */
+                System.Drawing.Image iconomenos = Properties.Resources.signomenos10px;
+
+                // Dibujar el segundo botón
+                var buttonRect2 = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width * 3 / 4, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
+                ControlPaint.DrawButton(e.Graphics, buttonRect2, ButtonState.Normal);
+                int x2 = buttonRect2.X + (buttonRect2.Width - iconomenos.Width) / 2;
+                int y2 = buttonRect2.Y + (buttonRect2.Height - iconomenos.Height) / 2;
+                e.Graphics.DrawImage(iconomenos, x2, y2);
+
+                e.Handled = true;
+            }
+        }
+
+        private void DGV_Clave_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) {
+                // Determinar si se hizo clic en el primer o segundo botón
+                var clickPosition = DGV_Clave.PointToClient(Cursor.Position);
+                var buttonRect1 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+                var buttonRect2 = new System.Drawing.Rectangle(DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).X + DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width * 3 / 4, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Y + 2, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Width / 4 - 5, DGV_Clave.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true).Height - 4);
+
+                if (buttonRect1.Contains(clickPosition)) {
+                    // Clic en el primer botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] < 5) {
+                            valores[e.RowIndex]++;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, 1);
+                    }
+                } else if (buttonRect2.Contains(clickPosition)) {
+                    // Clic en el segundo botón
+                    if (valores.ContainsKey(e.RowIndex)) {
+                        if (valores[e.RowIndex] > 1) {
+                            valores[e.RowIndex]--;
+                        }
+                    } else {
+                        valores.Add(e.RowIndex, -1);
+                    }
+                }
+
+                // Actualizar la visualización después de hacer clic
+                DGV_Clave.InvalidateCell(e.ColumnIndex, e.RowIndex);
+
+                // Actualizar el valor en la columna "Costo"
+                ActualizarCosto(e.RowIndex);
+            }
+        }
+        private void ActualizarCosto(int rowIndex) {
+            // Obtener la cantidad y el costo unitario de la fila
+            int cantidad = valores.ContainsKey(rowIndex) ? valores[rowIndex] : 1;
+
+            // Asegurarse de que las celdas tengan valores numéricos
+            if (decimal.TryParse(DGV_Clave.Rows[rowIndex].Cells[2].Value?.ToString(), out decimal costoUnitario)) {
+                // Calcular el costo multiplicando cantidad por costo unitario
+                decimal costo = cantidad * costoUnitario;
+
+                // Actualizar el valor en la columna "Costo"
+                DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
+            }
+        }
+
+        private void BTN_LimpiarClave_Click(object sender, EventArgs e) {
+            TXT_Clave.Enabled = true;
+            TXT_Clave.Text = "";
+        }
+
+        private void BTN_Agregar_Click(object sender, EventArgs e) {
+            List<string> concepto = AgregarClave(TruncarTextBox(TXT_Clave.Text));
+
+            // Suponiendo que concepto tiene la estructura Clave, Concepto, Valor repetida
+            for (int i = 0; i < concepto.Count; i += 3) {
+                int index = DGV_Clave.Rows.Add(concepto[i], concepto[i + 1], concepto[i + 2]);
+                ActualizarCosto(index);
+            }
+
+            BTN_LimpiarClave_Click(sender, e);
+        }
+        private void SumarCostos() {
+            decimal Total = 0;
+            foreach (DataGridViewRow row in DGV_Clave.Rows) {
+                Total += Convert.ToDecimal(row.Cells["Costo"].Value);
+            }
+
+            TXT_Total.Text = Total.ToString();
+        }
+
+        private void DGV_Clave_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+            SumarCostos();
+        }
     }
 }

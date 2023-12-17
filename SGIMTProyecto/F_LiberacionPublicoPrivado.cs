@@ -13,10 +13,14 @@ using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Threading;
+using HarfBuzzSharp;
 
 
 namespace SGIMTProyecto {
     public partial class F_LiberacionPublicoPrivado : UserControl {
+        private F_VisualizacionPDF formVisualizador;  
+
         public F_LiberacionPublicoPrivado() {
             InitializeComponent();
         }
@@ -29,6 +33,7 @@ namespace SGIMTProyecto {
             TXT_Tipo.Text = "";
             TXT_NoSerie.Text = "";
             TXT_NoMotor.Text = "";
+            TXT_NoBaja.Text = "";
         }
         private void LiberacionP_P(string cTexto) {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
@@ -101,6 +106,11 @@ namespace SGIMTProyecto {
             Datos.ActualizarLiberacion(placa);
         }
 
+        private string ObtenerDirector() {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ObtenerDirector();
+        }
+
         #endregion
 
         private void BTN_Buscar_Click(object sender, EventArgs e) {
@@ -119,6 +129,24 @@ namespace SGIMTProyecto {
                     if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
 
                         ActualizarLiberacion(TXT_Placa.Text.Trim());
+
+                        int nOficio = 1234;
+                        string marca = TXT_Marca.Text;
+                        int modelo = Convert.ToInt32(TXT_Modelo.Text);
+                        string tipo = TXT_Tipo.Text;
+                        string serie = TXT_NoSerie.Text;
+                        string motor = TXT_NoMotor.Text;
+                        int nBaja = Convert.ToInt32(TXT_NoBaja.Text);
+                        string fechaRecibo = DTP_Fecha.Value.ToString("dd/MM/yyyy");
+                        string director = ObtenerDirector();
+                        GenerarLiberacion(nOficio, marca, modelo, tipo, serie, motor, nBaja, fechaRecibo, director);
+
+
+                        if (formVisualizador == null || formVisualizador.IsDisposed) {
+                            F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                            formVisualizador.RecibirNombre("Liberacion.pdf");
+                            formVisualizador.ShowDialog();  // Utiliza ShowDialog en lugar de Show
+                        }
 
                         // Imprimir
                         /*DATOS NECESARIOS PARA IMPRIMIR
@@ -172,10 +200,9 @@ namespace SGIMTProyecto {
         #endregion
 
         private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
-
         }
 
-        private static void GenerarLiberacion()
+        private static void GenerarLiberacion(int nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
@@ -187,15 +214,15 @@ namespace SGIMTProyecto {
             int mesn = today.Month;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
 
-            int nOficio = 1570;
-            int modelo = 2009;
-            string tipo = "HIACE GV S";
-            string serie = "JTFPX22P890015513";
-            string motor = "2TR8162498";
+            //int nOficio = 1570;
+            //int modelo = 2009;
+            //string tipo = "HIACE GV S";
+            //string serie = "JTFPX22P890015513";
+            //string motor = "2TR8162498";
 
-            int nBaja = 45971683;
-            string fechaRecibo = "2/22/2022";
-            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
+            //int nBaja = 45971683;
+            //string fechaRecibo = "2/22/2022";
+            //string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
 
             /*
              * FUENTES
@@ -261,7 +288,7 @@ namespace SGIMTProyecto {
             var txtmarca = new Paragraph
             {
                 new Chunk("MARCA: ", fnegrita),
-                new Chunk($"{modelo}", fnormal)
+                new Chunk($"{marca}", fnormal)
             };
             var Ccell1 = new PdfPCell(new Paragraph(txtmarca) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 30f };
             contenido.AddCell(Ccell1);
@@ -309,7 +336,7 @@ namespace SGIMTProyecto {
             contenido.AddCell(Ccell1);
             var txtfecha = new Paragraph
             {
-                new Chunk("FEHCA: ", fnegrita),
+                new Chunk("FECHA: ", fnegrita),
                 new Chunk($"{fechaRecibo}", fnormal)
             };
             Ccell1 = new PdfPCell(new Paragraph(txtfecha) { Alignment = Element.ALIGN_CENTER }) { Border = 0, HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 60f };

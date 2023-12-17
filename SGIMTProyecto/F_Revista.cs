@@ -12,11 +12,13 @@ using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using System.Reflection;
 
 namespace SGIMTProyecto
 {
     public partial class F_Revista : Form
     {
+        private F_VisualizacionPDF formVisualizador;
         public F_Revista()
         {
             InitializeComponent();
@@ -53,6 +55,178 @@ namespace SGIMTProyecto
             MostrarDatos(Datos.Rev(cTexto));
         }
 
+        private (string, bool) VerificacionParametros() {
+            string error, variable;
+            bool bandera = false;
+
+            List<string> parametros = new List<string>();
+
+            int tamanio;
+
+            if (TXT_Nombre.Text.Trim().Length > 60 || TXT_Nombre.Text.Trim().Length < 1) {
+                variable = JLB_Nombre.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Domicilio.Text.Trim().Length > 150 || TXT_Domicilio.Text.Trim().Length < 1) {
+                variable = JLB_Domicilio.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Placas.Text.Length != 9) {
+                variable = JLB_Placas.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_NoSerie.Text.Trim().Length > 17 || TXT_NoSerie.Text.Trim().Length < 1) {
+                variable = JLB_NoSerie.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Tipo.Text.Trim().Length > 15 || TXT_Tipo.Text.Trim().Length < 1) {
+                variable = JLB_Tipo.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_NoMotor.Text.Trim(), out int noMotor)) {
+                variable = JLB_NoMotor.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_AnioModelo.Text.Trim().Length != 4 || !int.TryParse(TXT_AnioModelo.Text.Trim(), out int anioModelo)) {
+                variable = JLB_AnioModelo.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_ClaveVehicular.Text.Trim().Length > 7 || TXT_ClaveVehicular.Text.Trim().Length < 1) {
+                variable = JLB_ClaveVehicular.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Marca.Text.Trim().Length > 15 || TXT_Marca.Text.Trim().Length < 1) {
+                variable = JLB_Marca.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_NoPasajeros.Text.Trim(), out int noPasajeros)) {
+                variable = JLB_NoPasajeros.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (!int.TryParse(TXT_FolioRevista.Text.Trim(), out int folioRevista)) {
+                variable = JLB_FolioRevista.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_TipoConcesion.Text.Trim().Length > 50 || TXT_TipoConcesion.Text.Trim().Length < 1) {
+                variable = JLB_TipoConcesion.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_Resolucion.Text.Trim().Length > 50 || TXT_Resolucion.Text.Trim().Length < 1) {
+                variable = JLB_Resolucion.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+            if (TXT_SitioRuta.Text.Trim().Length > 500 || TXT_SitioRuta.Text.Trim().Length < 1) {
+                variable = JLB_SitioRuta.Text;
+                parametros.Add(variable.Substring(0, variable.Length - 1));
+                bandera = true;
+            }
+
+            tamanio = parametros.Count;
+
+            if (tamanio == 1) {
+                error = "Verifica el siguiente parámetro: ";
+            } else {
+                error = "Verifica los siguientes parámetros: ";
+            }
+
+            for (int i = 0; i < tamanio; i++) {
+                error += parametros[i];
+                if (i != tamanio - 1) {
+                    error += ", ";
+                }
+            }
+
+            return (error, bandera);
+        }
+
+        private string DocumentosUnidad() {
+            string docUnidad = "";
+            List<string> parametros = new List<string>();
+
+            int tamanio;
+
+            if (CHB_Repuve.Checked) {
+                parametros.Add(CHB_Repuve.Text);
+            }
+            if (CHB_INE.Checked) {
+                parametros.Add(CHB_INE.Text);
+            }
+            if (CHB_Seguro.Checked) {
+                parametros.Add(CHB_Seguro.Text);
+            }
+            if (CHB_Factura.Checked) {
+                parametros.Add(CHB_Factura.Text);
+            }
+            if (CHB_Dictamen.Checked) {
+                parametros.Add(CHB_Dictamen.Text);
+            }
+            if (CHB_Contrato.Checked) {
+                parametros.Add(CHB_Contrato.Text);
+            }
+            if (CHB_TarjetaCirculacion.Checked) {
+                parametros.Add(CHB_TarjetaCirculacion.Text);
+            }
+
+            tamanio = parametros.Count;
+            
+            for (int i = 0; i < tamanio; i++) {
+                docUnidad += parametros[i];
+                if (i != tamanio - 1) {
+                    docUnidad += ", ";
+                }
+            }
+
+            return docUnidad;
+        }
+
+        private void LimpiarTextBox(){
+            TXT_Nombre.Text = "";
+            TXT_Domicilio.Text = "";
+            TXT_Placas.Text = "";
+            TXT_NoSerie.Text = "";
+            TXT_Tipo.Text = "";
+            TXT_NoMotor.Text = "";
+            TXT_AnioModelo.Text = "";
+            TXT_ClaveVehicular.Text = "";
+            TXT_Marca.Text = "";
+            TXT_NoPasajeros.Text = "";
+            TXT_TipoConcesion.Text = "";
+            TXT_Resolucion.Text = "";
+            TXT_SitioRuta.Text = "";
+            TXT_FolioRevista.Text = "";
+            CHB_Repuve.Checked = false;
+            CHB_INE.Checked = false;
+            CHB_Seguro.Checked = false;
+            CHB_Factura.Checked = false;
+            CHB_Dictamen.Checked = false;
+            CHB_Contrato.Checked = false;
+            CHB_TarjetaCirculacion.Checked = false;
+            CHB_ConcidcionesMecanicas.Checked = false;
+            CHB_Llantas.Checked = false;
+            CHB_LlantaAux.Checked = false;
+            CHB_Luces.Checked = false;
+            CHB_Direccionales.Checked = false;
+            CHB_Cristales.Checked = false;
+            CHB_Espejos.Checked = false;
+            CHB_Limpiadores.Checked = false;
+            CHB_Vestiduras.Checked = false;
+            CHB_Defensas.Checked = false;
+            CHB_PinturaGeneral.Checked = false;
+            CHB_Rotulacion.Checked = false;
+        }
         private void MostrarDatos(List<string[]> datos)
         {
             // Verificar que haya al menos una fila de datos
@@ -78,19 +252,7 @@ namespace SGIMTProyecto
             }
             else
             {
-                TXT_Nombre.Text = "";
-                TXT_Domicilio.Text = "";
-                TXT_Placas.Text = "";
-                TXT_NoSerie.Text = "";
-                TXT_Tipo.Text = "";
-                TXT_NoMotor.Text = "";
-                TXT_AnioModelo.Text = "";
-                TXT_ClaveVehicular.Text = "";
-                TXT_Marca.Text = "";
-                TXT_NoPasajeros.Text = "";
-                TXT_TipoConcesion.Text = "";
-                TXT_Resolucion.Text = "";
-                TXT_SitioRuta.Text = "";
+                LimpiarTextBox();
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -109,44 +271,127 @@ namespace SGIMTProyecto
 
         private void BTN_GuardaImprimir_Click(object sender, EventArgs e)
         {
-            /*REGISTROS QUE OCUPA 
-             * Boton de imprimir y guardar
-             * 
-             * string placa = "AXXXXX";
-                string nombre = "MANUEL ALEJANDRO MORA MENESES";
-                string direccion = "Enrique segoviano";
-                string serie = "VF1FLADRACY419294";
-                string motor = "C683198";
-                int modelo = 2023;
-                string marca = "RENAULT TRAFIC";
-                string tipo = "PANEL";
-                string pasajeros = "20 PASAJEROS";
-                string concecion = "COLECTIVO";
-                string resolucion = "RESOLUCION";
-                string docUnidad = "FACTURA, REPUVE , SEGURO, INE, CONTRATO DE COMPRA VENTA";
-                string ruta = "PAPALOTLA - PANZACOLA - P.I.(BUENAVENTURA)";
-                string condicionesR = "Check";
-                string espejos = "Check";
-                string llantas = "Check";
-                string limpiadores = "Check";
-                string llantaAux = "Check";
-                string vestiduras = "Check";
-                string luces = "Check";
-                string defensas = "Check";
-                string direccionales = "Check";
-                string pinturaG = "Check";
-                string cristales = "Check";
-                string rotulacion = "Check";
-                string observaciones = "CAMBIO DE UNIDAD SALE TOYOTA 2016, ENTRA TOYOTA 2010";
-             * 
-             * 
-             * 
-             */
+            (string mensajeError, bool bandera) = VerificacionParametros();
+
+            if (bandera) {
+                MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                string placa = TXT_Placas.Text.Trim();
+                string nombre = TXT_Nombre.Text.Trim();
+                string direccion = TXT_Domicilio.Text.Trim();
+                string serie = TXT_NoSerie.Text.Trim();
+                string motor = TXT_NoMotor.Text.Trim();
+                int modelo = Convert.ToInt32(TXT_AnioModelo.Text.Trim());
+                string marca = TXT_Marca.Text.Trim();
+                string tipo = TXT_Tipo.Text.Trim();
+                string pasajeros = TXT_NoPasajeros.Text.Trim();
+                string concecion = TXT_TipoConcesion.Text.Trim();
+                string resolucion = TXT_Resolucion.Text.Trim();
+
+                string docUnidad = DocumentosUnidad();
+                string ruta = TXT_SitioRuta.Text.Trim();
+
+                string condicionesR = "";
+                string espejos = "";
+                string llantas = "";
+                string limpiadores = "";
+                string llantaAux = "";
+                string vestiduras = "";
+                string luces = "";
+                string defensas = "";
+                string direccionales = "";
+                string pinturaG = "";
+                string cristales = "";
+                string rotulacion = "";
+                string observaciones = TXT_Observaciones.Text.Trim();
+
+                if (CHB_ConcidcionesMecanicas.Checked){
+                    condicionesR = "Check";
+                }
+                if (CHB_Llantas.Checked) {
+                    llantas = "Check";
+                }
+                if (CHB_LlantaAux.Checked) {
+                    llantaAux = "Check";
+                }
+                if (CHB_Luces.Checked) {
+                    luces = "Check";
+                }
+                if (CHB_Direccionales.Checked) {
+                    direccionales = "Check";
+                }
+                if (CHB_Cristales.Checked) {
+                    cristales = "Check";
+                }
+                if (CHB_Espejos.Checked) {
+                    espejos = "Check";
+                }
+                if (CHB_Limpiadores.Checked) {
+                    limpiadores = "Check";
+                }
+                if (CHB_Vestiduras.Checked) {
+                    vestiduras = "Check";
+                }
+                if (CHB_Defensas.Checked) {
+                    defensas = "Check";
+                }
+                if (CHB_PinturaGeneral.Checked) {
+                    pinturaG = "Check";
+                }
+                if (CHB_Rotulacion.Checked) {
+                    rotulacion = "Check";
+                }
+
+                generarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, resolucion, docUnidad, ruta, condicionesR, espejos, llantas, limpiadores, llantaAux, vestiduras, luces, defensas, direccionales, pinturaG, cristales, rotulacion, observaciones);
+
+                if (formVisualizador == null || formVisualizador.IsDisposed) {
+                    F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                    formVisualizador.RecibirNombre("Revista.pdf");
+                    formVisualizador.ShowDialog();
+                }
+
+                MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LimpiarTextBox();
+            }
+                /*REGISTROS QUE OCUPA 
+                 * Boton de imprimir y guardar
+                 * 
+                 * string placa = "AXXXXX";
+                    string nombre = "MANUEL ALEJANDRO MORA MENESES";
+                    string direccion = "Enrique segoviano";
+                    string serie = "VF1FLADRACY419294";
+                    string motor = "C683198";
+                    int modelo = 2023;
+                    string marca = "RENAULT TRAFIC";
+                    string tipo = "PANEL";
+                    string pasajeros = "20 PASAJEROS";
+                    string concecion = "COLECTIVO";
+                    string resolucion = "RESOLUCION";
+                    string docUnidad = "FACTURA, REPUVE , SEGURO, INE, CONTRATO DE COMPRA VENTA";
+                    string ruta = "PAPALOTLA - PANZACOLA - P.I.(BUENAVENTURA)";
+                    string condicionesR = "Check";
+                    string espejos = "Check";
+                    string llantas = "Check";
+                    string limpiadores = "Check";
+                    string llantaAux = "Check";
+                    string vestiduras = "Check";
+                    string luces = "Check";
+                    string defensas = "Check";
+                    string direccionales = "Check";
+                    string pinturaG = "Check";
+                    string cristales = "Check";
+                    string rotulacion = "Check";
+                    string observaciones = "CAMBIO DE UNIDAD SALE TOYOTA 2016, ENTRA TOYOTA 2010";
+                 * 
+                 * 
+                 * 
+                 */
 
 
-        }
+            }
 
-        private static void generarPDF ()
+        private static void generarPDF (string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string pasajeros, string concecion, string resolucion, string docUnidad, string ruta, string condicionesR, string espejos, string llantas, string limpiadores, string llantaAux, string vestiduras, string luces, string defensas, string direccionales, string pinturaG, string cristales, string rotulacion, string observaciones)
         {
 
             #region datos
@@ -157,7 +402,7 @@ namespace SGIMTProyecto
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
             int year = DateTime.Today.Year;
 
-            string placa = "AXXXXX";
+            /*string placa = "AXXXXX";
             string nombre = "MANUEL ALEJANDRO MORA MENESES";
             string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
             string serie = "VF1FLADRACY419294";
@@ -182,7 +427,7 @@ namespace SGIMTProyecto
             string pinturaG = "Check";
             string cristales = "Check";
             string rotulacion = "Check";
-            string observaciones = "CAMBIO DE UNIDAD SALE TOYOTA 2016, ENTRA TOYOTA 2010";
+            string observaciones = "CAMBIO DE UNIDAD SALE TOYOTA 2016, ENTRA TOYOTA 2010";*/
             #endregion
 
             #region generar pdf
@@ -410,5 +655,21 @@ namespace SGIMTProyecto
 
             #endregion
         }
+
+        #region PlaceHolder
+        private void TXT_Placa_Enter(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "Placa") {
+                TXT_Placa.Text = "";
+                TXT_Placa.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_Placa_Leave(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "") {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+        }
+        #endregion
     }
 }

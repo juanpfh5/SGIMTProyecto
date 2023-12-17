@@ -79,7 +79,7 @@
             this.JLB_Marca.AutoSize = true;
             this.JLB_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Marca.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_Marca.Location = new System.Drawing.Point(187, 165);
+            this.JLB_Marca.Location = new System.Drawing.Point(206, 164);
             this.JLB_Marca.Name = "JLB_Marca";
             this.JLB_Marca.Size = new System.Drawing.Size(45, 15);
             this.JLB_Marca.TabIndex = 13;
@@ -99,7 +99,7 @@
             this.JLB_Modelo.AutoSize = true;
             this.JLB_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Modelo.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_Modelo.Location = new System.Drawing.Point(187, 212);
+            this.JLB_Modelo.Location = new System.Drawing.Point(199, 211);
             this.JLB_Modelo.Name = "JLB_Modelo";
             this.JLB_Modelo.Size = new System.Drawing.Size(52, 15);
             this.JLB_Modelo.TabIndex = 11;
@@ -119,7 +119,7 @@
             this.JLB_Tipo.AutoSize = true;
             this.JLB_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Tipo.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_Tipo.Location = new System.Drawing.Point(187, 251);
+            this.JLB_Tipo.Location = new System.Drawing.Point(217, 250);
             this.JLB_Tipo.Name = "JLB_Tipo";
             this.JLB_Tipo.Size = new System.Drawing.Size(34, 15);
             this.JLB_Tipo.TabIndex = 9;
@@ -139,7 +139,7 @@
             this.JLB_NoSerie.AutoSize = true;
             this.JLB_NoSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_NoSerie.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_NoSerie.Location = new System.Drawing.Point(187, 287);
+            this.JLB_NoSerie.Location = new System.Drawing.Point(190, 286);
             this.JLB_NoSerie.Name = "JLB_NoSerie";
             this.JLB_NoSerie.Size = new System.Drawing.Size(61, 15);
             this.JLB_NoSerie.TabIndex = 7;
@@ -179,7 +179,7 @@
             this.JLB_NoBaja.AutoSize = true;
             this.JLB_NoBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_NoBaja.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_NoBaja.Location = new System.Drawing.Point(187, 361);
+            this.JLB_NoBaja.Location = new System.Drawing.Point(194, 360);
             this.JLB_NoBaja.Name = "JLB_NoBaja";
             this.JLB_NoBaja.Size = new System.Drawing.Size(57, 15);
             this.JLB_NoBaja.TabIndex = 3;
@@ -198,7 +198,7 @@
             this.JLB_Fecha.AutoSize = true;
             this.JLB_Fecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Fecha.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.JLB_Fecha.Location = new System.Drawing.Point(187, 397);
+            this.JLB_Fecha.Location = new System.Drawing.Point(207, 397);
             this.JLB_Fecha.Name = "JLB_Fecha";
             this.JLB_Fecha.Size = new System.Drawing.Size(44, 15);
             this.JLB_Fecha.TabIndex = 1;

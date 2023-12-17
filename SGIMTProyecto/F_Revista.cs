@@ -23,6 +23,29 @@ namespace SGIMTProyecto
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormClosing += Formulario_FormClosing;
+        }
+        private void LimpiarTextBox(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                // Si el control es un TextBox, establece su texto en blanco
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Text = "";
+                }
+
+                // Si el control contiene otros controles, llama recursivamente a la función
+                if (c.HasChildren)
+                {
+                    LimpiarTextBox(c);
+                }
+            }
+        }
+        private void Formulario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Llamar al método para limpiar los TextBox cuando se cierra el formulario
+            LimpiarTextBox(this);
         }
 
         #region Métodos

@@ -139,7 +139,7 @@
             this.JLB_Nombre.AutoSize = true;
             this.JLB_Nombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Nombre.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Nombre.Location = new System.Drawing.Point(52, 59);
+            this.JLB_Nombre.Location = new System.Drawing.Point(60, 63);
             this.JLB_Nombre.Name = "JLB_Nombre";
             this.JLB_Nombre.Size = new System.Drawing.Size(55, 15);
             this.JLB_Nombre.TabIndex = 42;
@@ -152,7 +152,7 @@
             this.TXT_Nombre.Location = new System.Drawing.Point(126, 57);
             this.TXT_Nombre.Name = "TXT_Nombre";
             this.TXT_Nombre.ReadOnly = true;
-            this.TXT_Nombre.Size = new System.Drawing.Size(541, 21);
+            this.TXT_Nombre.Size = new System.Drawing.Size(578, 21);
             this.TXT_Nombre.TabIndex = 43;
             // 
             // JLB_Vehiculo
@@ -160,7 +160,7 @@
             this.JLB_Vehiculo.AutoSize = true;
             this.JLB_Vehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Vehiculo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Vehiculo.Location = new System.Drawing.Point(49, 89);
+            this.JLB_Vehiculo.Location = new System.Drawing.Point(60, 98);
             this.JLB_Vehiculo.Name = "JLB_Vehiculo";
             this.JLB_Vehiculo.Size = new System.Drawing.Size(57, 15);
             this.JLB_Vehiculo.TabIndex = 41;
@@ -170,7 +170,7 @@
             // 
             this.TXT_Vehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Vehiculo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_Vehiculo.Location = new System.Drawing.Point(126, 86);
+            this.TXT_Vehiculo.Location = new System.Drawing.Point(126, 92);
             this.TXT_Vehiculo.Name = "TXT_Vehiculo";
             this.TXT_Vehiculo.Size = new System.Drawing.Size(100, 21);
             this.TXT_Vehiculo.TabIndex = 40;
@@ -180,7 +180,7 @@
             this.JLB_Marca.AutoSize = true;
             this.JLB_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Marca.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Marca.Location = new System.Drawing.Point(264, 90);
+            this.JLB_Marca.Location = new System.Drawing.Point(301, 96);
             this.JLB_Marca.Name = "JLB_Marca";
             this.JLB_Marca.Size = new System.Drawing.Size(45, 15);
             this.JLB_Marca.TabIndex = 39;
@@ -190,7 +190,7 @@
             // 
             this.TXT_Marca.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Marca.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_Marca.Location = new System.Drawing.Point(342, 87);
+            this.TXT_Marca.Location = new System.Drawing.Point(355, 93);
             this.TXT_Marca.Name = "TXT_Marca";
             this.TXT_Marca.Size = new System.Drawing.Size(100, 21);
             this.TXT_Marca.TabIndex = 38;
@@ -200,7 +200,7 @@
             this.JLB_Modelo.AutoSize = true;
             this.JLB_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Modelo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Modelo.Location = new System.Drawing.Point(475, 89);
+            this.JLB_Modelo.Location = new System.Drawing.Point(506, 99);
             this.JLB_Modelo.Name = "JLB_Modelo";
             this.JLB_Modelo.Size = new System.Drawing.Size(52, 15);
             this.JLB_Modelo.TabIndex = 37;
@@ -210,9 +210,9 @@
             // 
             this.TXT_Modelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Modelo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_Modelo.Location = new System.Drawing.Point(541, 89);
+            this.TXT_Modelo.Location = new System.Drawing.Point(566, 95);
             this.TXT_Modelo.Name = "TXT_Modelo";
-            this.TXT_Modelo.Size = new System.Drawing.Size(126, 21);
+            this.TXT_Modelo.Size = new System.Drawing.Size(138, 21);
             this.TXT_Modelo.TabIndex = 36;
             // 
             // JLB_Tipo
@@ -220,7 +220,7 @@
             this.JLB_Tipo.AutoSize = true;
             this.JLB_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Tipo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Tipo.Location = new System.Drawing.Point(49, 124);
+            this.JLB_Tipo.Location = new System.Drawing.Point(41, 130);
             this.JLB_Tipo.Name = "JLB_Tipo";
             this.JLB_Tipo.Size = new System.Drawing.Size(76, 15);
             this.JLB_Tipo.TabIndex = 35;
@@ -230,7 +230,7 @@
             // 
             this.TXT_Tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Tipo.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_Tipo.Location = new System.Drawing.Point(126, 121);
+            this.TXT_Tipo.Location = new System.Drawing.Point(126, 127);
             this.TXT_Tipo.Name = "TXT_Tipo";
             this.TXT_Tipo.Size = new System.Drawing.Size(100, 21);
             this.TXT_Tipo.TabIndex = 34;
@@ -240,7 +240,7 @@
             this.JLB_TipoServicio.AutoSize = true;
             this.JLB_TipoServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_TipoServicio.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_TipoServicio.Location = new System.Drawing.Point(249, 127);
+            this.JLB_TipoServicio.Location = new System.Drawing.Point(249, 133);
             this.JLB_TipoServicio.Name = "JLB_TipoServicio";
             this.JLB_TipoServicio.Size = new System.Drawing.Size(97, 15);
             this.JLB_TipoServicio.TabIndex = 33;
@@ -250,7 +250,7 @@
             // 
             this.TXT_TipoServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_TipoServicio.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_TipoServicio.Location = new System.Drawing.Point(342, 122);
+            this.TXT_TipoServicio.Location = new System.Drawing.Point(355, 128);
             this.TXT_TipoServicio.Name = "TXT_TipoServicio";
             this.TXT_TipoServicio.Size = new System.Drawing.Size(100, 21);
             this.TXT_TipoServicio.TabIndex = 32;
@@ -260,7 +260,7 @@
             this.JLB_VehiculoOrigen.AutoSize = true;
             this.JLB_VehiculoOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_VehiculoOrigen.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_VehiculoOrigen.Location = new System.Drawing.Point(448, 127);
+            this.JLB_VehiculoOrigen.Location = new System.Drawing.Point(461, 133);
             this.JLB_VehiculoOrigen.Name = "JLB_VehiculoOrigen";
             this.JLB_VehiculoOrigen.Size = new System.Drawing.Size(97, 15);
             this.JLB_VehiculoOrigen.TabIndex = 31;
@@ -270,9 +270,9 @@
             // 
             this.TXT_VehiculoOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_VehiculoOrigen.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_VehiculoOrigen.Location = new System.Drawing.Point(541, 124);
+            this.TXT_VehiculoOrigen.Location = new System.Drawing.Point(566, 130);
             this.TXT_VehiculoOrigen.Name = "TXT_VehiculoOrigen";
-            this.TXT_VehiculoOrigen.Size = new System.Drawing.Size(126, 21);
+            this.TXT_VehiculoOrigen.Size = new System.Drawing.Size(138, 21);
             this.TXT_VehiculoOrigen.TabIndex = 30;
             // 
             // JLB_ClaveVehicular
@@ -280,7 +280,7 @@
             this.JLB_ClaveVehicular.AutoSize = true;
             this.JLB_ClaveVehicular.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_ClaveVehicular.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_ClaveVehicular.Location = new System.Drawing.Point(34, 157);
+            this.JLB_ClaveVehicular.Location = new System.Drawing.Point(34, 166);
             this.JLB_ClaveVehicular.Name = "JLB_ClaveVehicular";
             this.JLB_ClaveVehicular.Size = new System.Drawing.Size(83, 15);
             this.JLB_ClaveVehicular.TabIndex = 29;
@@ -290,7 +290,7 @@
             // 
             this.TXT_ClaveVehicular.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_ClaveVehicular.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_ClaveVehicular.Location = new System.Drawing.Point(126, 151);
+            this.TXT_ClaveVehicular.Location = new System.Drawing.Point(126, 163);
             this.TXT_ClaveVehicular.Name = "TXT_ClaveVehicular";
             this.TXT_ClaveVehicular.Size = new System.Drawing.Size(100, 21);
             this.TXT_ClaveVehicular.TabIndex = 28;
@@ -300,7 +300,7 @@
             this.JLB_NoSeguro.AutoSize = true;
             this.JLB_NoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_NoSeguro.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_NoSeguro.Location = new System.Drawing.Point(234, 154);
+            this.JLB_NoSeguro.Location = new System.Drawing.Point(231, 166);
             this.JLB_NoSeguro.Name = "JLB_NoSeguro";
             this.JLB_NoSeguro.Size = new System.Drawing.Size(115, 15);
             this.JLB_NoSeguro.TabIndex = 27;
@@ -310,7 +310,7 @@
             // 
             this.TXT_NoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_NoSeguro.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_NoSeguro.Location = new System.Drawing.Point(342, 152);
+            this.TXT_NoSeguro.Location = new System.Drawing.Point(355, 164);
             this.TXT_NoSeguro.Name = "TXT_NoSeguro";
             this.TXT_NoSeguro.Size = new System.Drawing.Size(100, 21);
             this.TXT_NoSeguro.TabIndex = 26;
@@ -320,7 +320,7 @@
             this.JLB_Repuve.AutoSize = true;
             this.JLB_Repuve.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Repuve.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Repuve.Location = new System.Drawing.Point(475, 154);
+            this.JLB_Repuve.Location = new System.Drawing.Point(506, 169);
             this.JLB_Repuve.Name = "JLB_Repuve";
             this.JLB_Repuve.Size = new System.Drawing.Size(52, 15);
             this.JLB_Repuve.TabIndex = 25;
@@ -330,9 +330,9 @@
             // 
             this.TXT_Repuve.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Repuve.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_Repuve.Location = new System.Drawing.Point(541, 154);
+            this.TXT_Repuve.Location = new System.Drawing.Point(566, 166);
             this.TXT_Repuve.Name = "TXT_Repuve";
-            this.TXT_Repuve.Size = new System.Drawing.Size(126, 21);
+            this.TXT_Repuve.Size = new System.Drawing.Size(138, 21);
             this.TXT_Repuve.TabIndex = 24;
             // 
             // JLB_NoSerie
@@ -340,7 +340,7 @@
             this.JLB_NoSerie.AutoSize = true;
             this.JLB_NoSerie.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_NoSerie.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_NoSerie.Location = new System.Drawing.Point(783, 87);
+            this.JLB_NoSerie.Location = new System.Drawing.Point(797, 90);
             this.JLB_NoSerie.Name = "JLB_NoSerie";
             this.JLB_NoSerie.Size = new System.Drawing.Size(61, 15);
             this.JLB_NoSerie.TabIndex = 23;
@@ -360,7 +360,7 @@
             this.JLB_NoMotor.AutoSize = true;
             this.JLB_NoMotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_NoMotor.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_NoMotor.Location = new System.Drawing.Point(783, 122);
+            this.JLB_NoMotor.Location = new System.Drawing.Point(794, 125);
             this.JLB_NoMotor.Name = "JLB_NoMotor";
             this.JLB_NoMotor.Size = new System.Drawing.Size(64, 15);
             this.JLB_NoMotor.TabIndex = 21;
@@ -380,7 +380,7 @@
             this.JLB_Cilindros.AutoSize = true;
             this.JLB_Cilindros.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Cilindros.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Cilindros.Location = new System.Drawing.Point(783, 155);
+            this.JLB_Cilindros.Location = new System.Drawing.Point(800, 158);
             this.JLB_Cilindros.Name = "JLB_Cilindros";
             this.JLB_Cilindros.Size = new System.Drawing.Size(58, 15);
             this.JLB_Cilindros.TabIndex = 19;
@@ -400,7 +400,7 @@
             this.JLB_Combustible.AutoSize = true;
             this.JLB_Combustible.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Combustible.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Combustible.Location = new System.Drawing.Point(786, 187);
+            this.JLB_Combustible.Location = new System.Drawing.Point(779, 193);
             this.JLB_Combustible.Name = "JLB_Combustible";
             this.JLB_Combustible.Size = new System.Drawing.Size(79, 15);
             this.JLB_Combustible.TabIndex = 17;
@@ -420,7 +420,7 @@
             this.JLB_Toneladas.AutoSize = true;
             this.JLB_Toneladas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Toneladas.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Toneladas.Location = new System.Drawing.Point(783, 220);
+            this.JLB_Toneladas.Location = new System.Drawing.Point(790, 226);
             this.JLB_Toneladas.Name = "JLB_Toneladas";
             this.JLB_Toneladas.Size = new System.Drawing.Size(68, 15);
             this.JLB_Toneladas.TabIndex = 15;
@@ -440,7 +440,7 @@
             this.JLB_Pasajeros.AutoSize = true;
             this.JLB_Pasajeros.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Pasajeros.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Pasajeros.Location = new System.Drawing.Point(783, 259);
+            this.JLB_Pasajeros.Location = new System.Drawing.Point(793, 265);
             this.JLB_Pasajeros.Name = "JLB_Pasajeros";
             this.JLB_Pasajeros.Size = new System.Drawing.Size(65, 15);
             this.JLB_Pasajeros.TabIndex = 13;
@@ -460,7 +460,7 @@
             this.JLB_Uso.AutoSize = true;
             this.JLB_Uso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Uso.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Uso.Location = new System.Drawing.Point(783, 297);
+            this.JLB_Uso.Location = new System.Drawing.Point(826, 303);
             this.JLB_Uso.Name = "JLB_Uso";
             this.JLB_Uso.Size = new System.Drawing.Size(32, 15);
             this.JLB_Uso.TabIndex = 11;
@@ -480,7 +480,7 @@
             this.JLB_Placas.AutoSize = true;
             this.JLB_Placas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_Placas.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_Placas.Location = new System.Drawing.Point(780, 335);
+            this.JLB_Placas.Location = new System.Drawing.Point(811, 338);
             this.JLB_Placas.Name = "JLB_Placas";
             this.JLB_Placas.Size = new System.Drawing.Size(47, 15);
             this.JLB_Placas.TabIndex = 9;
@@ -500,7 +500,7 @@
             this.JLB_SitioRuta.AutoSize = true;
             this.JLB_SitioRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_SitioRuta.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_SitioRuta.Location = new System.Drawing.Point(79, 201);
+            this.JLB_SitioRuta.Location = new System.Drawing.Point(34, 202);
             this.JLB_SitioRuta.Name = "JLB_SitioRuta";
             this.JLB_SitioRuta.Size = new System.Drawing.Size(134, 15);
             this.JLB_SitioRuta.TabIndex = 7;
@@ -510,10 +510,10 @@
             // 
             this.TXT_SitioRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_SitioRuta.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_SitioRuta.Location = new System.Drawing.Point(79, 220);
+            this.TXT_SitioRuta.Location = new System.Drawing.Point(37, 220);
             this.TXT_SitioRuta.Multiline = true;
             this.TXT_SitioRuta.Name = "TXT_SitioRuta";
-            this.TXT_SitioRuta.Size = new System.Drawing.Size(588, 115);
+            this.TXT_SitioRuta.Size = new System.Drawing.Size(667, 115);
             this.TXT_SitioRuta.TabIndex = 6;
             // 
             // JLB_FolioTC
@@ -521,7 +521,7 @@
             this.JLB_FolioTC.AutoSize = true;
             this.JLB_FolioTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_FolioTC.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_FolioTC.Location = new System.Drawing.Point(90, 354);
+            this.JLB_FolioTC.Location = new System.Drawing.Point(45, 354);
             this.JLB_FolioTC.Name = "JLB_FolioTC";
             this.JLB_FolioTC.Size = new System.Drawing.Size(55, 15);
             this.JLB_FolioTC.TabIndex = 5;
@@ -531,7 +531,7 @@
             // 
             this.TXT_FolioTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_FolioTC.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_FolioTC.Location = new System.Drawing.Point(154, 352);
+            this.TXT_FolioTC.Location = new System.Drawing.Point(109, 352);
             this.TXT_FolioTC.Name = "TXT_FolioTC";
             this.TXT_FolioTC.Size = new System.Drawing.Size(100, 21);
             this.TXT_FolioTC.TabIndex = 4;
@@ -541,7 +541,7 @@
             this.JLB_RFV.AutoSize = true;
             this.JLB_RFV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_RFV.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_RFV.Location = new System.Drawing.Point(271, 355);
+            this.JLB_RFV.Location = new System.Drawing.Point(255, 352);
             this.JLB_RFV.Name = "JLB_RFV";
             this.JLB_RFV.Size = new System.Drawing.Size(33, 15);
             this.JLB_RFV.TabIndex = 3;
@@ -551,7 +551,7 @@
             // 
             this.TXT_RFV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_RFV.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.TXT_RFV.Location = new System.Drawing.Point(329, 355);
+            this.TXT_RFV.Location = new System.Drawing.Point(313, 352);
             this.TXT_RFV.Name = "TXT_RFV";
             this.TXT_RFV.Size = new System.Drawing.Size(100, 21);
             this.TXT_RFV.TabIndex = 2;
@@ -561,7 +561,7 @@
             this.JLB_FolioRevista.AutoSize = true;
             this.JLB_FolioRevista.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JLB_FolioRevista.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.JLB_FolioRevista.Location = new System.Drawing.Point(466, 355);
+            this.JLB_FolioRevista.Location = new System.Drawing.Point(466, 357);
             this.JLB_FolioRevista.Name = "JLB_FolioRevista";
             this.JLB_FolioRevista.Size = new System.Drawing.Size(80, 15);
             this.JLB_FolioRevista.TabIndex = 1;
@@ -569,9 +569,10 @@
             // 
             // TXT_FolioRevista
             // 
-            this.TXT_FolioRevista.Location = new System.Drawing.Point(553, 352);
+            this.TXT_FolioRevista.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TXT_FolioRevista.Location = new System.Drawing.Point(553, 354);
             this.TXT_FolioRevista.Name = "TXT_FolioRevista";
-            this.TXT_FolioRevista.Size = new System.Drawing.Size(114, 29);
+            this.TXT_FolioRevista.Size = new System.Drawing.Size(151, 21);
             this.TXT_FolioRevista.TabIndex = 0;
             // 
             // TXT_Placa

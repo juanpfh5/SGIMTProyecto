@@ -547,7 +547,7 @@
             this.JLB_Tramite.AutoSize = true;
             this.JLB_Tramite.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.JLB_Tramite.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Tramite.Location = new System.Drawing.Point(15, 307);
+            this.JLB_Tramite.Location = new System.Drawing.Point(27, 307);
             this.JLB_Tramite.Name = "JLB_Tramite";
             this.JLB_Tramite.Size = new System.Drawing.Size(49, 15);
             this.JLB_Tramite.TabIndex = 40;
@@ -584,7 +584,7 @@
             this.JLB_Folio.AutoSize = true;
             this.JLB_Folio.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.JLB_Folio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Folio.Location = new System.Drawing.Point(33, 455);
+            this.JLB_Folio.Location = new System.Drawing.Point(40, 456);
             this.JLB_Folio.Name = "JLB_Folio";
             this.JLB_Folio.Size = new System.Drawing.Size(36, 15);
             this.JLB_Folio.TabIndex = 44;

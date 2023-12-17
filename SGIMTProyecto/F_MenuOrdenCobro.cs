@@ -15,6 +15,8 @@ namespace SGIMTProyecto
         public F_MenuOrdenCobro()
         {
             InitializeComponent();
+            BTN_OrdenCobro.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_OrdenCobroDiversos.BackColor = Color.FromArgb(103, 24, 122);
             this.StartPosition = FormStartPosition.CenterScreen;
             AddUserControl(new F_OrdenCobro());
         }
@@ -28,13 +30,15 @@ namespace SGIMTProyecto
 
         private void BTN_OrdenCobro_Click(object sender, EventArgs e)
         {
-            
+            BTN_OrdenCobro.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_OrdenCobroDiversos.BackColor = Color.FromArgb(103, 24, 122);
             AddUserControl(new F_OrdenCobro());
         }
 
         private void BTN_OrdenCobroDiversos_Click(object sender, EventArgs e)
         {
-            
+            BTN_OrdenCobro.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_OrdenCobroDiversos.BackColor = Color.FromArgb(80, 14, 95);
             AddUserControl(new F_OrdenCobroDiversos());
         }
 

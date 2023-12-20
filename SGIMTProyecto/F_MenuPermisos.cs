@@ -16,8 +16,10 @@ namespace SGIMTProyecto
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            SDP_MenuEditar.Height = BTN_TransporteEscolar.Height;
-            SDP_MenuEditar.Top = BTN_TransporteEscolar.Top;
+            BTN_TransporteEscolar.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_PasoAnual.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_TransportePersonalEmpresas.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_EventualFueraRuta.BackColor = Color.FromArgb(103, 24, 122);
             AddUserControl(new F_PermisoTransporteE());
         }
         private void AddUserControl(UserControl userControl)
@@ -30,29 +32,37 @@ namespace SGIMTProyecto
 
         private void BTN_TransporteEscolar_Click(object sender, EventArgs e)
         {
-            SDP_MenuEditar.Height = BTN_TransporteEscolar.Height;
-            SDP_MenuEditar.Top = BTN_TransporteEscolar.Top;
+            BTN_TransporteEscolar.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_PasoAnual.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_TransportePersonalEmpresas.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_EventualFueraRuta.BackColor = Color.FromArgb(103, 24, 122);
             AddUserControl(new F_PermisoTransporteE());
         }
 
         private void BTN_PasoAnual_Click(object sender, EventArgs e)
         {
-            SDP_MenuEditar.Height = BTN_PasoAnual.Height;
-            SDP_MenuEditar.Top = BTN_PasoAnual.Top;
+            BTN_TransporteEscolar.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_PasoAnual.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_TransportePersonalEmpresas.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_EventualFueraRuta.BackColor = Color.FromArgb(103, 24, 122);
             AddUserControl(new F_PermisoPasoAnual());
         }
 
         private void BTN_TransportePersonalEmpresas_Click(object sender, EventArgs e)
         {
-            SDP_MenuEditar.Height = BTN_TransportePersonalEmpresas.Height;
-            SDP_MenuEditar.Top = BTN_TransportePersonalEmpresas.Top;
+            BTN_TransporteEscolar.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_PasoAnual.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_TransportePersonalEmpresas.BackColor = Color.FromArgb(80, 14, 95);
+            BTN_EventualFueraRuta.BackColor = Color.FromArgb(103, 24, 122);
             AddUserControl(new F_PermisoPersonalEmpresas());
         }
 
         private void BTN_EventualFueraRuta_Click(object sender, EventArgs e)
         {
-            SDP_MenuEditar.Height = BTN_EventualFueraRuta.Height;
-            SDP_MenuEditar.Top = BTN_EventualFueraRuta.Top;
+            BTN_TransporteEscolar.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_PasoAnual.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_TransportePersonalEmpresas.BackColor = Color.FromArgb(103, 24, 122);
+            BTN_EventualFueraRuta.BackColor = Color.FromArgb(80, 14, 95);
             AddUserControl(new F_PermisoCircularFueraRuta());
         }
 

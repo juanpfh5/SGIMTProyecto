@@ -28,8 +28,11 @@ namespace SGIMTProyecto
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;//centrar el formulario al crearse
-            SDP_MenuPrincipal.Height = BTN_Revista.Height;//alinear el side panel con el boton
-            SDP_MenuPrincipal.Top = BTN_Revista.Top;
+            BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_Permisos.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(135, 20, 62);
             F_MenuPrincipalUC menuPrincipalUC = new F_MenuPrincipalUC();
             AddUserControl(menuPrincipalUC);
         }
@@ -45,7 +48,11 @@ namespace SGIMTProyecto
             }
             this.Hide();
             formRevista.ShowDialog();
-
+            BTN_Revista.BackColor = Color.FromArgb(106, 16, 49);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_Permisos.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(135, 20, 62);
             this.Show();
             AddUserControl(new F_MenuPrincipalUC());
         }
@@ -59,8 +66,11 @@ namespace SGIMTProyecto
             this.Hide();
             formTC.ShowDialog();
             this.Show();
-            SDP_MenuPrincipal.Height = BTN_TarjetaCirculacion.Height;
-            SDP_MenuPrincipal.Top = BTN_TarjetaCirculacion.Top;
+            BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(106, 16, 49);
+            BTN_Permisos.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(135, 20, 62);
             AddUserControl(new F_MenuPrincipalUC());
         }
 
@@ -73,8 +83,11 @@ namespace SGIMTProyecto
             this.Hide();
             formMpermisos.ShowDialog();
             this.Show();
-            SDP_MenuPrincipal.Height = BTN_Permisos.Height;
-            SDP_MenuPrincipal.Top = BTN_Permisos.Top;
+            BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_Permisos.BackColor = Color.FromArgb(106, 16, 49);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(135, 20, 62);
             AddUserControl(new F_MenuPrincipalUC());
         }
 
@@ -87,15 +100,21 @@ namespace SGIMTProyecto
             this.Hide();
             formOrdenCobro.ShowDialog();
             this.Show();
-            SDP_MenuPrincipal.Height = BTN_OrdenCobro.Height;
-            SDP_MenuPrincipal.Top = BTN_OrdenCobro.Top;
+            BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_Permisos.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(106, 16, 49);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(135, 20, 62);
             AddUserControl(new F_MenuPrincipalUC());
         }
 
         private void BTN_LiberacionPublicoPrivado_Click(object sender, EventArgs e)
         {
-            SDP_MenuPrincipal.Height = BTN_LiberacionPublicoPrivado.Height;
-            SDP_MenuPrincipal.Top = BTN_LiberacionPublicoPrivado.Top;
+            BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_Permisos.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_OrdenCobro.BackColor = Color.FromArgb(135, 20, 62);
+            BTN_LiberacionPublicoPrivado.BackColor = Color.FromArgb(106, 16, 49);
             AddUserControl(new F_LiberacionPublicoPrivado());
         }
 
@@ -108,8 +127,7 @@ namespace SGIMTProyecto
             this.Hide();
             formMenuEditar.ShowDialog();
             this.Show();
-            SDP_MenuPrincipal.Height = BTN_Editar.Height;
-            SDP_MenuPrincipal.Top = BTN_Editar.Top;
+            
         }
     }
 }

@@ -289,5 +289,40 @@ namespace SGIMTProyecto {
             return new Tuple<string, string>(cilindros, ruta);
         }
 
+        public decimal ObtenerDescuento(string fecha) {
+            MySqlConnection SqlCon = new MySqlConnection();
+            decimal des = 0.00m; // Asigna un valor predeterminado
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT COALESCE(procentaje_de, 0.00) AS PorcentajeDescuento FROM (SELECT * FROM (SELECT procentaje_de FROM descuento_de WHERE @Fecha BETWEEN fechaInicio_de AND fechaFin_de ORDER BY id_de DESC LIMIT 1 ) AS subquery UNION SELECT 0.00 AS procentaje_de ) AS combined LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Fecha", fecha);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
+                        des = Convert.ToDecimal(reader["PorcentajeDescuento"]);
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+
+            // Retorna el valor del descuento
+            return des;
+        }
+
+
     }
 }

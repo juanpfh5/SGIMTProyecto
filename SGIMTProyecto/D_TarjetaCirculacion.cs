@@ -80,5 +80,41 @@ namespace SGIMTProyecto
                 }
             }
         }
+
+        public Tuple<string, string> ObtenerPasajerosYVehiculo(string placa) {
+            MySqlConnection SqlCon = new MySqlConnection();
+            string pasajeros = "";
+            string vehiculo = "";
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT pasajeros_un, vehiculo_un FROM unidad_un WHERE placa_un = @Placa;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        // Asigna los valores de las columnas a las variables correspondientes
+                        pasajeros = reader["pasajeros_un"].ToString();
+                        vehiculo = reader["vehiculo_un"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+
+            // Retorna una tupla con los valores obtenidos
+            return new Tuple<string, string>(pasajeros, vehiculo);
+        }
     }
 }

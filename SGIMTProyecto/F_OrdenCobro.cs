@@ -278,6 +278,11 @@ namespace SGIMTProyecto
             return Datos.ObtenerRFC(placa);
         }
 
+        private decimal ObtenerDescuento(string fecha) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            return Datos.ObtenerDescuento(fecha);
+        }
+
         private Tuple<string, string> ObtenerCilindrosYRuta(string placa) {
             D_OrdenCobro Datos = new D_OrdenCobro();
             return Datos.ObtenerCilindrosYRuta(placa);
@@ -423,6 +428,7 @@ namespace SGIMTProyecto
         }
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
+            TXT_Descuento.Text = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd")).ToString() + "%";
             AutoCompleteClave();
             DGV_Clave.ColumnCount = 5;
             DGV_Clave.Columns[0].Name = "Clave";
@@ -580,11 +586,13 @@ namespace SGIMTProyecto
 
         private void SumarCostos(){
             decimal Total = 0;
+            decimal descuento = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
+
             foreach (DataGridViewRow row in DGV_Clave.Rows){
                 Total += Convert.ToDecimal(row.Cells["Costo"].Value);
             }
-
-            TXT_Total.Text = Total.ToString();
+            
+            TXT_Total.Text = (Total * (1 - (descuento / 100))).ToString();
         }
 
         #region funciones de PDF

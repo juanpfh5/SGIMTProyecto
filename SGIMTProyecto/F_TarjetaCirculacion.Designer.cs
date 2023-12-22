@@ -679,6 +679,7 @@
             this.Controls.Add(this.BTN_Inicio);
             this.Name = "F_TarjetaCirculacion";
             this.Text = "TarjetaCirculacion";
+            this.Load += new System.EventHandler(this.F_TarjetaCirculacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.GRB_TarjetaCirculacion.ResumeLayout(false);
             this.GRB_TarjetaCirculacion.PerformLayout();

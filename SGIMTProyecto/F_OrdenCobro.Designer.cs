@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GRB_OrdenCobro = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -74,6 +74,8 @@
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
+            this.JLB_Descuento = new System.Windows.Forms.Label();
+            this.TXT_Descuento = new System.Windows.Forms.TextBox();
             this.GRB_OrdenCobro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).BeginInit();
             this.SuspendLayout();
@@ -112,6 +114,8 @@
             this.GRB_OrdenCobro.Controls.Add(this.TXT_Clave);
             this.GRB_OrdenCobro.Controls.Add(this.BTN_Agregar);
             this.GRB_OrdenCobro.Controls.Add(this.BTN_LimpiarClave);
+            this.GRB_OrdenCobro.Controls.Add(this.JLB_Descuento);
+            this.GRB_OrdenCobro.Controls.Add(this.TXT_Descuento);
             this.GRB_OrdenCobro.Controls.Add(this.DGV_Clave);
             this.GRB_OrdenCobro.Controls.Add(this.JLB_Observaciones);
             this.GRB_OrdenCobro.Controls.Add(this.TXT_Observaciones);
@@ -448,8 +452,8 @@
             this.DGV_Clave.Location = new System.Drawing.Point(18, 336);
             this.DGV_Clave.Name = "DGV_Clave";
             this.DGV_Clave.ReadOnly = true;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 55;
             this.DGV_Clave.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellClick);
@@ -572,6 +576,27 @@
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
             this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
             // 
+            // JLB_Descuento
+            // 
+            this.JLB_Descuento.AutoSize = true;
+            this.JLB_Descuento.Enabled = false;
+            this.JLB_Descuento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Descuento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Descuento.Location = new System.Drawing.Point(631, 301);
+            this.JLB_Descuento.Name = "JLB_Descuento";
+            this.JLB_Descuento.Size = new System.Drawing.Size(67, 15);
+            this.JLB_Descuento.TabIndex = 65;
+            this.JLB_Descuento.Text = "Descuento:";
+            // 
+            // TXT_Descuento
+            // 
+            this.TXT_Descuento.Enabled = false;
+            this.TXT_Descuento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Descuento.Location = new System.Drawing.Point(713, 298);
+            this.TXT_Descuento.Name = "TXT_Descuento";
+            this.TXT_Descuento.Size = new System.Drawing.Size(161, 23);
+            this.TXT_Descuento.TabIndex = 66;
+            // 
             // F_OrdenCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -638,5 +663,7 @@
         private System.Windows.Forms.Button BTN_BuscarPlaca;
         private System.Windows.Forms.TextBox TXT_Placa;
         private System.Windows.Forms.Button BTN_LimpiarClave;
+        private System.Windows.Forms.Label JLB_Descuento;
+        private System.Windows.Forms.TextBox TXT_Descuento;
     }
 }

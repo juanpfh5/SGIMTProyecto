@@ -32,23 +32,21 @@ namespace SGIMTProyecto
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += Formulario_FormClosing;
         }
-        private void LimpiarTextBox(Control control)
-        {
-            foreach (Control c in control.Controls)
-            {
+
+        private void LimpiarTextBox(System.Windows.Forms.Control control) {
+            foreach (System.Windows.Forms.Control c in control.Controls) {
                 // Si el control es un TextBox, establece su texto en blanco
-                if (c is TextBox)
-                {
-                    ((TextBox)c).Text = "";
+                if (c is System.Windows.Forms.TextBox textBox) {
+                    textBox.Text = string.Empty;  // Utiliza string.Empty en lugar de ""
                 }
 
                 // Si el control contiene otros controles, llama recursivamente a la función
-                if (c.HasChildren)
-                {
+                if (c.HasChildren) {
                     LimpiarTextBox(c);
                 }
             }
         }
+
         private void Formulario_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Llamar al método para limpiar los TextBox cuando se cierra el formulario
@@ -65,6 +63,11 @@ namespace SGIMTProyecto
         private string ObtenerTitularSMyT() {
             D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
             return Datos.ObtenerTitularSMyT();
+        }
+
+        private Tuple<string, string> ObtenerPasajerosYVehiculo(string placa) {
+            D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
+            return Datos.ObtenerPasajerosYVehiculo(placa);
         }
 
         private (string, bool) VerificacionParametros() {
@@ -302,8 +305,6 @@ namespace SGIMTProyecto
                     string marca = TXT_Marca.Text.Trim();
                     string tipo = TXT_ClaseTipo.Text.Trim();
 
-                    string pasajeros = "Prueba";
-
                     string concecion = "COLECTIVO";
                     string ruta = TXT_SitioRuta.Text.Trim();
                     string rfc = TXT_RFC.Text.Trim();
@@ -317,28 +318,23 @@ namespace SGIMTProyecto
                     string tramite = TXT_Tramite.Text.Trim();
 
                     string fechaExp = DateTime.Now.ToString("dd/MM/yyyy");
-                    int diasPermiso;
-                    string selectedItem = CMB_VigenciaPermiso.SelectedItem.ToString();
-                    if (int.TryParse(selectedItem.Split(' ')[0], out int numero)) {
-                        diasPermiso = numero;
-                    } else {
-                        diasPermiso = 0;
-                    }
-                    DateTime nuevaFecha = DateTime.Now.AddDays(diasPermiso);
-                    string vigencia = nuevaFecha.ToString("dd/MM/yyyy");
+                    string vigencia = "31/12/" + Convert.ToString(DateTime.Now.Year);
 
                     string noConcecion = TXT_NoConcesion.Text.Trim();
                     string cilindros = TXT_Cilindros.Text.Trim();
                     string combustible = TXT_Combustible.Text.Trim();
                     string repuve = TXT_Repuve.Text.Trim();
 
-                    string capacidad = "Prueba";
+                    Tuple<string, string> PasYVehi = ObtenerPasajerosYVehiculo(placa);
+
+                    string pasajeros = PasYVehi.Item1;
+                    string capacidad = PasYVehi.Item2;
 
                     string toneladas = TXT_Toneladas.Text.Trim();
                     int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
                     string uso = TXT_Uso.Text.Trim();
 
-                    string secretario = "Prueba";
+                    string secretario = ObtenerTitularSMyT();
 
                     GenerarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, ruta, rfc, vehiculo, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, fechaExp, vigencia, noConcecion, cilindros, combustible, repuve, capacidad, toneladas, personas, uso, secretario);
 
@@ -1015,5 +1011,11 @@ namespace SGIMTProyecto
             }
         }
         #endregion
+
+        private void F_TarjetaCirculacion_Load(object sender, EventArgs e) {
+            if (CMB_VigenciaPermiso.Items.Count > 0) {
+                CMB_VigenciaPermiso.SelectedIndex = 0;
+            }
+        }
     }
 }

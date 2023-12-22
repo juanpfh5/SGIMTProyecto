@@ -178,3 +178,5 @@ C:\Users\juanp\Documents\GitHub\SGIMTProyecto_V2\SGIMTProyecto\obj\Debug\Interop
 C:\Users\juanp\Documents\GitHub\SGIMTProyecto_V2\SGIMTProyecto\obj\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\juanp\Documents\GitHub\SGIMTProyecto_V2\SGIMTProyecto\obj\Debug\SGIMTProyecto.csproj.ResolveComReference.cache
 C:\Users\juanp\Documents\GitHub\SGIMTProyecto_V2\SGIMTProyecto\obj\Debug\SGIMTProyecto.F_VisualizacionPDF.resources
+C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.csproj.ResolveComReference.cache
+C:\Users\aleja\OneDrive\Documentos\smyt\ProyectoGit\SGIMTProyecto\SGIMTProyecto\obj\Debug\SGIMTProyecto.F_VisualizacionPDF.resources

@@ -148,7 +148,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_SitioRuta.Text.Length > 500 || TXT_SitioRuta.Text.Length < 1) {
+            if (TXT_SitioRuta.Text.Length > 5000 || TXT_SitioRuta.Text.Length < 1) {
                 variable = JLB_SitioRuta.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;

@@ -49,7 +49,7 @@ namespace SGIMTProyecto
             TXT_Recorrido.Text = "";
             TXT_Motivo.Text = "";
             TXT_FolioPermiso.Text = "";
-            TXT_Placa.Text = "Placa";
+            TXT_NoMovimiento.Text = "";
             TXT_Placas.Enabled = true;
             TXT_TarjetaCirculacion.Enabled = true;
         }
@@ -75,7 +75,6 @@ namespace SGIMTProyecto
                 if (primeraFila.Length > 9) TXT_Placas.Text = primeraFila[9];
                 if (primeraFila.Length > 10) TXT_TarjetaCirculacion.Text = primeraFila[10];
                 if (primeraFila.Length > 11) TXT_Recorrido.Text = primeraFila[11];
-                if (primeraFila.Length > 12) TXT_TitularSMyT.Text = primeraFila[12];
             }
             else
             {
@@ -137,7 +136,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Placas.Text.Length != 9) {
+            if (TXT_Placas.Text.Length != 7) {
                 variable = JLB_Placas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -147,12 +146,12 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Recorrido.Text.Trim().Length > 500 || TXT_Recorrido.Text.Trim().Length < 1) {
+            if (TXT_Recorrido.Text.Trim().Length > 5000 || TXT_Recorrido.Text.Trim().Length < 1) {
                 variable = JLB_Recorrido.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (DTP_FechaExpedicion.Value > DateTime.Now) {
+            if (DTP_FechaExpedicion.Value >= DTP_FechaVigencia.Value) {
                 variable = JLB_FechaExpedicion.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -277,11 +276,12 @@ namespace SGIMTProyecto
                     string motor = TXT_NoMotor.Text.Trim();
                     string marca = TXT_Marca.Text.Trim();
                     string motivo = TXT_Motivo.Text.Trim();
+                    string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
                     string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
                     string director = ObtenerTitularSMyT();
                     string repuve = TXT_Repuve.Text.Trim();
 
-                    GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, modelo, serie, motor, marca, motivo, fechaVig, director, repuve);
+                    GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, modelo, serie, motor, marca, motivo, fechaVig, director, repuve, fechaHoy);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
                         F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
@@ -322,6 +322,13 @@ namespace SGIMTProyecto
         }
 
         private void F_PermisoCircularFueraRuta_Load(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+
+            this.ActiveControl = null;
+
             TXT_TitularSMyT.Text = ObtenerTitularSMyT();
         }
 
@@ -341,12 +348,12 @@ namespace SGIMTProyecto
         }
         #endregion
 
-        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve)
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve, string fechaHoy)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
-            DateTime today = DateTime.Today;
+            /*DateTime today = DateTime.Today;
 
-            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);*/
 
 
             /*string placa = "AXXXXX";

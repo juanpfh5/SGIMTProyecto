@@ -73,7 +73,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Placas.Text.Length != 9) {
+            if (TXT_Placas.Text.Length != 7) {
                 variable = JLB_Placas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -128,7 +128,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_SitioRuta.Text.Trim().Length > 500 || TXT_SitioRuta.Text.Trim().Length < 1) {
+            if (TXT_SitioRuta.Text.Trim().Length > 5000 || TXT_SitioRuta.Text.Trim().Length < 1) {
                 variable = JLB_SitioRuta.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -306,40 +306,40 @@ namespace SGIMTProyecto
                 string observaciones = TXT_Observaciones.Text.Trim();
 
                 if (CHB_ConcidcionesMecanicas.Checked){
-                    condicionesR = "Check";
+                    condicionesR = "En Condiciones";
                 }
                 if (CHB_Llantas.Checked) {
-                    llantas = "Check";
+                    llantas = "En Condiciones";
                 }
                 if (CHB_LlantaAux.Checked) {
-                    llantaAux = "Check";
+                    llantaAux = "En Condiciones";
                 }
                 if (CHB_Luces.Checked) {
-                    luces = "Check";
+                    luces = "En Condiciones";
                 }
                 if (CHB_Direccionales.Checked) {
-                    direccionales = "Check";
+                    direccionales = "En Condiciones";
                 }
                 if (CHB_Cristales.Checked) {
-                    cristales = "Check";
+                    cristales = "En Condiciones";
                 }
                 if (CHB_Espejos.Checked) {
-                    espejos = "Check";
+                    espejos = "En Condiciones";
                 }
                 if (CHB_Limpiadores.Checked) {
-                    limpiadores = "Check";
+                    limpiadores = "En Condiciones";
                 }
                 if (CHB_Vestiduras.Checked) {
-                    vestiduras = "Check";
+                    vestiduras = "En Condiciones";
                 }
                 if (CHB_Defensas.Checked) {
-                    defensas = "Check";
+                    defensas = "En Condiciones";
                 }
                 if (CHB_PinturaGeneral.Checked) {
-                    pinturaG = "Check";
+                    pinturaG = "En Condiciones";
                 }
                 if (CHB_Rotulacion.Checked) {
-                    rotulacion = "Check";
+                    rotulacion = "En Condiciones";
                 }
 
                 generarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, resolucion, docUnidad, ruta, condicionesR, espejos, llantas, limpiadores, llantaAux, vestiduras, luces, defensas, direccionales, pinturaG, cristales, rotulacion, observaciones);
@@ -665,11 +665,21 @@ namespace SGIMTProyecto
         }
 
         private void TXT_Placa_Leave(object sender, EventArgs e) {
-            if (TXT_Placa.Text == "") {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
                 TXT_Placa.Text = "Placa";
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
         #endregion
+
+        private void F_Revista_Load(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+
+            this.ActiveControl = null;
+        }
+
     }
 }

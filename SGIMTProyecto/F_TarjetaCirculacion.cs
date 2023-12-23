@@ -108,7 +108,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Placas.Text.Length != 9) {
+            if (TXT_Placas.Text.Length != 7) {
                 variable = JLB_Placas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -183,7 +183,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_SitioRuta.Text.Trim().Length > 500 || TXT_SitioRuta.Text.Trim().Length < 1) {
+            if (TXT_SitioRuta.Text.Trim().Length > 5000 || TXT_SitioRuta.Text.Trim().Length < 1) {
                 variable = JLB_SitioRuta.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -233,6 +233,7 @@ namespace SGIMTProyecto
             TXT_TipoServicio.Text = "";
             TXT_NoConcesion.Text = "";
             TXT_VehiculoOrigen.Text = "";
+            TXT_Tramite.Text = "";
             TXT_SitioRuta.Text = "";
             TXT_Folio.Text = "";
         }
@@ -309,8 +310,6 @@ namespace SGIMTProyecto
                     string ruta = TXT_SitioRuta.Text.Trim();
                     string rfc = TXT_RFC.Text.Trim();
 
-                    string vehiculo = "Prueba";
-
                     string clvVehicular = TXT_ClaveVehicular.Text.Trim();
                     string ofcExp = "SAN PABLO APETATITLAN";
                     string tipoServ = TXT_TipoServicio.Text.Trim();
@@ -328,7 +327,8 @@ namespace SGIMTProyecto
                     Tuple<string, string> PasYVehi = ObtenerPasajerosYVehiculo(placa);
 
                     string pasajeros = PasYVehi.Item1;
-                    string capacidad = PasYVehi.Item2;
+                    string vehiculo = PasYVehi.Item2;
+                    string capacidad = "Prueba";
 
                     string toneladas = TXT_Toneladas.Text.Trim();
                     int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
@@ -433,7 +433,7 @@ namespace SGIMTProyecto
             tabla1.AddCell(cel3);
 
             var cel4 = new PdfPCell(new Paragraph($"{rfc}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0 };
-            var cel5 = new PdfPCell(new Paragraph($"{serie}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 20f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var cel5 = new PdfPCell(new Paragraph($"{motor}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 20f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
             var cel6 = new PdfPCell(new Paragraph($"", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0 };
 
             tabla1.AddCell(cel4);
@@ -546,7 +546,7 @@ namespace SGIMTProyecto
             tabla10.AddCell(cel30);
 
             var cel40 = new PdfPCell(new Paragraph($"{rfc}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0 };
-            var cel50 = new PdfPCell(new Paragraph($"{serie}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 20f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
+            var cel50 = new PdfPCell(new Paragraph($"{motor}", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_CENTER, MinimumHeight = 20f, VerticalAlignment = Element.ALIGN_BOTTOM, Border = 0 };
             var cel60 = new PdfPCell(new Paragraph($"", fnormal_mini)) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0 };
 
             tabla10.AddCell(cel40);
@@ -1013,6 +1013,13 @@ namespace SGIMTProyecto
         #endregion
 
         private void F_TarjetaCirculacion_Load(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+
+            this.ActiveControl = null;
+
             if (CMB_VigenciaPermiso.Items.Count > 0) {
                 CMB_VigenciaPermiso.SelectedIndex = 0;
             }

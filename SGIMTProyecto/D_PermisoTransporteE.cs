@@ -77,7 +77,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+                string sql_tarea = "SELECT nombre_se FROM secretario_se ORDER BY id_se DESC LIMIT 1;";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.CommandTimeout = 60;

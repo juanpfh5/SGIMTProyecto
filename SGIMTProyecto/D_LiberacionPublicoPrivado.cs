@@ -16,7 +16,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT marca_un, modelo_un, tipo_un, noSerie_un, noMotor_un FROM unidad_un WHERE placa_un = @Placa";
+                string sql_tarea = "SELECT marca_un, modelo_un, tipo_un, noSerie_un, noMotor_un FROM unidad_un WHERE placa_un = @Placa AND baja_un IS NULL";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.Parameters.AddWithValue("@Placa", placa);
@@ -101,7 +101,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+                string sql_tarea = "SELECT nombre_se FROM secretario_se ORDER BY id_se DESC LIMIT 1;";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
 

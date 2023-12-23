@@ -785,6 +785,7 @@
             this.Controls.Add(this.BTN_Inicio);
             this.Name = "F_Revista";
             this.Text = "Revista";
+            this.Load += new System.EventHandler(this.F_Revista_Load);
             this.GRB_DatosPropietario.ResumeLayout(false);
             this.GRB_DatosPropietario.PerformLayout();
             this.GRB_DatosVehiculo.ResumeLayout(false);

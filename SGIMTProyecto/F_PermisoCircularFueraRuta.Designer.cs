@@ -361,7 +361,6 @@
             // 
             // DTP_FechaExpedicion
             // 
-            this.DTP_FechaExpedicion.Enabled = false;
             this.DTP_FechaExpedicion.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DTP_FechaExpedicion.Location = new System.Drawing.Point(123, 378);
             this.DTP_FechaExpedicion.Name = "DTP_FechaExpedicion";

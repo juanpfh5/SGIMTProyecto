@@ -209,7 +209,10 @@ namespace SGIMTProyecto
             D_OrdenCobro Datos = new D_OrdenCobro();
             return Datos.ObtenerDirector();
         }
-
+        private decimal ObtenerDescuento(string fecha) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ObtenerDescuento(fecha);
+        }
         private bool ExistenciaVehiculo(string placa) {
             D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             return Datos.ExistenciaVehiculo(placa);
@@ -280,20 +283,20 @@ namespace SGIMTProyecto
                     List<string> descripcion = new List<string>();
                     List<decimal> importe = new List<decimal>();
                     foreach (DataGridViewRow fila in DGV_Clave.Rows) {
-                        if (fila.Cells[0].Value != null) {
-                            if (int.TryParse(fila.Cells[0].Value.ToString(), out int clave)) {
+                        if (fila.Cells["Clave"].Value != null) {
+                            if (int.TryParse(fila.Cells["Clave"].Value.ToString(), out int clave)) {
                                 claves.Add(clave);
                             }
                         }
 
                         // Lista de descripciones (índice 1)
-                        if (fila.Cells[1].Value != null) {
-                            descripcion.Add(fila.Cells[1].Value.ToString());
+                        if (fila.Cells["Concepto"].Value != null) {
+                            descripcion.Add(fila.Cells["Concepto"].Value.ToString());
                         }
 
                         // Lista de importes (índice 4)
-                        if (fila.Cells[4].Value != null) {
-                            if (decimal.TryParse(fila.Cells[4].Value.ToString(), out decimal valorImporte)) {
+                        if (fila.Cells["Costo"].Value != null) {
+                            if (decimal.TryParse(fila.Cells["Costo"].Value.ToString(), out decimal valorImporte)) {
                                 importe.Add(valorImporte);
                             }
                         }
@@ -314,7 +317,7 @@ namespace SGIMTProyecto
                     string combustible = "";
                     string capacidad = "";
 
-                    string rfc = "";
+                    string cp = TXT_CP.Text.Trim();
                     string cilindros = "";
                     string ruta = "";
                     string observaciones = "";
@@ -331,13 +334,13 @@ namespace SGIMTProyecto
                         combustible = datosRestantes[0][7].ToString();
                         capacidad = datosRestantes[0][8].ToString();
 
-                        rfc = datosRestantes[0][9].ToString();
+                        string rfc = datosRestantes[0][9].ToString();
                         cilindros = datosRestantes[0][10].ToString();
                         ruta = datosRestantes[0][11].ToString();
                         observaciones = datosRestantes[0][12].ToString();
                     }
 
-                    GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
+                    GenerarpdfResumen(servicio, placa, nombre, direccion, cp, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
                         F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
@@ -370,12 +373,14 @@ namespace SGIMTProyecto
             AutoCompleteClave();
             DGV_Clave.Rows.Clear();
 
-            DGV_Clave.ColumnCount = 5;
+            TXT_Descuento.Text = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd")).ToString() + "%";
+
+            DGV_Clave.ColumnCount = 3;
             DGV_Clave.Columns[0].Name = "Clave";
             DGV_Clave.Columns[1].Name = "Concepto";
-            DGV_Clave.Columns[2].Name = "Costo Unitario";
-            DGV_Clave.Columns[3].Name = "Cantidad";
-            DGV_Clave.Columns[4].Name = "Costo";
+            //DGV_Clave.Columns[2].Name = "Costo Unitario";
+            //DGV_Clave.Columns[3].Name = "Cantidad";
+            DGV_Clave.Columns[2].Name = "Costo";
 
             DataGridViewButtonColumn btnEliminar = new DataGridViewButtonColumn();
 
@@ -634,7 +639,7 @@ namespace SGIMTProyecto
 
         }
 
-        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string rfc, string serie, string motor, string modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe)
+        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string cp, string serie, string motor, string modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe)
         {
             #region DATOS 
             DateTime today = DateTime.Today;
@@ -723,8 +728,8 @@ namespace SGIMTProyecto
             doc.Add(new iTextSharp.text.Paragraph($"{domicilio}", fnormal));
             var prfrfc = new iTextSharp.text.Paragraph
             {
-                new iTextSharp.text.Chunk("RFC: ", fnegrita),
-                new iTextSharp.text.Chunk($"{rfc}\n", fnormal)
+                new iTextSharp.text.Chunk("CP: ", fnegrita),
+                new iTextSharp.text.Chunk($"{cp}\n", fnormal)
             };
             doc.Add(new iTextSharp.text.Paragraph(prfrfc));
             doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
@@ -893,7 +898,7 @@ namespace SGIMTProyecto
             }
         }
 
-        private Dictionary<int, int> valores = new Dictionary<int, int>();
+        /*private Dictionary<int, int> valores = new Dictionary<int, int>();
 
         private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
             if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) { // Ajusta el índice de la columna según sea necesario
@@ -905,9 +910,6 @@ namespace SGIMTProyecto
                 // Dibujar el primer botón
                 var buttonRect1 = new System.Drawing.Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
                 ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
-                /*
-                 * IMAGEN DEL BOTON MAS
-                 */
                 // Dibujar el icono en el primer botón
                 System.Drawing.Image iconomas = Properties.Resources.signomas10px;
                 //Image icono1 = Image.FromFile("Resources/signomas.png"); // Ajusta la ruta según tu proyecto
@@ -919,9 +921,6 @@ namespace SGIMTProyecto
                 var textRect = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
                 TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-                /*
-                 * Imagen DEL BOTON MENOS
-                 */
                 System.Drawing.Image iconomenos = Properties.Resources.signomenos10px;
 
                 // Dibujar el segundo botón
@@ -981,7 +980,7 @@ namespace SGIMTProyecto
                 // Actualizar el valor en la columna "Costo"
                 DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
             }
-        }
+        }*/
 
         private void BTN_LimpiarClave_Click(object sender, EventArgs e) {
             TXT_Clave.Enabled = true;
@@ -994,21 +993,22 @@ namespace SGIMTProyecto
             // Suponiendo que concepto tiene la estructura Clave, Concepto, Valor repetida
             for (int i = 0; i < concepto.Count; i += 3) {
                 int index = DGV_Clave.Rows.Add(concepto[i], concepto[i + 1], concepto[i + 2]);
-                ActualizarCosto(index);
+                //ActualizarCosto(index);
             }
 
             BTN_LimpiarClave_Click(sender, e);
         }
         private void SumarCostos() {
             decimal Total = 0;
+            decimal descuento = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
             foreach (DataGridViewRow row in DGV_Clave.Rows) {
                 Total += Convert.ToDecimal(row.Cells["Costo"].Value);
             }
 
-            TXT_Total.Text = Total.ToString();
+            TXT_Total.Text = (Total * (1 - (descuento / 100))).ToString();
         }
 
-        private void DGV_Clave_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+        private void DGV_Clave_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
             SumarCostos();
         }
     }

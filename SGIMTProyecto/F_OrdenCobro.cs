@@ -24,6 +24,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using System.Globalization;
 using iTextSharp.text.pdf.qrcode;
+using MySqlX.XDevAPI.Relational;
 
 namespace SGIMTProyecto
 {
@@ -111,7 +112,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_PlacaActual.Text.Trim().Length != 9) {
+            if (TXT_PlacaActual.Text.Trim().Length != 7) {
                 variable = JLB_PlacaActual.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -121,11 +122,11 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_NuevaPlaca.Text.Trim().Length != 9) {
+            /*if (TXT_NuevaPlaca.Text.Trim().Length != 9) {
                 variable = JLB_NuevaPlaca.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
-            }
+            }*/
             if (TXT_CP.Text.Trim().Length != 5 || !int.TryParse(TXT_CP.Text.Trim(), out int cp)) {
                 variable = JLB_CP.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
@@ -348,6 +349,20 @@ namespace SGIMTProyecto
                 }
                 else
                 {
+                    if (TXT_NuevaPlaca.Text.Trim().Length > 0) {
+                        if (TXT_NuevaPlaca.Text.Trim().Length == 7){
+                            DialogResult resultado = MessageBox.Show("¿Desea actualizar la placa?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (resultado == DialogResult.Yes) {
+                                Console.WriteLine("Usuario seleccionó Sí");
+
+                            } else {
+                                TXT_NuevaPlaca.Text = "";
+                            }
+                        } else {
+                            MessageBox.Show("La nueva placa no cumple con parámetros válidos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                     // Message => Actualizar índice
+                    }
                     // GENERAR PDF ORDEN COBRO
                     
                     string placa = TXT_PlacaActual.Text.Trim();
@@ -364,10 +379,11 @@ namespace SGIMTProyecto
                     string elaboro = CMB_Elaboro.Text.Trim();
                     int nMovimiento = Convert.ToInt32(TXT_NoMovimiento.Text.Trim());
                     string combustible = TXT_Combustible.Text.Trim();
-                    string capacidad = TXT_NoPasajeros.Text.Trim();
+                    string capacidad = TXT_NoPasajeros.Text.Trim() + " pasajeros";
                     List<int> claves = new List<int>();
                     List<string> descripcion = new List<string>();
                     List<decimal> importe = new List<decimal>();
+                    string cp = TXT_CP.Text.Trim();
 
                     string servicio = "Colectivo";
                     string rfc = ObtenerRFC(placa);
@@ -378,27 +394,27 @@ namespace SGIMTProyecto
                     string autorizoC = ObtenerDirector();
 
                     foreach (DataGridViewRow fila in DGV_Clave.Rows) {
-                        if (fila.Cells[0].Value != null) {
-                            if (int.TryParse(fila.Cells[0].Value.ToString(), out int clave)) {
+                        if (fila.Cells["Clave"].Value != null) {
+                            if (int.TryParse(fila.Cells["Clave"].Value.ToString(), out int clave)) {
                                 claves.Add(clave);
                             }
                         }
 
                         // Lista de descripciones (índice 1)
-                        if (fila.Cells[1].Value != null) {
-                            descripcion.Add(fila.Cells[1].Value.ToString());
+                        if (fila.Cells["Concepto"].Value != null) {
+                            descripcion.Add(fila.Cells["Concepto"].Value.ToString());
                         }
 
                         // Lista de importes (índice 4)
-                        if (fila.Cells[4].Value != null) {
-                            if (decimal.TryParse(fila.Cells[4].Value.ToString(), out decimal valorImporte)) {
+                        if (fila.Cells["Costo"].Value != null) {
+                            if (decimal.TryParse(fila.Cells["Costo"].Value.ToString(), out decimal valorImporte)) {
                                 importe.Add(valorImporte);
                             }
                         }
                     }
 
 
-                    GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
+                    GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe, cp);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
                         F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
@@ -406,7 +422,7 @@ namespace SGIMTProyecto
                         formVisualizador.ShowDialog();
                     }
 
-                    GenerarPdf(placa, nombre, direccion, folioR, serie, motor, modelo, marca, clvVehicular, tipo, total, elaboro, nMovimiento, combustible, capacidad, claves, descripcion, importe);
+                    GenerarPdf(placa, nombre, direccion, folioR, serie, motor, modelo, marca, clvVehicular, tipo, total, elaboro, nMovimiento, combustible, capacidad, claves, descripcion, importe, cp);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
                         F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
@@ -430,12 +446,12 @@ namespace SGIMTProyecto
             CMB_Elaboro.DataSource = ListadoPersonal();
             TXT_Descuento.Text = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd")).ToString() + "%";
             AutoCompleteClave();
-            DGV_Clave.ColumnCount = 5;
+            DGV_Clave.ColumnCount = 3;
             DGV_Clave.Columns[0].Name = "Clave";
             DGV_Clave.Columns[1].Name = "Concepto";
-            DGV_Clave.Columns[2].Name = "Costo Unitario";
-            DGV_Clave.Columns[3].Name = "Cantidad";
-            DGV_Clave.Columns[4].Name = "Costo";
+            //DGV_Clave.Columns[2].Name = "Costo";
+            //DGV_Clave.Columns[3].Name = "Cantidad";
+            DGV_Clave.Columns[2].Name = "Costo";
 
              //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 1);
              //DGV_Clave.Rows.Add(4410, "Pago Tarjeta", 502.5, 2, 1);
@@ -475,7 +491,7 @@ namespace SGIMTProyecto
             // Suponiendo que concepto tiene la estructura Clave, Concepto, Valor repetida
             for (int i = 0; i < concepto.Count; i += 3) {
                 int index = DGV_Clave.Rows.Add(concepto[i], concepto[i + 1], concepto[i + 2]);
-                ActualizarCosto(index);
+                //ActualizarCosto(index);
             }
 
             BTN_LimpiarClave_Click(sender, e);
@@ -493,9 +509,9 @@ namespace SGIMTProyecto
             }
         }
 
-        private Dictionary<int, int> valores = new Dictionary<int, int>(); // Almacena los valores para cada fila
+        /*private Dictionary<int, int> valores = new Dictionary<int, int>();*/ // Almacena los valores para cada fila
 
-        private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
+        /*private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
             if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) { // Ajusta el índice de la columna según sea necesario
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.ContentForeground);
 
@@ -505,9 +521,7 @@ namespace SGIMTProyecto
                 // Dibujar el primer botón
                 var buttonRect1 = new System.Drawing.Rectangle(e.CellBounds.X + 5, e.CellBounds.Y + 2, e.CellBounds.Width / 4 - 5, e.CellBounds.Height - 4);
                 ControlPaint.DrawButton(e.Graphics, buttonRect1, ButtonState.Normal);
-                /*
-                 * IMAGEN DEL BOTON MAS
-                 */
+                
                 // Dibujar el icono en el primer botón
                 System.Drawing.Image iconomas = Properties.Resources.signomas10px;
                 //Image icono1 = Image.FromFile("Resources/signomas.png"); // Ajusta la ruta según tu proyecto
@@ -519,9 +533,6 @@ namespace SGIMTProyecto
                 var textRect = new System.Drawing.Rectangle(e.CellBounds.X + e.CellBounds.Width / 4, e.CellBounds.Y, e.CellBounds.Width / 2, e.CellBounds.Height);
                 TextRenderer.DrawText(e.Graphics, valorActual.ToString(), e.CellStyle.Font, textRect, e.CellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
 
-                /*
-                 * Imagen DEL BOTON MENOS
-                 */
                 System.Drawing.Image iconomenos = Properties.Resources.signomenos10px;
                 
                 // Dibujar el segundo botón
@@ -533,9 +544,9 @@ namespace SGIMTProyecto
 
                 e.Handled = true;
             }
-        }
+        }*/
 
-        private void DGV_Clave_CellClick(object sender, DataGridViewCellEventArgs e) {
+        /*private void DGV_Clave_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex >= 0 && e.ColumnIndex == DGV_Clave.Columns["Cantidad"].Index) {
                 // Determinar si se hizo clic en el primer o segundo botón
                 var clickPosition = DGV_Clave.PointToClient(Cursor.Position);
@@ -568,9 +579,9 @@ namespace SGIMTProyecto
                 // Actualizar el valor en la columna "Costo"
                 ActualizarCosto(e.RowIndex);
             }
-        }
+        }*/
 
-        private void ActualizarCosto(int rowIndex) {
+        /*private void ActualizarCosto(int rowIndex) {
         // Obtener la cantidad y el costo unitario de la fila
             int cantidad = valores.ContainsKey(rowIndex) ? valores[rowIndex] : 1;
 
@@ -582,7 +593,7 @@ namespace SGIMTProyecto
                 // Actualizar el valor en la columna "Costo"
                 DGV_Clave.Rows[rowIndex].Cells[4].Value = costo;
             }
-        }
+        }*/
 
         private void SumarCostos(){
             decimal Total = 0;
@@ -596,7 +607,7 @@ namespace SGIMTProyecto
         }
 
         #region funciones de PDF
-        private static void GenerarPdf(string placa, string nombre, string direccion, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, int nMovimiento, string combustible, string capacidad, List<int> claves, List<string> descripcion, List<decimal> importe)
+        private static void GenerarPdf(string placa, string nombre, string direccion, int folioR, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, decimal total, string elaboro, int nMovimiento, string combustible, string capacidad, List<int> claves, List<string> descripcion, List<decimal> importe, string cp)
         {
             #region DATOS
             DateTime today = DateTime.Today;
@@ -688,6 +699,12 @@ namespace SGIMTProyecto
             doc.Add(new Phrase($"DIRECCIÓN: ", fnegrita));
             doc.Add(new Phrase($"{direccion}", fnormal));
             doc.Add(iTextSharp.text.Chunk.NEWLINE);
+            var prfrfc = new iTextSharp.text.Paragraph
+            {
+                new iTextSharp.text.Chunk("CP: ", fnegrita),
+                new iTextSharp.text.Chunk($"{cp}\n", fnormal)
+            };
+            doc.Add(new iTextSharp.text.Paragraph(prfrfc));
             doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
             doc.Add(iTextSharp.text.Chunk.NEWLINE);
             doc.Add(new iTextSharp.text.Paragraph($"DATOS DEL VEHICULO ", fnegrita) { Alignment = Element.ALIGN_CENTER });
@@ -825,7 +842,7 @@ namespace SGIMTProyecto
             doc.Close();
         }
 
-        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string rfc, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe)
+        private static void GenerarpdfResumen(string servicio, string placa, string nombre, string domicilio, string rfc, string serie, string motor, int modelo, string marca, string clvVehicular, string tipo, string cilindros, decimal total, string elaboroC, string ruta, string observaciones, string combustible, string capacidad, string autorizoC, List<int> claves, List<String> descripcion, List<decimal> importe, string cp)
         {
             DateTime today = DateTime.Today;
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
@@ -914,8 +931,8 @@ namespace SGIMTProyecto
             doc.Add(new iTextSharp.text.Paragraph($"{domicilio}", fnormal));
             var prfrfc = new iTextSharp.text.Paragraph
             {
-                new iTextSharp.text.Chunk("RFC: ", fnegrita),
-                new iTextSharp.text.Chunk($"{rfc}\n", fnormal)
+                new iTextSharp.text.Chunk("CP: ", fnegrita),
+                new iTextSharp.text.Chunk($"{cp}\n", fnormal)
             };
             doc.Add(new iTextSharp.text.Paragraph(prfrfc));
             doc.Add(new iTextSharp.text.Chunk(new iTextSharp.text.pdf.draw.LineSeparator(1f, 100f, BaseColor.BLACK, Element.ALIGN_CENTER, 0f)));
@@ -1077,7 +1094,7 @@ namespace SGIMTProyecto
 
         #endregion
 
-        private void DGV_Clave_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+        private void DGV_Clave_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
             SumarCostos();
         }
     }

@@ -19,7 +19,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, rfc_co, noExterior_co, noInterior_co, cp_co, colonia_co, municipio_co, estado_co, noConcesion_un, noSeguro_un FROM unidad_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa";
+                string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, rfc_co, noExterior_co, noInterior_co, cp_co, colonia_co, municipio_co, estado_co, noConcesion_un, noSeguro_un FROM unidad_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.Parameters.AddWithValue("@Placa", placa);

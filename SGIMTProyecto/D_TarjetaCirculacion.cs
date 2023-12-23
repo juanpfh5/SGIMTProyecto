@@ -20,7 +20,7 @@ namespace SGIMTProyecto
             try
             {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, domicilio_co, vehiculo_un, rfc_co, repuve_un, noSerie_un, placa_un, toneladas_un, noMotor_un ,cilindros_un, pasajeros_un, marca_un, combustible_un, modelo_un, claveVehicular_un, tipo_un, uso_un, tipoServicio_un, noConcesion_un, vehiculoOrigen_un, ruta_un, folioTC_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa";
+                string sql_tarea = "SELECT nombre_co, domicilio_co, vehiculo_un, rfc_co, repuve_un, noSerie_un, placa_un, toneladas_un, noMotor_un ,cilindros_un, pasajeros_un, marca_un, combustible_un, modelo_un, claveVehicular_un, tipo_un, uso_un, tipoServicio_un, noConcesion_un, vehiculoOrigen_un, ruta_un, folioTC_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.Parameters.AddWithValue("@Placa", placa);
@@ -57,7 +57,7 @@ namespace SGIMTProyecto
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_di FROM director_di ORDER BY id_di DESC LIMIT 1;";
+                string sql_tarea = "SELECT nombre_se FROM secretario_se ORDER BY id_se DESC LIMIT 1;";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.CommandTimeout = 60;

@@ -65,7 +65,7 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Placas.Text.Length != 9) {
+            if (TXT_Placas.Text.Length != 7) {
                 variable = JLB_Placas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -75,12 +75,12 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Recorrido.Text.Trim().Length > 200 || TXT_Recorrido.Text.Trim().Length < 1) {
+            if (TXT_Recorrido.Text.Trim().Length > 5000 || TXT_Recorrido.Text.Trim().Length < 1) {
                 variable = JLB_Recorrido.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (DTP_FechaExpedicion.Value > DateTime.Now) {
+            if (DTP_FechaExpedicion.Value >= DTP_FechaVigencia.Value) {
                 variable = JLB_FechaExpedicion.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -187,10 +187,11 @@ namespace SGIMTProyecto
                 int CP = Convert.ToInt32(TXT_CP.Text.Trim());
                 int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
                 string recorrido = TXT_Recorrido.Text.Trim();
+                string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
                 string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
                 string director = ObtenerTitularSMyT();
 
-                GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, recorrido, fechaVig, director);
+                GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, recorrido, fechaVig, director, fechaHoy);
 
                 if (formVisualizador == null || formVisualizador.IsDisposed) {
                     F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
@@ -219,11 +220,11 @@ namespace SGIMTProyecto
                  */
             }
         }
-        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string recorrido, string fechaVig, string director)
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string recorrido, string fechaVig, string director, string fechaHoy)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
-            DateTime today = DateTime.Today;
-            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
+            /*DateTime today = DateTime.Today;
+            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);*/
 
 
             /*string placa = "AXXXXX";

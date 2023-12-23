@@ -67,7 +67,7 @@ namespace SGIMTProyecto {
 
             int tamanio;
 
-            if (TXT_Nombre.Text.Trim().Length > 50 || TXT_Nombre.Text.Trim().Length < 1) {
+            if (TXT_Nombre.Text.Trim().Length > 60 || TXT_Nombre.Text.Trim().Length < 1) {
                 variable = JLB_Nombre.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;

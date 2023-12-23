@@ -51,6 +51,8 @@
             this.TXT_Clave = new System.Windows.Forms.TextBox();
             this.BTN_Agregar = new System.Windows.Forms.Button();
             this.BTN_LimpiarClave = new System.Windows.Forms.Button();
+            this.JLB_Descuento = new System.Windows.Forms.Label();
+            this.TXT_Descuento = new System.Windows.Forms.TextBox();
             this.DGV_Clave = new System.Windows.Forms.DataGridView();
             this.JLB_NoMovimiento = new System.Windows.Forms.Label();
             this.TXT_NoMovimiento = new System.Windows.Forms.TextBox();
@@ -89,6 +91,8 @@
             this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Clave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.BTN_Agregar);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.BTN_LimpiarClave);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_Descuento);
+            this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_Descuento);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.DGV_Clave);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.JLB_NoMovimiento);
             this.GRB_OrdenCobroDiversos.Controls.Add(this.TXT_NoMovimiento);
@@ -319,6 +323,27 @@
             this.BTN_LimpiarClave.UseVisualStyleBackColor = true;
             this.BTN_LimpiarClave.Click += new System.EventHandler(this.BTN_LimpiarClave_Click);
             // 
+            // JLB_Descuento
+            // 
+            this.JLB_Descuento.AutoSize = true;
+            this.JLB_Descuento.Enabled = false;
+            this.JLB_Descuento.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Descuento.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Descuento.Location = new System.Drawing.Point(630, 284);
+            this.JLB_Descuento.Name = "JLB_Descuento";
+            this.JLB_Descuento.Size = new System.Drawing.Size(67, 15);
+            this.JLB_Descuento.TabIndex = 67;
+            this.JLB_Descuento.Text = "Descuento:";
+            // 
+            // TXT_Descuento
+            // 
+            this.TXT_Descuento.Enabled = false;
+            this.TXT_Descuento.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TXT_Descuento.Location = new System.Drawing.Point(712, 281);
+            this.TXT_Descuento.Name = "TXT_Descuento";
+            this.TXT_Descuento.Size = new System.Drawing.Size(161, 23);
+            this.TXT_Descuento.TabIndex = 68;
+            // 
             // DGV_Clave
             // 
             this.DGV_Clave.AllowUserToAddRows = false;
@@ -330,10 +355,8 @@
             this.DGV_Clave.ReadOnly = true;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 33;
-            this.DGV_Clave.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellClick);
             this.DGV_Clave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellContentClick);
-            this.DGV_Clave.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DGV_Clave_CellPainting);
-            this.DGV_Clave.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellValueChanged);
+            this.DGV_Clave.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_Clave_RowsAdded);
             // 
             // JLB_NoMovimiento
             // 
@@ -485,5 +508,7 @@
         private System.Windows.Forms.Label JLB_Elaboro;
         private System.Windows.Forms.ComboBox CMB_Elaboro;
         private System.Windows.Forms.Button BTN_LimpiarClave;
+        private System.Windows.Forms.TextBox TXT_Descuento;
+        private System.Windows.Forms.Label JLB_Descuento;
     }
 }

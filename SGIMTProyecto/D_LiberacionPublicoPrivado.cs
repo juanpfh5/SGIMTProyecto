@@ -110,7 +110,7 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        nombreDirector = reader["nombre_di"].ToString();
+                        nombreDirector = reader["nombre_se"].ToString();
                     }
                 }
             }
@@ -123,6 +123,38 @@ namespace SGIMTProyecto {
                 }
             }
             return nombreDirector;
+        }
+
+        public int ObtenerFolio() {
+            MySqlConnection SqlCon = new MySqlConnection();
+            int id = 0;
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "INSERT INTO autoincrementable_au() VALUES(); SELECT id_au FROM autoincrementable_au ORDER BY id_au DESC LIMIT 1;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                using (var reader = Comando.ExecuteReader()) {
+                    if (reader.Read()) {
+                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
+                        id = Convert.ToInt32(reader["id_au"]);
+                    }
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) {
+                    SqlCon.Close();
+                }
+            }
+
+            return id;
         }
 
     }

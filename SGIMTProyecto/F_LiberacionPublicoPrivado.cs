@@ -110,6 +110,10 @@ namespace SGIMTProyecto {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
             return Datos.ObtenerDirector();
         }
+        private int ObtenerFolio(){
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ObtenerFolio();
+        }
 
         #endregion
 
@@ -130,7 +134,7 @@ namespace SGIMTProyecto {
 
                         ActualizarLiberacion(TXT_Placa.Text.Trim());
 
-                        int nOficio = 1234;
+                        string nOficio = ObtenerFolio().ToString("D4");
                         string marca = TXT_Marca.Text;
                         int modelo = Convert.ToInt32(TXT_Modelo.Text);
                         string tipo = TXT_Tipo.Text;
@@ -202,7 +206,7 @@ namespace SGIMTProyecto {
         private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
         }
 
-        private static void GenerarLiberacion(int nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
+        private static void GenerarLiberacion(string nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;

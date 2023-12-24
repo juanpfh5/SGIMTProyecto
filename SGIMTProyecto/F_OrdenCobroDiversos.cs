@@ -40,6 +40,11 @@ namespace SGIMTProyecto
             return Datos.ListadoPersonal();
         }
 
+        private List<string> ListadoDirector() {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ListadoDirector();
+        }
+
         private void LimpiarTextBox() {
             TXT_Nombre.Text = "";
             TXT_NoExterior.Text = "";
@@ -50,7 +55,7 @@ namespace SGIMTProyecto
             TXT_Colonia.Text = "";
             TXT_Estado.Text = "";
             TXT_Municipio.Text = "";
-            TXT_NoMovimiento.Text = "";
+            //TXT_NoMovimiento.Text = "";
             TXT_Total.Text = "";
         }
 
@@ -138,11 +143,11 @@ namespace SGIMTProyecto
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
+            /*if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
                 variable = JLB_NoMovimiento.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
-            }
+            }*/
             if (DGV_Clave.Rows.Count < 1) {
                 variable = JLB_Clave.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
@@ -201,21 +206,42 @@ namespace SGIMTProyecto
         }
 
         private List<string> ListadoClaveConcepto(string busqueda) {
-            D_OrdenCobro Datos = new D_OrdenCobro();
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             return Datos.ListadoClaveConcepto(busqueda);
         }
 
         private string ObtenerDirector() {
-            D_OrdenCobro Datos = new D_OrdenCobro();
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             return Datos.ObtenerDirector();
         }
-        private decimal ObtenerDescuento(string fecha) {
+        private (decimal, int) ObtenerDescuento(string fecha) {
             D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             return Datos.ObtenerDescuento(fecha);
+        }
+        private int ObtenerIDUMA() {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ObtenerIDUMA();
+        }
+        private int ObtenerIDMovimiento() {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ObtenerIDMovimiento();
+        }
+        private int ObtenerIDClave(string concepto) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            return Datos.ObtenerIDClave(concepto);
         }
         private bool ExistenciaVehiculo(string placa) {
             D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
             return Datos.ExistenciaVehiculo(placa);
+        }
+        private void InsertarMovimiento(List<object> datosMovimiento) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            Datos.InsertarMovimiento(datosMovimiento);
+        }
+
+        private void InsertarClavesMovimiento(List<object> datosClaveMovimiento) {
+            D_OrdenCobroDiversos Datos = new D_OrdenCobroDiversos();
+            Datos.InsertarClavesMovimiento(datosClaveMovimiento);
         }
 
         private void AutoCompleteClave() {
@@ -273,11 +299,15 @@ namespace SGIMTProyecto
                 if (bandera) {
                     MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 } else {
+                    decimal descuento;
+                    int id_de;
+                    (descuento, id_de) = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
+
                     string placa = TXT_Placa.Text.Trim();
                     string nombre = TXT_Nombre.Text.Trim();
                     string direccion = TXT_Domicilio.Text.Trim();
                     decimal total = Convert.ToDecimal(TXT_Total.Text.Trim());
-                    int nMovimiento = Convert.ToInt32(TXT_NoMovimiento.Text.Trim());
+                    //int nMovimiento = ObtenerIDMovimiento();
 
                     List<int> claves = new List<int>();
                     List<string> descripcion = new List<string>();
@@ -340,6 +370,45 @@ namespace SGIMTProyecto
                         observaciones = datosRestantes[0][12].ToString();
                     }
 
+                    if (id_de == 0) {
+                        List<object> datosMovimiento = new List<object> {
+                            decimal.Parse(TXT_Total.Text.Trim()),
+                            1,
+                            CMB_Elaboro.SelectedIndex + 1,
+                            CMB_Autorizo.SelectedIndex + 1,
+                            placa,
+                            ObtenerIDUMA(),
+                            null
+                        };
+                        InsertarMovimiento(datosMovimiento);
+                    } else {
+                        List<object> datosMovimiento = new List<object> {
+                            decimal.Parse(TXT_Total.Text.Trim()),
+                            1,
+                            CMB_Elaboro.SelectedIndex + 1,
+                            CMB_Autorizo.SelectedIndex + 1,
+                            placa,
+                            ObtenerIDUMA(),
+                            id_de
+                        };
+                        InsertarMovimiento(datosMovimiento);
+                    }
+
+                    int nMovimiento = ObtenerIDMovimiento();
+
+                    foreach (DataGridViewRow fila in DGV_Clave.Rows) {
+                        if (fila.Cells["Concepto"].Value != null) {
+                            int id_cl = ObtenerIDClave(fila.Cells["Concepto"].Value.ToString());
+
+                            List<object> datosClaveMovimiento = new List<object> {
+                                nMovimiento,
+                                id_cl
+                            };
+
+                            InsertarClavesMovimiento(datosClaveMovimiento);
+                        }
+                    }
+
                     GenerarpdfResumen(servicio, placa, nombre, direccion, cp, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
@@ -355,6 +424,18 @@ namespace SGIMTProyecto
                         formVisualizador.RecibirNombre("OrdenCobroDiversos.pdf");
                         formVisualizador.ShowDialog();
                     }
+
+                    LimpiarTextBox();
+                    TXT_Nombre.Enabled = true;
+                    TXT_NoExterior.Enabled = true;
+                    TXT_Domicilio.Enabled = true;
+                    TXT_NoInterior.Enabled = true;
+                    TXT_RFC.Enabled = true;
+                    TXT_CP.Enabled = true;
+                    TXT_Colonia.Enabled = true;
+                    TXT_Estado.Enabled = true;
+                    TXT_Municipio.Enabled = true;
+                    MessageBox.Show("El registro se agregó con éxito.", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
@@ -370,10 +451,15 @@ namespace SGIMTProyecto
         }
         private void F_OrdenCobroDiversos_Load(object sender, EventArgs e) {
             CMB_Elaboro.DataSource = ListadoPersonal();
+            CMB_Autorizo.DataSource = ListadoDirector();
             AutoCompleteClave();
             DGV_Clave.Rows.Clear();
 
-            TXT_Descuento.Text = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd")).ToString() + "%";
+            decimal descuento;
+            int id_de;
+            (descuento, id_de) = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
+            TXT_Descuento.Text = descuento + "%";
+            TXT_Total.Text = "$0.00";
 
             DGV_Clave.ColumnCount = 3;
             DGV_Clave.Columns[0].Name = "Clave";
@@ -1000,12 +1086,14 @@ namespace SGIMTProyecto
         }
         private void SumarCostos() {
             decimal Total = 0;
-            decimal descuento = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
+            decimal descuento;
+            int id_de;
+            (descuento, id_de)= ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
             foreach (DataGridViewRow row in DGV_Clave.Rows) {
                 Total += Convert.ToDecimal(row.Cells["Costo"].Value);
             }
 
-            TXT_Total.Text = (Total * (1 - (descuento / 100))).ToString();
+            TXT_Total.Text = "$" + (Total * (1 - (descuento / 100))).ToString("N2", CultureInfo.InvariantCulture);
         }
 
         private void DGV_Clave_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {

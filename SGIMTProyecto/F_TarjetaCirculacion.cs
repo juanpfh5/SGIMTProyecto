@@ -70,6 +70,11 @@ namespace SGIMTProyecto
             return Datos.ObtenerPasajerosYVehiculo(placa);
         }
 
+        private int ObtenerFolio() {
+            D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
+            return Datos.ObtenerFolio();
+        }
+
         private (string, bool) VerificacionParametros() {
             string error, variable;
             bool bandera = false;
@@ -660,6 +665,8 @@ namespace SGIMTProyecto
                 if (bandera) {
                     MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 } else {
+                    string nOficio = ObtenerFolio().ToString("D4");
+
                     string placa = TXT_Placas.Text.Trim();
                     string nombre = TXT_Propietario.Text.Trim();
                     string direccion = TXT_Domicilio.Text.Trim();
@@ -690,7 +697,7 @@ namespace SGIMTProyecto
                         diasPermiso = 0;
                     }
                     string director = ObtenerTitularSMyT();
-                    int nOficio = Convert.ToInt32(TXT_Folio.Text.Trim());
+                    // int nOficio = Convert.ToInt32(TXT_Folio.Text.Trim());
 
                     GenerarProvisionalPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, ruta, rfc, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, noConcecion, cilindros, combustible, toneladas, personas, uso, diasPermiso, director, nOficio);
 
@@ -706,7 +713,7 @@ namespace SGIMTProyecto
             }
 
         }
-        private static void GenerarProvisionalPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string ruta, string rfc, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string noConcecion, string cilindros, string combustible, string toneladas, int personas, string uso, int diasPermiso, string director, int nOficio)
+        private static void GenerarProvisionalPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string ruta, string rfc, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string noConcecion, string cilindros, string combustible, string toneladas, int personas, string uso, int diasPermiso, string director, string nOficio)
         {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;

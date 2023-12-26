@@ -7,25 +7,111 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 
-namespace SGIMTProyecto
-{
-    public partial class F_PermisoPersonalEmpresas : UserControl
-    {
+namespace SGIMTProyecto {
+    public partial class F_PermisoPersonalEmpresas : UserControl {
         private F_VisualizacionPDF formVisualizador;
-        public F_PermisoPersonalEmpresas()
-        {
+        public F_PermisoPersonalEmpresas() {
             InitializeComponent();
         }
 
-        #region Métodos
+        #region Métodos Base de Datos
+        private string ObtenerTitularSMyT() {
+            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
+            return Datos.ObtenerTitularSMyT();
+        }
 
-        private void LimpiarTextBox(){
+        private void InsertarPersonalEmpresas(List<object> datosPersonalEmpresas) {
+            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
+            Datos.InsertarPersonalEmpresas(datosPersonalEmpresas);
+        }
+
+        private bool ExistenciaMovimiento(int movimiento) {
+            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
+            return Datos.ExistenciaMovimiento(movimiento);
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void F_PermisoPersonalEmpresas_Load(object sender, EventArgs e) {
+            TXT_TitularSMyT.Text = ObtenerTitularSMyT();
+            TXT_TitularSMyT.Enabled = false;
+        }
+
+        private void BTN_Imprimir_Click(object sender, EventArgs e) {
+            (string mensajeError, bool bandera) = VerificacionParametros();
+
+            if (bandera) {
+                MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                DateTime fechaSeleccionada = DTP_FechaExpedicion.Value;
+                string anio = fechaSeleccionada.Year.ToString();
+                string mes = fechaSeleccionada.Month.ToString("00");
+                string dia = fechaSeleccionada.Day.ToString("00");
+                string fechaExpedicion = anio + '-' + mes + '-' + dia;
+
+                fechaSeleccionada = DTP_FechaVigencia.Value;
+                anio = fechaSeleccionada.Year.ToString();
+                mes = fechaSeleccionada.Month.ToString("00");
+                dia = fechaSeleccionada.Day.ToString("00");
+                string fechaVigencia = anio + '-' + mes + '-' + dia;
+
+                List<object> datosPersonalEmpresasl = new List<object> {
+                        TXT_Permisionario.Text.Trim(),
+                        TXT_Domicilio.Text.Trim(),
+                        int.Parse(TXT_CP.Text.Trim()),
+                        TXT_Poblacion.Text.Trim(),
+                        TXT_Placas.Text.Trim(),
+                        int.Parse(TXT_TarjetaCirculacion.Text.Trim()),
+                        TXT_Recorrido.Text.Trim(),
+                        fechaExpedicion,
+                        fechaVigencia,
+                        int.Parse(TXT_FolioPermiso.Text.Trim()),
+                        int.Parse(TXT_NoMovimiento.Text.Trim())
+                    };
+
+                InsertarPersonalEmpresas(datosPersonalEmpresasl);
+
+                string placa = TXT_Placas.Text.Trim();
+                string nombre = TXT_Permisionario.Text.Trim();
+                string direccion = TXT_Domicilio.Text.Trim();
+                string poblacion = TXT_Poblacion.Text.Trim();
+                int CP = Convert.ToInt32(TXT_CP.Text.Trim());
+                int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
+                string recorrido = TXT_Recorrido.Text.Trim();
+                string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
+                string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
+                string director = ObtenerTitularSMyT();
+
+                GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, recorrido, fechaVig, director, fechaHoy);
+
+                if (formVisualizador == null || formVisualizador.IsDisposed) {
+                    F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                    formVisualizador.RecibirNombre("PermisoPersonalEmpresas.pdf");
+                    formVisualizador.ShowDialog();
+                }
+
+                MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LimpiarTextBox();
+            }
+        }
+
+        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        #endregion
+
+        #region Métodos Extra
+        private void LimpiarTextBox() {
             TXT_Permisionario.Text = "";
             TXT_Domicilio.Text = "";
             TXT_CP.Text = "";
@@ -124,118 +210,11 @@ namespace SGIMTProyecto
             return (error, bandera);
         }
 
-        private string ObtenerTitularSMyT() {
-            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
-            return Datos.ObtenerTitularSMyT();
-        }
-
-        private void InsertarPersonalEmpresas(List<object> datosPersonalEmpresas) {
-            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
-            Datos.InsertarPersonalEmpresas(datosPersonalEmpresas);
-        }
-
-        private bool ExistenciaMovimiento(int movimiento) {
-            D_PermisoPersonalEmpresas Datos = new D_PermisoPersonalEmpresas();
-            return Datos.ExistenciaMovimiento(movimiento);
-        }
-
         #endregion
 
-        private void F_PermisoPersonalEmpresas_Load(object sender, EventArgs e) {
-            TXT_TitularSMyT.Text = ObtenerTitularSMyT();
-            TXT_TitularSMyT.Enabled = false;
-        }
-
-        private void BTN_Imprimir_Click(object sender, EventArgs e) {
-            (string mensajeError, bool bandera) = VerificacionParametros();
-
-            if (bandera) {
-                MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            } else {
-                DateTime fechaSeleccionada = DTP_FechaExpedicion.Value;
-                string anio = fechaSeleccionada.Year.ToString();
-                string mes = fechaSeleccionada.Month.ToString("00");
-                string dia = fechaSeleccionada.Day.ToString("00");
-                string fechaExpedicion = anio + '-' + mes + '-' + dia;
-
-                fechaSeleccionada = DTP_FechaVigencia.Value;
-                anio = fechaSeleccionada.Year.ToString();
-                mes = fechaSeleccionada.Month.ToString("00");
-                dia = fechaSeleccionada.Day.ToString("00");
-                string fechaVigencia = anio + '-' + mes + '-' + dia;
-
-                List<object> datosPersonalEmpresasl = new List<object> {
-                        TXT_Permisionario.Text.Trim(),
-                        TXT_Domicilio.Text.Trim(),
-                        int.Parse(TXT_CP.Text.Trim()),
-                        TXT_Poblacion.Text.Trim(),
-                        TXT_Placas.Text.Trim(),
-                        int.Parse(TXT_TarjetaCirculacion.Text.Trim()),
-                        TXT_Recorrido.Text.Trim(),
-                        fechaExpedicion,
-                        fechaVigencia,
-                        int.Parse(TXT_FolioPermiso.Text.Trim()),
-                        int.Parse(TXT_NoMovimiento.Text.Trim())
-                    };
-
-                InsertarPersonalEmpresas(datosPersonalEmpresasl);
-
-                string placa = TXT_Placas.Text.Trim();
-                string nombre = TXT_Permisionario.Text.Trim();
-                string direccion = TXT_Domicilio.Text.Trim();
-                string poblacion = TXT_Poblacion.Text.Trim();
-                int CP = Convert.ToInt32(TXT_CP.Text.Trim());
-                int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
-                string recorrido = TXT_Recorrido.Text.Trim();
-                string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
-                string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
-                string director = ObtenerTitularSMyT();
-
-                GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, recorrido, fechaVig, director, fechaHoy);
-
-                if (formVisualizador == null || formVisualizador.IsDisposed) {
-                    F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
-                    formVisualizador.RecibirNombre("PermisoPersonalEmpresas.pdf");
-                    formVisualizador.ShowDialog();
-                }
-
-                MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                LimpiarTextBox();
-
-                //imprimir 
-                /*REQUISITOS PARA IMPRIMIR
-                 * 
-                 * string placa = "AXXXXX";
-                    string nombre = "MANUEL ALEJANDRO MORA MENESES";
-                    string direccion = "Enrique segoviano";
-                    string poblacion = "AMAXAC DE GUERRERO";
-                    int CP = 90600;
-                    int TC = 4812;
-
-                    string recorrido = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-                    string fechaVig = "31/12/2023";
-                    string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-                 * 
-                 */
-            }
-        }
-        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string recorrido, string fechaVig, string director, string fechaHoy)
-        {
+        #region Métodos PDF
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, string recorrido, string fechaVig, string director, string fechaHoy) {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
-            /*DateTime today = DateTime.Today;
-            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);*/
-
-
-            /*string placa = "AXXXXX";
-            string nombre = "MANUEL ALEJANDRO MORA MENESES";
-            string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
-            string poblacion = "AMAXAC DE GUERRERO";
-            int CP = 90600;
-            int TC = 4812;
-            string recorrido = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-            string fechaVig = "31/12/2023";
-            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";*/
 
             /*
              * FUENTES
@@ -319,12 +298,7 @@ namespace SGIMTProyecto
             doc.Add(tabla5);
             doc.Close();
         }
+        #endregion
 
-        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
-            if (char.IsLower(e.KeyChar)) {
-                // Si es una letra minúscula, conviértela a mayúscula
-                e.KeyChar = char.ToUpper(e.KeyChar);
-            }
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.Globalization;
 using System.Security.Cryptography;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
@@ -21,41 +19,17 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace SGIMTProyecto
-{
-    public partial class F_TarjetaCirculacion : Form
-    {
+namespace SGIMTProyecto {
+    public partial class F_TarjetaCirculacion : Form {
         private F_VisualizacionPDF formVisualizador;
-        public F_TarjetaCirculacion()
-        {
+        public F_TarjetaCirculacion() {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += Formulario_FormClosing;
         }
 
-        private void LimpiarTextBox(System.Windows.Forms.Control control) {
-            foreach (System.Windows.Forms.Control c in control.Controls) {
-                // Si el control es un TextBox, establece su texto en blanco
-                if (c is System.Windows.Forms.TextBox textBox) {
-                    textBox.Text = string.Empty;  // Utiliza string.Empty en lugar de ""
-                }
-
-                // Si el control contiene otros controles, llama recursivamente a la función
-                if (c.HasChildren) {
-                    LimpiarTextBox(c);
-                }
-            }
-        }
-
-        private void Formulario_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Llamar al método para limpiar los TextBox cuando se cierra el formulario
-            LimpiarTextBox(this);
-        }
-
-        #region Métodos
-        private void TC(string cTexto)
-        {
+        #region Métodos Base de Datos
+        private void TC(string cTexto) {
             D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
             MostrarDatos(Datos.TC(cTexto));
         }
@@ -73,6 +47,201 @@ namespace SGIMTProyecto
         private int ObtenerFolio() {
             D_TarjetaCirculacion Datos = new D_TarjetaCirculacion();
             return Datos.ObtenerFolio();
+        }
+
+        private void MostrarDatos(List<string[]> datos) {
+            // Verificar que haya al menos una fila de datos
+            if (datos.Count > 0) {
+                // Acceder a los valores de la primera fila
+                string[] primeraFila = datos[0];
+
+                // Mostrar los valores en TextBox correspondientes
+                if (primeraFila.Length > 0) TXT_Propietario.Text = primeraFila[0];
+                if (primeraFila.Length > 1) TXT_Domicilio.Text = primeraFila[1];
+                if (primeraFila.Length > 2) TXT_Vehiculo.Text = primeraFila[2];
+                if (primeraFila.Length > 3) TXT_RFC.Text = primeraFila[3];
+                if (primeraFila.Length > 4) TXT_Repuve.Text = primeraFila[4];
+                if (primeraFila.Length > 5) TXT_NIV.Text = primeraFila[5];
+                if (primeraFila.Length > 6) TXT_Placas.Text = primeraFila[6];
+                if (primeraFila.Length > 7) TXT_Toneladas.Text = primeraFila[7];
+                if (primeraFila.Length > 8) TXT_NoMotor.Text = primeraFila[8];
+                if (primeraFila.Length > 9) TXT_Cilindros.Text = primeraFila[9];
+                if (primeraFila.Length > 10) TXT_Personas.Text = primeraFila[10];
+                if (primeraFila.Length > 11) TXT_Marca.Text = primeraFila[11];
+                if (primeraFila.Length > 12) TXT_Combustible.Text = primeraFila[12];
+                if (primeraFila.Length > 13) TXT_Modelo.Text = primeraFila[13];
+                if (primeraFila.Length > 14) TXT_ClaveVehicular.Text = primeraFila[14];
+                if (primeraFila.Length > 15) TXT_ClaseTipo.Text = primeraFila[15];
+                if (primeraFila.Length > 16) TXT_Uso.Text = primeraFila[16];
+                if (primeraFila.Length > 17) TXT_TipoServicio.Text = primeraFila[17];
+                if (primeraFila.Length > 18) TXT_NoConcesion.Text = primeraFila[18];
+                if (primeraFila.Length > 19) TXT_VehiculoOrigen.Text = primeraFila[19];
+                if (primeraFila.Length > 20) TXT_SitioRuta.Text = primeraFila[20];
+                if (primeraFila.Length > 21) TXT_Folio.Text = primeraFila[21];
+            } else {
+                LimpiarTextBox();
+                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void Formulario_FormClosing(object sender, FormClosingEventArgs e) {
+            // Llamar al método para limpiar los TextBox cuando se cierra el formulario
+            LimpiarTextBox(this);
+        }
+
+        private void BTN_Inicio_Click(object sender, EventArgs e) {
+            this.Close();
+        }
+
+        private void BTN_BuscarPlaca_Click(object sender, EventArgs e) {
+            this.TC(TXT_Placa.Text.Trim());
+        }
+
+        private void BTN_TarjetaCirculacion_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Propietario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string serie = TXT_NIV.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string marca = TXT_Marca.Text.Trim();
+                    string tipo = TXT_ClaseTipo.Text.Trim();
+
+                    string concecion = "COLECTIVO";
+                    string ruta = TXT_SitioRuta.Text.Trim();
+                    string rfc = TXT_RFC.Text.Trim();
+
+                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
+                    string ofcExp = "SAN PABLO APETATITLAN";
+                    string tipoServ = TXT_TipoServicio.Text.Trim();
+                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
+                    string tramite = TXT_Tramite.Text.Trim();
+
+                    string fechaExp = DateTime.Now.ToString("dd/MM/yyyy");
+                    string vigencia = "31/12/" + Convert.ToString(DateTime.Now.Year);
+
+                    string noConcecion = TXT_NoConcesion.Text.Trim();
+                    string cilindros = TXT_Cilindros.Text.Trim();
+                    string combustible = TXT_Combustible.Text.Trim();
+                    string repuve = TXT_Repuve.Text.Trim();
+
+                    Tuple<string, string> PasYVehi = ObtenerPasajerosYVehiculo(placa);
+
+                    string pasajeros = PasYVehi.Item1;
+                    string vehiculo = PasYVehi.Item2;
+                    string capacidad = "Prueba";
+
+                    string toneladas = TXT_Toneladas.Text.Trim();
+                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
+                    string uso = TXT_Uso.Text.Trim();
+
+                    string secretario = ObtenerTitularSMyT();
+
+                    GenerarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, ruta, rfc, vehiculo, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, fechaExp, vigencia, noConcecion, cilindros, combustible, repuve, capacidad, toneladas, personas, uso, secretario);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("TarjetaCirculacion.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("Tarjeta de Circulación generada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarTextBox();
+                }
+            }
+        }
+
+        private void BTN_PermisoProvisional_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    string nOficio = ObtenerFolio().ToString("D4");
+
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Propietario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string serie = TXT_NIV.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string marca = TXT_Marca.Text.Trim();
+                    string tipo = TXT_ClaseTipo.Text.Trim();
+                    string ruta = TXT_SitioRuta.Text.Trim();
+                    string rfc = TXT_RFC.Text.Trim();
+                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
+                    string ofcExp = "SAN PABLO APETATITLAN";
+                    string tipoServ = TXT_TipoServicio.Text.Trim();
+                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
+                    string tramite = TXT_Tramite.Text.Trim();
+                    string noConcecion = TXT_NoConcesion.Text.Trim();
+                    string cilindros = TXT_Cilindros.Text.Trim();
+                    string combustible = TXT_Combustible.Text.Trim();
+                    string toneladas = TXT_Toneladas.Text.Trim();
+                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
+                    string uso = TXT_Uso.Text.Trim();
+
+                    int diasPermiso;
+                    string selectedItem = CMB_VigenciaPermiso.SelectedItem.ToString();
+                    if (int.TryParse(selectedItem.Split(' ')[0], out int numero)) {
+                        diasPermiso = numero;
+                    } else {
+                        diasPermiso = 0;
+                    }
+                    string director = ObtenerTitularSMyT();
+                    // int nOficio = Convert.ToInt32(TXT_Folio.Text.Trim());
+
+                    GenerarProvisionalPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, ruta, rfc, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, noConcecion, cilindros, combustible, toneladas, personas, uso, diasPermiso, director, nOficio);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("PermisoSinTC.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("Permiso provisional generado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarTextBox();
+                }
+            }
+
+        }
+
+        private void F_TarjetaCirculacion_Load(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+
+            this.ActiveControl = null;
+
+            if (CMB_VigenciaPermiso.Items.Count > 0) {
+                CMB_VigenciaPermiso.SelectedIndex = 0;
+            }
+        }
+
+        #endregion
+
+        #region Métodos Extra
+        private void LimpiarTextBox(System.Windows.Forms.Control control) {
+            foreach (System.Windows.Forms.Control c in control.Controls) {
+                // Si el control es un TextBox, establece su texto en blanco
+                if (c is System.Windows.Forms.TextBox textBox) {
+                }
+
+                if (c.HasChildren) {
+                    LimpiarTextBox(c);
+                }
+            }
         }
 
         private (string, bool) VerificacionParametros() {
@@ -243,149 +412,10 @@ namespace SGIMTProyecto
             TXT_Folio.Text = "";
         }
 
-        private void MostrarDatos(List<string[]> datos)
-        {
-            // Verificar que haya al menos una fila de datos
-            if (datos.Count > 0)
-            {
-                // Acceder a los valores de la primera fila
-                string[] primeraFila = datos[0];
-
-                // Mostrar los valores en TextBox correspondientes
-                if (primeraFila.Length > 0) TXT_Propietario.Text = primeraFila[0];
-                if (primeraFila.Length > 1) TXT_Domicilio.Text = primeraFila[1];
-                if (primeraFila.Length > 2) TXT_Vehiculo.Text = primeraFila[2];
-                if (primeraFila.Length > 3) TXT_RFC.Text = primeraFila[3];
-                if (primeraFila.Length > 4) TXT_Repuve.Text = primeraFila[4];
-                if (primeraFila.Length > 5) TXT_NIV.Text = primeraFila[5];
-                if (primeraFila.Length > 6) TXT_Placas.Text = primeraFila[6];
-                if (primeraFila.Length > 7) TXT_Toneladas.Text = primeraFila[7];
-                if (primeraFila.Length > 8) TXT_NoMotor.Text = primeraFila[8];
-                if (primeraFila.Length > 9) TXT_Cilindros.Text = primeraFila[9];
-                if (primeraFila.Length > 10) TXT_Personas.Text = primeraFila[10];
-                if (primeraFila.Length > 11) TXT_Marca.Text = primeraFila[11];
-                if (primeraFila.Length > 12) TXT_Combustible.Text = primeraFila[12];
-                if (primeraFila.Length > 13) TXT_Modelo.Text = primeraFila[13];
-                if (primeraFila.Length > 14) TXT_ClaveVehicular.Text = primeraFila[14];
-                if (primeraFila.Length > 15) TXT_ClaseTipo.Text = primeraFila[15];
-                if (primeraFila.Length > 16) TXT_Uso.Text = primeraFila[16];
-                if (primeraFila.Length > 17) TXT_TipoServicio.Text = primeraFila[17];
-                if (primeraFila.Length > 18) TXT_NoConcesion.Text = primeraFila[18];
-                if (primeraFila.Length > 19) TXT_VehiculoOrigen.Text = primeraFila[19];
-                if (primeraFila.Length > 20) TXT_SitioRuta.Text = primeraFila[20];
-                if (primeraFila.Length > 21) TXT_Folio.Text = primeraFila[21];
-            }
-            else
-            {
-                LimpiarTextBox();
-                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
         #endregion
 
-        private void BTN_Inicio_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void BTN_BuscarPlaca_Click(object sender, EventArgs e)
-        {
-            this.TC(TXT_Placa.Text.Trim());
-        }
-
-        private void BTN_TarjetaCirculacion_Click(object sender, EventArgs e)
-        {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    string placa = TXT_Placas.Text.Trim();
-                    string nombre = TXT_Propietario.Text.Trim();
-                    string direccion = TXT_Domicilio.Text.Trim();
-                    string serie = TXT_NIV.Text.Trim();
-                    string motor = TXT_NoMotor.Text.Trim();
-                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
-                    string marca = TXT_Marca.Text.Trim();
-                    string tipo = TXT_ClaseTipo.Text.Trim();
-
-                    string concecion = "COLECTIVO";
-                    string ruta = TXT_SitioRuta.Text.Trim();
-                    string rfc = TXT_RFC.Text.Trim();
-
-                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
-                    string ofcExp = "SAN PABLO APETATITLAN";
-                    string tipoServ = TXT_TipoServicio.Text.Trim();
-                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
-                    string tramite = TXT_Tramite.Text.Trim();
-
-                    string fechaExp = DateTime.Now.ToString("dd/MM/yyyy");
-                    string vigencia = "31/12/" + Convert.ToString(DateTime.Now.Year);
-
-                    string noConcecion = TXT_NoConcesion.Text.Trim();
-                    string cilindros = TXT_Cilindros.Text.Trim();
-                    string combustible = TXT_Combustible.Text.Trim();
-                    string repuve = TXT_Repuve.Text.Trim();
-
-                    Tuple<string, string> PasYVehi = ObtenerPasajerosYVehiculo(placa);
-
-                    string pasajeros = PasYVehi.Item1;
-                    string vehiculo = PasYVehi.Item2;
-                    string capacidad = "Prueba";
-
-                    string toneladas = TXT_Toneladas.Text.Trim();
-                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
-                    string uso = TXT_Uso.Text.Trim();
-
-                    string secretario = ObtenerTitularSMyT();
-
-                    GenerarPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, pasajeros, concecion, ruta, rfc, vehiculo, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, fechaExp, vigencia, noConcecion, cilindros, combustible, repuve, capacidad, toneladas, personas, uso, secretario);
-
-                    if (formVisualizador == null || formVisualizador.IsDisposed) {
-                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
-                        formVisualizador.RecibirNombre("TarjetaCirculacion.pdf");
-                        formVisualizador.ShowDialog();
-                    }
-
-                    MessageBox.Show("Tarjeta de Circulación generada con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LimpiarTextBox();
-                }
-            }
-        }
-        private static void GenerarPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string pasajeros, string concecion, string ruta, string rfc, string vehiculo, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string fechaExp, string vigencia, string noConcecion, string cilindros, string combustible, string repuve, string capacidad, string toneladas, int personas, string uso, string secretario)
-        {
-            /*string placa = "AXXXXX";
-            string nombre = "MANUEL ALEJANDRO MORA MENESES";
-            string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
-            string serie = "VF1FLADRACY419294";
-            string motor = "C683198";
-            int modelo = 2023;
-            string marca = "RENAULT TRAFIC";
-            string tipo = "PANEL";
-            string pasajeros = "20 PASAJEROS";
-            string concecion = "COLECTIVO";
-            string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-            string rfc = "TUX920811PQ7";
-            string vehiculo = "NISSAN";
-            string clvVehicular = "1982432";
-            string ofcExp = "SAN PABLO APETATITLAN";
-            string tipoServ = "SERV.PUB.LOCAL CON ITINERARIO FIJO";
-            string vehOrig = "NACIONAL";
-            string tramite = "";
-            string fechaExp = "17-JULIO-23";
-            string vigencia = "31-DIC-2023";
-            string noConcecion = "P/213/23";
-            string cilindros = "4 CIL";
-            string combustible = "GASOLINA";
-            string repuve = "322PIE61";
-            string capacidad = "";
-            string toneladas = "";
-            int personas = 17;
-            string uso = "COLECTIVO";
-            string secretario = "LIC. JUAN TAPIA PELCASTRE";*/
-
+        #region Métodos PDF
+        private static void GenerarPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string pasajeros, string concecion, string ruta, string rfc, string vehiculo, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string fechaExp, string vigencia, string noConcecion, string cilindros, string combustible, string repuve, string capacidad, string toneladas, int personas, string uso, string secretario) {
             /*
              * FUENTES
              * 
@@ -657,64 +687,7 @@ namespace SGIMTProyecto
             doc.Close();
         }
 
-        private void BTN_PermisoProvisional_Click(object sender, EventArgs e)
-        {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    string nOficio = ObtenerFolio().ToString("D4");
-
-                    string placa = TXT_Placas.Text.Trim();
-                    string nombre = TXT_Propietario.Text.Trim();
-                    string direccion = TXT_Domicilio.Text.Trim();
-                    string serie = TXT_NIV.Text.Trim();
-                    string motor = TXT_NoMotor.Text.Trim();
-                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
-                    string marca = TXT_Marca.Text.Trim();
-                    string tipo = TXT_ClaseTipo.Text.Trim();
-                    string ruta = TXT_SitioRuta.Text.Trim();
-                    string rfc = TXT_RFC.Text.Trim();
-                    string clvVehicular = TXT_ClaveVehicular.Text.Trim();
-                    string ofcExp = "SAN PABLO APETATITLAN";
-                    string tipoServ = TXT_TipoServicio.Text.Trim();
-                    string vehOrig = TXT_VehiculoOrigen.Text.Trim();
-                    string tramite = TXT_Tramite.Text.Trim();
-                    string noConcecion = TXT_NoConcesion.Text.Trim();
-                    string cilindros = TXT_Cilindros.Text.Trim();
-                    string combustible = TXT_Combustible.Text.Trim();
-                    string toneladas = TXT_Toneladas.Text.Trim();
-                    int personas = Convert.ToInt32(TXT_Personas.Text.Trim());
-                    string uso = TXT_Uso.Text.Trim();
-
-                    int diasPermiso;
-                    string selectedItem = CMB_VigenciaPermiso.SelectedItem.ToString();
-                    if (int.TryParse(selectedItem.Split(' ')[0], out int numero)) {
-                        diasPermiso = numero;
-                    } else {
-                        diasPermiso = 0;
-                    }
-                    string director = ObtenerTitularSMyT();
-                    // int nOficio = Convert.ToInt32(TXT_Folio.Text.Trim());
-
-                    GenerarProvisionalPDF(placa, nombre, direccion, serie, motor, modelo, marca, tipo, ruta, rfc, clvVehicular, ofcExp, tipoServ, vehOrig, tramite, noConcecion, cilindros, combustible, toneladas, personas, uso, diasPermiso, director, nOficio);
-
-                    if (formVisualizador == null || formVisualizador.IsDisposed) {
-                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
-                        formVisualizador.RecibirNombre("PermisoSinTC.pdf");
-                        formVisualizador.ShowDialog();
-                    }
-
-                    MessageBox.Show("Permiso provisional generado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LimpiarTextBox();
-                }
-            }
-
-        }
-        private static void GenerarProvisionalPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string ruta, string rfc, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string noConcecion, string cilindros, string combustible, string toneladas, int personas, string uso, int diasPermiso, string director, string nOficio)
-        {
+        private static void GenerarProvisionalPDF(string placa, string nombre, string direccion, string serie, string motor, int modelo, string marca, string tipo, string ruta, string rfc, string clvVehicular, string ofcExp, string tipoServ, string vehOrig, string tramite, string noConcecion, string cilindros, string combustible, string toneladas, int personas, string uso, int diasPermiso, string director, string nOficio) {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
 
@@ -722,30 +695,6 @@ namespace SGIMTProyecto
             int dia = today.Day;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
 
-            /*string placa = "AXXXXX";
-            string nombre = "MANUEL ALEJANDRO MORA MENESES";
-            string direccion = "EL ROBLE EXT. 4 INT. - COL. EL SABINAL, TLAXCO, TLAXCALA";
-            string serie = "VF1FLADRACY419294";
-            string motor = "C683198";
-            int modelo = 2023;
-            string marca = "RENAULT TRAFIC";
-            string tipo = "PANEL";
-            string ruta = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-            string rfc = "TUX920811PQ7";
-            string clvVehicular = "1982432";
-            string ofcExp = "SAN PABLO APETATITLAN";
-            string tipoServ = "SERV.PUB.LOCAL CON ITINERARIO FIJO";
-            string vehOrig = "NACIONAL";
-            string tramite = "";
-            string noConcecion = "P/213/23";
-            string cilindros = "4 CIL";
-            string combustible = "GASOLINA";
-            string toneladas = "";
-            int personas = 17;
-            string uso = "COLECTIVO";
-            int diasPermiso = 90;
-            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-            int nOficio = 1570;*/
             /*
              * FUENTES
              * 
@@ -1003,6 +952,8 @@ namespace SGIMTProyecto
             doc.Close();
         }
 
+        #endregion
+
         #region PlaceHolder
         private void TXT_Placa_Enter(object sender, EventArgs e) {
             if (TXT_Placa.Text == "Placa") {
@@ -1017,19 +968,8 @@ namespace SGIMTProyecto
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
         #endregion
 
-        private void F_TarjetaCirculacion_Load(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
-                TXT_Placa.Text = "Placa";
-                TXT_Placa.ForeColor = Color.Gray;
-            }
-
-            this.ActiveControl = null;
-
-            if (CMB_VigenciaPermiso.Items.Count > 0) {
-                CMB_VigenciaPermiso.SelectedIndex = 0;
-            }
-        }
     }
 }

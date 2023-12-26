@@ -55,14 +55,12 @@ namespace SGIMTProyecto {
                 string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
-                Comando.Parameters.AddWithValue("@Placa", placa);  // Utiliza parámetros para evitar la inyección de SQL
+                Comando.Parameters.AddWithValue("@Placa", placa);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
 
-                // Ejecutar la consulta y obtener el resultado
                 int resultado = Convert.ToInt32(Comando.ExecuteScalar());
 
-                // Devolver true si el vehículo existe, false si no existe
                 return resultado == 1;
             }
             catch (Exception ex) {
@@ -115,12 +113,6 @@ namespace SGIMTProyecto {
                         case 8:
                             parametro = "@Estado";
                             break;
-                            /*case 9:
-                                parametro = "@NoConcesion";
-                                break;
-                            case 10:
-                                parametro = "@NoSeguro";
-                                break;*/
                     }
                     Comando.Parameters.AddWithValue(parametro, elemento);
                     count++;
@@ -138,5 +130,4 @@ namespace SGIMTProyecto {
             }
         }
     }
-
 }

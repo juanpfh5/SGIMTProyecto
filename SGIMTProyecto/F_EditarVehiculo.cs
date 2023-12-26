@@ -14,8 +14,77 @@ namespace SGIMTProyecto {
             InitializeComponent();
         }
 
-        #region Métodos
+        #region Métodos Base de Datos
+        private void DatosVehiculo(string cTexto) {
+            D_EditarVehiculo Datos = new D_EditarVehiculo();
+            MostrarDatos(Datos.DatosVehiculo(cTexto));
+        }
 
+        private bool ExistenciaVehiculo(string cTexto) {
+            D_EditarPropietario Datos = new D_EditarPropietario();
+            return Datos.ExistenciaVehiculo(cTexto);
+        }
+
+        private void ActualizarVehiculo(List<object> datosVehiculo, string placa) {
+            D_EditarVehiculo Datos = new D_EditarVehiculo();
+            Datos.ActualizarVehiculo(datosVehiculo, placa);
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void BTN_Buscar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                this.DatosVehiculo(TXT_Placa.Text.Trim());
+            }
+        }
+
+        private void BTN_Guardar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
+                        List<object> datosVehiculo = new List<object> {
+                        TXT_Vehiculo.Text.Trim(),
+                        TXT_Marca.Text.Trim(),
+                        TXT_Modelo.Text.Trim(),
+                        TXT_Tipo.Text.Trim(),
+                        TXT_TipoServicio.Text.Trim(),
+                        TXT_VehiculoOrigen.Text.Trim(),
+                        TXT_ClaveVehicular.Text.Trim(),
+                        TXT_NoSeguro.Text.Trim(),
+                        TXT_Repuve.Text.Trim(),
+                        TXT_SitioRuta.Text.Trim(),
+                        int.Parse(TXT_FolioTC.Text.Trim()),
+                        TXT_RFV.Text.Trim(),
+                        int.Parse(TXT_FolioRevista.Text.Trim()),
+                        TXT_NoSerie.Text.Trim(),
+                        TXT_NoMotor.Text.Trim(),
+                        TXT_Cilindros.Text.Trim(),
+                        TXT_Combustible.Text.Trim(),
+                        TXT_Toneladas.Text.Trim(),
+                        TXT_Pasajeros.Text.Trim(),
+                        TXT_Uso.Text.Trim()
+                    };
+
+                        ActualizarVehiculo(datosVehiculo, TXT_Placa.Text.Trim());
+
+                        MessageBox.Show("Los datos del propietario se han actualizado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarTextBox();
+                    } else {
+                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        #endregion 
+
+        #region Métodos Extra
         private void LimpiarTextBox() {
             TXT_Nombre.Text = "";
             TXT_Vehiculo.Text = "";
@@ -40,18 +109,11 @@ namespace SGIMTProyecto {
             TXT_RFV.Text = "";
             TXT_FolioRevista.Text = "";
         }
-        private void DatosVehiculo(string cTexto) {
-            D_EditarVehiculo Datos = new D_EditarVehiculo();
-            MostrarDatos(Datos.DatosVehiculo(cTexto));
-        }
 
         private void MostrarDatos(List<string[]> datos) {
-            // Verificar que haya al menos una fila de datos
             if (datos.Count > 0) {
-                // Acceder a los valores de la primera fila
                 string[] primeraFila = datos[0];
 
-                // Mostrar los valores en TextBox correspondientes
                 if (primeraFila.Length > 0) TXT_Nombre.Text = primeraFila[0];
                 if (primeraFila.Length > 1) TXT_Vehiculo.Text = primeraFila[1];
                 if (primeraFila.Length > 2) TXT_Marca.Text = primeraFila[2];
@@ -80,16 +142,6 @@ namespace SGIMTProyecto {
             }
         }
 
-        private bool ExistenciaVehiculo(string cTexto) {
-            D_EditarPropietario Datos = new D_EditarPropietario();
-            return Datos.ExistenciaVehiculo(cTexto);
-        }
-
-        private void ActualizarVehiculo(List<object> datosVehiculo, string placa) {
-            D_EditarVehiculo Datos = new D_EditarVehiculo();
-            Datos.ActualizarVehiculo(datosVehiculo, placa);
-        }
-
         private (string, bool) VerificacionParametros() {
             string error, variable;
             bool bandera = false;
@@ -98,11 +150,6 @@ namespace SGIMTProyecto {
 
             int tamanio;
 
-            /*if (TXT_Nombre.Text.Length > 50 || TXT_Nombre.Text.Length < 1)
-            {
-                parametros.Add("Nombre");
-                bandera = true;
-            }*/
             if (TXT_Vehiculo.Text.Length > 15 || TXT_Vehiculo.Text.Length < 1) {
                 variable = JLB_Vehiculo.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
@@ -203,11 +250,6 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            /*if (TXT_NoConcesion.Text.Length > 25 || TXT_NoConcesion.Text.Length < 1)
-            {
-                parametros.Add("No. Concesion");
-                bandera = true;
-            }*/
 
             tamanio = parametros.Count;
 
@@ -229,56 +271,7 @@ namespace SGIMTProyecto {
 
         #endregion
 
-        private void BTN_Buscar_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.DatosVehiculo(TXT_Placa.Text.Trim());
-            }
-        }
-
-        private void BTN_Guardar_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
-                        List<object> datosVehiculo = new List<object> {
-                        TXT_Vehiculo.Text.Trim(),
-                        TXT_Marca.Text.Trim(),
-                        TXT_Modelo.Text.Trim(),
-                        TXT_Tipo.Text.Trim(),
-                        TXT_TipoServicio.Text.Trim(),
-                        TXT_VehiculoOrigen.Text.Trim(),
-                        TXT_ClaveVehicular.Text.Trim(),
-                        TXT_NoSeguro.Text.Trim(),
-                        TXT_Repuve.Text.Trim(),
-                        TXT_SitioRuta.Text.Trim(),
-                        int.Parse(TXT_FolioTC.Text.Trim()),
-                        TXT_RFV.Text.Trim(),
-                        int.Parse(TXT_FolioRevista.Text.Trim()),
-                        TXT_NoSerie.Text.Trim(),
-                        TXT_NoMotor.Text.Trim(),
-                        TXT_Cilindros.Text.Trim(),
-                        TXT_Combustible.Text.Trim(),
-                        TXT_Toneladas.Text.Trim(),
-                        TXT_Pasajeros.Text.Trim(),
-                        TXT_Uso.Text.Trim()
-                    };
-
-                        ActualizarVehiculo(datosVehiculo, TXT_Placa.Text.Trim());
-
-                        MessageBox.Show("Los datos del propietario se han actualizado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LimpiarTextBox();
-                    } else {
-                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-        }
-
-        #region PlaceHolder
+        #region Métodos PlaceHolder
         private void TXT_Placa_Enter(object sender, EventArgs e) {
             if (TXT_Placa.Text == "Placa") {
                 TXT_Placa.Text = "";
@@ -292,6 +285,8 @@ namespace SGIMTProyecto {
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
         #endregion
+
     }
 }

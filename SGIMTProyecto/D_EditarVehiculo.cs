@@ -7,18 +7,14 @@ using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace SGIMTProyecto
-{
-    public class D_EditarVehiculo
-    {
-        public List<string[]> DatosVehiculo(string placa)
-        {
+namespace SGIMTProyecto {
+    public class D_EditarVehiculo {
+        public List<string[]> DatosVehiculo(string placa) {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT nombre_co, vehiculo_un, marca_un, modelo_un, tipo_un, tipoServicio_un, vehiculoOrigen_un, claveVehicular_un, noSeguro_un, repuve_un, noSerie_un, noMotor_un, cilindros_un, combustible_un, toneladas_un, pasajeros_un, uso_un, placa_un, ruta_un, folioTC_un, rfv_un, folioRevista_un FROM unidad_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
 
@@ -28,69 +24,54 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
-                while (Resultado.Read())
-                {
-                    // Crear un array para almacenar los datos de cada fila
+                while (Resultado.Read()) {
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    // Copiar los datos de cada columna al array
-                    for (int i = 0; i < Resultado.FieldCount; i++)
-                    {
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
-                    // Agregar el array a la lista
                     listaDatos.Add(datosFila);
                 }
 
                 return listaDatos;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
 
-        public bool ExistenciaVehiculo(string placa)
-        {
+        public bool ExistenciaVehiculo(string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
-                Comando.Parameters.AddWithValue("@Placa", placa);  // Utiliza parámetros para evitar la inyección de SQL
+                Comando.Parameters.AddWithValue("@Placa", placa);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
 
-                // Ejecutar la consulta y obtener el resultado
                 int resultado = Convert.ToInt32(Comando.ExecuteScalar());
 
-                // Devolver true si el vehículo existe, false si no existe
                 return resultado == 1;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
 
-        public void ActualizarVehiculo(List<object> datosVehiculo, string placa)
-        {
+        public void ActualizarVehiculo(List<object> datosVehiculo, string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 int count = 0;
                 string parametro;
 
@@ -99,11 +80,9 @@ namespace SGIMTProyecto
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
 
-                foreach (var elemento in datosVehiculo)
-                {
+                foreach (var elemento in datosVehiculo) {
                     parametro = "";
-                    switch (count)
-                    {
+                    switch (count) {
                         case 0:
                             parametro = "@Vehiculo";
                             break;
@@ -173,15 +152,12 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Comando.ExecuteReader();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
-
     }
 }

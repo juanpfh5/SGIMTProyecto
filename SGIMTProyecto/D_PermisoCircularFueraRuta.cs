@@ -8,18 +8,14 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace SGIMTProyecto
-{
-    public class D_PermisoCircularFueraRuta
-    {
-        public List<string[]> CircularFR(string placa)
-        {
+namespace SGIMTProyecto {
+    public class D_PermisoCircularFueraRuta {
+        public List<string[]> CircularFR(string placa) {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT nombre_co, domicilio_co, estado_co, cp_co, noSerie_un, noMotor_un, repuve_un, marca_un, modelo_un, unidad_un.placa_un, folioTC_un, ruta_un FROM unidad_un INNER JOIN movimiento_mo ON unidad_un.placa_un = movimiento_mo.placa_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE unidad_un.placa_un = @Placa AND unidad_un.baja_un IS NULL";
 
@@ -29,12 +25,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
-                while (Resultado.Read())
-                {
+                while (Resultado.Read()) {
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    for (int i = 0; i < Resultado.FieldCount; i++)
-                    {
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
@@ -43,12 +37,10 @@ namespace SGIMTProyecto
 
                 return listaDatos;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
@@ -170,14 +162,11 @@ namespace SGIMTProyecto
                 string sql_tarea = "SELECT EXISTS(SELECT 1 FROM movimiento_mo WHERE id_mo = @Movimiento) as existeMovimiento;";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
-                Comando.Parameters.AddWithValue("@Movimiento", movimiento);  // Utiliza parámetros para evitar la inyección de SQL
+                Comando.Parameters.AddWithValue("@Movimiento", movimiento);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
 
-                // Ejecutar la consulta y obtener el resultado
                 int resultado = Convert.ToInt32(Comando.ExecuteScalar());
-
-                // Devolver true si el vehículo existe, false si no existe
                 return resultado == 1;
             }
             catch (Exception ex) {

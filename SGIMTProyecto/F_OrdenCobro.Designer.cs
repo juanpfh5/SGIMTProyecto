@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GRB_OrdenCobro = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -71,11 +71,11 @@
             this.TXT_Total = new System.Windows.Forms.TextBox();
             this.JLB_Elaboro = new System.Windows.Forms.Label();
             this.CMB_Elaboro = new System.Windows.Forms.ComboBox();
+            this.JLB_Autorizo = new System.Windows.Forms.Label();
+            this.CMB_Autorizo = new System.Windows.Forms.ComboBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.BTN_Imprimir = new System.Windows.Forms.Button();
-            this.JLB_Autorizo = new System.Windows.Forms.Label();
-            this.CMB_Autorizo = new System.Windows.Forms.ComboBox();
             this.GRB_OrdenCobro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clave)).BeginInit();
             this.SuspendLayout();
@@ -209,6 +209,7 @@
             this.TXT_NuevaPlaca.Name = "TXT_NuevaPlaca";
             this.TXT_NuevaPlaca.Size = new System.Drawing.Size(161, 23);
             this.TXT_NuevaPlaca.TabIndex = 31;
+            this.TXT_NuevaPlaca.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NuevaPlaca_KeyPress);
             // 
             // JLB_CP
             // 
@@ -473,11 +474,10 @@
             this.DGV_Clave.Location = new System.Drawing.Point(18, 336);
             this.DGV_Clave.Name = "DGV_Clave";
             this.DGV_Clave.ReadOnly = true;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 55;
-            this.DGV_Clave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clave_CellContentClick);
             this.DGV_Clave.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_Clave_RowsAdded);
             // 
             // JLB_Observaciones
@@ -538,6 +538,25 @@
             this.CMB_Elaboro.Size = new System.Drawing.Size(121, 33);
             this.CMB_Elaboro.TabIndex = 63;
             // 
+            // JLB_Autorizo
+            // 
+            this.JLB_Autorizo.AutoSize = true;
+            this.JLB_Autorizo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
+            this.JLB_Autorizo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.JLB_Autorizo.Location = new System.Drawing.Point(613, 476);
+            this.JLB_Autorizo.Name = "JLB_Autorizo";
+            this.JLB_Autorizo.Size = new System.Drawing.Size(56, 15);
+            this.JLB_Autorizo.TabIndex = 67;
+            this.JLB_Autorizo.Text = "Autorizó:";
+            // 
+            // CMB_Autorizo
+            // 
+            this.CMB_Autorizo.FormattingEnabled = true;
+            this.CMB_Autorizo.Location = new System.Drawing.Point(683, 467);
+            this.CMB_Autorizo.Name = "CMB_Autorizo";
+            this.CMB_Autorizo.Size = new System.Drawing.Size(121, 33);
+            this.CMB_Autorizo.TabIndex = 68;
+            // 
             // TXT_Placa
             // 
             this.TXT_Placa.ForeColor = System.Drawing.Color.Gray;
@@ -575,25 +594,6 @@
             this.BTN_Imprimir.Text = "Imprimir";
             this.BTN_Imprimir.UseVisualStyleBackColor = false;
             this.BTN_Imprimir.Click += new System.EventHandler(this.BTN_Imprimir_Click);
-            // 
-            // JLB_Autorizo
-            // 
-            this.JLB_Autorizo.AutoSize = true;
-            this.JLB_Autorizo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.JLB_Autorizo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_Autorizo.Location = new System.Drawing.Point(613, 476);
-            this.JLB_Autorizo.Name = "JLB_Autorizo";
-            this.JLB_Autorizo.Size = new System.Drawing.Size(56, 15);
-            this.JLB_Autorizo.TabIndex = 67;
-            this.JLB_Autorizo.Text = "Autorizó:";
-            // 
-            // CMB_Autorizo
-            // 
-            this.CMB_Autorizo.FormattingEnabled = true;
-            this.CMB_Autorizo.Location = new System.Drawing.Point(683, 467);
-            this.CMB_Autorizo.Name = "CMB_Autorizo";
-            this.CMB_Autorizo.Size = new System.Drawing.Size(121, 33);
-            this.CMB_Autorizo.TabIndex = 68;
             // 
             // F_OrdenCobro
             // 

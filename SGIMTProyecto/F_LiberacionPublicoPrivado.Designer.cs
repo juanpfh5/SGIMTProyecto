@@ -262,7 +262,6 @@
             this.Controls.Add(this.BTN_Imprimir);
             this.Name = "F_LiberacionPublicoPrivado";
             this.Size = new System.Drawing.Size(756, 657);
-            this.Click += new System.EventHandler(this.F_LiberacionPublicoPrivado_Click);
             this.GRB_Liberacion.ResumeLayout(false);
             this.GRB_Liberacion.PerformLayout();
             this.ResumeLayout(false);

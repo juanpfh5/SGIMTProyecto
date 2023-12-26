@@ -106,6 +106,29 @@ namespace SGIMTProyecto {
             }
         }
 
+        public bool ExistenciaVehiculo(string placa) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT EXISTS(SELECT 1 FROM unidad_un WHERE placa_un = @Placa) as existeVehiculo";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Placa", placa);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                int resultado = Convert.ToInt32(Comando.ExecuteScalar());
+
+                return resultado == 1;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
         public List<string> ListadoClaveConcepto(string busqueda) {
             MySqlDataReader listaClaveConcepto;
             List<string> listaBusqueda = new List<string>();
@@ -134,49 +157,6 @@ namespace SGIMTProyecto {
             }
         }
 
-
-        static void MostrarListaEnMessageBox(List<string> lista) {
-            // Concatenar los elementos de la lista en una sola cadena
-            string mensaje = string.Join(Environment.NewLine, lista);
-
-            // Mostrar el MessageBox
-            MessageBox.Show(mensaje, "Elementos de la Lista", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        /*public List<string> AgregarClave(string concepto) {
-            MySqlDataReader Resultado;
-            List<string> listaDatos = new List<string>();
-            MySqlConnection SqlCon = new MySqlConnection();
-
-            try {
-                SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT clave_cl, concepto_cl, COALESCE(dias_cl * (SELECT valor_um FROM uma_um ORDER BY id_um DESC LIMIT 1), costo_cl) AS valor FROM claves_cl WHERE id_cl = (SELECT id_cl FROM claves_cl WHERE concepto_cl = @Concepto);a";
-
-                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
-                Comando.Parameters.AddWithValue("@Concepto", concepto);
-                Comando.CommandTimeout = 60;
-                SqlCon.Open();
-                Resultado = Comando.ExecuteReader();
-
-                while (Resultado.Read()) {
-                    string[] datosFila = new string[Resultado.FieldCount];
-
-                    for (int i = 0; i < Resultado.FieldCount; i++) {
-                        datosFila[i] = Resultado[i].ToString();
-                    }
-
-                    listaDatos.Add(datosFila);
-                }
-
-                return listaDatos;
-            }
-            catch (Exception ex) {
-                throw ex;
-            }
-            finally {
-                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
-            }
-        }*/
         public List<string> AgregarClave(string concepto) {
             List<string> listaBusqueda = new List<string>();
             MySqlConnection SqlCon = new MySqlConnection();
@@ -210,7 +190,6 @@ namespace SGIMTProyecto {
                 return listaBusqueda;
             }
             catch (Exception ex) {
-                // Aquí puedes considerar lograr la excepción o manejarla de otra manera
                 throw ex;
             }
             finally {
@@ -250,7 +229,7 @@ namespace SGIMTProyecto {
 
         public string ObtenerRFC(string placa) {
             MySqlConnection SqlCon = new MySqlConnection();
-            string rfc = ""; // Cambiado el nombre de la variable a rfc
+            string rfc = "";
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
@@ -264,7 +243,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "rfc_co" a la variable rfc
                         rfc = reader["rfc_co"].ToString();
                     }
                 }
@@ -278,7 +256,6 @@ namespace SGIMTProyecto {
                 }
             }
 
-            // Retorna el RFC
             return rfc;
         }
 
@@ -299,7 +276,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna los valores de las columnas a las variables correspondientes
                         cilindros = reader["cilindros_un"].ToString();
                         ruta = reader["ruta_un"].ToString();
                     }
@@ -313,14 +289,12 @@ namespace SGIMTProyecto {
                     SqlCon.Close();
                 }
             }
-
-            // Retorna una tupla con los valores obtenidos
             return new Tuple<string, string>(cilindros, ruta);
         }
 
         public (decimal, int) ObtenerDescuento(string fecha) {
             MySqlConnection SqlCon = new MySqlConnection();
-            decimal des = 0.00m; // Asigna un valor predeterminado
+            decimal des = 0.00m;
             int id = 0;
 
             try {
@@ -335,7 +309,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
                         des = Convert.ToDecimal(reader["PorcentajeDescuento"]);
                         id = Convert.ToInt32(reader["ID_Descuento"]);
                     }
@@ -349,8 +322,6 @@ namespace SGIMTProyecto {
                     SqlCon.Close();
                 }
             }
-
-            // Retorna el valor del descuento
             return (des, id);
         }
 
@@ -369,7 +340,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
                         id = Convert.ToInt32(reader["id_um"]);
                     }
                 }
@@ -401,7 +371,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
                         id = Convert.ToInt32(reader["id_mo"]);
                     }
                 }
@@ -434,7 +403,6 @@ namespace SGIMTProyecto {
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
                         id = Convert.ToInt32(reader["id_cl"]);
                     }
                 }
@@ -528,6 +496,32 @@ namespace SGIMTProyecto {
                     Comando.Parameters.AddWithValue(parametro, elemento);
                     count++;
                 }
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                Comando.ExecuteReader();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+        public void ActualizarPlaca(string placaActual, string placaNueva) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                int count = 0;
+                string parametro;
+
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "INSERT INTO unidad_un (placa_un, noSerie_un, noMotor_un, cilindros_un, combustible_un, marca_un, vehiculo_un, modelo_un, claveVehicular_un, tipo_un, toneladas_un, tipoServicio_un, pasajeros_un, vehiculoOrigen_un, uso_un, folioTC_un, rfv_un, folioRevista_un, ruta_un, noSeguro_un, repuve_un, noConcesion_un, otros_un, id_co) SELECT @PlacaNueva, noSerie_un, noMotor_un, cilindros_un, combustible_un, marca_un, vehiculo_un, modelo_un, claveVehicular_un, tipo_un, toneladas_un, tipoServicio_un, pasajeros_un, vehiculoOrigen_un, uso_un, folioTC_un, rfv_un, folioRevista_un, ruta_un, noSeguro_un, repuve_un, noConcesion_un, otros_un, id_co FROM unidad_un WHERE placa_un = @PlacaActual;  UPDATE unidad_un SET baja_un = true WHERE placa_un = @PlacaActual;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.Parameters.AddWithValue("@PlacaActual", placaActual);
+                Comando.Parameters.AddWithValue("@PlacaNueva", placaNueva);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
                 Comando.ExecuteReader();

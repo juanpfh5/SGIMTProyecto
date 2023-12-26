@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
 using System.Globalization;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
@@ -17,23 +15,156 @@ using HarfBuzzSharp;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
-namespace SGIMTProyecto
-{
-    public partial class F_PermisoCircularFueraRuta : UserControl
-    {
+namespace SGIMTProyecto {
+    public partial class F_PermisoCircularFueraRuta : UserControl {
         private F_VisualizacionPDF formVisualizador;
-        public F_PermisoCircularFueraRuta()
-        {
+        public F_PermisoCircularFueraRuta() {
             InitializeComponent();
         }
 
-        #region Métodos
-        private void CircularFR(string cTexto)
-        {
+        #region Métodos Base de Datos
+        private void CircularFR(string cTexto) {
             D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
             MostrarDatos(Datos.CircularFR(cTexto));
         }
 
+        private void MostrarDatos(List<string[]> datos) {
+            if (datos.Count > 0) {
+                string[] primeraFila = datos[0];
+
+                if (primeraFila.Length > 0) TXT_Permisionario.Text = primeraFila[0];
+                if (primeraFila.Length > 1) TXT_Domicilio.Text = primeraFila[1];
+                if (primeraFila.Length > 2) TXT_Poblacion.Text = primeraFila[2];
+                if (primeraFila.Length > 3) TXT_CP.Text = primeraFila[3];
+                if (primeraFila.Length > 4) TXT_NoSerie.Text = primeraFila[4];
+                if (primeraFila.Length > 5) TXT_NoMotor.Text = primeraFila[5];
+                if (primeraFila.Length > 6) TXT_Repuve.Text = primeraFila[6];
+                if (primeraFila.Length > 7) TXT_Marca.Text = primeraFila[7];
+                if (primeraFila.Length > 8) TXT_Modelo.Text = primeraFila[8];
+                if (primeraFila.Length > 9) TXT_Placas.Text = primeraFila[9];
+                if (primeraFila.Length > 10) TXT_TarjetaCirculacion.Text = primeraFila[10];
+                if (primeraFila.Length > 11) TXT_Recorrido.Text = primeraFila[11];
+            } else {
+                LimpiarTextBox();
+                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private string ObtenerTitularSMyT() {
+            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
+            return Datos.ObtenerTitularSMyT();
+        }
+
+        private void InsertarFueraRuta(List<object> datosFueraRuta) {
+            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
+            Datos.InsertarFueraRuta(datosFueraRuta);
+        }
+
+        private bool ExistenciaMovimiento(int movimiento) {
+            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
+            return Datos.ExistenciaMovimiento(movimiento);
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void BTN_BuscarPlaca_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                this.CircularFR(TXT_Placa.Text.Trim());
+                TXT_Placas.Enabled = false;
+                TXT_TarjetaCirculacion.Enabled = false;
+            }
+        }
+
+        private void BTN_Imprimir_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    DateTime fechaSeleccionada = DTP_FechaExpedicion.Value;
+                    string anio = fechaSeleccionada.Year.ToString();
+                    string mes = fechaSeleccionada.Month.ToString("00");
+                    string dia = fechaSeleccionada.Day.ToString("00");
+                    string fechaExpedicion = anio + '-' + mes + '-' + dia;
+
+                    fechaSeleccionada = DTP_FechaVigencia.Value;
+                    anio = fechaSeleccionada.Year.ToString();
+                    mes = fechaSeleccionada.Month.ToString("00");
+                    dia = fechaSeleccionada.Day.ToString("00");
+                    string fechaVigencia = anio + '-' + mes + '-' + dia;
+
+                    List<object> datosFueraRuta = new List<object> {
+                        TXT_Permisionario.Text.Trim(),
+                        TXT_Domicilio.Text.Trim(),
+                        TXT_Poblacion.Text.Trim(),
+                        int.Parse(TXT_CP.Text.Trim()),
+                        int.Parse(TXT_TarjetaCirculacion.Text.Trim()),
+                        TXT_Marca.Text.Trim(),
+                        TXT_Modelo.Text.Trim(),
+                        TXT_NoSerie.Text.Trim(),
+                        int.Parse(TXT_NoMotor.Text.Trim()),
+                        TXT_Repuve.Text.Trim(),
+                        TXT_Recorrido.Text.Trim(),
+                        TXT_Motivo.Text.Trim(),
+                        fechaExpedicion,
+                        fechaVigencia,
+                        int.Parse(TXT_FolioPermiso.Text.Trim()),
+                        int.Parse(TXT_NoMovimiento.Text.Trim())
+                    };
+
+                    InsertarFueraRuta(datosFueraRuta);
+
+                    string placa = TXT_Placas.Text.Trim();
+                    string nombre = TXT_Permisionario.Text.Trim();
+                    string direccion = TXT_Domicilio.Text.Trim();
+                    string poblacion = TXT_Poblacion.Text.Trim();
+                    int CP = Convert.ToInt32(TXT_CP.Text.Trim());
+                    int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
+                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
+                    string serie = TXT_NoSerie.Text.Trim();
+                    string motor = TXT_NoMotor.Text.Trim();
+                    string marca = TXT_Marca.Text.Trim();
+                    string motivo = TXT_Motivo.Text.Trim();
+                    string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
+                    string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
+                    string director = ObtenerTitularSMyT();
+                    string repuve = TXT_Repuve.Text.Trim();
+
+                    GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, modelo, serie, motor, marca, motivo, fechaVig, director, repuve, fechaHoy);
+
+                    if (formVisualizador == null || formVisualizador.IsDisposed) {
+                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                        formVisualizador.RecibirNombre("PermisoFueraRuta.pdf");
+                        formVisualizador.ShowDialog();
+                    }
+
+                    MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarTextBox();
+                }
+            }
+        }
+
+        private void F_PermisoCircularFueraRuta_Load(object sender, EventArgs e) {
+            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+
+            this.ActiveControl = null;
+
+            TXT_TitularSMyT.Text = ObtenerTitularSMyT();
+        }
+
+        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        #endregion
+
+        #region Métodos Extra
         private void LimpiarTextBox() {
             TXT_Permisionario.Text = "";
             TXT_Domicilio.Text = "";
@@ -52,35 +183,6 @@ namespace SGIMTProyecto
             TXT_NoMovimiento.Text = "";
             TXT_Placas.Enabled = true;
             TXT_TarjetaCirculacion.Enabled = true;
-        }
-
-        private void MostrarDatos(List<string[]> datos)
-        {
-            // Verificar que haya al menos una fila de datos
-            if (datos.Count > 0)
-            {
-                // Acceder a los valores de la primera fila
-                string[] primeraFila = datos[0];
-
-                // Mostrar los valores en TextBox correspondientes
-                if (primeraFila.Length > 0) TXT_Permisionario.Text = primeraFila[0];
-                if (primeraFila.Length > 1) TXT_Domicilio.Text = primeraFila[1];
-                if (primeraFila.Length > 2) TXT_Poblacion.Text = primeraFila[2];
-                if (primeraFila.Length > 3) TXT_CP.Text = primeraFila[3];
-                if (primeraFila.Length > 4) TXT_NoSerie.Text = primeraFila[4];
-                if (primeraFila.Length > 5) TXT_NoMotor.Text = primeraFila[5];
-                if (primeraFila.Length > 6) TXT_Repuve.Text = primeraFila[6];
-                if (primeraFila.Length > 7) TXT_Marca.Text = primeraFila[7];
-                if (primeraFila.Length > 8) TXT_Modelo.Text = primeraFila[8];
-                if (primeraFila.Length > 9) TXT_Placas.Text = primeraFila[9];
-                if (primeraFila.Length > 10) TXT_TarjetaCirculacion.Text = primeraFila[10];
-                if (primeraFila.Length > 11) TXT_Recorrido.Text = primeraFila[11];
-            }
-            else
-            {
-                LimpiarTextBox();
-                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private (string, bool) VerificacionParametros() {
@@ -200,139 +302,9 @@ namespace SGIMTProyecto
             return (error, bandera);
         }
 
-        private string ObtenerTitularSMyT() {
-            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
-            return Datos.ObtenerTitularSMyT();
-        }
-
-        private void InsertarFueraRuta(List<object> datosFueraRuta) {
-            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
-            Datos.InsertarFueraRuta(datosFueraRuta);
-        }
-
-        private bool ExistenciaMovimiento(int movimiento) {
-            D_PermisoCircularFueraRuta Datos = new D_PermisoCircularFueraRuta();
-            return Datos.ExistenciaMovimiento(movimiento);
-        }
         #endregion
 
-        private void BTN_BuscarPlaca_Click(object sender, EventArgs e)
-        {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.CircularFR(TXT_Placa.Text.Trim());
-                TXT_Placas.Enabled = false;
-                TXT_TarjetaCirculacion.Enabled = false;
-            }
-        }
-
-        private void BTN_Imprimir_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    DateTime fechaSeleccionada = DTP_FechaExpedicion.Value;
-                    string anio = fechaSeleccionada.Year.ToString();
-                    string mes = fechaSeleccionada.Month.ToString("00");
-                    string dia = fechaSeleccionada.Day.ToString("00");
-                    string fechaExpedicion = anio + '-' + mes + '-' + dia;
-
-                    fechaSeleccionada = DTP_FechaVigencia.Value;
-                    anio = fechaSeleccionada.Year.ToString();
-                    mes = fechaSeleccionada.Month.ToString("00");
-                    dia = fechaSeleccionada.Day.ToString("00");
-                    string fechaVigencia = anio + '-' + mes + '-' + dia;
-
-                    List<object> datosFueraRuta = new List<object> {
-                        TXT_Permisionario.Text.Trim(),
-                        TXT_Domicilio.Text.Trim(),
-                        TXT_Poblacion.Text.Trim(),
-                        int.Parse(TXT_CP.Text.Trim()),
-                        int.Parse(TXT_TarjetaCirculacion.Text.Trim()),
-                        TXT_Marca.Text.Trim(),
-                        TXT_Modelo.Text.Trim(),
-                        TXT_NoSerie.Text.Trim(),
-                        int.Parse(TXT_NoMotor.Text.Trim()),
-                        TXT_Repuve.Text.Trim(),
-                        TXT_Recorrido.Text.Trim(),
-                        TXT_Motivo.Text.Trim(),
-                        fechaExpedicion,
-                        fechaVigencia,
-                        int.Parse(TXT_FolioPermiso.Text.Trim()),
-                        int.Parse(TXT_NoMovimiento.Text.Trim())
-                    };
-
-                    InsertarFueraRuta(datosFueraRuta);
-
-                    string placa = TXT_Placas.Text.Trim();
-                    string nombre = TXT_Permisionario.Text.Trim();
-                    string direccion = TXT_Domicilio.Text.Trim();
-                    string poblacion = TXT_Poblacion.Text.Trim();
-                    int CP = Convert.ToInt32(TXT_CP.Text.Trim());
-                    int TC = Convert.ToInt32(TXT_TarjetaCirculacion.Text.Trim());
-                    int modelo = Convert.ToInt32(TXT_Modelo.Text.Trim());
-                    string serie = TXT_NoSerie.Text.Trim();
-                    string motor = TXT_NoMotor.Text.Trim();
-                    string marca = TXT_Marca.Text.Trim();
-                    string motivo = TXT_Motivo.Text.Trim();
-                    string fechaHoy = DTP_FechaExpedicion.Value.ToString("dd/MM/yyyy");
-                    string fechaVig = DTP_FechaVigencia.Value.ToString("dd/MM/yyyy");
-                    string director = ObtenerTitularSMyT();
-                    string repuve = TXT_Repuve.Text.Trim();
-
-                    GenerarPDF(placa, nombre, direccion, poblacion, CP, TC, modelo, serie, motor, marca, motivo, fechaVig, director, repuve, fechaHoy);
-
-                    if (formVisualizador == null || formVisualizador.IsDisposed) {
-                        F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
-                        formVisualizador.RecibirNombre("PermisoFueraRuta.pdf");
-                        formVisualizador.ShowDialog();
-                    }
-
-                    MessageBox.Show("El registro se agrego con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LimpiarTextBox();
-
-                    //imprimir
-                    /*REQUISITOS PARA IMPRESION
-                     * 
-                     * CultureInfo culturaEspañol = new CultureInfo("es-ES");
-                        DateTime today = DateTime.Today;
-
-                        string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
-
-
-                        string placa = "AXXXXX";
-                        string nombre = "MANUEL ALEJANDRO MORA MENESES";
-                        string direccion = "Enrique segoviano";
-                        string poblacion = "AMAXAC DE GUERRERO";
-                        int CP = 90600;
-                        int TC = 4812;
-                        int modelo = 2023;
-                        string serie = "VF1FLADRACY419294";
-                        string motor = "C683198";
-                        string marca = "RENAULT TRAFIC";
-                        string motivo = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-                        string fechaVig = "31/12/2023";
-                        string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-                        string repuve = "322PIE61";
-                     * 
-                     */
-                }
-            }
-        }
-
-        private void F_PermisoCircularFueraRuta_Load(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
-                TXT_Placa.Text = "Placa";
-                TXT_Placa.ForeColor = Color.Gray;
-            }
-
-            this.ActiveControl = null;
-
-            TXT_TitularSMyT.Text = ObtenerTitularSMyT();
-        }
-
-        #region PlaceHolder
+        #region Métodos PlaceHolder
         private void TXT_Placa_Enter(object sender, EventArgs e) {
             if (TXT_Placa.Text == "Placa") {
                 TXT_Placa.Text = "";
@@ -346,30 +318,13 @@ namespace SGIMTProyecto
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
         #endregion
 
-        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve, string fechaHoy)
-        {
+        #region Métodos PDF
+        private static void GenerarPDF(string placa, string nombre, string direccion, string poblacion, int CP, int TC, int modelo, string serie, string motor, string marca, string motivo, string fechaVig, string director, string repuve, string fechaHoy) {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
-            /*DateTime today = DateTime.Today;
 
-            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);*/
-
-
-            /*string placa = "AXXXXX";
-            string nombre = "MANUEL ALEJANDRO MORA MENESES";
-            string direccion = "ENCINOS NO 7 B. OCOTLAN DE TEPATLAXCO, CONTLA DE JUAN CUAMATIZI, TLAX.";
-            string poblacion = "AMAXAC DE GUERRERO";
-            int CP = 90600;
-            int TC = 4812;
-            int modelo = 2023;
-            string serie = "VF1FLADRACY419294";
-            string motor = "C683198";
-            string marca = "RENAULT TRAFIC";
-            string motivo = "INFORNAVIT PETROQUIMICA.TLAX DE XICOHTENCATL-PROCURADURIA GRAL DE JUSTICIA PI (GRAN PATIO, SAN PABLO APETATITLAN, CAMINO REAL, GARITA, MERCADO, CENTRAL CAMNIONERA, SOBRE LIBRIAMIENTO INSTITUTO POLITECNICO NACIONAL, TEPEHITEC).";
-            string fechaVig = "31/12/2023";
-            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-            string repuve = "322PIE61";*/
             /*
              * FUENTES
              * 
@@ -466,12 +421,7 @@ namespace SGIMTProyecto
 
             doc.Close();
         }
+        #endregion
 
-        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
-            if (char.IsLower(e.KeyChar)) {
-                // Si es una letra minúscula, conviértela a mayúscula
-                e.KeyChar = char.ToUpper(e.KeyChar);
-            }
-        }
     }
 }

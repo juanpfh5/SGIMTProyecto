@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,32 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
-
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
 using System.Threading;
 using HarfBuzzSharp;
 
-
 namespace SGIMTProyecto {
     public partial class F_LiberacionPublicoPrivado : UserControl {
-        private F_VisualizacionPDF formVisualizador;  
+        private F_VisualizacionPDF formVisualizador;
 
         public F_LiberacionPublicoPrivado() {
             InitializeComponent();
         }
 
-        #region Métodos
-
-        private void LimpiarTextBox() {
-            TXT_Marca.Text = "";
-            TXT_Modelo.Text = "";
-            TXT_Tipo.Text = "";
-            TXT_NoSerie.Text = "";
-            TXT_NoMotor.Text = "";
-            TXT_NoBaja.Text = "";
-        }
+        #region Métodos Base de Datos
         private void LiberacionP_P(string cTexto) {
             D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
             MostrarDatos(Datos.LiberacionP_P(cTexto));
@@ -56,6 +44,84 @@ namespace SGIMTProyecto {
                 LimpiarTextBox();
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private bool ExistenciaVehiculo(string cTexto) {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ExistenciaVehiculo(cTexto);
+        }
+
+        private void ActualizarLiberacion(string placa) {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            Datos.ActualizarLiberacion(placa);
+        }
+
+        private string ObtenerDirector() {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ObtenerDirector();
+        }
+        private int ObtenerFolio() {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ObtenerFolio();
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void BTN_Buscar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                this.LiberacionP_P(TXT_Placa.Text.Trim());
+            }
+        }
+
+        private void BTN_Imprimir_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
+
+                        ActualizarLiberacion(TXT_Placa.Text.Trim());
+
+                        string nOficio = ObtenerFolio().ToString("D4");
+                        string marca = TXT_Marca.Text;
+                        int modelo = Convert.ToInt32(TXT_Modelo.Text);
+                        string tipo = TXT_Tipo.Text;
+                        string serie = TXT_NoSerie.Text;
+                        string motor = TXT_NoMotor.Text;
+                        int nBaja = Convert.ToInt32(TXT_NoBaja.Text);
+                        string fechaRecibo = DTP_Fecha.Value.ToString("dd/MM/yyyy");
+                        string director = ObtenerDirector();
+                        GenerarLiberacion(nOficio, marca, modelo, tipo, serie, motor, nBaja, fechaRecibo, director);
+
+                        if (formVisualizador == null || formVisualizador.IsDisposed) {
+                            F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
+                            formVisualizador.RecibirNombre("Liberacion.pdf");
+                            formVisualizador.ShowDialog();  // Utiliza ShowDialog en lugar de Show
+                        }
+
+                        MessageBox.Show("La unidad ha sido dada de baja correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarTextBox();
+                    } else {
+                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Métodos Extra
+        private void LimpiarTextBox() {
+            TXT_Marca.Text = "";
+            TXT_Modelo.Text = "";
+            TXT_Tipo.Text = "";
+            TXT_NoSerie.Text = "";
+            TXT_NoMotor.Text = "";
+            TXT_NoBaja.Text = "";
         }
 
         private (string, bool) VerificacionParametros() {
@@ -96,118 +162,10 @@ namespace SGIMTProyecto {
             return (error, bandera);
         }
 
-        private bool ExistenciaVehiculo(string cTexto) {
-            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
-            return Datos.ExistenciaVehiculo(cTexto);
-        }
-
-        private void ActualizarLiberacion(string placa) {
-            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
-            Datos.ActualizarLiberacion(placa);
-        }
-
-        private string ObtenerDirector() {
-            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
-            return Datos.ObtenerDirector();
-        }
-        private int ObtenerFolio(){
-            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
-            return Datos.ObtenerFolio();
-        }
-
         #endregion
 
-        private void BTN_Buscar_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.LiberacionP_P(TXT_Placa.Text.Trim());
-            }
-        }
-
-        private void BTN_Imprimir_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
-
-                        ActualizarLiberacion(TXT_Placa.Text.Trim());
-
-                        string nOficio = ObtenerFolio().ToString("D4");
-                        string marca = TXT_Marca.Text;
-                        int modelo = Convert.ToInt32(TXT_Modelo.Text);
-                        string tipo = TXT_Tipo.Text;
-                        string serie = TXT_NoSerie.Text;
-                        string motor = TXT_NoMotor.Text;
-                        int nBaja = Convert.ToInt32(TXT_NoBaja.Text);
-                        string fechaRecibo = DTP_Fecha.Value.ToString("dd/MM/yyyy");
-                        string director = ObtenerDirector();
-                        GenerarLiberacion(nOficio, marca, modelo, tipo, serie, motor, nBaja, fechaRecibo, director);
-
-
-                        if (formVisualizador == null || formVisualizador.IsDisposed) {
-                            F_VisualizacionPDF formVisualizador = new F_VisualizacionPDF();
-                            formVisualizador.RecibirNombre("Liberacion.pdf");
-                            formVisualizador.ShowDialog();  // Utiliza ShowDialog en lugar de Show
-                        }
-
-                        // Imprimir
-                        /*DATOS NECESARIOS PARA IMPRIMIR
-                         * 
-                         * CultureInfo culturaEspañol = new CultureInfo("es-ES");
-                            DateTime today = DateTime.Today;
-
-                            string fechaHoy = DateTime.Today.ToString("dd/M/yyyy", culturaEspañol);
-
-                            int year = today.Year;
-                            int dia = today.Day;
-                            string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
-
-                            int nOficio = 1570;
-                            string marca = "TOYOTA";
-                            int modelo = 2009;
-                            string tipo = "HIACE GV S";
-                            string serie = "JTFPX22P890015513";
-                            string motor = "2TR8162498";
-
-                            int nBaja = 45971683;
-                            string fechaRecibo = "2/22/2022";
-                            string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
-                         * 
-                         */
-
-                        MessageBox.Show("La unidad ha sido dada de baja correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LimpiarTextBox();
-                    } else {
-                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-        }
-
-        #region PlaceHolder
-        private void TXT_Placa_Enter(object sender, EventArgs e) {
-            if (TXT_Placa.Text == "Placa") {
-                TXT_Placa.Text = "";
-                TXT_Placa.ForeColor = Color.Black;
-            }
-        }
-
-        private void TXT_Placa_Leave(object sender, EventArgs e) {
-            if (TXT_Placa.Text == "") {
-                TXT_Placa.Text = "Placa";
-                TXT_Placa.ForeColor = Color.Gray;
-            }
-        }
-        #endregion
-
-        private void F_LiberacionPublicoPrivado_Click(object sender, EventArgs e) {
-        }
-
-        private static void GenerarLiberacion(string nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director)
-        {
+        #region Métodos PDF
+        private static void GenerarLiberacion(string nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director) {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
 
@@ -217,16 +175,6 @@ namespace SGIMTProyecto {
             int dia = today.Day;
             int mesn = today.Month;
             string mes = DateTime.Today.ToString("MMMM", culturaEspañol);
-
-            //int nOficio = 1570;
-            //int modelo = 2009;
-            //string tipo = "HIACE GV S";
-            //string serie = "JTFPX22P890015513";
-            //string motor = "2TR8162498";
-
-            //int nBaja = 45971683;
-            //string fechaRecibo = "2/22/2022";
-            //string director = "LIC. JOSE ANTONIO CARAMILLO SANCHEZ";
 
             /*
              * FUENTES
@@ -375,5 +323,25 @@ namespace SGIMTProyecto {
 
             doc.Close();
         }
+
+        #endregion
+
+        #region Métodos PlaceHolder
+        private void TXT_Placa_Enter(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "Placa") {
+                TXT_Placa.Text = "";
+                TXT_Placa.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_Placa_Leave(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "") {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+        }
+
+        #endregion
+
     }
 }

@@ -7,18 +7,14 @@ using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace SGIMTProyecto
-{
-    public class D_TarjetaCirculacion
-    {
-        public List<string[]> TC(string placa)
-        {
+namespace SGIMTProyecto {
+    public class D_TarjetaCirculacion {
+        public List<string[]> TC(string placa) {
             MySqlDataReader Resultado;
             List<string[]> listaDatos = new List<string[]>();
             MySqlConnection SqlCon = new MySqlConnection();
 
-            try
-            {
+            try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
                 string sql_tarea = "SELECT nombre_co, domicilio_co, vehiculo_un, rfc_co, repuve_un, noSerie_un, placa_un, toneladas_un, noMotor_un ,cilindros_un, pasajeros_un, marca_un, combustible_un, modelo_un, claveVehicular_un, tipo_un, uso_un, tipoServicio_un, noConcesion_un, vehiculoOrigen_un, ruta_un, folioTC_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
 
@@ -28,12 +24,10 @@ namespace SGIMTProyecto
                 SqlCon.Open();
                 Resultado = Comando.ExecuteReader();
 
-                while (Resultado.Read())
-                {
+                while (Resultado.Read()) {
                     string[] datosFila = new string[Resultado.FieldCount];
 
-                    for (int i = 0; i < Resultado.FieldCount; i++)
-                    {
+                    for (int i = 0; i < Resultado.FieldCount; i++) {
                         datosFila[i] = Resultado[i].ToString();
                     }
 
@@ -42,12 +36,10 @@ namespace SGIMTProyecto
 
                 return listaDatos;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
-            finally
-            {
+            finally {
                 if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
             }
         }
@@ -98,7 +90,6 @@ namespace SGIMTProyecto
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna los valores de las columnas a las variables correspondientes
                         pasajeros = reader["pasajeros_un"].ToString();
                         vehiculo = reader["vehiculo_un"].ToString();
                     }
@@ -113,7 +104,6 @@ namespace SGIMTProyecto
                 }
             }
 
-            // Retorna una tupla con los valores obtenidos
             return new Tuple<string, string>(pasajeros, vehiculo);
         }
 
@@ -132,7 +122,6 @@ namespace SGIMTProyecto
 
                 using (var reader = Comando.ExecuteReader()) {
                     if (reader.Read()) {
-                        // Asigna el valor de la columna "PorcentajeDescuento" a la variable des
                         id = Convert.ToInt32(reader["id_au"]);
                     }
                 }

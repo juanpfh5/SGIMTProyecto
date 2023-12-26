@@ -16,25 +16,10 @@ namespace SGIMTProyecto {
             InitializeComponent();
         }
 
-        #region Métodos
+        #region Métodos Base de Datos
         private void DatosPropietario(string placa) {
             D_EditarPropietario Datos = new D_EditarPropietario();
             MostrarDatos(Datos.DatosPropietario(placa));
-        }
-
-        private void LimpiarTextBox() {
-            TXT_Nombre.Text = "";
-            TXT_Placas.Text = "";
-            TXT_Domicilio.Text = "";
-            TXT_RFC.Text = "";
-            TXT_NoExterior.Text = "";
-            TXT_NoInterior.Text = "";
-            TXT_CP.Text = "";
-            TXT_Colonia.Text = "";
-            TXT_Municipio.Text = "";
-            TXT_Estado.Text = "";
-            TXT_NoConcesion.Text = "";
-            TXT_NoSeguro.Text = "";
         }
 
         private void MostrarDatos(List<string[]> datos) {
@@ -57,6 +42,75 @@ namespace SGIMTProyecto {
                 LimpiarTextBox();
                 MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private bool ExistenciaVehiculo(string cTexto) {
+            D_EditarPropietario Datos = new D_EditarPropietario();
+            return Datos.ExistenciaVehiculo(cTexto);
+        }
+
+        private void ActualizarPropietario(List<object> datosPropietario, string placa) {
+            D_EditarPropietario Datos = new D_EditarPropietario();
+            Datos.ActualizarPropietario(datosPropietario, placa);
+        }
+
+        #endregion
+
+        #region Métodos Botones
+        private void BTN_Buscar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                this.DatosPropietario(TXT_Placa.Text.Trim());
+            }
+        }
+
+        private void BTN_Guardar_Click(object sender, EventArgs e) {
+            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
+                (string mensajeError, bool bandera) = VerificacionParametros();
+
+                if (bandera) {
+                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                } else {
+                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
+                        List<object> datosPropietario = new List<object> {
+                            TXT_Nombre.Text.Trim(),
+                            TXT_Domicilio.Text.Trim(),
+                            TXT_RFC.Text.Trim(),
+                            TXT_NoExterior.Text.Trim(),
+                            TXT_NoInterior.Text.Trim(),
+                            int.Parse(TXT_CP.Text.Trim()),
+                            TXT_Colonia.Text.Trim(),
+                            TXT_Municipio.Text.Trim(),
+                            TXT_Estado.Text.Trim()
+                        };
+
+                        ActualizarPropietario(datosPropietario, TXT_Placa.Text.Trim());
+
+                        MessageBox.Show("Los datos del propietario se han actualizado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarTextBox();
+                    } else {
+                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Métodos Extra
+        private void LimpiarTextBox() {
+            TXT_Nombre.Text = "";
+            TXT_Placas.Text = "";
+            TXT_Domicilio.Text = "";
+            TXT_RFC.Text = "";
+            TXT_NoExterior.Text = "";
+            TXT_NoInterior.Text = "";
+            TXT_CP.Text = "";
+            TXT_Colonia.Text = "";
+            TXT_Municipio.Text = "";
+            TXT_Estado.Text = "";
+            TXT_NoConcesion.Text = "";
+            TXT_NoSeguro.Text = "";
         }
 
         private (string, bool) VerificacionParametros() {
@@ -131,57 +185,9 @@ namespace SGIMTProyecto {
             return (error, bandera);
         }
 
-        private bool ExistenciaVehiculo(string cTexto) {
-            D_EditarPropietario Datos = new D_EditarPropietario();
-            return Datos.ExistenciaVehiculo(cTexto);
-        }
-
-        private void ActualizarPropietario(List<object> datosPropietario, string placa) {
-            D_EditarPropietario Datos = new D_EditarPropietario();
-            Datos.ActualizarPropietario(datosPropietario, placa);
-        }
-
         #endregion
 
-        private void BTN_Buscar_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                this.DatosPropietario(TXT_Placa.Text.Trim());
-            }
-        }
-
-        private void BTN_Guardar_Click(object sender, EventArgs e) {
-            if (!TXT_Placa.Text.Trim().Equals("Placa")) {
-                (string mensajeError, bool bandera) = VerificacionParametros();
-
-                if (bandera) {
-                    MessageBox.Show(mensajeError, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else {
-                    if (this.ExistenciaVehiculo(TXT_Placa.Text.Trim())) {
-                        List<object> datosPropietario = new List<object> {
-                            TXT_Nombre.Text.Trim(),
-                            TXT_Domicilio.Text.Trim(),
-                            TXT_RFC.Text.Trim(),
-                            TXT_NoExterior.Text.Trim(),
-                            TXT_NoInterior.Text.Trim(),
-                            int.Parse(TXT_CP.Text.Trim()),
-                            TXT_Colonia.Text.Trim(),
-                            TXT_Municipio.Text.Trim(),
-                            TXT_Estado.Text.Trim()
-                        };
-
-                        ActualizarPropietario(datosPropietario, TXT_Placa.Text.Trim());
-
-                        MessageBox.Show("Los datos del propietario se han actualizado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LimpiarTextBox();
-                    } else {
-                        MessageBox.Show("El vehículo no existe.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-        }
-
-        #region PlaceHolder
+        #region Métodos PlaceHolder
         private void TXT_Placa_Enter(object sender, EventArgs e) {
             if (TXT_Placa.Text == "Placa") {
                 TXT_Placa.Text = "";
@@ -195,6 +201,8 @@ namespace SGIMTProyecto {
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
         #endregion
+
     }
 }

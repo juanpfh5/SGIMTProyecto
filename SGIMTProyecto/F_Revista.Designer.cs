@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Revista));
             this.GRB_DatosPropietario = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -83,10 +84,10 @@
             this.JLB_Observaciones = new System.Windows.Forms.Label();
             this.TXT_Observaciones = new System.Windows.Forms.TextBox();
             this.TXT_Placa = new System.Windows.Forms.TextBox();
-            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
-            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.BTN_Inicio = new System.Windows.Forms.Button();
             this.BTN_GuardaImprimir = new System.Windows.Forms.Button();
+            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
+            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.GRB_DatosPropietario.SuspendLayout();
             this.GRB_DatosVehiculo.SuspendLayout();
             this.GRB_DatosConcesion.SuspendLayout();
@@ -212,6 +213,7 @@
             this.TXT_NoSerie.Name = "TXT_NoSerie";
             this.TXT_NoSerie.Size = new System.Drawing.Size(155, 22);
             this.TXT_NoSerie.TabIndex = 8;
+            this.TXT_NoSerie.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoSerie_KeyPress);
             // 
             // JLB_Tipo
             // 
@@ -248,17 +250,18 @@
             this.TXT_NoMotor.Name = "TXT_NoMotor";
             this.TXT_NoMotor.Size = new System.Drawing.Size(155, 22);
             this.TXT_NoMotor.TabIndex = 3;
+            this.TXT_NoMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoMotor_KeyPress);
             // 
             // JLB_AnioModelo
             // 
             this.JLB_AnioModelo.AutoSize = true;
             this.JLB_AnioModelo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.JLB_AnioModelo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.JLB_AnioModelo.Location = new System.Drawing.Point(284, 59);
+            this.JLB_AnioModelo.Location = new System.Drawing.Point(243, 63);
             this.JLB_AnioModelo.Name = "JLB_AnioModelo";
-            this.JLB_AnioModelo.Size = new System.Drawing.Size(51, 30);
+            this.JLB_AnioModelo.Size = new System.Drawing.Size(95, 15);
             this.JLB_AnioModelo.TabIndex = 7;
-            this.JLB_AnioModelo.Text = "Año del\r\nModelo:";
+            this.JLB_AnioModelo.Text = "Año del Modelo:";
             // 
             // TXT_AnioModelo
             // 
@@ -714,7 +717,34 @@
             this.TXT_Placa.Tag = "";
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
+            // 
+            // BTN_Inicio
+            // 
+            this.BTN_Inicio.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Inicio.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Inicio.Location = new System.Drawing.Point(746, 835);
+            this.BTN_Inicio.Name = "BTN_Inicio";
+            this.BTN_Inicio.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Inicio.TabIndex = 23;
+            this.BTN_Inicio.Text = "Inicio";
+            this.BTN_Inicio.UseVisualStyleBackColor = false;
+            this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
+            // 
+            // BTN_GuardaImprimir
+            // 
+            this.BTN_GuardaImprimir.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_GuardaImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_GuardaImprimir.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_GuardaImprimir.Location = new System.Drawing.Point(378, 835);
+            this.BTN_GuardaImprimir.Name = "BTN_GuardaImprimir";
+            this.BTN_GuardaImprimir.Size = new System.Drawing.Size(133, 30);
+            this.BTN_GuardaImprimir.TabIndex = 24;
+            this.BTN_GuardaImprimir.Text = "Imprimir";
+            this.BTN_GuardaImprimir.UseVisualStyleBackColor = false;
+            this.BTN_GuardaImprimir.Click += new System.EventHandler(this.BTN_GuardaImprimir_Click);
             // 
             // PCB_LogoSMyT
             // 
@@ -741,32 +771,6 @@
             this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
             this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
             // 
-            // BTN_Inicio
-            // 
-            this.BTN_Inicio.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_Inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Inicio.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_Inicio.Location = new System.Drawing.Point(746, 835);
-            this.BTN_Inicio.Name = "BTN_Inicio";
-            this.BTN_Inicio.Size = new System.Drawing.Size(80, 30);
-            this.BTN_Inicio.TabIndex = 23;
-            this.BTN_Inicio.Text = "Inicio";
-            this.BTN_Inicio.UseVisualStyleBackColor = false;
-            this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
-            // 
-            // BTN_GuardaImprimir
-            // 
-            this.BTN_GuardaImprimir.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_GuardaImprimir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_GuardaImprimir.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_GuardaImprimir.Location = new System.Drawing.Point(378, 835);
-            this.BTN_GuardaImprimir.Name = "BTN_GuardaImprimir";
-            this.BTN_GuardaImprimir.Size = new System.Drawing.Size(133, 30);
-            this.BTN_GuardaImprimir.TabIndex = 24;
-            this.BTN_GuardaImprimir.Text = "Guardar e Imprimir";
-            this.BTN_GuardaImprimir.UseVisualStyleBackColor = false;
-            this.BTN_GuardaImprimir.Click += new System.EventHandler(this.BTN_GuardaImprimir_Click);
-            // 
             // F_Revista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,6 +787,8 @@
             this.Controls.Add(this.GRB_Observaciones);
             this.Controls.Add(this.BTN_GuardaImprimir);
             this.Controls.Add(this.BTN_Inicio);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "F_Revista";
             this.Text = "Revista";
             this.Load += new System.EventHandler(this.F_Revista_Load);

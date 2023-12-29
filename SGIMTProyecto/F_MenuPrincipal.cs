@@ -27,6 +27,7 @@ namespace SGIMTProyecto
         public F_MenuPrincipal()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;//centrar el formulario al crearse
             BTN_Revista.BackColor = Color.FromArgb(135, 20, 62);
             BTN_TarjetaCirculacion.BackColor = Color.FromArgb(135, 20, 62);

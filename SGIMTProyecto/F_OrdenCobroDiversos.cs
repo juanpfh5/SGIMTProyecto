@@ -42,12 +42,9 @@ namespace SGIMTProyecto {
         }
 
         private void MostrarDatos(List<string[]> datos) {
-            // Verificar que haya al menos una fila de datos
             if (datos.Count > 0) {
-                // Acceder a los valores de la primera fila
                 string[] primeraFila = datos[0];
 
-                // Mostrar los valores en TextBox correspondientes
                 if (primeraFila.Length > 0) TXT_Nombre.Text = primeraFila[0];
                 if (primeraFila.Length > 1) TXT_NoExterior.Text = primeraFila[1];
                 if (primeraFila.Length > 2) TXT_Domicilio.Text = primeraFila[2];
@@ -209,6 +206,7 @@ namespace SGIMTProyecto {
                     string modelo = "";
                     string marca = "";
                     string clvVehicular = "";
+
                     string tipo = "";
                     string combustible = "";
                     string capacidad = "";
@@ -341,6 +339,18 @@ namespace SGIMTProyecto {
             }
         }
 
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_RFC_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
         /*private Dictionary<int, int> valores = new Dictionary<int, int>();
 
         private void DGV_Clave_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) {
@@ -460,7 +470,9 @@ namespace SGIMTProyecto {
             TXT_Colonia.Text = "";
             TXT_Estado.Text = "";
             TXT_Municipio.Text = "";
-            TXT_Total.Text = "";
+            TXT_Total.Text = "$0.00";
+
+            DGV_Clave.Rows.Clear();
         }
 
         private (string, bool) VerificacionParametros() {
@@ -559,8 +571,8 @@ namespace SGIMTProyecto {
 
         private string TruncarTextBox(string textBox) {
             string concepto = "";
-            if (textBox.Length > 7) {
-                concepto = textBox.Substring(7);
+            if (textBox.Length > 6) {
+                concepto = textBox.Substring(6);
             } else {
                 concepto = string.Empty;
             }
@@ -1016,6 +1028,6 @@ namespace SGIMTProyecto {
         }
 
         #endregion
-
+               
     }
 }

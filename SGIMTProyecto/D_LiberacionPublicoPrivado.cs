@@ -150,5 +150,28 @@ namespace SGIMTProyecto {
 
             return id;
         }
+
+        public bool ExistenciaMovimiento(int movimiento) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "SELECT EXISTS(SELECT 1 FROM movimiento_mo WHERE id_mo = @Movimiento) as existeMovimiento;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.Parameters.AddWithValue("@Movimiento", movimiento);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+
+                int resultado = Convert.ToInt32(Comando.ExecuteScalar());
+                return resultado == 1;
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
     }
 }

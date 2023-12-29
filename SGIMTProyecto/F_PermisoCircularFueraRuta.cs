@@ -103,14 +103,15 @@ namespace SGIMTProyecto {
                         TXT_Marca.Text.Trim(),
                         TXT_Modelo.Text.Trim(),
                         TXT_NoSerie.Text.Trim(),
-                        int.Parse(TXT_NoMotor.Text.Trim()),
+                        TXT_NoMotor.Text.Trim(),
                         TXT_Repuve.Text.Trim(),
                         TXT_Recorrido.Text.Trim(),
                         TXT_Motivo.Text.Trim(),
                         fechaExpedicion,
                         fechaVigencia,
                         int.Parse(TXT_FolioPermiso.Text.Trim()),
-                        int.Parse(TXT_NoMovimiento.Text.Trim())
+                        int.Parse(TXT_NoMovimiento.Text.Trim()),
+                        TXT_Placas.Text.Trim()
                     };
 
                     InsertarFueraRuta(datosFueraRuta);
@@ -157,6 +158,24 @@ namespace SGIMTProyecto {
         }
 
         private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoSerie_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoMotor_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
             if (char.IsLower(e.KeyChar)) {
                 e.KeyChar = char.ToUpper(e.KeyChar);
             }
@@ -218,7 +237,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text, out int noMotor)) {
+            if (TXT_NoMotor.Text.Length > 15 || TXT_NoSerie.Text.Length < 1) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -233,7 +252,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
+            if (TXT_Modelo.Text.Length != 4 || !int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
                 variable = JLB_Modelo.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -273,12 +292,18 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento) || !ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
                 variable = JLB_NoMovimiento.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
+            } else {
                 if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
-                    mensajeExtra = "No. Movimiento no existente.";
+                    if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                        variable = JLB_NoMovimiento.Text;
+                        parametros.Add(variable.Substring(0, variable.Length - 1));
+                        bandera = true;
+                        mensajeExtra = "No. Movimiento no existente.";
+                    }
                 }
             }
 
@@ -300,23 +325,6 @@ namespace SGIMTProyecto {
             error += "\n" + mensajeExtra;
 
             return (error, bandera);
-        }
-
-        #endregion
-
-        #region Métodos PlaceHolder
-        private void TXT_Placa_Enter(object sender, EventArgs e) {
-            if (TXT_Placa.Text == "Placa") {
-                TXT_Placa.Text = "";
-                TXT_Placa.ForeColor = Color.Black;
-            }
-        }
-
-        private void TXT_Placa_Leave(object sender, EventArgs e) {
-            if (TXT_Placa.Text == "") {
-                TXT_Placa.Text = "Placa";
-                TXT_Placa.ForeColor = Color.Gray;
-            }
         }
 
         #endregion
@@ -421,6 +429,23 @@ namespace SGIMTProyecto {
 
             doc.Close();
         }
+        #endregion
+
+        #region Métodos PlaceHolder
+        private void TXT_Placa_Enter(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "Placa") {
+                TXT_Placa.Text = "";
+                TXT_Placa.ForeColor = Color.Black;
+            }
+        }
+
+        private void TXT_Placa_Leave(object sender, EventArgs e) {
+            if (TXT_Placa.Text == "") {
+                TXT_Placa.Text = "Placa";
+                TXT_Placa.ForeColor = Color.Gray;
+            }
+        }
+
         #endregion
 
     }

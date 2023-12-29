@@ -43,8 +43,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 861);
             this.Controls.Add(this.PDF_Visualizador);
+            this.MaximizeBox = false;
             this.Name = "F_VisualizacionPDF";
-            this.Text = "F_VisualizacionPDF";
+            this.Text = "Visualización del PDF";
             this.Load += new System.EventHandler(this.F_VisualizacionPDF_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PDF_Visualizador)).EndInit();
             this.ResumeLayout(false);

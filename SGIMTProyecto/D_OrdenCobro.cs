@@ -19,7 +19,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, placa_un, domicilio_co, cp_co, noSerie_un, noMotor_un, modelo_un, marca_un, claveVehicular_un, tipo_un, combustible_un, pasajeros_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
+                string sql_tarea = "SELECT nombre_co, placa_un, CONCAT(domicilio_co, ' No. ', noExterior_co, ', ', municipio_co, ', ', estado_co) AS domicilio_co, cp_co, noSerie_un, noMotor_un, modelo_un, marca_un, claveVehicular_un, tipo_un, combustible_un, pasajeros_un FROM unidad_un INNER JOIN  concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE placa_un = @Placa AND baja_un IS NULL";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.Parameters.AddWithValue("@Placa", placa);
@@ -522,6 +522,29 @@ namespace SGIMTProyecto {
 
                 Comando.Parameters.AddWithValue("@PlacaActual", placaActual);
                 Comando.Parameters.AddWithValue("@PlacaNueva", placaNueva);
+                Comando.CommandTimeout = 60;
+                SqlCon.Open();
+                Comando.ExecuteReader();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                if (SqlCon.State == ConnectionState.Open) SqlCon.Close();
+            }
+        }
+
+        public void InsertarObservaciones(string placa, string observaciones) {
+            MySqlConnection SqlCon = new MySqlConnection();
+
+            try {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "UPDATE unidad_un SET observaciones_un = @Observaciones WHERE placa_un = @Placa;";
+
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.Parameters.AddWithValue("@Placa", placa);
+                Comando.Parameters.AddWithValue("@Observaciones", observaciones);
                 Comando.CommandTimeout = 60;
                 SqlCon.Open();
                 Comando.ExecuteReader();

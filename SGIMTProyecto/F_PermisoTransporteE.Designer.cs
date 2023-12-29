@@ -323,6 +323,7 @@
             this.Controls.Add(this.BTN_Imprimir);
             this.Name = "F_PermisoTransporteE";
             this.Size = new System.Drawing.Size(797, 607);
+            this.Load += new System.EventHandler(this.F_PermisoTransporteE_Load);
             this.GRB_TransporteEscolar.ResumeLayout(false);
             this.GRB_TransporteEscolar.PerformLayout();
             this.ResumeLayout(false);

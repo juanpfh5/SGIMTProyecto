@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_MenuEditar));
             this.PNL_MenuEditar = new System.Windows.Forms.Panel();
-            this.BTN_DatosPropietario = new System.Windows.Forms.Button();
-            this.BTN_DatosVehiculo = new System.Windows.Forms.Button();
-            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
             this.PNL_Editar = new System.Windows.Forms.Panel();
             this.BTN_Inicio = new System.Windows.Forms.Button();
+            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
+            this.BTN_DatosVehiculo = new System.Windows.Forms.Button();
+            this.BTN_DatosPropietario = new System.Windows.Forms.Button();
             this.PNL_MenuEditar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).BeginInit();
             this.SuspendLayout();
@@ -49,50 +50,6 @@
             this.PNL_MenuEditar.Name = "PNL_MenuEditar";
             this.PNL_MenuEditar.Size = new System.Drawing.Size(1064, 109);
             this.PNL_MenuEditar.TabIndex = 0;
-            // 
-            // BTN_DatosPropietario
-            // 
-            this.BTN_DatosPropietario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_DatosPropietario.FlatAppearance.BorderSize = 0;
-            this.BTN_DatosPropietario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_DatosPropietario.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_DatosPropietario.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_DatosPropietario.Image = global::SGIMTProyecto.Properties.Resources.perfil_white_50px;
-            this.BTN_DatosPropietario.Location = new System.Drawing.Point(653, 22);
-            this.BTN_DatosPropietario.Name = "BTN_DatosPropietario";
-            this.BTN_DatosPropietario.Size = new System.Drawing.Size(337, 69);
-            this.BTN_DatosPropietario.TabIndex = 2;
-            this.BTN_DatosPropietario.Text = "Datos del Propietario";
-            this.BTN_DatosPropietario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BTN_DatosPropietario.UseVisualStyleBackColor = true;
-            this.BTN_DatosPropietario.Click += new System.EventHandler(this.BTN_DatosPropietario_Click);
-            // 
-            // BTN_DatosVehiculo
-            // 
-            this.BTN_DatosVehiculo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_DatosVehiculo.FlatAppearance.BorderSize = 0;
-            this.BTN_DatosVehiculo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_DatosVehiculo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.BTN_DatosVehiculo.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_DatosVehiculo.Image = global::SGIMTProyecto.Properties.Resources.coche_white_50px;
-            this.BTN_DatosVehiculo.Location = new System.Drawing.Point(309, 22);
-            this.BTN_DatosVehiculo.Name = "BTN_DatosVehiculo";
-            this.BTN_DatosVehiculo.Size = new System.Drawing.Size(338, 69);
-            this.BTN_DatosVehiculo.TabIndex = 1;
-            this.BTN_DatosVehiculo.Text = "Datos del Vehículo";
-            this.BTN_DatosVehiculo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.BTN_DatosVehiculo.UseVisualStyleBackColor = true;
-            this.BTN_DatosVehiculo.Click += new System.EventHandler(this.BTN_DatosVehiculo_Click);
-            // 
-            // PCB_LogoSMyT
-            // 
-            this.PCB_LogoSMyT.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_blanco_530;
-            this.PCB_LogoSMyT.Location = new System.Drawing.Point(0, 0);
-            this.PCB_LogoSMyT.Name = "PCB_LogoSMyT";
-            this.PCB_LogoSMyT.Size = new System.Drawing.Size(198, 106);
-            this.PCB_LogoSMyT.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PCB_LogoSMyT.TabIndex = 0;
-            this.PCB_LogoSMyT.TabStop = false;
             // 
             // PNL_Editar
             // 
@@ -115,14 +72,61 @@
             this.BTN_Inicio.UseVisualStyleBackColor = false;
             this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
             // 
-            // MenuEditar
+            // PCB_LogoSMyT
+            // 
+            this.PCB_LogoSMyT.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_blanco_530;
+            this.PCB_LogoSMyT.Location = new System.Drawing.Point(0, 0);
+            this.PCB_LogoSMyT.Name = "PCB_LogoSMyT";
+            this.PCB_LogoSMyT.Size = new System.Drawing.Size(198, 106);
+            this.PCB_LogoSMyT.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PCB_LogoSMyT.TabIndex = 0;
+            this.PCB_LogoSMyT.TabStop = false;
+            // 
+            // BTN_DatosVehiculo
+            // 
+            this.BTN_DatosVehiculo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_DatosVehiculo.FlatAppearance.BorderSize = 0;
+            this.BTN_DatosVehiculo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_DatosVehiculo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_DatosVehiculo.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_DatosVehiculo.Image = global::SGIMTProyecto.Properties.Resources.coche_white_50px;
+            this.BTN_DatosVehiculo.Location = new System.Drawing.Point(309, 22);
+            this.BTN_DatosVehiculo.Name = "BTN_DatosVehiculo";
+            this.BTN_DatosVehiculo.Size = new System.Drawing.Size(338, 69);
+            this.BTN_DatosVehiculo.TabIndex = 1;
+            this.BTN_DatosVehiculo.Text = "Datos del Vehículo";
+            this.BTN_DatosVehiculo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_DatosVehiculo.UseVisualStyleBackColor = true;
+            this.BTN_DatosVehiculo.Click += new System.EventHandler(this.BTN_DatosVehiculo_Click);
+            // 
+            // BTN_DatosPropietario
+            // 
+            this.BTN_DatosPropietario.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_DatosPropietario.FlatAppearance.BorderSize = 0;
+            this.BTN_DatosPropietario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_DatosPropietario.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.BTN_DatosPropietario.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_DatosPropietario.Image = global::SGIMTProyecto.Properties.Resources.perfil_white_50px;
+            this.BTN_DatosPropietario.Location = new System.Drawing.Point(653, 22);
+            this.BTN_DatosPropietario.Name = "BTN_DatosPropietario";
+            this.BTN_DatosPropietario.Size = new System.Drawing.Size(337, 69);
+            this.BTN_DatosPropietario.TabIndex = 2;
+            this.BTN_DatosPropietario.Text = "Datos del Propietario";
+            this.BTN_DatosPropietario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_DatosPropietario.UseVisualStyleBackColor = true;
+            this.BTN_DatosPropietario.Click += new System.EventHandler(this.BTN_DatosPropietario_Click);
+            // 
+            // F_MenuEditar
             // 
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(1064, 657);
             this.Controls.Add(this.PNL_Editar);
             this.Controls.Add(this.PNL_MenuEditar);
             this.Controls.Add(this.BTN_Inicio);
-            this.Name = "MenuEditar";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "F_MenuEditar";
+            this.Text = "Menú de Edición";
             this.PNL_MenuEditar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.ResumeLayout(false);

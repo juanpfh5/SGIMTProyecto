@@ -17,7 +17,7 @@ namespace SGIMTProyecto {
 
             try {
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "SELECT nombre_co, domicilio_co, estado_co, cp_co, noSerie_un, noMotor_un, repuve_un, marca_un, modelo_un, unidad_un.placa_un, folioTC_un, ruta_un FROM unidad_un INNER JOIN movimiento_mo ON unidad_un.placa_un = movimiento_mo.placa_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE unidad_un.placa_un = @Placa AND unidad_un.baja_un IS NULL";
+                string sql_tarea = "SELECT nombre_co, CONCAT(domicilio_co, ' No. ', noExterior_co, ', ', municipio_co, ', ', estado_co) AS domicilio_co, estado_co, cp_co, noSerie_un, noMotor_un, repuve_un, marca_un, modelo_un, unidad_un.placa_un, folioTC_un, ruta_un FROM unidad_un INNER JOIN movimiento_mo ON unidad_un.placa_un = movimiento_mo.placa_un INNER JOIN concesionario_co ON unidad_un.id_co = concesionario_co.id_co WHERE unidad_un.placa_un = @Placa AND unidad_un.baja_un IS NULL";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
                 Comando.Parameters.AddWithValue("@Placa", placa);
@@ -82,7 +82,7 @@ namespace SGIMTProyecto {
                 string parametro;
 
                 SqlCon = Conexion.getInstancia().CrearConexion();
-                string sql_tarea = "INSERT INTO fueraruta_fr (permisionario_fr, domicilio_fr, poblacion_fr, cp_fr, folioTC_fr, marca_fr, modelo_fr, noSerie_fr, noMotor_fr, repuve_fr, recorrido_fr, motivo_fr, fechaExpedicion_fr, fechaVigencia_fr, folioPermiso_fr, id_mo) VALUES (@Permisionario, @Domicilio, @Poblacion, @CP, @FolioTC, @Marca, @Modelo, @NoSerie, @Nomotor, @Repuve, @Recorrido, @Motivo, @FechaExpedicion,  @FechaVigencia, @FolioPermiso, @NoMovimiento);";
+                string sql_tarea = "INSERT INTO fueraruta_fr (permisionario_fr, domicilio_fr, poblacion_fr, cp_fr, folioTC_fr, marca_fr, modelo_fr, noSerie_fr, noMotor_fr, repuve_fr, recorrido_fr, motivo_fr, fechaExpedicion_fr, fechaVigencia_fr, folioPermiso_fr, id_mo, placa_fr) VALUES (@Permisionario, @Domicilio, @Poblacion, @CP, @FolioTC, @Marca, @Modelo, @NoSerie, @NoMotor, @Repuve, @Recorrido, @Motivo, @FechaExpedicion,  @FechaVigencia, @FolioPermiso, @NoMovimiento, @Placa);";
 
                 MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
 
@@ -136,6 +136,9 @@ namespace SGIMTProyecto {
                             break;
                         case 15:
                             parametro = "@NoMovimiento";
+                            break;
+                        case 16:
+                            parametro = "@Placa";
                             break;
 
                     }

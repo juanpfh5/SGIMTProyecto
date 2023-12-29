@@ -206,6 +206,7 @@
             this.TXT_NoSerie.Name = "TXT_NoSerie";
             this.TXT_NoSerie.Size = new System.Drawing.Size(176, 23);
             this.TXT_NoSerie.TabIndex = 17;
+            this.TXT_NoSerie.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoSerie_KeyPress);
             // 
             // JLB_NoMotor
             // 
@@ -225,6 +226,7 @@
             this.TXT_NoMotor.Name = "TXT_NoMotor";
             this.TXT_NoMotor.Size = new System.Drawing.Size(129, 23);
             this.TXT_NoMotor.TabIndex = 19;
+            this.TXT_NoMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoMotor_KeyPress);
             // 
             // JLB_RFV
             // 

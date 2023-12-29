@@ -22,6 +22,7 @@ using System.IO;
 using System.Globalization;
 using iTextSharp.text.pdf.qrcode;
 using MySqlX.XDevAPI.Relational;
+using System.Drawing.Printing;
 
 namespace SGIMTProyecto {
     public partial class F_OrdenCobro : UserControl {
@@ -139,6 +140,11 @@ namespace SGIMTProyecto {
         private void ActualizarPlaca(string placaActual, string placaNueva) {
             D_OrdenCobro Datos = new D_OrdenCobro();
             Datos.ActualizarPlaca(placaActual, placaNueva);
+        }
+
+        private void InsertarObservaciones(string placa, string observaciones) {
+            D_OrdenCobro Datos = new D_OrdenCobro();
+            Datos.InsertarObservaciones(placa, observaciones);
         }
 
         #endregion
@@ -275,6 +281,8 @@ namespace SGIMTProyecto {
                         }
                     }
 
+                    InsertarObservaciones(placa, observaciones);
+
                     GenerarpdfResumen(servicio, placa, nombre, direccion, rfc, serie, motor, modelo, marca, clvVehicular, tipo, cilindros, total, elaboro, ruta, observaciones, combustible, capacidad, autorizoC, claves, descripcion, importe, cp);
 
                     if (formVisualizador == null || formVisualizador.IsDisposed) {
@@ -295,27 +303,25 @@ namespace SGIMTProyecto {
 
                     LimpiarTextBox();
 
-                    TXT_Nombre.Enabled = true;
-                    TXT_PlacaActual.Enabled = true;
-                    TXT_Domicilio.Enabled = true;
-                    TXT_CP.Enabled = true;
-                    TXT_NoSerie.Enabled = true;
-                    TXT_NoMotor.Enabled = true;
-                    TXT_Modelo.Enabled = true;
-                    TXT_Marca.Enabled = true;
-                    TXT_ClaveVehicular.Enabled = true;
-                    TXT_Tipo.Enabled = true;
-                    TXT_Combustible.Enabled = true;
-                    TXT_NoPasajeros.Enabled = true;
+                    HabilitarTextBox();
                 }
 
             }
         }
+              
 
         private void F_OrdenCobro_Load(object sender, EventArgs e) {
             int id;
             decimal descuento;
             (descuento, id) = ObtenerDescuento(DateTime.Now.ToString("yyyy-MM-dd"));
+
+            LimpiarTextBox();
+            HabilitarTextBox();
+            TXT_Placa.Text = "Placa";
+            TXT_Placa.ForeColor = Color.Gray;
+            TXT_FolioRevista.Text = "";
+            TXT_NuevaPlaca.Text = "";
+            DGV_Clave.Rows.Clear();
 
             CMB_Elaboro.DataSource = ListadoPersonal();
             CMB_Autorizo.DataSource = ListadoDirector();
@@ -357,6 +363,30 @@ namespace SGIMTProyecto {
         }
 
         private void TXT_NuevaPlaca_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoMotor_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoSerie_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_PlacaActual_KeyPress(object sender, KeyPressEventArgs e) {
             if (char.IsLower(e.KeyChar)) {
                 e.KeyChar = char.ToUpper(e.KeyChar);
             }
@@ -457,6 +487,27 @@ namespace SGIMTProyecto {
             TXT_Tipo.Text = "";
             TXT_Combustible.Text = "";
             TXT_NoPasajeros.Text = "";
+            TXT_Observaciones.Text = "";
+            TXT_FolioRevista.Text = "";
+            TXT_Total.Text = "$0.00";
+            TXT_NuevaPlaca.Text = "";
+
+            DGV_Clave.Rows.Clear();
+        }
+
+        private void HabilitarTextBox() {
+            TXT_Nombre.Enabled = true;
+            TXT_PlacaActual.Enabled = true;
+            TXT_Domicilio.Enabled = true;
+            TXT_CP.Enabled = true;
+            TXT_NoSerie.Enabled = true;
+            TXT_NoMotor.Enabled = true;
+            TXT_Modelo.Enabled = true;
+            TXT_Marca.Enabled = true;
+            TXT_ClaveVehicular.Enabled = true;
+            TXT_Tipo.Enabled = true;
+            TXT_Combustible.Enabled = true;
+            TXT_NoPasajeros.Enabled = true;
         }
 
         private (string, bool) VerificacionParametros() {
@@ -497,12 +548,12 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text.Trim(), out int noMotor)) {
+            if (TXT_NoMotor.Text.Trim().Length > 15 || (TXT_NoMotor.Text.Trim().Length < 1)) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
+            if (TXT_Modelo.Text.Length != 4 || !int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
                 variable = JLB_Modelo.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -581,8 +632,8 @@ namespace SGIMTProyecto {
 
         private string TruncarTextBox(string textBox) {
             string concepto;
-            if (textBox.Length > 7) {
-                concepto = textBox.Substring(7);
+            if (textBox.Length > 6) {
+                concepto = textBox.Substring(6);
             } else {
                 concepto = string.Empty;
             }
@@ -1065,6 +1116,7 @@ namespace SGIMTProyecto {
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
         #endregion
 
     }

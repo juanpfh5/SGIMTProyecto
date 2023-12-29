@@ -65,6 +65,11 @@ namespace SGIMTProyecto {
             return Datos.ObtenerFolio();
         }
 
+        private bool ExistenciaMovimiento(int movimiento) {
+            D_LiberacionPublicoPrivado Datos = new D_LiberacionPublicoPrivado();
+            return Datos.ExistenciaMovimiento(movimiento);
+        }
+
         #endregion
 
         #region Métodos Botones
@@ -87,7 +92,7 @@ namespace SGIMTProyecto {
 
                         string nOficio = ObtenerFolio().ToString("D4");
                         string marca = TXT_Marca.Text;
-                        int modelo = Convert.ToInt32(TXT_Modelo.Text);
+                        string modelo = TXT_Modelo.Text.Trim();
                         string tipo = TXT_Tipo.Text;
                         string serie = TXT_NoSerie.Text;
                         string motor = TXT_NoMotor.Text;
@@ -112,6 +117,12 @@ namespace SGIMTProyecto {
             }
         }
 
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
         #endregion
 
         #region Métodos Extra
@@ -125,17 +136,26 @@ namespace SGIMTProyecto {
         }
 
         private (string, bool) VerificacionParametros() {
-            string error, variable;
+            string error, variable, mensajeExtra = "";
             bool bandera = false;
 
             List<string> parametros = new List<string>();
 
             int tamanio;
 
-            if (!int.TryParse(TXT_NoBaja.Text, out int noBaja)) {
+            if (!int.TryParse(TXT_NoBaja.Text.Trim(), out int noBaja)) {
                 variable = JLB_NoBaja.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
+            } else {
+                if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoBaja.Text))) {
+                    if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoBaja.Text))) {
+                        variable = JLB_NoBaja.Text;
+                        parametros.Add(variable.Substring(0, variable.Length - 1));
+                        bandera = true;
+                        mensajeExtra = "No. Movimiento no existente.";
+                    }
+                }
             }
             if (DTP_Fecha.Value > DateTime.Now) {
                 variable = JLB_Fecha.Text;
@@ -159,13 +179,15 @@ namespace SGIMTProyecto {
                 }
             }
 
+            error += "\n" + mensajeExtra;
+
             return (error, bandera);
         }
 
         #endregion
 
         #region Métodos PDF
-        private static void GenerarLiberacion(string nOficio, string marca, int modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director) {
+        private static void GenerarLiberacion(string nOficio, string marca, string modelo, string tipo, string serie, string motor, int nBaja, string fechaRecibo, string director) {
             CultureInfo culturaEspañol = new CultureInfo("es-ES");
             DateTime today = DateTime.Today;
 

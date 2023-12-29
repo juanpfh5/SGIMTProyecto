@@ -15,6 +15,7 @@ namespace SGIMTProyecto
         public F_MenuEditar()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             AddUserControl(new F_EditarVehiculo());
             BTN_DatosVehiculo.BackColor = Color.FromArgb(80, 14, 95);

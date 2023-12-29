@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_MenuOrdenCobro));
             this.PNL_MenuOrdenC = new System.Windows.Forms.Panel();
+            this.PNL_OrdenC = new System.Windows.Forms.Panel();
+            this.BTN_Inicio = new System.Windows.Forms.Button();
             this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
             this.BTN_OrdenCobroDiversos = new System.Windows.Forms.Button();
             this.BTN_OrdenCobro = new System.Windows.Forms.Button();
-            this.PNL_OrdenC = new System.Windows.Forms.Panel();
-            this.BTN_Inicio = new System.Windows.Forms.Button();
             this.PNL_MenuOrdenC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +50,27 @@
             this.PNL_MenuOrdenC.Name = "PNL_MenuOrdenC";
             this.PNL_MenuOrdenC.Size = new System.Drawing.Size(1064, 100);
             this.PNL_MenuOrdenC.TabIndex = 0;
+            // 
+            // PNL_OrdenC
+            // 
+            this.PNL_OrdenC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PNL_OrdenC.Location = new System.Drawing.Point(0, 100);
+            this.PNL_OrdenC.Name = "PNL_OrdenC";
+            this.PNL_OrdenC.Size = new System.Drawing.Size(1064, 638);
+            this.PNL_OrdenC.TabIndex = 1;
+            // 
+            // BTN_Inicio
+            // 
+            this.BTN_Inicio.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_Inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_Inicio.ForeColor = System.Drawing.SystemColors.Window;
+            this.BTN_Inicio.Location = new System.Drawing.Point(972, 744);
+            this.BTN_Inicio.Name = "BTN_Inicio";
+            this.BTN_Inicio.Size = new System.Drawing.Size(80, 30);
+            this.BTN_Inicio.TabIndex = 24;
+            this.BTN_Inicio.Text = "Inicio";
+            this.BTN_Inicio.UseVisualStyleBackColor = false;
+            this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
             // 
             // PCB_LogoSMyT
             // 
@@ -92,27 +114,6 @@
             this.BTN_OrdenCobro.UseVisualStyleBackColor = true;
             this.BTN_OrdenCobro.Click += new System.EventHandler(this.BTN_OrdenCobro_Click);
             // 
-            // PNL_OrdenC
-            // 
-            this.PNL_OrdenC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PNL_OrdenC.Location = new System.Drawing.Point(0, 100);
-            this.PNL_OrdenC.Name = "PNL_OrdenC";
-            this.PNL_OrdenC.Size = new System.Drawing.Size(1064, 638);
-            this.PNL_OrdenC.TabIndex = 1;
-            // 
-            // BTN_Inicio
-            // 
-            this.BTN_Inicio.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_Inicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_Inicio.ForeColor = System.Drawing.SystemColors.Window;
-            this.BTN_Inicio.Location = new System.Drawing.Point(972, 744);
-            this.BTN_Inicio.Name = "BTN_Inicio";
-            this.BTN_Inicio.Size = new System.Drawing.Size(80, 30);
-            this.BTN_Inicio.TabIndex = 24;
-            this.BTN_Inicio.Text = "Inicio";
-            this.BTN_Inicio.UseVisualStyleBackColor = false;
-            this.BTN_Inicio.Click += new System.EventHandler(this.BTN_Inicio_Click);
-            // 
             // F_MenuOrdenCobro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -122,8 +123,10 @@
             this.Controls.Add(this.PNL_OrdenC);
             this.Controls.Add(this.PNL_MenuOrdenC);
             this.Controls.Add(this.BTN_Inicio);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "F_MenuOrdenCobro";
-            this.Text = "MenuOrdenCobro";
+            this.Text = "Menu de Orden de Cobro";
             this.PNL_MenuOrdenC.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.ResumeLayout(false);

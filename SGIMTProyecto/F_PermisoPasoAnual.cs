@@ -40,7 +40,18 @@ namespace SGIMTProyecto {
         #region Métodos Botones
         private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
             if (char.IsLower(e.KeyChar)) {
-                // Si es una letra minúscula, conviértela a mayúscula
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoSerie_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoMotor_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
                 e.KeyChar = char.ToUpper(e.KeyChar);
             }
         }
@@ -75,7 +86,7 @@ namespace SGIMTProyecto {
                         TXT_Poblacion.Text.Trim(),
                         int.Parse(TXT_CP.Text.Trim()),
                         TXT_NoSerie.Text.Trim(),
-                        int.Parse(TXT_NoMotor.Text.Trim()),
+                        TXT_NoMotor.Text.Trim(),
                         TXT_RFV.Text.Trim(),
                         TXT_Marca.Text.Trim(),
                         TXT_Modelo.Text.Trim(),
@@ -158,12 +169,12 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text, out int noMotor)) {
+            if (TXT_NoMotor.Text.Length > 15 || TXT_NoSerie.Text.Length < 1) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_RFV.Text.Length > 17 || TXT_RFV.Text.Length < 1) {
+            if (TXT_RFV.Text.Length > 17) {
                 variable = JLB_RFV.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -173,7 +184,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
+            if (TXT_Modelo.Text.Length != 4 || !int.TryParse(TXT_Modelo.Text.Trim(), out int modelo)) {
                 variable = JLB_Modelo.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -208,12 +219,18 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento) || !ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
                 variable = JLB_NoMovimiento.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
+            } else {
                 if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
-                    mensajeExtra = "No. Movimiento no existente.";
+                    if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                        variable = JLB_NoMovimiento.Text;
+                        parametros.Add(variable.Substring(0, variable.Length - 1));
+                        bandera = true;
+                        mensajeExtra = "No. Movimiento no existente.";
+                    }
                 }
             }
 

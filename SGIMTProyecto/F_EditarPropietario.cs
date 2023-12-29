@@ -95,6 +95,12 @@ namespace SGIMTProyecto {
             }
         }
 
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
         #endregion
 
         #region Métodos Extra

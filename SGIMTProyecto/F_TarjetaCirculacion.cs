@@ -24,6 +24,7 @@ namespace SGIMTProyecto {
         private F_VisualizacionPDF formVisualizador;
         public F_TarjetaCirculacion() {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += Formulario_FormClosing;
         }
@@ -88,7 +89,6 @@ namespace SGIMTProyecto {
 
         #region Métodos Botones
         private void Formulario_FormClosing(object sender, FormClosingEventArgs e) {
-            // Llamar al método para limpiar los TextBox cuando se cierra el formulario
             LimpiarTextBox(this);
         }
 
@@ -213,10 +213,13 @@ namespace SGIMTProyecto {
                     LimpiarTextBox();
                 }
             }
-
         }
 
         private void F_TarjetaCirculacion_Load(object sender, EventArgs e) {
+            LimpiarTextBox();
+            TXT_Placa.Text = "Placa";
+            TXT_Placa.ForeColor = Color.Gray;
+
             if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
                 TXT_Placa.Text = "Placa";
                 TXT_Placa.ForeColor = Color.Gray;
@@ -229,12 +232,41 @@ namespace SGIMTProyecto {
             }
         }
 
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_Placas_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoMotor_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_RFC_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NIV_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
         #endregion
 
         #region Métodos Extra
         private void LimpiarTextBox(System.Windows.Forms.Control control) {
             foreach (System.Windows.Forms.Control c in control.Controls) {
-                // Si el control es un TextBox, establece su texto en blanco
                 if (c is System.Windows.Forms.TextBox textBox) {
                 }
 
@@ -287,12 +319,12 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Toneladas.Text.Trim().Length > 10 || TXT_Toneladas.Text.Trim().Length < 1) {
+            if (TXT_Toneladas.Text.Trim().Length > 10) {
                 variable = JLB_Toneladas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text.Trim(), out int noMotor)) {
+            if (TXT_NoMotor.Text.Trim().Length > 15 || TXT_Cilindros.Text.Trim().Length < 1) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;

@@ -15,6 +15,7 @@ namespace SGIMTProyecto
         public F_MenuPermisos()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             BTN_TransporteEscolar.BackColor = Color.FromArgb(80, 14, 95);
             BTN_PasoAnual.BackColor = Color.FromArgb(103, 24, 122);

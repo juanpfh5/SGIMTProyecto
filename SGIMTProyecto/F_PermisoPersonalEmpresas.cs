@@ -41,6 +41,7 @@ namespace SGIMTProyecto {
         private void F_PermisoPersonalEmpresas_Load(object sender, EventArgs e) {
             TXT_TitularSMyT.Text = ObtenerTitularSMyT();
             TXT_TitularSMyT.Enabled = false;
+
         }
 
         private void BTN_Imprimir_Click(object sender, EventArgs e) {
@@ -181,12 +182,18 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento) || !ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+            if (!int.TryParse(TXT_NoMovimiento.Text.Trim(), out int noMovimiento)) {
                 variable = JLB_NoMovimiento.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
+            } else {
                 if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
-                    mensajeExtra = "No. Movimiento no existente.";
+                    if (!ExistenciaMovimiento(Convert.ToInt32(TXT_NoMovimiento.Text))) {
+                        variable = JLB_NoMovimiento.Text;
+                        parametros.Add(variable.Substring(0, variable.Length - 1));
+                        bandera = true;
+                        mensajeExtra = "No. Movimiento no existente.";
+                    }
                 }
             }
 

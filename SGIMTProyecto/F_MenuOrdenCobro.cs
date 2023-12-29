@@ -15,6 +15,7 @@ namespace SGIMTProyecto
         public F_MenuOrdenCobro()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             BTN_OrdenCobro.BackColor = Color.FromArgb(80, 14, 95);
             BTN_OrdenCobroDiversos.BackColor = Color.FromArgb(103, 24, 122);
             this.StartPosition = FormStartPosition.CenterScreen;

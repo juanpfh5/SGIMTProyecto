@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GRB_OrdenCobro = new System.Windows.Forms.GroupBox();
             this.JLB_Nombre = new System.Windows.Forms.Label();
             this.TXT_Nombre = new System.Windows.Forms.TextBox();
@@ -171,6 +171,7 @@
             this.TXT_PlacaActual.Name = "TXT_PlacaActual";
             this.TXT_PlacaActual.Size = new System.Drawing.Size(161, 23);
             this.TXT_PlacaActual.TabIndex = 29;
+            this.TXT_PlacaActual.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_PlacaActual_KeyPress);
             // 
             // JLB_Domicilio
             // 
@@ -267,6 +268,7 @@
             this.TXT_NoSerie.Name = "TXT_NoSerie";
             this.TXT_NoSerie.Size = new System.Drawing.Size(186, 23);
             this.TXT_NoSerie.TabIndex = 39;
+            this.TXT_NoSerie.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoSerie_KeyPress);
             // 
             // JLB_NoMotor
             // 
@@ -286,6 +288,7 @@
             this.TXT_NoMotor.Name = "TXT_NoMotor";
             this.TXT_NoMotor.Size = new System.Drawing.Size(208, 23);
             this.TXT_NoMotor.TabIndex = 37;
+            this.TXT_NoMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoMotor_KeyPress);
             // 
             // JLB_Modelo
             // 
@@ -474,8 +477,8 @@
             this.DGV_Clave.Location = new System.Drawing.Point(18, 336);
             this.DGV_Clave.Name = "DGV_Clave";
             this.DGV_Clave.ReadOnly = true;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DGV_Clave.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DGV_Clave.Size = new System.Drawing.Size(955, 123);
             this.DGV_Clave.TabIndex = 55;
             this.DGV_Clave.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DGV_Clave_RowsAdded);
@@ -566,6 +569,7 @@
             this.TXT_Placa.TabIndex = 65;
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_BuscarPlaca

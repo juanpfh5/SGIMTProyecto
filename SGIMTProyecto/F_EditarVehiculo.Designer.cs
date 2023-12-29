@@ -488,6 +488,7 @@
             // 
             // TXT_Placas
             // 
+            this.TXT_Placas.Enabled = false;
             this.TXT_Placas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TXT_Placas.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.TXT_Placas.Location = new System.Drawing.Point(864, 332);
@@ -584,6 +585,7 @@
             this.TXT_Placa.TabIndex = 2;
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_Buscar
@@ -623,6 +625,7 @@
             this.Controls.Add(this.BTN_Guardar);
             this.Name = "F_EditarVehiculo";
             this.Size = new System.Drawing.Size(1064, 500);
+            this.Load += new System.EventHandler(this.F_EditarVehiculo_Load);
             this.GRB_Vehiculo.ResumeLayout(false);
             this.GRB_Vehiculo.PerformLayout();
             this.ResumeLayout(false);

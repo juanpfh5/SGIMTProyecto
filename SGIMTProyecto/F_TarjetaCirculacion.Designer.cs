@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
-            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_TarjetaCirculacion));
             this.TXT_Placa = new System.Windows.Forms.TextBox();
             this.GRB_TarjetaCirculacion = new System.Windows.Forms.GroupBox();
             this.JLB_Propietario = new System.Windows.Forms.Label();
@@ -83,34 +82,11 @@
             this.BTN_PermisoProvisional = new System.Windows.Forms.Button();
             this.JLB_VigenciaPermiso = new System.Windows.Forms.Label();
             this.CMB_VigenciaPermiso = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).BeginInit();
+            this.PCB_LogoSMyT = new System.Windows.Forms.PictureBox();
+            this.BTN_BuscarPlaca = new System.Windows.Forms.Button();
             this.GRB_TarjetaCirculacion.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PCB_LogoSMyT
-            // 
-            this.PCB_LogoSMyT.BackColor = System.Drawing.Color.FloralWhite;
-            this.PCB_LogoSMyT.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_530;
-            this.PCB_LogoSMyT.Location = new System.Drawing.Point(0, 0);
-            this.PCB_LogoSMyT.Name = "PCB_LogoSMyT";
-            this.PCB_LogoSMyT.Size = new System.Drawing.Size(236, 104);
-            this.PCB_LogoSMyT.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PCB_LogoSMyT.TabIndex = 26;
-            this.PCB_LogoSMyT.TabStop = false;
-            // 
-            // BTN_BuscarPlaca
-            // 
-            this.BTN_BuscarPlaca.BackColor = System.Drawing.Color.DarkRed;
-            this.BTN_BuscarPlaca.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTN_BuscarPlaca.FlatAppearance.BorderSize = 0;
-            this.BTN_BuscarPlaca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BTN_BuscarPlaca.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
-            this.BTN_BuscarPlaca.Location = new System.Drawing.Point(761, 44);
-            this.BTN_BuscarPlaca.Name = "BTN_BuscarPlaca";
-            this.BTN_BuscarPlaca.Size = new System.Drawing.Size(59, 30);
-            this.BTN_BuscarPlaca.TabIndex = 25;
-            this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
-            this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
             // 
             // TXT_Placa
             // 
@@ -122,6 +98,7 @@
             this.TXT_Placa.Tag = "";
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // GRB_TarjetaCirculacion
@@ -253,6 +230,7 @@
             this.TXT_RFC.Name = "TXT_RFC";
             this.TXT_RFC.Size = new System.Drawing.Size(155, 22);
             this.TXT_RFC.TabIndex = 8;
+            this.TXT_RFC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_RFC_KeyPress);
             // 
             // JLB_Repuve
             // 
@@ -289,6 +267,7 @@
             this.TXT_NIV.Name = "TXT_NIV";
             this.TXT_NIV.Size = new System.Drawing.Size(155, 22);
             this.TXT_NIV.TabIndex = 3;
+            this.TXT_NIV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NIV_KeyPress);
             // 
             // JLB_Placas
             // 
@@ -307,6 +286,7 @@
             this.TXT_Placas.Name = "TXT_Placas";
             this.TXT_Placas.Size = new System.Drawing.Size(155, 22);
             this.TXT_Placas.TabIndex = 9;
+            this.TXT_Placas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placas_KeyPress);
             // 
             // JLB_Toneladas
             // 
@@ -343,6 +323,7 @@
             this.TXT_NoMotor.Name = "TXT_NoMotor";
             this.TXT_NoMotor.Size = new System.Drawing.Size(155, 22);
             this.TXT_NoMotor.TabIndex = 5;
+            this.TXT_NoMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoMotor_KeyPress);
             // 
             // JLB_Cilindros
             // 
@@ -441,9 +422,9 @@
             this.JLB_ClaveVehicular.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.JLB_ClaveVehicular.Location = new System.Drawing.Point(20, 225);
             this.JLB_ClaveVehicular.Name = "JLB_ClaveVehicular";
-            this.JLB_ClaveVehicular.Size = new System.Drawing.Size(55, 30);
+            this.JLB_ClaveVehicular.Size = new System.Drawing.Size(58, 30);
             this.JLB_ClaveVehicular.TabIndex = 19;
-            this.JLB_ClaveVehicular.Text = "Clv.\r\nVehicular";
+            this.JLB_ClaveVehicular.Text = "Clv.\r\nVehicular:";
             // 
             // TXT_ClaveVehicular
             // 
@@ -531,9 +512,9 @@
             this.JLB_VehiculoOrigen.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.JLB_VehiculoOrigen.Location = new System.Drawing.Point(544, 269);
             this.JLB_VehiculoOrigen.Name = "JLB_VehiculoOrigen";
-            this.JLB_VehiculoOrigen.Size = new System.Drawing.Size(91, 15);
+            this.JLB_VehiculoOrigen.Size = new System.Drawing.Size(94, 15);
             this.JLB_VehiculoOrigen.TabIndex = 34;
-            this.JLB_VehiculoOrigen.Text = "Vehículo Origen";
+            this.JLB_VehiculoOrigen.Text = "Vehículo Origen:";
             // 
             // TXT_VehiculoOrigen
             // 
@@ -662,6 +643,31 @@
             this.CMB_VigenciaPermiso.Size = new System.Drawing.Size(121, 21);
             this.CMB_VigenciaPermiso.TabIndex = 47;
             // 
+            // PCB_LogoSMyT
+            // 
+            this.PCB_LogoSMyT.BackColor = System.Drawing.Color.FloralWhite;
+            this.PCB_LogoSMyT.Image = global::SGIMTProyecto.Properties.Resources.logosmyt_530;
+            this.PCB_LogoSMyT.Location = new System.Drawing.Point(0, 0);
+            this.PCB_LogoSMyT.Name = "PCB_LogoSMyT";
+            this.PCB_LogoSMyT.Size = new System.Drawing.Size(236, 104);
+            this.PCB_LogoSMyT.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PCB_LogoSMyT.TabIndex = 26;
+            this.PCB_LogoSMyT.TabStop = false;
+            // 
+            // BTN_BuscarPlaca
+            // 
+            this.BTN_BuscarPlaca.BackColor = System.Drawing.Color.DarkRed;
+            this.BTN_BuscarPlaca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_BuscarPlaca.FlatAppearance.BorderSize = 0;
+            this.BTN_BuscarPlaca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_BuscarPlaca.Image = global::SGIMTProyecto.Properties.Resources.lupa_20;
+            this.BTN_BuscarPlaca.Location = new System.Drawing.Point(761, 44);
+            this.BTN_BuscarPlaca.Name = "BTN_BuscarPlaca";
+            this.BTN_BuscarPlaca.Size = new System.Drawing.Size(59, 30);
+            this.BTN_BuscarPlaca.TabIndex = 25;
+            this.BTN_BuscarPlaca.UseVisualStyleBackColor = false;
+            this.BTN_BuscarPlaca.Click += new System.EventHandler(this.BTN_BuscarPlaca_Click);
+            // 
             // F_TarjetaCirculacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -677,12 +683,14 @@
             this.Controls.Add(this.BTN_PermisoProvisional);
             this.Controls.Add(this.BTN_TarjetaCirculacion);
             this.Controls.Add(this.BTN_Inicio);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "F_TarjetaCirculacion";
-            this.Text = "TarjetaCirculacion";
+            this.Text = "Tarjeta de Circulacion";
             this.Load += new System.EventHandler(this.F_TarjetaCirculacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.GRB_TarjetaCirculacion.ResumeLayout(false);
             this.GRB_TarjetaCirculacion.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PCB_LogoSMyT)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

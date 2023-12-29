@@ -30,6 +30,38 @@ namespace SGIMTProyecto {
             Datos.ActualizarVehiculo(datosVehiculo, placa);
         }
 
+        private void MostrarDatos(List<string[]> datos) {
+            if (datos.Count > 0) {
+                string[] primeraFila = datos[0];
+
+                if (primeraFila.Length > 0) TXT_Nombre.Text = primeraFila[0];
+                if (primeraFila.Length > 1) TXT_Vehiculo.Text = primeraFila[1];
+                if (primeraFila.Length > 2) TXT_Marca.Text = primeraFila[2];
+                if (primeraFila.Length > 3) TXT_Modelo.Text = primeraFila[3];
+                if (primeraFila.Length > 4) TXT_Tipo.Text = primeraFila[4];
+                if (primeraFila.Length > 5) TXT_TipoServicio.Text = primeraFila[5];
+                if (primeraFila.Length > 6) TXT_VehiculoOrigen.Text = primeraFila[6];
+                if (primeraFila.Length > 7) TXT_ClaveVehicular.Text = primeraFila[7];
+                if (primeraFila.Length > 8) TXT_NoSeguro.Text = primeraFila[8];
+                if (primeraFila.Length > 9) TXT_Repuve.Text = primeraFila[9];
+                if (primeraFila.Length > 10) TXT_NoSerie.Text = primeraFila[10];
+                if (primeraFila.Length > 11) TXT_NoMotor.Text = primeraFila[11];
+                if (primeraFila.Length > 12) TXT_Cilindros.Text = primeraFila[12];
+                if (primeraFila.Length > 13) TXT_Combustible.Text = primeraFila[13];
+                if (primeraFila.Length > 14) TXT_Toneladas.Text = primeraFila[14];
+                if (primeraFila.Length > 15) TXT_Pasajeros.Text = primeraFila[15];
+                if (primeraFila.Length > 16) TXT_Uso.Text = primeraFila[16];
+                if (primeraFila.Length > 17) TXT_Placas.Text = primeraFila[17];
+                if (primeraFila.Length > 18) TXT_SitioRuta.Text = primeraFila[18];
+                if (primeraFila.Length > 19) TXT_FolioTC.Text = primeraFila[19];
+                if (primeraFila.Length > 20) TXT_RFV.Text = primeraFila[20];
+                if (primeraFila.Length > 21) TXT_FolioRevista.Text = primeraFila[21];
+            } else {
+                LimpiarTextBox();
+                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         #endregion
 
         #region Métodos Botones
@@ -82,6 +114,18 @@ namespace SGIMTProyecto {
             }
         }
 
+        private void F_EditarVehiculo_Load(object sender, EventArgs e) {
+            LimpiarTextBox();
+            TXT_Placa.Text = "Placa";
+            TXT_Placa.ForeColor = Color.Gray;
+        }
+
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
         #endregion 
 
         #region Métodos Extra
@@ -109,39 +153,7 @@ namespace SGIMTProyecto {
             TXT_RFV.Text = "";
             TXT_FolioRevista.Text = "";
         }
-
-        private void MostrarDatos(List<string[]> datos) {
-            if (datos.Count > 0) {
-                string[] primeraFila = datos[0];
-
-                if (primeraFila.Length > 0) TXT_Nombre.Text = primeraFila[0];
-                if (primeraFila.Length > 1) TXT_Vehiculo.Text = primeraFila[1];
-                if (primeraFila.Length > 2) TXT_Marca.Text = primeraFila[2];
-                if (primeraFila.Length > 3) TXT_Modelo.Text = primeraFila[3];
-                if (primeraFila.Length > 4) TXT_Tipo.Text = primeraFila[4];
-                if (primeraFila.Length > 5) TXT_TipoServicio.Text = primeraFila[5];
-                if (primeraFila.Length > 6) TXT_VehiculoOrigen.Text = primeraFila[6];
-                if (primeraFila.Length > 7) TXT_ClaveVehicular.Text = primeraFila[7];
-                if (primeraFila.Length > 8) TXT_NoSeguro.Text = primeraFila[8];
-                if (primeraFila.Length > 9) TXT_Repuve.Text = primeraFila[9];
-                if (primeraFila.Length > 10) TXT_NoSerie.Text = primeraFila[10];
-                if (primeraFila.Length > 11) TXT_NoMotor.Text = primeraFila[11];
-                if (primeraFila.Length > 12) TXT_Cilindros.Text = primeraFila[12];
-                if (primeraFila.Length > 13) TXT_Combustible.Text = primeraFila[13];
-                if (primeraFila.Length > 14) TXT_Toneladas.Text = primeraFila[14];
-                if (primeraFila.Length > 15) TXT_Pasajeros.Text = primeraFila[15];
-                if (primeraFila.Length > 16) TXT_Uso.Text = primeraFila[16];
-                if (primeraFila.Length > 17) TXT_Placas.Text = primeraFila[17];
-                if (primeraFila.Length > 18) TXT_SitioRuta.Text = primeraFila[18];
-                if (primeraFila.Length > 19) TXT_FolioTC.Text = primeraFila[19];
-                if (primeraFila.Length > 20) TXT_RFV.Text = primeraFila[20];
-                if (primeraFila.Length > 21) TXT_FolioRevista.Text = primeraFila[21];
-            } else {
-                LimpiarTextBox();
-                MessageBox.Show("Lo sentimos, la placa no existe en la base de datos :(", "Placa Ausente", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
+                
         private (string, bool) VerificacionParametros() {
             string error, variable;
             bool bandera = false;
@@ -205,7 +217,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_RFV.Text.Length > 17 || TXT_RFV.Text.Length < 1) {
+            if (TXT_RFV.Text.Length > 17) {
                 variable = JLB_RFV.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -220,7 +232,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text, out int noMotor)) {
+            if (TXT_NoMotor.Text.Length > 15 || TXT_NoMotor.Text.Length < 1) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -235,7 +247,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (TXT_Toneladas.Text.Length > 10 || TXT_Toneladas.Text.Length < 1) {
+            if (TXT_Toneladas.Text.Length > 10) {
                 variable = JLB_Toneladas.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -285,6 +297,7 @@ namespace SGIMTProyecto {
                 TXT_Placa.ForeColor = Color.Gray;
             }
         }
+
 
         #endregion
 

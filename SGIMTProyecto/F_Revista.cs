@@ -18,6 +18,7 @@ namespace SGIMTProyecto {
         private F_VisualizacionPDF formVisualizador;
         public F_Revista() {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += Formulario_FormClosing;
         }
@@ -156,12 +157,32 @@ namespace SGIMTProyecto {
         }
 
         private void F_Revista_Load(object sender, EventArgs e) {
+            LimpiarTextBox();
+
             if (string.IsNullOrWhiteSpace(TXT_Placa.Text)) {
                 TXT_Placa.Text = "Placa";
                 TXT_Placa.ForeColor = Color.Gray;
             }
 
             this.ActiveControl = null;
+        }
+
+        private void TXT_NoMotor_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_NoSerie_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        }
+
+        private void TXT_Placa_KeyPress(object sender, KeyPressEventArgs e) {
+            if (char.IsLower(e.KeyChar)) {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
         }
 
         #endregion
@@ -212,7 +233,7 @@ namespace SGIMTProyecto {
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
             }
-            if (!int.TryParse(TXT_NoMotor.Text.Trim(), out int noMotor)) {
+            if (TXT_NoMotor.Text.Trim().Length > 15 || TXT_Tipo.Text.Trim().Length < 1) {
                 variable = JLB_NoMotor.Text;
                 parametros.Add(variable.Substring(0, variable.Length - 1));
                 bandera = true;
@@ -331,6 +352,7 @@ namespace SGIMTProyecto {
             TXT_Resolucion.Text = "";
             TXT_SitioRuta.Text = "";
             TXT_FolioRevista.Text = "";
+            TXT_Observaciones.Text = "";
             CHB_Repuve.Checked = false;
             CHB_INE.Checked = false;
             CHB_Seguro.Checked = false;

@@ -346,6 +346,7 @@
             this.TXT_Placa.Tag = "";
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_Guardar

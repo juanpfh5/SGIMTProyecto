@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_MenuPrincipal));
             this.PNL_Editar = new System.Windows.Forms.Panel();
+            this.PNL_MenuPrincipal = new System.Windows.Forms.Panel();
             this.BTN_Revista = new System.Windows.Forms.Button();
             this.BTN_TarjetaCirculacion = new System.Windows.Forms.Button();
             this.BTN_Permisos = new System.Windows.Forms.Button();
             this.BTN_OrdenCobro = new System.Windows.Forms.Button();
             this.BTN_LiberacionPublicoPrivado = new System.Windows.Forms.Button();
             this.BTN_Editar = new System.Windows.Forms.Button();
-            this.PNL_MenuPrincipal = new System.Windows.Forms.Panel();
             this.PNL_Editar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +54,14 @@
             this.PNL_Editar.Name = "PNL_Editar";
             this.PNL_Editar.Size = new System.Drawing.Size(307, 657);
             this.PNL_Editar.TabIndex = 0;
+            // 
+            // PNL_MenuPrincipal
+            // 
+            this.PNL_MenuPrincipal.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PNL_MenuPrincipal.Location = new System.Drawing.Point(305, 0);
+            this.PNL_MenuPrincipal.Name = "PNL_MenuPrincipal";
+            this.PNL_MenuPrincipal.Size = new System.Drawing.Size(759, 657);
+            this.PNL_MenuPrincipal.TabIndex = 1;
             // 
             // BTN_Revista
             // 
@@ -162,14 +171,6 @@
             this.BTN_Editar.UseVisualStyleBackColor = false;
             this.BTN_Editar.Click += new System.EventHandler(this.BTN_Editar_Click);
             // 
-            // PNL_MenuPrincipal
-            // 
-            this.PNL_MenuPrincipal.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PNL_MenuPrincipal.Location = new System.Drawing.Point(305, 0);
-            this.PNL_MenuPrincipal.Name = "PNL_MenuPrincipal";
-            this.PNL_MenuPrincipal.Size = new System.Drawing.Size(759, 657);
-            this.PNL_MenuPrincipal.TabIndex = 1;
-            // 
             // F_MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,6 +179,8 @@
             this.ClientSize = new System.Drawing.Size(1064, 657);
             this.Controls.Add(this.PNL_MenuPrincipal);
             this.Controls.Add(this.PNL_Editar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "F_MenuPrincipal";
             this.Text = "Menu Principal";
             this.PNL_Editar.ResumeLayout(false);

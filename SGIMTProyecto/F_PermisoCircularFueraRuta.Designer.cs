@@ -212,6 +212,7 @@
             this.TXT_NoSerie.Name = "TXT_NoSerie";
             this.TXT_NoSerie.Size = new System.Drawing.Size(162, 23);
             this.TXT_NoSerie.TabIndex = 49;
+            this.TXT_NoSerie.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoSerie_KeyPress);
             // 
             // JLB_NoMotor
             // 
@@ -231,6 +232,7 @@
             this.TXT_NoMotor.Name = "TXT_NoMotor";
             this.TXT_NoMotor.Size = new System.Drawing.Size(129, 23);
             this.TXT_NoMotor.TabIndex = 51;
+            this.TXT_NoMotor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_NoMotor_KeyPress);
             // 
             // JLB_Repuve
             // 
@@ -472,6 +474,7 @@
             this.TXT_Placa.TabIndex = 3;
             this.TXT_Placa.Text = "Placa";
             this.TXT_Placa.Enter += new System.EventHandler(this.TXT_Placa_Enter);
+            this.TXT_Placa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TXT_Placa_KeyPress);
             this.TXT_Placa.Leave += new System.EventHandler(this.TXT_Placa_Leave);
             // 
             // BTN_Imprimir

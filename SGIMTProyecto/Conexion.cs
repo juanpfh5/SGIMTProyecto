@@ -24,7 +24,7 @@ namespace SGIMTProyecto
             this.Servidor = "localhost";
             this.Puerto = "3306";
             this.Usuario = "root";
-            this.Clave = "Suragakure-2";
+            this.Clave = "Contra-123";
         }
 
         public MySqlConnection CrearConexion()

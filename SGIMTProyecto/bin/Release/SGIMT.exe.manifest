@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l9s5XBKUkSDsrKXrOKT7sD4bZ7u8RRnplZHwn5LBXdE=</dsig:DigestValue>
+        <dsig:DigestValue>VrnB6+YgQiglaLm//yHmXQhFQuwwH+azo2YRQQ56kpI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yAW7dC0a+i/S+tYnmiSoKZDAb0Su40j6VDmpikjzoag=</dsig:DigestValue>
+        <dsig:DigestValue>kvEuV/pPrQMiK8QHZ/WhYQWz3KfO5P97a80y8EGWRXg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -163,14 +163,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGIMT.exe" size="1377776">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SGIMT.exe" size="1381872">
       <assemblyIdentity name="SGIMT" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>35hiYqn5JTdA5QGHvyVViEhO0qR+rQjTEulgSdwJSKM=</dsig:DigestValue>
+        <dsig:DigestValue>GJRFgNYnOIvc0QrrnFbbuFz5SlCmXczgqzbvQT+m6sY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

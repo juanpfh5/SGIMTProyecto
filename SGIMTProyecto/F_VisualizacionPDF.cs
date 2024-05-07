@@ -22,7 +22,7 @@ namespace SGIMTProyecto {
         }
 
         private void F_VisualizacionPDF_Load(object sender, EventArgs e) {
-            nombrePDF = "C:/Users/juanp/Documents/GitHub/SGIMTProyecto_V2/SGIMTProyecto/bin/Debug/" + nombrePDF;
+            nombrePDF = "C:/Users/luiz_/source/repos/SGIMTProyecto/SGIMTProyecto/bin/Debug/" + nombrePDF;
             PDF_Visualizador.src = nombrePDF;
         }
     }

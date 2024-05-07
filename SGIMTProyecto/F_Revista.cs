@@ -18,6 +18,7 @@ namespace SGIMTProyecto {
         private F_VisualizacionPDF formVisualizador;
         public F_Revista() {
             InitializeComponent();
+            this.AutoScroll = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += Formulario_FormClosing;
@@ -627,6 +628,7 @@ namespace SGIMTProyecto {
         }
 
         #endregion
+
 
     }
 }

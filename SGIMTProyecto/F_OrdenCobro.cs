@@ -391,7 +391,12 @@ namespace SGIMTProyecto {
                 e.KeyChar = char.ToUpper(e.KeyChar);
             }
         }
-
+        private void DGV_Clave_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
+                DGV_Clave.Rows.RemoveAt(e.RowIndex);
+                SumarCostos();
+            }
+        }
         /*private void DGV_Clave_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == DGV_Clave.Columns["EliminarRegistro"].Index) {
                 DGV_Clave.Rows.RemoveAt(e.RowIndex);
@@ -1119,5 +1124,6 @@ namespace SGIMTProyecto {
 
         #endregion
 
+        
     }
 }

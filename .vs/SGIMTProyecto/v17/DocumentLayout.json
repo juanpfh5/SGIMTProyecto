@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\sgimtproyecto\\f_revista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_revista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\sgimtproyecto\\f_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|c:\\users\\luiz_\\source\\repos\\sgimtproyecto\\sgimtproyecto\\f_revista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_revista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|c:\\users\\luiz_\\source\\repos\\sgimtproyecto\\sgimtproyecto\\f_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|c:\\users\\luiz_\\source\\repos\\sgimtproyecto\\sgimtproyecto\\f_revista.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_revista.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|c:\\users\\luiz_\\source\\repos\\sgimtproyecto\\sgimtproyecto\\f_ordencobrodiversos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_ordencobrodiversos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|c:\\users\\luiz_\\source\\repos\\sgimtproyecto\\sgimtproyecto\\f_ordencobrodiversos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\f_ordencobrodiversos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\sgimtproyecto\\d_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47D342B0-F1E5-4BD7-BC91-AA020D51E9D3}|SGIMTProyecto\\SGIMTProyecto.csproj|solutionrelative:sgimtproyecto\\d_ordencobro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,53 +30,74 @@
       "DocumentGroups": [
         {
           "DockedHeight": 315,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "F_Revista.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.Designer.cs",
-              "RelativeDocumentMoniker": "SGIMTProyecto\\F_Revista.Designer.cs",
-              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.Designer.cs*",
-              "RelativeToolTip": "SGIMTProyecto\\F_Revista.Designer.cs*",
-              "ViewState": "AQIAAD8DAAAAAAAAAAD4v0wDAAACAAAA",
+              "DocumentIndex": 1,
+              "Title": "F_OrdenCobro.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobro.cs",
+              "RelativeDocumentMoniker": "SGIMTProyecto\\F_OrdenCobro.cs",
+              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobro.cs [Dise\u00F1o]*",
+              "RelativeToolTip": "SGIMTProyecto\\F_OrdenCobro.cs [Dise\u00F1o]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T01:10:09.727Z",
+              "WhenOpened": "2024-06-04T05:31:48.739Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "F_OrdenCobroDiversos.cs",
+              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "RelativeDocumentMoniker": "SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "RelativeToolTip": "SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "ViewState": "AQIAAEcBAAAAAAAAAAAowE4BAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T05:29:05.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "F_Revista.cs",
-              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.cs",
-              "RelativeDocumentMoniker": "SGIMTProyecto\\F_Revista.cs",
-              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.cs*",
-              "RelativeToolTip": "SGIMTProyecto\\F_Revista.cs*",
-              "ViewState": "AQIAABIAAAAAAAAAAIAwwBQAAAAjAAAA",
+              "DocumentIndex": 3,
+              "Title": "F_OrdenCobroDiversos.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "RelativeDocumentMoniker": "SGIMTProyecto\\F_OrdenCobroDiversos.cs",
+              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobroDiversos.cs [Dise\u00F1o]",
+              "RelativeToolTip": "SGIMTProyecto\\F_OrdenCobroDiversos.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T01:02:35.807Z",
+              "WhenOpened": "2024-06-04T05:29:03.645Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "D_OrdenCobro.cs",
+              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\D_OrdenCobro.cs",
+              "RelativeDocumentMoniker": "SGIMTProyecto\\D_OrdenCobro.cs",
+              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\D_OrdenCobro.cs",
+              "RelativeToolTip": "SGIMTProyecto\\D_OrdenCobro.cs",
+              "ViewState": "AQIAALkAAAAAAAAAAAAWwD0BAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T03:23:31.355Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "F_Revista.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.cs",
-              "RelativeDocumentMoniker": "SGIMTProyecto\\F_Revista.cs",
-              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_Revista.cs [Dise\u00F1o]*",
-              "RelativeToolTip": "SGIMTProyecto\\F_Revista.cs [Dise\u00F1o]*",
+              "Title": "F_OrdenCobro.cs",
+              "DocumentMoniker": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobro.cs",
+              "RelativeDocumentMoniker": "SGIMTProyecto\\F_OrdenCobro.cs",
+              "ToolTip": "C:\\Users\\luiz_\\source\\repos\\SGIMTProyecto\\SGIMTProyecto\\F_OrdenCobro.cs*",
+              "RelativeToolTip": "SGIMTProyecto\\F_OrdenCobro.cs*",
+              "ViewState": "AQIAAIEBAAAAAAAAAAApwJQBAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T22:53:03.16Z",
-              "EditorCaption": " [Dise\u00F1o]"
+              "WhenOpened": "2024-05-18T03:22:03.866Z",
+              "EditorCaption": ""
             }
           ]
         },
